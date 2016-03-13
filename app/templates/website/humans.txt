@@ -3,7 +3,7 @@
 
 # TEAM
 
-    <%= appauthor %> —- <%= appemail %>
+    <name> -- <role> -- <twitter>
 
 # THANKS
 
