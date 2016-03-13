@@ -1,12 +1,8 @@
 // ==========================================================================
-// Sparky Sass Shizzle
+// Robonkey Sass Shizzle
 // ==========================================================================
-
-
-
-
-@import "libs/breakpoint";
-@import "libs/susy";
+@import "libs/breakpoint/breakpoint";
+@import "libs/susy/susy";
 @import 'libs/colors/**/*';
 
 

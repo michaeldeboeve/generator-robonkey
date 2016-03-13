@@ -123,8 +123,8 @@ module.exports = generators.Base.extend({
     this.fs.copy(bowerRoot + '/susy/sass/susy', srcsRoot + '/scss/libs/susy/susy');
 
     // Animate SCSS
-    // this.fs.copy(bowerRoot + '/animate.scss/scss/animate.scss', srcsRoot + '/scss/libs/animate/animate.scss');
-    // this.fs.copy(bowerRoot + '/animate.scss/scss/animations', srcsRoot + '/scss/libs/animate/animations');
+    this.fs.copy(bowerRoot + '/animate.scss/scss/animate.scss', srcsRoot + '/scss/libs/animate/animate.scss');
+    this.fs.copy(bowerRoot + '/animate.scss/scss/animations', srcsRoot + '/scss/libs/animate/animations');
   },
 
   _getPrompts: function(){
@@ -271,7 +271,7 @@ module.exports = generators.Base.extend({
     var npmdir = process.cwd() + '/gulp';
     process.chdir(npmdir);
     this.bowerInstall();
-    // this.npmInstall();
+    this.npmInstall();
     this.on('end', function () {
       this._copyBowerComponents();
     });
