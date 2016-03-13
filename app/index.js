@@ -137,7 +137,7 @@ module.exports = generators.Base.extend({
   },
 
   initializing: function() {
-    var message = chalk.yellow.bold('Welcome to Chimp ') + chalk.yellow('\'Cause we lazy monkeyz');
+    var message = chalk.yellow.bold('Welcome to Robonkey ') + chalk.yellow('\'Cause everyone needs a Robotic Monkey');
     this.log(yosay(message, {maxLength: 19}));
   },
   prompting: function() {
