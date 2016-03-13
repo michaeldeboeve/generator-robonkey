@@ -13,10 +13,10 @@
     "jade",
     "gulp"
   ],
-  "authors": {
-    "Michaël de Boevé",
-    "Dietlev Maertens"
-  },
+  "author": "Michaël de Boevé",
+  "contributors": [
+      "Dietlev Maertens"
+  ],
   "license": "MIT",
   "dependencies": {
     "yosay": "^1.0.3",
