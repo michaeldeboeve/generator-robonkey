@@ -1,0 +1,98 @@
+$fontSmooth:                 true;
+
+
+$tiny:                       480px;
+$xsmall:                     640px;
+$small:                      768px;
+$medium:                     960px;
+$regular:                    1024px;
+$large:                      1280px;
+$xlarge:                     1440px;
+$xxlarge:                    1550px;
+$huge:                       1650px;
+
+
+$desktop-container:          $regular;
+$tablet-breakpoint:          $medium;
+$mobile-breakpoint:          $small;
+
+
+// Font-weights
+// Thin (Hairline):           100
+// Extra Light (Ultra Light): 200
+// Light:                     300
+// Normal:                    400
+// Medium:                    500
+// Semi Bold (Demi Bold):     600
+// Bold:                      700
+// Extra Bold (Ultra Bold):   800
+// Black (Heavy):             900
+
+$thin:                       100;
+$hairline:                   $thin;
+$extralight:                 200;
+$ultralight:                 $extralight;
+$light:                      300;
+$normal:                     400;
+$book:                       500;
+$medium:                     $book;
+$semi:                       600;
+$bold:                       700;
+$extrabold:                  800;
+$ultrabold:                  $extrabold;
+$heavy:                      900;
+
+$fw-normal:                  $normal;
+$fw-bold:                    $bold;
+
+
+// Default Fonts
+$default-font-family:        'lato', sans-serif;
+$title-font-family:          'bebas', sans-serif;
+$serif-font-family:          serif;
+$mono-font-family:           monospace, monospace;
+
+
+
+// Font Size Defaults
+$h1:                         40;
+$h2:                         32;
+$h3:                         26;
+$h4:                         20;
+$h5:                         18;
+$h6:                         16;
+
+$default-font-size:          16px;
+$default-line-height:        1.2;
+
+$icn-font-size:              .875em;
+$icn-line-height:            1;
+$icn-fixed-width-size:       (18em / 14);
+
+
+
+
+// Default Colours
+
+$black:                      #202020;
+$white:                      #fff;
+$red:                        #d10109;
+$grey:                       #666;
+$lightgrey:                  #999;
+$lightblue:                  #00aced;
+$darkblue:                   #173853;
+$orange:                     #e16c00;
+
+
+$error-color:                $red;
+
+$default-font-color:         $grey;
+$default-link-color:         $grey;
+$default-link-hover-color: darken($grey, 20);
+
+
+
+$base-transition:            all .3s ease-out;
+
+
+$padding:                    37px;

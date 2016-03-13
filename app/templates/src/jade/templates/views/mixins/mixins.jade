@@ -1,0 +1,34 @@
+mixin dummy()
+  .dummy
+    | content
+
+mixin googleFonts(font)
+  -var link = font
+  link(href='https://fonts.googleapis.com/css?family=#{link}', rel='stylesheet', type='text/css')
+
+mixin html()
+  != '\n'
+  != '<!-- [if lt IE 7]>      '
+  != '<html lang="'+lang+'" class="no-js '+lang+' lt-ie10 lt-ie9 lt-ie8 lt-ie7">'
+  != '<![endif] -->'
+  != '\n'
+
+  != '<!-- [if IE 7]>         '
+  != '<html lang="'+lang+'" class="no-js '+lang+' lt-ie10 lt-ie9 lt-ie8">'
+  != '<![endif] -->'
+  != '\n'
+
+  != '<!-- [if IE 8]>         '
+  != '<html lang="'+lang+'" class="no-js '+lang+' lt-ie10 lt-ie9">'
+  != '<![endif] -->'
+  != '\n'
+
+  != '<!-- [if IE 9]>         '
+  != '<html lang="'+lang+'" class="no-js '+lang+' lt-ie10">'
+  != '<![endif] -->'
+  != '\n'
+
+  != '<!--[if gt IE 9]><!-->  '
+  != '<html lang="'+lang+'" class="no-js '+lang+'">'
+  != ' <!--<![endif]-->'
+  != '\n'

@@ -1,0 +1,6 @@
+@mixin equal-padding-inline-span($color, $width) {
+  display: inline;
+  background-color: $color;
+  box-shadow: $width 0 $color, -($width) 0 $color;
+  vertical-align: sub;
+}

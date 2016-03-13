@@ -1,0 +1,50 @@
+extends templates/base
+
+
+//- Variables
+block append vars
+  - var lang                  = 'nl'
+  - var pageTitle             = '| pageTitle'
+  - var pageDescription       = 'Description'
+  - var bodyClass             = ''
+
+
+//- block append socialMedia
+//-   - var useTwitterMetaTags     = true
+//-   - var useFacebookMetaTags   = true
+//- 
+//- 
+//- block append favicons
+//-   - var useCustomFaviconPath   = false
+//-   - var useAppleIcons         = false
+
+
+//- Extra Styles
+block prepend headerStyles
+  // +googleFonts('Open+Sans:400,400italic,700italic|Roboto:400,400italic')
+  //- link(rel="stylesheet" href="assets/css/libs/slick.css")
+
+
+//- Extra Scripts Header
+append headerScripts
+  //- script#__bs_script__(type='text/javascript').
+  //-   //<![CDATA[
+  //-     document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.11.1.js'><\\/script>".replace("HOST", location.hostname));
+  //-     //]]>
+
+
+//- Extra Scripts Footer
+prepend footerScripts
+  //- script(src="assets/js/libs/jquery.waypoints.min.js")
+  //- script(src="assets/js/libs/slick.min.js")
+  //- script(src="assets/js/libs/jquery.placeholder.min.js")
+
+
+
+
+//- The Content
+block contentMain
+  p schijterij
+  include templates/views/sections/header
+  include tools/kitchensink
+  include templates/views/sections/footer

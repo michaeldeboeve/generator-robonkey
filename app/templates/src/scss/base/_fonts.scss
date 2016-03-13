@@ -1,0 +1,38 @@
+/* ========================================================================== */
+/* Fonts                                                                      */
+/* ========================================================================== */
+
+// Font-weights
+// Thin (Hairline): 100
+// Extra Light (Ultra Light): 200
+// Light: 300
+// Normal: 400
+// Medium: 500
+// Semi Bold (Demi Bold): 600
+// Bold: 700
+// Extra Bold (Ultra Bold): 800
+// Black (Heavy): 900
+
+
+@include load-font('dc-icons', '../fonts/dc-icons/dc-icons');
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Extends
+%basefont { font-family: $default-font-family; }
+%monofont { font-family: $mono-font-family; }
+%iconfont { font-family: 'dc-icons'; }
+%titlefont {
+  font-family: $title-font-family;
+  text-transform: uppercase;
+}

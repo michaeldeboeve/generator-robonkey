@@ -1,0 +1,132 @@
+// @include load-font('dc-icons', '../fonts/dc-icons/dc-icons');
+
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+
+$icn-desktop: "\E001";
+$icn-envelope: "\E002";
+$icn-facebook: "\E003";
+$icn-globe: "\E004";
+$icn-google-plus: "\E005";
+$icn-instagram: "\E006";
+$icn-laptop: "\E007";
+$icn-linkedin: "\E008";
+$icn-map-marker: "\E009";
+$icn-mobile: "\E00A";
+$icn-phone: "\E00B";
+$icn-pinterest-p: "\E00C";
+$icn-pinterest: "\E00D";
+$icn-sparky-full: "\E00E";
+$icn-sparky: "\E00F";
+$icn-tablet: "\E010";
+$icn-twitter: "\E011";
+$icn-vimeo: "\E012";
+$icn-vine: "\E013";
+$icn-whatsapp: "\E014";
+$icn-youtube-play: "\E015";
+$icn-youtube: "\E016";
+
+
+
+
+
+// ==========================================================================
+// Map
+// ==========================================================================
+
+$icons: (
+  desktop: "\E001",
+  envelope: "\E002",
+  facebook: "\E003",
+  globe: "\E004",
+  google-plus: "\E005",
+  instagram: "\E006",
+  laptop: "\E007",
+  linkedin: "\E008",
+  map-marker: "\E009",
+  mobile: "\E00A",
+  phone: "\E00B",
+  pinterest-p: "\E00C",
+  pinterest: "\E00D",
+  sparky-full: "\E00E",
+  sparky: "\E00F",
+  tablet: "\E010",
+  twitter: "\E011",
+  vimeo: "\E012",
+  vine: "\E013",
+  whatsapp: "\E014",
+  youtube-play: "\E015",
+  youtube: "\E016",
+);
+
+
+
+
+// ==========================================================================
+// Extends
+// ==========================================================================
+
+%icn-base {
+  @extend %iconfont;
+  font-size: 1em;
+  line-height: 1;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  display: inline-block;
+  text-rendering: auto;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%icn{
+  @extend %iconfont;
+  display: inline-block;
+  // vertical-align: bottom;
+  &:before {
+    @extend %icn-base;
+  }
+}
+
+%icn-fw {
+  width: $icn-fixed-width-size;
+  text-align: center;
+}
+
+
+@each $name, $icn in $icons {
+  .icn-#{$name}:before {
+    content: $icn;
+  }
+}
+
+//
+// %icn-desktop:before { content: $icn-desktop; }
+// %icn-envelope:before { content: $icn-envelope; }
+// %icn-facebook:before { content: $icn-facebook; }
+// %icn-globe:before { content: $icn-globe; }
+// %icn-google-plus:before { content: $icn-google-plus; }
+// %icn-instagram:before { content: $icn-instagram; }
+// %icn-laptop:before { content: $icn-laptop; }
+// %icn-linkedin:before { content: $icn-linkedin; }
+// %icn-map-marker:before { content: $icn-map-marker; }
+// %icn-mobile:before { content: $icn-mobile; }
+// %icn-phone:before { content: $icn-phone; }
+// %icn-pinterest-p:before { content: $icn-pinterest-p; }
+// %icn-pinterest:before { content: $icn-pinterest; }
+// %icn-sparky-full:before { content: $icn-sparky-full; }
+// %icn-sparky:before { content: $icn-sparky; }
+// %icn-tablet:before { content: $icn-tablet; }
+// %icn-twitter:before { content: $icn-twitter; }
+// %icn-vimeo:before { content: $icn-vimeo; }
+// %icn-vine:before { content: $icn-vine; }
+// %icn-whatsapp:before { content: $icn-whatsapp; }
+// %icn-youtube-play:before { content: $icn-youtube-play; }
+// %icn-youtube:before { content: $icn-youtube; }

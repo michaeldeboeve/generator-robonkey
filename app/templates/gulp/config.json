@@ -1,0 +1,36 @@
+{
+  "projectURL": "starter.local",
+
+  "src": "./../src/",
+  "dest": "./../website/",
+  "resrc": {
+    "main": "./../website/assets/",
+    "js": "./../website/assets/js/",
+    "jsvendor": "./../website/assets/js/libs/",
+    "img": "./../website/assets/images/",
+    "css": "./../website/assets/css/",
+    "cssvendor": "./../website/assets/css/libs/",
+    "fonts": "./../website/assets/fonts/",
+    "jade": "./../website/"
+},
+
+  "useJade": true,
+
+  "iconFont": {
+    "name": "dc-icons",
+    "types": ["ttf", "eot", "woff", "woff2", "svg"]
+  },
+
+  "cssComb": {
+    "use": false,
+    "config": "./csscomb.json"
+  },
+
+  "modernizr": {
+    "excludeTests": [],
+    "tests": [],
+    "output": "modernizr-custom.js",
+    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
+  }
+
+}

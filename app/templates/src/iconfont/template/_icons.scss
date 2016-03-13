@@ -1,0 +1,69 @@
+// @include load-font('<%= fontName %>', '<%= fontPath %><%= fontName %>');
+
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+<%_.each(glyphs, function(glyph) { %>
+$icn-<%= glyph.fileName %>: "\<%= glyph.codePoint %>";<% }); %>
+
+
+
+
+
+// ==========================================================================
+// Map
+// ==========================================================================
+
+$icons: (<%_.each(glyphs, function(glyph) { %>
+	<%= glyph.fileName %>: "\<%= glyph.codePoint %>",<% }); %>
+);
+
+
+
+
+// ==========================================================================
+// Extends
+// ==========================================================================
+
+%icn-base {
+	@extend %iconfont;
+	font-size: 1em;
+	line-height: 1;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	speak: none;
+	display: inline-block;
+	text-rendering: auto;
+
+	// Better Font Rendering
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+%icn{
+	@extend %iconfont;
+	display: inline-block;
+	// vertical-align: bottom;
+	&:before {
+		@extend %icn-base;
+	}
+}
+
+%icn-fw {
+	width: $icn-fixed-width-size;
+	text-align: center;
+}
+
+
+@each $name, $icn in $icons {
+  .icn-#{$name}:before {
+    content: $icn;
+  }
+}
+
+// <%_.each(glyphs, function(glyph) { %>
+// %icn-<%= glyph.fileName %>:before { content: $icn-<%= glyph.fileName %>; }<% }); %>

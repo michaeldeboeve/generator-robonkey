@@ -1,0 +1,77 @@
+@mixin above($bp) {
+  $query: $bp;
+  @include breakpoint($query) { @content; }
+}
+
+@mixin below($bp) {
+  $query: (max-width: $bp);
+  @include breakpoint($query) { @content; }
+}
+
+@mixin between($bp1, $bp2) {
+  $query: $bp1 $bp2;
+  @include breakpoint($query) { @content; }
+}
+
+@mixin orientation($orientation) {
+  @media (orientation: $orientation) { @content; }
+}
+
+@mixin landscape() {
+  @include orientation(landscape) { @content; }
+}
+
+@mixin portrait() {
+  @include orientation(portrait) { @content; }
+}
+
+
+
+
+// Devices
+
+@mixin iphone6plus($mode: null) {
+  $viewports: (portrait, landscape);
+  @if index($viewports, $mode) {
+    $orientation: and (orientation : $mode);
+  }
+  @else {
+    $orientation: null;
+  }
+  @media only screen and (min-device-width : 414px) and (max-device-width : 736px) #{$orientation} { @content; }
+}
+
+
+@mixin iphone6($mode: null) {
+  $viewports: (portrait, landscape);
+  @if index($viewports, $mode) {
+    $orientation: and (orientation : $mode);
+  }
+  @else {
+    $orientation: null;
+  }
+  @media only screen and (min-device-width : 375px) and (max-device-width : 667px) #{$orientation} { @content; }
+}
+
+
+@mixin iphone5($mode: null) {
+  $viewports: (portrait, landscape);
+  @if index($viewports, $mode) {
+    $orientation: and (orientation : $mode);
+  }
+  @else {
+    $orientation: null;
+  }
+  @media only screen and (min-device-width : 320px) and (max-device-width : 568px) #{$orientation} { @content; }
+}
+
+@mixin iphone4($mode: null) {
+  $viewports: (portrait, landscape);
+  @if index($viewports, $mode) {
+    $orientation: and (orientation : $mode);
+  }
+  @else {
+    $orientation: null;
+  }
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) #{$orientation} { @content; }
+}

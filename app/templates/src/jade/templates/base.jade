@@ -1,0 +1,189 @@
+include views/mixins/mixins
+
+block vars
+  - var lang                   = 'nl'
+  - var pageTitle             = 'pageTitle'
+  - var pageDescription       = 'Description'
+  - var bodyClass             = ''
+
+block socialMedia
+  - var useTwitterMetaTags     = false
+  - var useFacebookMetaTags    = false
+  - var twitterCard            = 'summary'
+  - var twitterHandler         = '@someone'
+  - var twitterTitle           = 'The Twitter Title'
+  - var twitterDescription     = 'The Twitter Description'
+  - var twitterImage           = 'Link To The Twitter Image'
+  
+  - var facebookType           = 'website'
+  - var facebookTitle          = 'The Facebook Title'
+  - var facebookDescription    = 'The Facebook Description'
+  - var facebookImage          = 'Link To The Facebook Image'
+  
+  - var socialURL              = 'http://www.theurl.com'
+
+block favicons
+  - var useCustomFaviconPath   = false
+  - var useAppleIcons          = false
+  - var faviconType            = 'image/x-icon'
+  - var faviconPath            = 'assets/images/favicons/favicon.ico'
+  - var appleIPhone            = 'assets/images/favicons/touch-icon-iphone.png'
+  - var appleIPad              = 'assets/images/favicons/touch-icon-ipad.png'
+  - var appleIPhoneX2          = 'assets/images/favicons/touch-icon-iphone-retina.png'
+  - var appleIPadX2            = 'assets/images/favicons/touch-icon-ipad-retina.png'
+    
+    
+doctype html
+
+html(lang="#{ lang }" class="no-js #{ lang }")
+
+  head
+    meta(charset="utf-8")
+    meta(
+      http-equiv="X-UA-Compatible",
+      content="IE=edge"
+    )
+    != '\n'
+    title #{ pageTitle }
+    != '\n'
+    meta(
+      name="description",
+      content="#{ pageDescription }"
+    )
+    meta(
+      name="viewport",
+      content="width=device-width, initial-scale=1"
+    )
+    != '\n\n'
+    
+    
+    if useTwitterMetaTags
+      != '  <!-- [Start: Twitter Meta Tags] -->  '
+      meta(
+        name="twitter:card",
+        content="#{ twitterCard }"
+      )
+      meta(
+        name="twitter:site",
+        content="#{ twitterHandler }"
+      )
+      meta(
+        name="twitter:url",
+        content="#{ socialURL }"
+      )
+      meta(
+        name="twitter:title",
+        content="#{ twitterTitle }"
+      )
+      meta(
+        name="twitter:description",
+        content="#{ twitterDescription }"
+      )
+      meta(
+        name="twitter:image",
+        content="#{ twitterImage }"
+      )
+      != '\n'
+      != '  <!-- [End: Twitter Meta Tags] -->  '
+      
+      
+    if useFacebookMetaTags
+      != '  <!-- [Start: Facebook Meta Tags] -->  '
+      meta(
+        property="og:type",
+        content="#{ facebookType }"
+      )
+      meta(
+        property="og:url",
+        content="#{ socialURL }"
+      )
+      meta(
+        property="og:title",
+        content="#{ facebookTitle }"
+      )
+      meta(
+        property="og:description",
+        content="#{ facebookDescription }"
+      )
+      meta(
+        property="og:image",
+        content="#{ facebookImage }"
+      )
+      != '\n'
+      != '  <!-- [End: Facebook Meta Tags] -->  '
+    
+    
+    if useCustomFaviconPath
+      != '\n\n'
+      != '  <!-- [Start: Favicon] -->  '
+      link(
+        rel="icon",
+        type="#{ faviconType }",
+        href="#{ faviconPath }"
+      )
+      != '\n'
+      != '  <!-- [End: Favicon] -->  '
+    
+    if useAppleIcons
+      != '\n\n'
+      != '  <!-- [Start: Touch Icons] -->  '
+      link(
+        rel="apple-touch-icon"
+        href="#{ appleIPhone }"
+      )
+      link(
+        rel="apple-touch-icon",
+        sizes="76x76",
+        href="#{ appleIPad }"
+      )
+      link(
+        rel="apple-touch-icon",
+        sizes="120x120",
+        href="#{ appleIPhoneX2 }"
+      )
+      link(
+        rel="apple-touch-icon",
+        sizes="152x152",
+        href="#{ appleIPadX2 }"
+      )
+      != '\n'
+      != '  <!-- [End: Touch Icons] -->  '
+      
+    != '\n\n'
+    != '  <!-- [Start: Styles] -->'
+    block headerStyles
+      link(rel="stylesheet", href="assets/css/style.css")
+    != '\n'
+    != '  <!-- [End: Styles] -->  '
+
+
+    != '\n\n'
+    != '  <!-- [Start: Scripts] -->  '
+    block headerScripts
+      script(src="assets/js/libs/modernizr-custom.js")
+    != '\n'
+    != '  <!-- [End: Scripts] -->  '
+    != '\n'
+
+
+  body(class="#{ bodyClass }")
+    block contentMain
+
+
+
+    != '\n\n'
+    != '  <!-- [if lt IE 9]>'
+    script(src="assets/js/libs/jquery-1.11.2.min.js")
+    != '\n'
+    != '  <![endif] -->'
+    != '\n'
+    != '  <!--[if gt IE 9]><!-->'
+    script(src="assets/js/libs/jquery-2.1.3.min.js")
+    != '\n'
+    != '  <!--<![endif]-->'
+    != '\n'
+
+    block footerScripts
+      script(src="assets/js/script.min.js")
+
+    = '\n\n'

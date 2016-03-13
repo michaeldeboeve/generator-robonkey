@@ -1,0 +1,29 @@
+{
+  "name": "generator-robonkey",
+  "version": "0.0.1",
+  "description": "A front-end application generator for Jade, Sass & Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "yeoman-generator",
+    "sass",
+    "jade",
+    "gulp"
+  ],
+  "authors": {
+    "Michaël de Boevé"
+    "Dietlev Maertens"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "yosay": "^1.0.3",
+    "chalk": "^1.0.0",
+    "yeoman-generator": "^0.19.2",
+    "yo": "^1.4.6"
+  },
+  "files": [
+    "app"
+  ]
+}

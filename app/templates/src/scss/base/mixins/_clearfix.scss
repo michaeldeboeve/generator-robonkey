@@ -1,0 +1,20 @@
+@mixin clearfix($type: current){
+  @if $type == legacy {
+
+    &:before,
+    &:after {
+      content: '';
+      display: table;
+    }
+    &:after { clear: both; }
+
+  } @else {
+
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+  }
+}
