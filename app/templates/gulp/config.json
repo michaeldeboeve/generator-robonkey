@@ -1,5 +1,5 @@
 {
-  "projectURL": "starter.local",
+  "projectURL": "<%= localUrl %>",
 
   "src": "./../src/",
   "dest": "./../website/",

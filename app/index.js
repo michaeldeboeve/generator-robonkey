@@ -12,6 +12,7 @@ module.exports = generators.Base.extend({
         sourceRoot = this.sourceRoot(),
         appDir = destRoot,
         templateContext = {
+          localUrl: this.localUrl,
           appname: this.appname,
           appdescription: this.appdescription,
           appversion: this.appversion,
@@ -58,7 +59,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/gulp/package.json', templateContext);
     this.fs.copy(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js');
     this.fs.copy(sourceRoot + '/gulp/csscomb.json', destRoot + '/gulp/csscomb.json');
-    this.fs.copy(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json');
+    this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json', templateContext);
 
     // Copy Src Files
     this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
@@ -130,6 +131,11 @@ module.exports = generators.Base.extend({
   _getPrompts: function(){
     var prompts = [
       {
+        name: 'localUrl',
+        message: 'Local URL to use:',
+        default: 'localhost'
+      }
+      ,{
         type: 'list',
         name: 'setup',
         message: 'What is your setup?',
@@ -239,6 +245,7 @@ module.exports = generators.Base.extend({
     this.appauthor = answers.yourname;
     this.appemail = answers.email;
 
+    this.localUrl = answers.localUrl;
     this.includeJQuery = hasFeature('includeJQuery');
     this.includeWaypoints = hasFeature('includeWaypoints');
     this.includeSignals = hasFeature('includeSignals');
