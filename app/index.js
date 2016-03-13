@@ -128,6 +128,17 @@ module.exports = generators.Base.extend({
     this.fs.copy(bowerRoot + '/animate.scss/scss/animations', srcsRoot + '/scss/libs/animate/animations');
   },
 
+  _endMsg: function() {
+    var allDone =
+      '\nRobonkey says:\n' +
+      chalk.yellow.bold('ALL DONE!') +
+      '\n' +
+      chalk.yellow.bold('Happy coding!') +
+      '';
+
+    this.log(allDone);
+  },
+
   _getPrompts: function(){
     var prompts = [
       {
@@ -283,5 +294,4 @@ module.exports = generators.Base.extend({
       this._copyBowerComponents();
     });
   }
-
 });
