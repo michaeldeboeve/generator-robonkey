@@ -19,13 +19,13 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.1",
-    "waypoints": "^4.0.0",
-    "enquire": "^2.1.2",
-    "gsap": "^1.18.2",
-    "js-signals": "signals#^1.0.0",
+    <% if(includeJQuery){ %>"jquery": "^2.2.1",<% } %>
+    <% if(includeWaypoints){ %>"waypoints": "^4.0.0",<% } %>
+    <% if(includeEnquire){ %>"enquire": "^2.1.2",<% } %>
+    <% if(includeTweenmax){ %>"gsap": "^1.18.2",<% } %>
+    <% if(includeSignals){ %>"js-signals": "signals#^1.0.0",<% } %>
+    <% if(includeD3){ %>"d3": "^3.5.16",<% } %>
     "matchHeight": "jquery-match-height#^0.7.0",
-    "d3": "^3.5.16",
     "reset-css": "^2.0.2011012603",
     "animate.scss": "*",
     "susy": "^2.2.12",
