@@ -46,7 +46,9 @@ module.exports = generators.Base.extend({
   },
 
   _iconfont: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
+    if(this.includeCustomIcnFont) {
+      this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
+    }
   },
 
   _js: function(destRoot, sourceRoot, templateContext) {
@@ -54,7 +56,19 @@ module.exports = generators.Base.extend({
   },
 
   _scss: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/src/scss', destRoot + '/src/scss');
+    this.fs.copy(sourceRoot + '/src/scss/base', destRoot + '/src/scss/base');
+    this.fs.copy(sourceRoot + '/src/scss/layout', destRoot + '/src/scss/layout');
+    this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
+    this.fs.copy(sourceRoot + '/src/scss/playground', destRoot + '/src/scss/playground');
+    this.fs.copy(sourceRoot + '/src/scss/views', destRoot + '/src/scss/views');
+    this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
+    this.fs.copy(sourceRoot + '/src/scss/modules/_buttons.scss', destRoot + '/src/scss/modules/_buttons.scss');
+    this.fs.copy(sourceRoot + '/src/scss/modules/_forms.scss', destRoot + '/src/scss/modules/_forms.scss');
+    this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/styles.css', templateContext);
+
+    if(this.includeCustomIcnFont) {
+      this.fs.copy(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss');
+    }
   },
 
   _jade: function(destRoot, sourceRoot, templateContext) {
@@ -150,7 +164,8 @@ module.exports = generators.Base.extend({
           name: 'basic',
           value: 'isBasic',
           checked: true
-        }, {
+        },
+        {
           name: 'Wordpress',
           value: 'isWordpress',
           checked: false
@@ -207,9 +222,15 @@ module.exports = generators.Base.extend({
           name: 'Enquire',
           value: 'includeEnquire',
           checked: false
-        },{
+        }
+        ,{
           name: 'Google Analytics',
           value: 'includeGA',
+          checked: false
+        }
+        ,{
+          name: 'Custom Icon Font Gulp Task',
+          value: 'includeCustomIcnFont',
           checked: false
         }]
       }
@@ -271,6 +292,7 @@ module.exports = generators.Base.extend({
     this.includeModernizr = hasFeature('includeModernizr');
     this.includeGA = hasFeature('includeGA');
     this.includeJade = hasFeature('includeJade');
+    this.includeCustomIcnFont = hasFeature('includeCustomIcnFont');
 
     callback();
   },
@@ -311,7 +333,8 @@ module.exports = generators.Base.extend({
           includeEnquire: this.includeEnquire,
           includeModernizr: this.includeModernizr,
           includeGA: this.includeGA,
-          includeJade: this.includeJade
+          includeJade: this.includeJade,
+          includeCustomIcnFont: this.includeCustomIcnFont
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);

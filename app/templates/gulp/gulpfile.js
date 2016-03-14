@@ -53,12 +53,12 @@ var classPrfx       = require('postcss-class-prefix');
 var gradientFix     = require('postcss-gradient-transparency-fix');
 var cssnano         = require('cssnano');
 
-
+<% if(includeCustomIcnFont){ %>
 // Fonts
 var iconfont        = require('gulp-iconfont');
 var iconfontCss     = require('gulp-iconfont-css');
 var runTimestamp    = Math.round(Date.now()/1000);
-
+<% } %>
 
 
 // Sourcemaps
@@ -90,12 +90,12 @@ var path_build_js_vendor    = cfg.resrc.jsvendor; // where the vendor scripts ar
 var path_build_css          = cfg.resrc.css; // where the styles are stored
 var path_build_css_vendor   = cfg.resrc.jsvendor; // where the vendor styles are stored
 var path_build_img          = cfg.resrc.img; // where the images are stored
-var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored
+<% if(includeCustomIcnFont){ %>var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored<% } %>
 <% if(includeJade){ %>var path_build_jade         = cfg.resrc.jade; // where teh HTML is generated<% } %>
 
 
 // Settings
-var iconFontName      = cfg.iconFont.name;
+<% if(includeCustomIcnFont){ %>var iconFontName      = cfg.iconFont.name;<% } %>
 var projectURL        = cfg.projectURL;
 
 
@@ -142,16 +142,16 @@ var paths = {
     watch: path_src + 'jade/**/*.jade',
     build: path_build_jade
   },<% } %>
-  postcss: {
-    src: path_build_css + 'style.css',
-    build: path_build_css
-  },
-  font: {
+  <% if(includeCustomIcnFont){ %>font: {
     src: path_src + 'iconfont/svg/*.svg',
     build: path_build_fonts + iconFontName,
     templateInput: '../src/iconfont/template/_icons.scss',
     templateOutput: '../../../../src/scss/modules/_icons.scss',
     templateFontpath: '../fonts/' + iconFontName + '/'
+  }<% } %>
+  postcss: {
+    src: path_build_css + 'style.css',
+    build: path_build_css
   }
 };
 
@@ -265,7 +265,7 @@ gulp.task('jade', function() {
 
 
 
-
+<% if(includeCustomIcnFont){ %>
 // Create icon font
 gulp.task('iconfont', function(){
   return gulp.src(paths.font.src)
@@ -286,7 +286,7 @@ gulp.task('iconfont', function(){
     }))
     .pipe(gulp.dest(paths.font.build));
 });
-
+<% } %>
 
 
 

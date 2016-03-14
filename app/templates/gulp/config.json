@@ -1,6 +1,15 @@
 {
   "projectURL": "<%= localUrl %>",
-
+  <% if(includeModernizr){ %>"modernizr": {
+    "excludeTests": [],
+    "tests": [],
+    "output": "modernizr-custom.js",
+    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
+  },<% } %>
+  <% if(includeCustomIcnFont) { %>"iconFont": {
+    "name": "dc-icons",
+    "types": ["ttf", "eot", "woff", "woff2", "svg"]
+  }, <% } %>
   "src": "./../src/",
   "dest": "./../website/",
   "resrc": {
@@ -12,18 +21,5 @@
     "cssvendor": "./../website/assets/css/libs/",
     "fonts": "./../website/assets/fonts/",
     "jade": "./../website/"
-  },
-
-  <% if(includeModernizr){ %>"modernizr": {
-    "excludeTests": [],
-    "tests": [],
-    "output": "modernizr-custom.js",
-    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
-  },<% } %>
-
-  "iconFont": {
-    "name": "dc-icons",
-    "types": ["ttf", "eot", "woff", "woff2", "svg"]
   }
-
 }
