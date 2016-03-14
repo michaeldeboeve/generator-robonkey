@@ -7,9 +7,7 @@ var cfg             = JSON.parse(fs.readFileSync('./config.json'));
 // include gulp
 var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
-var gulpIf          = require('gulp-if');
 var concat          = require('gulp-concat');
-var nodemon         = require('gulp-nodemon');
 
 
 
@@ -44,7 +42,6 @@ var imagemin        = require('gulp-imagemin');
 
 
 // postprocessing
-var csscomb         = require('gulp-csscomb');
 var postcss         = require('gulp-postcss');
 var autoprefixer    = require('autoprefixer');
 var mqpacker        = require('css-mqpacker');
@@ -94,15 +91,12 @@ var path_build_css          = cfg.resrc.css; // where the styles are stored
 var path_build_css_vendor   = cfg.resrc.jsvendor; // where the vendor styles are stored
 var path_build_img          = cfg.resrc.img; // where the images are stored
 var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored
-<% if(includeJade){ %>var path_build_jade         = cfg.dest; // Where the html is built<% } %>
-
-
+<% if(includeJade){ %>var path_build_jade         = cfg.resrc.jade; // where teh HTML is generated<% } %>
 
 
 // Settings
 var iconFontName      = cfg.iconFont.name;
 var projectURL        = cfg.projectURL;
-<% if(includeJade){ %>var useJade           = cfg.useJade;<% } %>
 
 
 /*
@@ -249,7 +243,6 @@ gulp.task('styles', function() {
     .pipe(sourcemaps.init())
     .pipe(sass()) // Compile sass to css
     .pipe(postcss(postCssConfig)) // Perform postcss tasks
-    .pipe(gulpIf(cfg.cssComb.use, csscomb(cfg.cssComb.config))) // Cleanup css task
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.build));
 });
@@ -265,7 +258,7 @@ gulp.task('jade', function() {
   };
   gulp.src(paths.jade.src)
     .pipe(plumber(onJadeError))
-    .pipe(gulpIf(useJade, jade(jadeOptions)))
+    .pipe(jade(jadeOptions))
     .pipe(gulp.dest(paths.jade.build));
 });
 <% } %>

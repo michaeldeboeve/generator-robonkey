@@ -14,9 +14,7 @@
     "jade": "./../website/"
   },
 
-  <% if(includeJade){ %>"useJade": true,<% } %>
-
-  <% if(includeModernizr){ %>"modernizr":
+  <% if(includeModernizr){ %>"modernizr": {
     "excludeTests": [],
     "tests": [],
     "output": "modernizr-custom.js",
@@ -26,11 +24,6 @@
   "iconFont": {
     "name": "dc-icons",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
-  },
-
-  "cssComb": {
-    "use": false,
-    "config": "./csscomb.json"
   }
 
 }
