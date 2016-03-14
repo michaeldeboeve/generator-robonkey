@@ -69,9 +69,9 @@ module.exports = generators.Base.extend({
   },
 
   _copyBowerComponents: function() {
-    var bowerRoot = this.destinationRoot() + '/../src/bower_components';
-    var destRoot = this.destinationRoot() + '/../website/assets/js/libs';
-    var srcsRoot = this.destinationRoot() + '/../src';
+    var bowerRoot = this.destinationRoot() + '/../src/bower_components',
+        destRoot = this.destinationRoot() + '/../website/assets/js/libs',
+        srcsRoot = this.destinationRoot() + '/../src';
 
     // jQuery JS
     if(this.includeJQuery) {
@@ -331,9 +331,9 @@ module.exports = generators.Base.extend({
     process.chdir(npmdir);
     this.bowerInstall();
     // this.npmInstall();
-    this.on('end', function () {
-      this._copyBowerComponents();
-      this._endMsg();
-    });
+  },
+  end: function() {
+    this._copyBowerComponents();
+    this._endMsg();
   }
 });
