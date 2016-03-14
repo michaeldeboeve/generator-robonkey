@@ -12,9 +12,16 @@
     "cssvendor": "./../website/assets/css/libs/",
     "fonts": "./../website/assets/fonts/",
     "jade": "./../website/"
-},
+  },
 
-  "useJade": true,
+  <% if(includeJade){ %>"useJade": true,<% } %>
+
+  <% if(includeModernizr){ %>"modernizr":
+    "excludeTests": [],
+    "tests": [],
+    "output": "modernizr-custom.js",
+    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
+  },<% } %>
 
   "iconFont": {
     "name": "dc-icons",
@@ -24,13 +31,6 @@
   "cssComb": {
     "use": false,
     "config": "./csscomb.json"
-  },
-
-  "modernizr": {
-    "excludeTests": [],
-    "tests": [],
-    "output": "modernizr-custom.js",
-    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
   }
 
 }

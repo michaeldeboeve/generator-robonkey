@@ -28,14 +28,14 @@ var browserSync     = require('browser-sync');
 
 
 // html
-var jade            = require('gulp-jade');
+<% if(includeJade){ %>var jade            = require('gulp-jade');<% } %>
 
 
 
 // javascript
 var jshint          = require('gulp-jshint');
 var uglify          = require('gulp-uglify');
-var modernizr       = require('gulp-modernizr');
+<% if(includeModernizr){ %>var modernizr       = require('gulp-modernizr');<% } %>
 
 
 // images
@@ -94,7 +94,7 @@ var path_build_css          = cfg.resrc.css; // where the styles are stored
 var path_build_css_vendor   = cfg.resrc.jsvendor; // where the vendor styles are stored
 var path_build_img          = cfg.resrc.img; // where the images are stored
 var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored
-var path_build_jade         = cfg.dest; // Where the html is built
+<% if(includeJade){ %>var path_build_jade         = cfg.dest; // Where the html is built<% } %>
 
 
 
@@ -102,7 +102,7 @@ var path_build_jade         = cfg.dest; // Where the html is built
 // Settings
 var iconFontName      = cfg.iconFont.name;
 var projectURL        = cfg.projectURL;
-var useJade           = cfg.useJade;
+<% if(includeJade){ %>var useJade           = cfg.useJade;<% } %>
 
 
 /*
@@ -143,11 +143,11 @@ var paths = {
     build_srcsmap: path_build_css,
     build: path_build_css
   },
-  jade: {
+  <% if(includeJade){ %>jade: {
     src: path_src + 'jade/*.jade',
     watch: path_src + 'jade/**/*.jade',
     build: path_build_jade
-  },
+  },<% } %>
   postcss: {
     src: path_build_css + 'style.css',
     build: path_build_css
@@ -177,7 +177,7 @@ gulp.task('browser-sync', function() {
 
 
 
-
+<% if(includeModernizr){ %>
 // modernizr
 gulp.task('modernizr', function() {
   gulp.src([paths.styles.src_files, paths.scripts.src])
@@ -190,7 +190,7 @@ gulp.task('modernizr', function() {
     .pipe(uglify())
     .pipe(gulp.dest(paths.modernizr.build));
 });
-
+<% } %>
 
 
 // JS hint task -NOTE-: deze is voor de liefhebbers, runnen we niet per default
@@ -257,7 +257,7 @@ gulp.task('styles', function() {
 
 
 
-
+<% if(includeJade){ %>
 // Compile jade files
 gulp.task('jade', function() {
   var jadeOptions = {
@@ -268,6 +268,7 @@ gulp.task('jade', function() {
     .pipe(gulpIf(useJade, jade(jadeOptions)))
     .pipe(gulp.dest(paths.jade.build));
 });
+<% } %>
 
 
 
@@ -297,7 +298,7 @@ gulp.task('iconfont', function(){
 
 
 // default gulp task
-gulp.task('default', ['jade', 'images', 'scripts-min', 'styles', 'browser-sync'], function() {
+gulp.task('default', [<% if(includeJade){ %>'jade',<% } %> 'images', 'scripts-min', 'styles', 'browser-sync'], function() {
 
   // watch for JS changes
   // gulp.watch(paths.scripts.src, ['scripts', 'scripts-min']).on('change', browserSync.reload);
@@ -309,8 +310,8 @@ gulp.task('default', ['jade', 'images', 'scripts-min', 'styles', 'browser-sync']
   // watch for image changes
   gulp.watch(paths.images.src, ['images']);
 
-  // watch for Jade changes
-  gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);
+  <% if(includeJade){ %>// watch for Jade changes
+  gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);<% } %>
 
 });
 
@@ -325,6 +326,6 @@ function onStyleError(e) {
   console.log('CSS Error:', e.message, 'lineNumber:', e.lineNumber);
 }
 
-function onJadeError(e) {
+<% if(includeJade){ %>function onJadeError(e) {
   console.log('Jade Error:', e.message, 'lineNumber:', e.lineNumber);
-}
+}<% } %>

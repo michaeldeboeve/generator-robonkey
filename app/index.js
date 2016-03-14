@@ -7,28 +7,7 @@ var generators = require('yeoman-generator'),
 
 module.exports = generators.Base.extend({
 
-  _createProjectFileSystem: function(){
-    var destRoot = this.destinationRoot(),
-        sourceRoot = this.sourceRoot(),
-        appDir = destRoot,
-        templateContext = {
-          localUrl: this.localUrl,
-          appname: this.appname,
-          appdescription: this.appdescription,
-          appversion: this.appversion,
-          applicense: this.applicense,
-          appauthor: this.appauthor,
-          appemail: this.appemail,
-          includeJQuery: this.includeJQuery,
-          includeWaypoints: this.includeWaypoints,
-          includeSignals: this.includeSignals,
-          includeD3: this.includeD3,
-          includeTweenmax: this.includeTweenmax,
-          includeEnquire: this.includeEnquire,
-          includeModernizr: this.includeModernizr
-        };
-
-    // Create Folders
+  _folders: function(appDir){
     mkdirp(appDir + '/gulp');
     mkdirp(appDir + '/src');
     mkdirp(appDir + '/website');
@@ -37,39 +16,56 @@ module.exports = generators.Base.extend({
     mkdirp(appDir + '/website/assets/js/libs');
     mkdirp(appDir + '/website/assets/images');
     mkdirp(appDir + '/website/assets/fonts');
+  },
 
-    // Copy Website Files
+  _html: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/website/.htaccess', destRoot + '/website/.htaccess');
     this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
     // this.fs.copy(sourceRoot + '/website/browserconfig.xml', destRoot + '/website/browserconfig.xml');
     // this.fs.copy(sourceRoot + '/website/crossdomain.xml', destRoot + '/website/crossdomain.xml');
     // this.fs.copyTpl(sourceRoot + '/website/humans.txt', destRoot + '/website/humans.txt', templateContext);
     // this.fs.copy(sourceRoot + '/website/robots.txt', destRoot + '/website/robots.txt');
+  },
 
+  _config: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/project/.editorconfig', destRoot + '/.editorconfig');
     this.fs.copy(sourceRoot + '/project/.gitignore', destRoot + '/.gitignore');
     this.fs.copy(sourceRoot + '/project/.gitattributes', destRoot + '/.gitattributes');
     this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
+  },
 
-    // Copy Bower Files
+  _bower: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/bower/.bowerrc', destRoot + '/gulp/.bowerrc');
     this.fs.copyTpl(sourceRoot + '/bower/bower.json', destRoot + '/gulp/bower.json', templateContext);
+  },
 
-    // Copy Gulp Files
+  _gulp: function(destRoot, sourceRoot, templateContext) {
     this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/gulp/package.json', templateContext);
-    this.fs.copy(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js');
+    this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js', templateContext);
     this.fs.copy(sourceRoot + '/gulp/csscomb.json', destRoot + '/gulp/csscomb.json');
     this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json', templateContext);
+  },
 
-    // Copy Src Files
+  _iconfont: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
+  },
+
+  _js: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
+  },
+
+  _scss: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/scss', destRoot + '/src/scss');
-    this.fs.copy(sourceRoot + '/src/jade/index.jade', destRoot + '/src/jade/index.jade');
-    this.fs.copy(sourceRoot + '/src/jade/tools', destRoot + '/src/jade/tools');
-    this.fs.copy(sourceRoot + '/src/jade/templates', destRoot + '/src/jade/templates');
-    this.fs.copyTpl(sourceRoot + '/src/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', templateContext);
-    this.fs.copy(sourceRoot + '/src/jade/templates/views', destRoot + '/src/jade/templates/views');
+  },
+
+  _jade: function(destRoot, sourceRoot, templateContext) {
+    if(this.includeJade) {
+      this.fs.copy(sourceRoot + '/src/jade/index.jade', destRoot + '/src/jade/index.jade');
+      this.fs.copy(sourceRoot + '/src/jade/tools', destRoot + '/src/jade/tools');
+      this.fs.copy(sourceRoot + '/src/jade/templates', destRoot + '/src/jade/templates');
+      this.fs.copyTpl(sourceRoot + '/src/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', templateContext);
+      this.fs.copy(sourceRoot + '/src/jade/templates/views', destRoot + '/src/jade/templates/views');
+    }
   },
 
   _copyBowerComponents: function() {
@@ -130,11 +126,12 @@ module.exports = generators.Base.extend({
 
   _endMsg: function() {
     var allDone =
-      '\nRobonkey says:\n' +
-      chalk.yellow.bold('ALL DONE!') +
-      '\n' +
-      chalk.yellow.bold('Happy coding!') +
-      '';
+      '\n.----------------.' +
+      '\n| Robonkey says: |' +
+      '\n| '+chalk.yellow.bold('ALL DONE!') + '      |' +
+      '\n| ' + chalk.yellow.bold('Happy coding!') + '  |' +
+      '\n\'----------------\'' +
+      '\n';
 
     this.log(allDone);
   },
@@ -155,7 +152,7 @@ module.exports = generators.Base.extend({
           value: 'isBasic',
           checked: true
         }, {
-          name: 'wordpress',
+          name: 'Wordpress',
           value: 'isWordpress',
           checked: false
         }, {
@@ -163,7 +160,7 @@ module.exports = generators.Base.extend({
           value: 'isDrupal',
           checked: false
         }, {
-          name: 'codeigniter',
+          name: 'CodeIgniter',
           value: 'isCodeigniter',
           checked: false
         }]
@@ -173,6 +170,11 @@ module.exports = generators.Base.extend({
         name: 'features',
         message: 'What more would you like?',
         choices: [{
+          name: 'Jade',
+          value: 'includeJade',
+          checked: true
+        }
+        ,{
           name: 'Modernizr',
           value: 'includeModernizr',
           checked: true
@@ -205,6 +207,10 @@ module.exports = generators.Base.extend({
         ,{
           name: 'Enquire',
           value: 'includeEnquire',
+          checked: false
+        },{
+          name: 'Google Analytics',
+          value: 'includeGA',
           checked: false
         }]
       }
@@ -264,6 +270,8 @@ module.exports = generators.Base.extend({
     this.includeTweenmax = hasFeature('includeTweenmax');
     this.includeEnquire = hasFeature('includeEnquire');
     this.includeModernizr = hasFeature('includeModernizr');
+    this.includeGA = hasFeature('includeGA');
+    this.includeJade = hasFeature('includeJade');
 
     callback();
   },
@@ -272,26 +280,60 @@ module.exports = generators.Base.extend({
     var message = chalk.yellow.bold('Welcome to Robonkey ') + chalk.yellow('\'Cause everyone needs a Robotic Monkey');
     this.log(yosay(message, {maxLength: 19}));
   },
+
   prompting: function() {
     var done = this.async();
     this.prompt(this._getPrompts(), function(answers) {
       this._saveAnswers(answers, done);
     }.bind(this));
   },
+
   configuring: function(){
     this.config.save();
   },
+
   writing: function(){
-    this._createProjectFileSystem();
+    var destRoot = this.destinationRoot(),
+        sourceRoot = this.sourceRoot(),
+        appDir = destRoot,
+        templateContext = {
+          localUrl: this.localUrl,
+          appname: this.appname,
+          appdescription: this.appdescription,
+          appversion: this.appversion,
+          applicense: this.applicense,
+          appauthor: this.appauthor,
+          appemail: this.appemail,
+          includeJQuery: this.includeJQuery,
+          includeWaypoints: this.includeWaypoints,
+          includeSignals: this.includeSignals,
+          includeD3: this.includeD3,
+          includeTweenmax: this.includeTweenmax,
+          includeEnquire: this.includeEnquire,
+          includeModernizr: this.includeModernizr,
+          includeGA: this.includeGA,
+          includeJade: this.includeJade
+        };
+    this._folders(appDir);
+    this._html(destRoot, sourceRoot, templateContext);
+    this._config(destRoot, sourceRoot, templateContext);
+    this._bower(destRoot, sourceRoot, templateContext);
+    this._gulp(destRoot, sourceRoot, templateContext);
+    this._iconfont(destRoot, sourceRoot, templateContext);
+    this._js(destRoot, sourceRoot, templateContext);
+    this._scss(destRoot, sourceRoot, templateContext);
+    this._jade(destRoot, sourceRoot, templateContext);
   },
+
   install: function() {
     // Change working directory to 'gulp' for dependency install
     var npmdir = process.cwd() + '/gulp';
     process.chdir(npmdir);
     this.bowerInstall();
-    this.npmInstall();
+    // this.npmInstall();
     this.on('end', function () {
       this._copyBowerComponents();
+      this._endMsg();
     });
   }
 });
