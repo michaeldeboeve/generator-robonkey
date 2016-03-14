@@ -181,19 +181,9 @@ module.exports = generators.Base.extend({
       }
       ,{
         type: 'checkbox',
-        name: 'features',
-        message: 'What more would you like?',
+        name: 'featuresJS',
+        message: 'What Javascript libraries to include?',
         choices: [{
-          name: 'Jade',
-          value: 'includeJade',
-          checked: true
-        }
-        ,{
-          name: 'Modernizr',
-          value: 'includeModernizr',
-          checked: true
-        }
-        ,{
           name: 'jQuery',
           value: 'includeJQuery',
           checked: true
@@ -227,10 +217,30 @@ module.exports = generators.Base.extend({
           name: 'Google Analytics',
           value: 'includeGA',
           checked: false
-        }
+        }]
+      }
+      ,{
+        type: 'checkbox',
+        name: 'featuresGulp',
+        message: 'What Gulp tasks to include?',
+        choices: [{
+          name: 'Jade',
+          value: 'includeJade',
+          checked: true
+        },
+        {
+          name: 'Modernizr',
+          value: 'includeModernizr',
+          checked: true
+        },
         ,{
-          name: 'Custom Icon Font Gulp Task',
+          name: 'Custom Icon Font',
           value: 'includeCustomIcnFont',
+          checked: false
+        },
+        {
+          name: 'PostCSS',
+          value: 'includePostCSS',
           checked: false
         }]
       }
@@ -271,8 +281,8 @@ module.exports = generators.Base.extend({
   _saveAnswers: function(answers, callback) {
     var features = answers.features;
 
-    function hasFeature(feat) {
-      return features && features.indexOf(feat) !== -1;
+    function hasFeature(feat, list) {
+      return list && list.indexOf(feat) !== -1;
     };
 
     this.appname = answers.name;
@@ -283,16 +293,17 @@ module.exports = generators.Base.extend({
     this.appemail = answers.email;
 
     this.localUrl = answers.localUrl;
-    this.includeJQuery = hasFeature('includeJQuery');
-    this.includeWaypoints = hasFeature('includeWaypoints');
-    this.includeSignals = hasFeature('includeSignals');
-    this.includeD3 = hasFeature('includeD3');
-    this.includeTweenmax = hasFeature('includeTweenmax');
-    this.includeEnquire = hasFeature('includeEnquire');
-    this.includeModernizr = hasFeature('includeModernizr');
+    this.includeJQuery = hasFeature('includeJQuery', 'feauturesJS');
+    this.includeWaypoints = hasFeature('includeWaypoints', 'feauturesJS');
+    this.includeSignals = hasFeature('includeSignals', 'feauturesJS');
+    this.includeD3 = hasFeature('includeD3', 'feauturesJS');
+    this.includeTweenmax = hasFeature('includeTweenmax', 'feauturesJS');
+    this.includeEnquire = hasFeature('includeEnquire', 'feauturesJS');
     this.includeGA = hasFeature('includeGA');
-    this.includeJade = hasFeature('includeJade');
-    this.includeCustomIcnFont = hasFeature('includeCustomIcnFont');
+
+    this.includeModernizr = hasFeature('includeModernizr', 'featuresGulp');
+    this.includeJade = hasFeature('includeJade', 'featuresGulp');
+    this.includeCustomIcnFont = hasFeature('includeCustomIcnFont', 'featuresGulp');
 
     callback();
   },
