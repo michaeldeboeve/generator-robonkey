@@ -42,7 +42,6 @@ module.exports = generators.Base.extend({
   _gulp: function(destRoot, sourceRoot, templateContext) {
     this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/gulp/package.json', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js', templateContext);
-    this.fs.copy(sourceRoot + '/gulp/csscomb.json', destRoot + '/gulp/csscomb.json');
     this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json', templateContext);
   },
 
