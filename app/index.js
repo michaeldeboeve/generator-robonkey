@@ -330,7 +330,7 @@ module.exports = generators.Base.extend({
     var npmdir = process.cwd() + '/gulp';
     process.chdir(npmdir);
     this.bowerInstall();
-    // this.npmInstall();
+    this.npmInstall();
   },
   end: function() {
     this._copyBowerComponents();
