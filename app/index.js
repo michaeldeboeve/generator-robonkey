@@ -181,7 +181,7 @@ module.exports = generators.Base.extend({
       }
       ,{
         type: 'checkbox',
-        name: 'featuresJS',
+        name: 'scriptsJS',
         message: 'What Javascript libraries to include?',
         choices: [{
           name: 'jQuery',
@@ -221,24 +221,24 @@ module.exports = generators.Base.extend({
       }
       ,{
         type: 'checkbox',
-        name: 'featuresGulp',
+        name: 'gulpTasks',
         message: 'What Gulp tasks to include?',
         choices: [{
           name: 'Jade',
           value: 'includeJade',
           checked: true
-        },
-        {
+        }
+        ,{
           name: 'Modernizr',
           value: 'includeModernizr',
           checked: true
-        },
+        }
         ,{
           name: 'Custom Icon Font',
           value: 'includeCustomIcnFont',
           checked: false
-        },
-        {
+        }
+        ,{
           name: 'PostCSS',
           value: 'includePostCSS',
           checked: false
@@ -279,11 +279,16 @@ module.exports = generators.Base.extend({
   },
 
   _saveAnswers: function(answers, callback) {
-    var features = answers.features;
+    var scriptsJS = answers.scriptsJS;
+    var gulpTasks = answers.gulpTasks;
 
-    function hasFeature(feat, list) {
-      return list && list.indexOf(feat) !== -1;
+    function hasJSScript(feat) {
+      return scriptsJS && scriptsJS.indexOf(feat) !== -1;
     };
+    function hasGulpFeature(feat) {
+      return gulpTasks && gulpTasks.indexOf(feat) !== -1;
+    };
+
 
     this.appname = answers.name;
     this.appdescription = answers.description;
@@ -293,17 +298,17 @@ module.exports = generators.Base.extend({
     this.appemail = answers.email;
 
     this.localUrl = answers.localUrl;
-    this.includeJQuery = hasFeature('includeJQuery', 'feauturesJS');
-    this.includeWaypoints = hasFeature('includeWaypoints', 'feauturesJS');
-    this.includeSignals = hasFeature('includeSignals', 'feauturesJS');
-    this.includeD3 = hasFeature('includeD3', 'feauturesJS');
-    this.includeTweenmax = hasFeature('includeTweenmax', 'feauturesJS');
-    this.includeEnquire = hasFeature('includeEnquire', 'feauturesJS');
-    this.includeGA = hasFeature('includeGA');
+    this.includeJQuery = hasJSScript('includeJQuery');
+    this.includeWaypoints = hasJSScript('includeWaypoints');
+    this.includeSignals = hasJSScript('includeSignals');
+    this.includeD3 = hasJSScript('includeD3');
+    this.includeTweenmax = hasJSScript('includeTweenmax');
+    this.includeEnquire = hasJSScript('includeEnquire');
+    this.includeGA = hasJSScript('includeGA');
 
-    this.includeModernizr = hasFeature('includeModernizr', 'featuresGulp');
-    this.includeJade = hasFeature('includeJade', 'featuresGulp');
-    this.includeCustomIcnFont = hasFeature('includeCustomIcnFont', 'featuresGulp');
+    this.includeModernizr = hasGulpFeature('includeModernizr');
+    this.includeJade = hasGulpFeature('includeJade');
+    this.includeCustomIcnFont = hasGulpFeature('includeCustomIcnFont');
 
     callback();
   },
