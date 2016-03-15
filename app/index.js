@@ -1,10 +1,10 @@
 'use strict';
 
-var generators = require('yeoman-generator'),
-    mkdirp = require('mkdirp'),
-    yosay = require('yosay'),
-    chalk = require('chalk'),
-    wordpress = require('../util/wordpress.js');
+var generators  = require('yeoman-generator'),
+    mkdirp      = require('mkdirp'),
+    yosay       = require('yosay'),
+    chalk       = require('chalk');
+    //wordpress   = require('../util/wordpress.js');
 
 module.exports = generators.Base.extend({
 

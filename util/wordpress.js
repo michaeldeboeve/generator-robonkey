@@ -1,3 +1,4 @@
+/*
 var wpRepo = "git://github.com/WordPress/WordPress.git";
 
 
@@ -18,3 +19,4 @@ function getCurrentVersion(callback) {
 module.exports = {
   getCurrentVersion: getCurrentVersion
 }
+*/
