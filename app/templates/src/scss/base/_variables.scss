@@ -12,10 +12,6 @@ $xxlarge:                    1550px;
 $huge:                       1650px;
 
 
-$desktop-container:          $regular;
-$tablet-breakpoint:          $medium;
-$mobile-breakpoint:          $small;
-
 
 // Font-weights
 // Thin (Hairline):           100
@@ -55,13 +51,6 @@ $mono-font-family:           monospace, monospace;
 
 
 // Font Size Defaults
-$h1:                         40;
-$h2:                         32;
-$h3:                         26;
-$h4:                         20;
-$h5:                         18;
-$h6:                         16;
-
 $default-font-size:          16px;
 $default-line-height:        1.2;
 
@@ -78,10 +67,6 @@ $black:                      #202020;
 $white:                      #fff;
 $red:                        #d10109;
 $grey:                       #666;
-$lightgrey:                  #999;
-$lightblue:                  #00aced;
-$darkblue:                   #173853;
-$orange:                     #e16c00;
 
 
 $error-color:                $red;
@@ -91,8 +76,4 @@ $default-link-color:         $grey;
 $default-link-hover-color: darken($grey, 20);
 
 
-
 $base-transition:            all .3s ease-out;
-
-
-$padding:                    37px;

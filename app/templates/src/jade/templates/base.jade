@@ -39,76 +39,34 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
   head
     meta(charset="utf-8")
-    meta(
-      http-equiv="X-UA-Compatible",
-      content="IE=edge"
-    )
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     != '\n'
     title #{ pageTitle }
     != '\n'
-    meta(
-      name="description",
-      content="#{ pageDescription }"
-    )
-    meta(
-      name="viewport",
-      content="width=device-width, initial-scale=1"
-    )
+    meta(name="description", content="#{ pageDescription }")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     != '\n\n'
     
     
     if useTwitterMetaTags
       != '  <!-- [Start: Twitter Meta Tags] -->  '
-      meta(
-        name="twitter:card",
-        content="#{ twitterCard }"
-      )
-      meta(
-        name="twitter:site",
-        content="#{ twitterHandler }"
-      )
-      meta(
-        name="twitter:url",
-        content="#{ socialURL }"
-      )
-      meta(
-        name="twitter:title",
-        content="#{ twitterTitle }"
-      )
-      meta(
-        name="twitter:description",
-        content="#{ twitterDescription }"
-      )
-      meta(
-        name="twitter:image",
-        content="#{ twitterImage }"
-      )
+      meta(name="twitter:card", content="#{ twitterCard }")
+      meta(name="twitter:site", content="#{ twitterHandler }")
+      meta(name="twitter:url", content="#{ socialURL }")
+      meta(name="twitter:title", content="#{ twitterTitle }")
+      meta(name="twitter:description", content="#{ twitterDescription }")
+      meta(name="twitter:image", content="#{ twitterImage }")
       != '\n'
       != '  <!-- [End: Twitter Meta Tags] -->  '
       
       
     if useFacebookMetaTags
       != '  <!-- [Start: Facebook Meta Tags] -->  '
-      meta(
-        property="og:type",
-        content="#{ facebookType }"
-      )
-      meta(
-        property="og:url",
-        content="#{ socialURL }"
-      )
-      meta(
-        property="og:title",
-        content="#{ facebookTitle }"
-      )
-      meta(
-        property="og:description",
-        content="#{ facebookDescription }"
-      )
-      meta(
-        property="og:image",
-        content="#{ facebookImage }"
-      )
+      meta(property="og:type", content="#{ facebookType }")
+      meta(property="og:url", content="#{ socialURL }")
+      meta(property="og:title", content="#{ facebookTitle }")
+      meta(property="og:description", content="#{ facebookDescription }")
+      meta(property="og:image", content="#{ facebookImage }")
       != '\n'
       != '  <!-- [End: Facebook Meta Tags] -->  '
     
@@ -116,36 +74,17 @@ html(lang="#{ lang }" class="no-js #{ lang }")
     if useCustomFaviconPath
       != '\n\n'
       != '  <!-- [Start: Favicon] -->  '
-      link(
-        rel="icon",
-        type="#{ faviconType }",
-        href="#{ faviconPath }"
-      )
+      link(rel="icon", type="#{ faviconType }", href="#{ faviconPath }")
       != '\n'
       != '  <!-- [End: Favicon] -->  '
     
     if useAppleIcons
       != '\n\n'
       != '  <!-- [Start: Touch Icons] -->  '
-      link(
-        rel="apple-touch-icon"
-        href="#{ appleIPhone }"
-      )
-      link(
-        rel="apple-touch-icon",
-        sizes="76x76",
-        href="#{ appleIPad }"
-      )
-      link(
-        rel="apple-touch-icon",
-        sizes="120x120",
-        href="#{ appleIPhoneX2 }"
-      )
-      link(
-        rel="apple-touch-icon",
-        sizes="152x152",
-        href="#{ appleIPadX2 }"
-      )
+      link(rel="apple-touch-icon" href="#{ appleIPhone }")
+      link(rel="apple-touch-icon", sizes="76x76", href="#{ appleIPad }")
+      link(rel="apple-touch-icon", sizes="120x120", href="#{ appleIPhoneX2 }")
+      link(rel="apple-touch-icon", sizes="152x152", href="#{ appleIPadX2 }")
       != '\n'
       != '  <!-- [End: Touch Icons] -->  '
       
