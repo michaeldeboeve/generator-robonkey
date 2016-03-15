@@ -41,17 +41,17 @@ var imagemin        = require('gulp-imagemin');
 
 
 
-// postprocessing
-var postcss         = require('gulp-postcss');
-var autoprefixer    = require('autoprefixer');
-var mqpacker        = require('css-mqpacker');
-var scopify         = require('postcss-scopify');
-var selectorNot     = require('postcss-selector-not');
-var selectorMatches = require('postcss-selector-matches');
-var pseudoElements  = require('postcss-pseudoelements');
-var classPrfx       = require('postcss-class-prefix');
-var gradientFix     = require('postcss-gradient-transparency-fix');
-var cssnano         = require('cssnano');
+<% if(includePostCSS){ %>// postprocessing<% } %>
+<% if(includePostCSS){ %>var postcss         = require('gulp-postcss');<% } %>
+<% if(includePostCSS){ %>var autoprefixer    = require('autoprefixer');<% } %>
+<% if(includePostCSS && includePcssMQPacker){ %>var mqPacker        = require('css-mqpacker');<% } %>
+<% if(includePostCSS && includePcssScopify){ %>var scopify         = require('postcss-scopify');<% } %>
+<% if(includePostCSS && includePcssSelectorNot){ %>var selectorNot     = require('postcss-selector-not');<% } %>
+<% if(includePostCSS && includePcssSelectorMatches){ %>var selectorMatches = require('postcss-selector-matches');<% } %>
+<% if(includePostCSS && includePcssClassPrefix){ %>var classPrfx       = require('postcss-class-prefix');<% } %>
+<% if(includePostCSS && includePcssGradientFix){ %>var gradientFix     = require('postcss-gradient-transparency-fix');<% } %>
+<% if(includePostCSS && includePcssMQKeyframes){ %>var mqKeyframes     = require('postcss-mq-keyframes');<% } %>
+<% if(includePostCSS && includePcssNano){ %>var cssnano         = require('cssnano');<% } %>
 
 <% if(includeCustomIcnFont){ %>
 // Fonts
@@ -66,17 +66,17 @@ var sourcemaps      = require('gulp-sourcemaps'); // should use another concat p
 
 
 
-var postCssConfig = [
-  selectorNot,
-  selectorMatches,
-  pseudoElements,
-  gradientFix,
-  //classPrfx('dc-'),
-  //scopify('#scope'),
-  mqpacker,
-  autoprefixer({browsers: ['last 3 versions', '> 1%']}),
-  cssnano({autoprefixer: false, zindex: false})
-];
+<% if(includePostCSS){ %>var postCssConfig = [<% } %>
+<% if(includePostCSS && includePcssSelectorNot){ %>  selectorNot,<% } %>
+<% if(includePostCSS && includePcssSelectorMatches){ %>  selectorMatches,<% } %>
+<% if(includePostCSS && includePcssGradientFix){ %>  gradientFix,<% } %>
+<% if(includePostCSS && includePcssClassPrefix){ %>  classPrfx('dc-'),<% } %>
+<% if(includePostCSS && includePcssScopify){ %>  scopify('#scope'),<% } %>
+<% if(includePostCSS && includePcssMQKeyframes){ %>  mqKeyframes,<% } %>
+<% if(includePostCSS && includePcssMQPacker){ %>  mqPacker,<% } %>
+<% if(includePostCSS && includePcssNano){ %>  cssnano({autoprefixer: false, zindex: false}),<% } %>
+<% if(includePostCSS){ %>  autoprefixer({browsers: ['last 3 versions', '> 1%']})<% } %>
+<% if(includePostCSS){ %>];<% } %>
 
 
 
@@ -121,9 +121,6 @@ var paths = {
     src: path_src + 'js/**/*.js', // paths could also be an array: ['client/js/**/*.coffee', '!client/external/**/*.coffee']
     build: path_build_js
   },
-  modernizr: {
-    build: path_build_js_vendor
-  },
   html: {
     src: path_html + '*.html'
   },
@@ -148,10 +145,13 @@ var paths = {
     templateInput: '../src/iconfont/template/_icons.scss',
     templateOutput: '../../../../src/scss/modules/_icons.scss',
     templateFontpath: '../fonts/' + iconFontName + '/'
-  }<% } %>
-  postcss: {
+  },<% } %>
+  <% if(includePostCSS){ %>postcss: {
     src: path_build_css + 'style.css',
     build: path_build_css
+  },<% } %>
+  modernizr: {
+    build: path_build_js_vendor
   }
 };
 
@@ -242,7 +242,7 @@ gulp.task('styles', function() {
     .pipe(plumber(onStyleError))
     .pipe(sourcemaps.init())
     .pipe(sass()) // Compile sass to css
-    .pipe(postcss(postCssConfig)) // Perform postcss tasks
+    <% if(includePostCSS){ %>.pipe(postcss(postCssConfig)) // Perform postcss tasks<% } %>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.build));
 });
