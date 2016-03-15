@@ -14,7 +14,7 @@
 // Black (Heavy): 900
 
 
-@include load-font('dc-icons', '../fonts/dc-icons/dc-icons');
+@include load-font("<%= customIconFontName =>", '../fonts/dc-icons/dc-icons');
 
 
 
@@ -31,7 +31,7 @@
 // Extends
 %basefont { font-family: $default-font-family; }
 %monofont { font-family: $mono-font-family; }
-%iconfont { font-family: 'dc-icons'; }
+%iconfont { font-family: "<%= customIconFontName =>"; }
 %titlefont {
   font-family: $title-font-family;
   text-transform: uppercase;

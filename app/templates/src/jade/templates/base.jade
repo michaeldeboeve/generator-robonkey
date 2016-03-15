@@ -171,11 +171,12 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
 
 
-    <% if(includeJQuery){ %>script(src="assets/js/libs/jquery.min.js")<% } %><% if(includeWaypoints && includeJQuery){ %>
-    script(src="assets/js/libs/waypoints/jquery.waypoints.min.js")<% } else { %>script(src="assets/js/libs/waypoints/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
+    <% if(includeJQuery){ %>script(src="assets/js/libs/jquery.min.js")<% } %>
+    <% if(includeWaypoints && includeJQuery){ %>script(src="assets/js/libs/waypoints/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>script(src="assets/js/libs/waypoints/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
     script(src="assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
-    script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>@x
-    script(src="assets/js/libs/enquire.min.js")<% } %>
+    script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
+    script(src="assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
+    script(src="assets/js/libs/gsap/TweenMax.min.js")<% } %>
     
     block footerScripts
       script(src="assets/js/script.min.js")

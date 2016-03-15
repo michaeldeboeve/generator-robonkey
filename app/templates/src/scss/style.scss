@@ -1,8 +1,9 @@
 // ==========================================================================
 // Robonkey Sass Shizzle
 // ==========================================================================
-@import "libs/breakpoint/breakpoint";
-@import "libs/susy/susy";
+<% if(includeBreakpoint){ %>@import "libs/breakpoint/breakpoint";<% } %><% if(includeSusy){ %>
+@import "libs/susy/susy";<% } %><% if(includeAnimate){ %>
+@import "libs/animate/animate";<% } %>
 @import 'libs/colors/**/*';
 
 

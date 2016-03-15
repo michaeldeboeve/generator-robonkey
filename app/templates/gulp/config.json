@@ -1,13 +1,14 @@
 {
-  "projectURL": "<%= localUrl %>",
-  <% if(includeModernizr){ %>"modernizr": {
+  "projectURL": "<%= localUrl %>",<% if(includePcssScopify){ %>
+  "scope": "<%= customScope %>",<% } %><% if(includePcssClassPrefix){ %>
+  "prefix": "<%= customClassPrefix %>",<% } %><% if(includeModernizr){ %>
+  "modernizr": {
     "excludeTests": [],
     "tests": [],
     "output": "modernizr-custom.js",
     "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
-  },<% } %>
-  <% if(includeCustomIcnFont) { %>"iconFont": {
-    "name": "dc-icons",
+  },<% } %><% if(includeCustomIcnFont) { %>"iconFont": {
+    "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
   }, <% } %>
   "src": "./../src/",

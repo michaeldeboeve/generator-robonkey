@@ -20,36 +20,34 @@
   ],
   "license": "<%= applicense %>",
   "dependencies": {
-    "autoprefixer": "^6.3.3",
-    "browser-sync": "^2.11.1",
-    "css-mqpacker": "^4.0.0",
-    "cssnano": "^3.5.2",
     "gulp": "^3.9.1",
-    "gulp-changed": "^1.3.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-develop-server": "^0.5.1",
-    <% if(includeCustomIcnFont) { %>"gulp-iconfont": "^6.0.0",<% } %>
-    <% if(includeCustomIcnFont) { %>"gulp-iconfont-css": "^2.0.0",<% } %>
-    <% if(includeJade){ %>"gulp-jade": "^1.1.0",<% } %>
-    <% if(includeModernizr){ %>"gulp-modernizr": "^1.0.0-alpha",<% } %>
-    "gulp-jshint": "^2.0.0",
-    "gulp-imagemin": "^2.4.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.1.0",
+    "gulp-changed": "^1.3.0",
+    "gulp-watch": "^4.3.5",
+    "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.2.0",
     "gulp-sass-glob": "^1.0.4",
+    "gulp-jshint": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
-    "gulp-watch": "^4.3.5",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
-    "postcss-class-prefix": "^0.3.0",
-    "postcss-gradient-transparency-fix": "^1.0.1",
-    "postcss-pseudo-content-insert": "^0.3.0",
-    "postcss-pseudoelements": "^3.0.0",
-    "postcss-scopify": "^0.1.6",
-    "postcss-selector-matches": "^2.0.1",
-    "postcss-selector-not": "^2.0.0"
+    "gulp-imagemin": "^2.4.0",
+    <% if(includeJade){ %>"gulp-jade": "^1.1.0",<% } %>
+    <% if(includeCustomIcnFont) { %>"gulp-iconfont": "^6.0.0",<% } %>
+    <% if(includeCustomIcnFont) { %>"gulp-iconfont-css": "^2.0.0",<% } %>
+    <% if(includeModernizr){ %>"gulp-modernizr": "^1.0.0-alpha",<% } %>
+    <% if(includePostCSS){ %>"gulp-postcss": "^6.1.0",<% } %>
+    <% if(includePostCSS){ %>"autoprefixer": "^6.3.3",<% } %>
+    <% if(includePostCSS && includePcssMQPacker){ %>"css-mqpacker": "^4.0.0",<% } %>
+    <% if(includePostCSS && includePcssNano){ %>"cssnano": "^3.5.2",<% } %>
+    <% if(includePostCSS && includePcssClassPrefix){ %>"postcss-class-prefix": "^0.3.0",<% } %>
+    <% if(includePostCSS && includePcssGradientFix){ %>"postcss-gradient-transparency-fix": "^1.0.1",<% } %>
+    <% if(includePostCSS && includePcssScopify){ %>"postcss-scopify": "^0.1.6",<% } %>
+    <% if(includePostCSS && includePcssSelectorMatches){ %>"postcss-selector-matches": "^2.0.1",<% } %>
+    <% if(includePostCSS && includePcssSelectorNot){ %>"postcss-selector-not": "^2.0.0",<% } %>
+    <% if(includePostCSS && includePcssMQKeyframes){ %>"postcss-mq-keyframes": "^0.2.5",<% } %>
+    "browser-sync": "^2.11.1"
   },
   "devDependencies": {}
 }
