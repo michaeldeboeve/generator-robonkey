@@ -24,8 +24,7 @@
     "enquire": "^2.1.2",<% } %><% if(includeTweenmax){ %>
     "gsap": "^1.18.2",<% } %><% if(includeSignals){ %>
     "js-signals": "signals#^1.0.0",<% } %><% if(includeD3){ %>
-    "d3": "^3.5.16",<% } %><% if(includeAnimate){ %>
-    "animate.scss": "*",<% } %><% if(includeSusy){ %>
+    "d3": "^3.5.16",<% } %><% if(includeSusy){ %>
     "susy": "^2.2.12",<% } %><% if(includeBreakpoint){ %>
     "breakpoint": "^4.6.4",<% } %>
     "reset-css": "^2.0.2011012603"

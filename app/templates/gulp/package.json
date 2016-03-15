@@ -20,6 +20,7 @@
   ],
   "license": "<%= applicense %>",
   "dependencies": {
+    "browser-sync": "^2.11.1",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0",
     "gulp-changed": "^1.3.0",
@@ -47,7 +48,7 @@
     <% if(includePostCSS && includePcssSelectorMatches){ %>"postcss-selector-matches": "^2.0.1",<% } %>
     <% if(includePostCSS && includePcssSelectorNot){ %>"postcss-selector-not": "^2.0.0",<% } %>
     <% if(includePostCSS && includePcssMQKeyframes){ %>"postcss-mq-keyframes": "^0.2.5",<% } %>
-    "browser-sync": "^2.11.1"
+    "require-dir": "^0.3.0"
   },
   "devDependencies": {}
 }

@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "src": "./../src/js/**/*.js",
+    "build": "./../website/assets/js/"
+  },
+  "modernizr": {
+    "build": "./../website/assets/js/libs/"
+  },
+  "html": {
+    "src": "./../website/*.html"
+  },
+  "images": {
+    "src": "./../src/images/**/*",
+    "build": "./../website/assets/images/"
+  },
+  "styles": {
+    "src": "./../src/scss/style.scss",
+    "src_files": "./../src/scss/**/*.scss",
+    "build_srcsmap": "./../website/assets/css/",
+    "build": "./../website/assets/css/"
+  },
+  "jade": {
+    "src": "./../src/jade/*.jade",
+    "watch": "./../src/jade/**/*.jade",
+    "build": "./../website/"
+  },
+  "postcss": {
+    "src": "./../website/assets/css/style.css",
+    "build": "./../website/assets/css/"
+  },
+  "font": {
+    "src": "./../src/iconfont/svg/*.svg",
+    "build": "./../website/assets/fonts/iconFontName",
+    "templateInput": "../src/iconfont/template/_icons.scss",
+    "templateOutput": "../../../../src/scss/modules/_icons.scss",
+    "templateFontpath": "../fonts/iconFontName/"
+  }
+}

@@ -85,44 +85,43 @@ module.exports = generators.Base.extend({
         }]
       }
       ,{
-        type: 'checkbox',
-        name: 'gulpTasks',
-        message: 'What Gulp tasks to include?',
-        choices: [{
-          name: 'Jade',
-          value: 'includeJade',
-          checked: true
-        }
-        ,{
-          name: 'Modernizr',
-          value: 'includeModernizr',
-          checked: true
-        }
-        ,{
-          name: 'Custom Icon Font',
-          value: 'includeCustomIcnFont',
-          checked: false
-        }
-        ,{
-          name: 'PostCSS (Will use autoprefixer by default)',
-          value: 'includePostCSS',
-          checked: true
-        }]
+        type: 'confirm',
+        name: 'includeJade',
+        message: 'Would you like to use Jade?',
+        default: true
+      }
+      ,{
+        type: 'confirm',
+        name: 'includeModernizr',
+        message: 'Would you like to use Modernizr?',
+        default: true
+      }
+      ,{
+        type: 'confirm',
+        name: 'includeCustomIcnFont',
+        message: 'Would you like to include a custom icon font?',
+        default: false
       }
       ,{
         name: 'customIconFontName',
         message: 'Name your custom icon font',
         default: 'robonky-glyphs',
         when: function (answers) {
-          return answers.gulpTasks.indexOf('includeCustomIcnFont') !== -1;
+          return answers.includeCustomIcnFont !== -1;
         },
+      }
+      ,{
+        type: 'confirm',
+        name: 'includePostCSS',
+        message: 'Would you like to include postCSS?',
+        default: true
       }
       ,{
         type: 'checkbox',
         name: 'postCSSPlugins',
         message: 'What PostCSS plugin to include?',
         when: function (answers) {
-          return answers.gulpTasks.indexOf('includePostCSS') !== -1;
+          return answers.includePostCSS !== -1;
         },
         choices: [{
           name: 'CSSNano',
@@ -194,11 +193,6 @@ module.exports = generators.Base.extend({
           name: 'Breakpoint (Mediaqueries)',
           value: 'includeBreakpoint',
           checked: true
-        }
-        ,{
-          name: 'Animate (Animations… duh)',
-          value: 'includeAnimate',
-          checked: false
         }]
       }
       ,{
@@ -240,9 +234,9 @@ module.exports = generators.Base.extend({
     function hasJSScript(feat) {
       return scriptsJS && scriptsJS.indexOf(feat) !== -1;
     };
-    function hasGulpFeature(feat) {
-      return gulpTasks && gulpTasks.indexOf(feat) !== -1;
-    };
+    // function hasGulpFeature(feat) {
+    //   return gulpTasks && gulpTasks.indexOf(feat) !== -1;
+    // };
     function hasRootFile(feat) {
       return rootFiles && rootFiles.indexOf(feat) !== -1;
     };
@@ -273,10 +267,10 @@ module.exports = generators.Base.extend({
     this.includeEnquire = hasJSScript('includeEnquire');
     this.includeGA = hasJSScript('includeGA');
 
-    this.includeModernizr = hasGulpFeature('includeModernizr');
-    this.includeJade = hasGulpFeature('includeJade');
-    this.includeCustomIcnFont = hasGulpFeature('includeCustomIcnFont');
-    this.includePostCSS = hasGulpFeature('includePostCSS');
+    this.includeModernizr = answers.includeModernizr;
+    this.includeJade = answers.includeJade;
+    this.includeCustomIcnFont = answers.includeCustomIcnFont;
+    this.includePostCSS = answers.includePostCSS;
 
     this.includePcssSelectorNot = hasPostCSSPlugins('includePcssSelectorNot');
     this.includePcssSelectorMatches = hasPostCSSPlugins('includePcssSelectorMatches');
@@ -289,7 +283,6 @@ module.exports = generators.Base.extend({
 
     this.includeSusy = hasSCSSLibrary('includeSusy');
     this.includeBreakpoint = hasSCSSLibrary('includeBreakpoint');
-    this.includeAnimate = hasSCSSLibrary('includeAnimate');
 
     this.includeHtaccess = hasRootFile('includeHtaccess');
     this.includeCrossdomain = hasRootFile('includeCrossdomain');
@@ -353,8 +346,21 @@ module.exports = generators.Base.extend({
 
   _gulp: function(destRoot, sourceRoot, templateContext) {
     this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/gulp/package.json', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/paths.json', destRoot + '/gulp/paths.json', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/images.js', destRoot + '/gulp/gulp-tasks/images.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp/gulp-tasks/scripts.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    if(this.includeCustomIcnFont) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp/gulp-tasks/iconfont.js', templateContext);
+    }
+    if(this.includeJade) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp/gulp-tasks/jade.js', templateContext);
+    }
+    if(this.includeModernizr) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp/gulp-tasks/modernizr.js', templateContext);
+    }
   },
 
   _iconfont: function(destRoot, sourceRoot, templateContext) {
@@ -459,13 +465,6 @@ module.exports = generators.Base.extend({
     }
   },
 
-  _copyAnimateSCSS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeAnimate) {
-      this.fs.copy(bowerRoot + '/animate.scss/scss/animate.scss', srcsRoot + '/scss/libs/animate/animate.scss');
-      this.fs.copy(bowerRoot + '/animate.scss/scss/animations', srcsRoot + '/scss/libs/animate/animations');
-    }
-  },
-
   _endMsg: function() {
     var allDone =
       '\n.----------------.' +
@@ -531,7 +530,6 @@ module.exports = generators.Base.extend({
           includePcssNano: this.includePcssNano,
           includeSusy: this.includeSusy,
           includeBreakpoint: this.includeBreakpoint,
-          includeAnimate: this.includeAnimate,
           customIconFontName: this.customIconFontName,
           customClassPrefix: this.customClassPrefix,
           customScope: this.customScope
@@ -572,7 +570,6 @@ module.exports = generators.Base.extend({
     this._copyResetSCSS(bowerRoot, destRoot, srcsRoot);
     this._copyBreakpointSCSS(bowerRoot, destRoot, srcsRoot);
     this._copySusySCSS(bowerRoot, destRoot, srcsRoot);
-    this._copyAnimateSCSS(bowerRoot, destRoot, srcsRoot);
     // this._endMsg();
   }
 });
