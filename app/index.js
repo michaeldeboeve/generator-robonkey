@@ -211,13 +211,13 @@ module.exports = generators.Base.extend({
           checked: true
         }
         ,{
-          name: 'crossdomain.xml',
-          value: 'includeCrossdomain',
-          checked: false
-        }
-        ,{
           name: 'browserconfig.xml (for windows 10 tiles)',
           value: 'includeBrowserconfig',
+          checked: true
+        }
+        ,{
+          name: 'crossdomain.xml',
+          value: 'includeCrossdomain',
           checked: false
         }
         ,{
@@ -354,8 +354,15 @@ module.exports = generators.Base.extend({
     }
   },
 
+  _images: function(destRoot, sourceRoot, templateContext) {
+    this.fs.copy(sourceRoot + '/src/images', destRoot + '/src/images');
+  },
+
   _js: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
+    if(this.includeModernizr) {
+      this.fs.copy(sourceRoot + '/src/modernizr/modernizr-custom.js', destRoot + '/website/assets/js/libs/modernizr-custom.js');
+    }
   },
 
   _scss: function(destRoot, sourceRoot, templateContext) {
@@ -522,6 +529,7 @@ module.exports = generators.Base.extend({
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
+    this._images(destRoot, sourceRoot, templateContext);
     this._config(destRoot, sourceRoot, templateContext);
     this._bower(destRoot, sourceRoot, templateContext);
     this._gulp(destRoot, sourceRoot, templateContext);
