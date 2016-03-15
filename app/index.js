@@ -367,7 +367,7 @@ module.exports = generators.Base.extend({
     this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
     this.fs.copy(sourceRoot + '/src/scss/modules/_buttons.scss', destRoot + '/src/scss/modules/_buttons.scss');
     this.fs.copy(sourceRoot + '/src/scss/modules/_forms.scss', destRoot + '/src/scss/modules/_forms.scss');
-    this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/styles.css', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
 
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
