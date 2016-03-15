@@ -314,7 +314,9 @@ module.exports = generators.Base.extend({
 
   _html: function(destRoot, sourceRoot, templateContext) {
     this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
+  },
 
+  _h5bp: function(destRoot, sourceRoot, templateContext) {
     if(this.includeHtaccess) {
       this.fs.copy(sourceRoot + '/website/.htaccess', destRoot + '/website/.htaccess');
     }
@@ -330,11 +332,18 @@ module.exports = generators.Base.extend({
     }
   },
 
-  _config: function(destRoot, sourceRoot, templateContext) {
+  _editorconfig: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/project/.editorconfig', destRoot + '/.editorconfig');
+    this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
+  },
+
+  _git: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/project/.gitignore', destRoot + '/.gitignore');
     this.fs.copy(sourceRoot + '/project/.gitattributes', destRoot + '/.gitattributes');
-    this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
+  },
+
+  _readme: function(destRoot, sourceRoot, templateContext) {
+    this.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
   },
 
   _bower: function(destRoot, sourceRoot, templateContext) {
@@ -529,8 +538,11 @@ module.exports = generators.Base.extend({
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
+    this._h5bp(destRoot, sourceRoot, templateContext);
     this._images(destRoot, sourceRoot, templateContext);
-    this._config(destRoot, sourceRoot, templateContext);
+    this._editorconfig(destRoot, sourceRoot, templateContext);
+    this._git(destRoot, sourceRoot, templateContext);
+    this._readme(destRoot, sourceRoot, templateContext);
     this._bower(destRoot, sourceRoot, templateContext);
     this._gulp(destRoot, sourceRoot, templateContext);
     this._iconfont(destRoot, sourceRoot, templateContext);
