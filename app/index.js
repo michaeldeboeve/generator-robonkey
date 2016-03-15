@@ -12,7 +12,7 @@ module.exports = generators.Base.extend({
       {
         name: 'localUrl',
         message: 'Local URL to use:',
-        default: 'localhost'
+        default: 'mynewawesomeapp.localhost'
       }
       ,{
         name: 'name',
@@ -109,6 +109,14 @@ module.exports = generators.Base.extend({
         }]
       }
       ,{
+        name: 'customIconFontName',
+        message: 'Name your custom icon font',
+        default: 'robonky-glyphs',
+        when: function (answers) {
+          return answers.gulpTasks.indexOf('includeCustomIcnFont') !== -1;
+        },
+      }
+      ,{
         type: 'checkbox',
         name: 'postCSSPlugins',
         message: 'What PostCSS plugin to include?',
@@ -136,16 +144,6 @@ module.exports = generators.Base.extend({
           checked: false
         }
         ,{
-          name: 'ClassPrefix',
-          value: 'includePcssClassPrefix',
-          checked: false
-        }
-        ,{
-          name: 'Scopify',
-          value: 'includePcssScopify',
-          checked: false
-        }
-        ,{
           name: 'SelectorNot',
           value: 'includePcssSelectorNot',
           checked: false
@@ -154,7 +152,33 @@ module.exports = generators.Base.extend({
           name: 'SelectorMatches',
           value: 'includePcssSelectorMatches',
           checked: false
+        }
+        ,{
+          name: 'ClassPrefix',
+          value: 'includePcssClassPrefix',
+          checked: false
+        }
+        ,{
+          name: 'Scopify',
+          value: 'includePcssScopify',
+          checked: false
         }]
+      }
+      ,{
+        name: 'customClassPrefix',
+        message: 'Name your prefix',
+        default: '.prfx',
+        when: function (answers) {
+          return answers.postCSSPlugins.indexOf('includePcssClassPrefix') !== -1;
+        }
+      }
+      ,{
+        name: 'customScope',
+        message: 'Name your scope',
+        default: '#scope',
+        when: function (answers) {
+          return answers.postCSSPlugins.indexOf('includePcssScopify') !== -1;
+        }
       }
       ,{
         type: 'checkbox',
@@ -235,6 +259,10 @@ module.exports = generators.Base.extend({
     this.appauthor = answers.yourname;
     this.appemail = answers.email;
 
+    this.customIconFontName = answers.customIconFontName;
+    this.customClassPrefix = answers.customClassPrefix;
+    this.customScope = answers.customScope;
+
     this.localUrl = answers.localUrl;
     this.includeJQuery = hasJSScript('includeJQuery');
     this.includeWaypoints = hasJSScript('includeWaypoints');
@@ -278,6 +306,8 @@ module.exports = generators.Base.extend({
     mkdirp(appDir + '/website/assets/js');
     mkdirp(appDir + '/website/assets/js/libs');
     mkdirp(appDir + '/website/assets/images');
+    mkdirp(appDir + '/website/assets/css');
+    mkdirp(appDir + '/website/assets/css/libs');
     mkdirp(appDir + '/website/assets/fonts');
   },
 
@@ -339,7 +369,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/styles.css', templateContext);
 
     if(this.includeCustomIcnFont) {
-      this.fs.copy(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss');
+      this.fs.copyTpl(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
     }
   },
 
@@ -484,7 +514,10 @@ module.exports = generators.Base.extend({
           includePcssNano: this.includePcssNano,
           includeSusy: this.includeSusy,
           includeBreakpoint: this.includeBreakpoint,
-          includeAnimate: this.includeAnimate
+          includeAnimate: this.includeAnimate,
+          customIconFontName: this.customIconFontName,
+          customClassPrefix: this.customClassPrefix,
+          customScope: this.customScope
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
