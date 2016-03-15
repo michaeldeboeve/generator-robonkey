@@ -22,7 +22,8 @@
     "yosay": "^1.0.3",
     "chalk": "^1.0.0",
     "yeoman-generator": "^0.19.2",
-    "yo": "^1.4.6"
+    "yo": "^1.4.6",
+    "simple-git": "^1.28.0",
   },
   "files": [
     "app"
