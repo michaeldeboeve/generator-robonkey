@@ -22,13 +22,23 @@
 ## Getting Started
 	This generator isn't on npm yet, so if you want to use it, you'll need to:
 
-* Download this repo
-* In terminal, navigate to the folder `$ cd path/to/generator-robonkey`
-* Make a symlink to your node working directory `$ npm link`
-* Install yo: `$ npm install -g yo`;
+Download this repo, and navigate to the folder:
 
-## Install
-```$ yo robonkey```
+	$ cd path/to/generator-robonkey
+	
+Make a symlink to your node working directory:
+
+	$ npm link
+
+Install yo:
+	
+	$ npm install -g yo
+
+Install Robonkey: 
+
+	$ yo robonkey
+
+
 
 ## Options
 
