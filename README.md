@@ -1,10 +1,8 @@
 #Robonkey Generator
-___
 
 > A [Yeoman](http://yeoman.io) front-end application generator with Jade, Sass &amp; Gulp
 
 ## Features
-___
 
 * Gulp
 * Jade
@@ -14,7 +12,6 @@ ___
 * Autoprefixr
 
 ## Options
-___
 
 * Javascript Libraries
 	* jQuery
