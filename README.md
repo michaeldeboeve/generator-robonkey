@@ -9,14 +9,14 @@
 ## Features
 
 * Gulp
-* Jade
+* Jade _(Optional)_
 * SCSS
 * BrowserSync
-* PostCSS
-* Autoprefixr
+* PostCSS _(Optional)_
+* Autoprefixr _(Automatically used **if postCSS is true**)_
 * Image Optimalisation
-* Custom Icon Font Generator
-* Modernizr Builder
+* Custom Icon Font Generator _(Optional)_
+* Modernizr Builder _(Optional)_
 
 	
 ## Getting Started
@@ -49,8 +49,8 @@
 	* MQKeyframes
 	* SelectorNot
 	* SelectorMatcher
-* Prefix selectors
-* Scopify selectors
+	* Prefix selectors
+	* Scopify selectors
 * Base styles
 	* Reset
 	* Normalize
@@ -58,8 +58,15 @@
 * SCSS Libraries
 	* Susy
 	* Breakpoint
-* Boilerplate extra's
+* HTML5 Boilerplate extra's
 	* .htaccess
 	* browserconfig.xml
 	* crossdomain.xml
 	* robots.txt and humans.txt
+
+
+## Docs
+
+* [Getting started](docs/README.md) with robonkey
+* [Features](docs/features.md)
+* [Options](docs/options.md)
