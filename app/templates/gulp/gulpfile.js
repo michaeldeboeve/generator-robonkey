@@ -25,7 +25,7 @@ gulp.task('browser-sync', function() {
 
 
 // default gulp task
-gulp.task('default', [<% if(includeJade){ %>'jade', <% } %>'images', 'scripts-min', 'styles', 'browser-sync'], function() {
+gulp.task('default', ['moveBower', <% if(includeJade){ %>'jade', <% } %>'images', 'scripts-min', 'styles', 'browser-sync'], function() {
 
   // watch for JS changes, then reload
   // gulp.watch(paths.scripts.src, ['scripts', 'scripts-min']).on('change', browserSync.reload);

@@ -108,7 +108,7 @@ module.exports = generators.Base.extend({
         default: 'robonky-glyphs',
         when: function (answers) {
           return answers.includeCustomIcnFont !== -1;
-        },
+        }
       }
       ,{
         type: 'confirm',
@@ -350,6 +350,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/paths.json', destRoot + '/gulp/paths.json', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulp/gulpfile.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/images.js', destRoot + '/gulp/gulp-tasks/images.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp/gulp-tasks/bower.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp/gulp-tasks/scripts.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
     if(this.includeCustomIcnFont) {
@@ -406,72 +407,13 @@ module.exports = generators.Base.extend({
     }
   },
 
-  _copyJQueryJS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeJQuery) {
-      this.fs.copy(bowerRoot + '/jquery/dist/jquery.min.js', destRoot + '/jquery.min.js');
-    }
-  },
-
-  _copyWaypointsJS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeWaypoints) {
-      this.fs.copy(bowerRoot + '/waypoints/lib/jquery.waypoints.min.js', destRoot + '/waypoints/jquery.waypoints.min.js');
-      this.fs.copy(bowerRoot + '/waypoints/lib/noframework.waypoints.min.js', destRoot + '/waypoints/noframework.waypoints.min.js');
-      this.fs.copy(bowerRoot + '/waypoints/lib/waypoints.debug.js', destRoot + '/waypoints/waypoints.debug.js');
-      this.fs.copy(bowerRoot + '/waypoints/lib/waypoints.debug.js', destRoot + '/waypoints/waypoints.debug.js');
-      this.fs.copy(bowerRoot + '/waypoints/lib/shortcuts', destRoot + '/waypoints/shortcuts');
-    }
-  },
-
-  _copyEnquireJS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeEnquire) {
-      this.fs.copy(bowerRoot + '/enquire/dist/enquire.min.js', destRoot + '/enquire.min.js');
-    }
-  },
-
-  _copySignalsJS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeSignals) {
-      this.fs.copy(bowerRoot + '/js-signals/dist/signals.min.js', destRoot + '/signals.min.js');
-    }
-  },
-
-  _copyTweenMaxJS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeTweenmax) {
-      this.fs.copy(bowerRoot + '/gsap/src/minified', destRoot + '/gsap');
-    }
-  },
-
-  _copyD3JS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeD3) {
-      this.fs.copy(bowerRoot + '/d3/d3.min.js', destRoot + '/d3.min.js');
-    }
-  },
-
-  _copyResetSCSS: function(bowerRoot, destRoot, srcsRoot){
-    this.fs.copy(bowerRoot + '/reset-css/_reset.scss', srcsRoot + '/scss/base/_reset.scss');
-  },
-
-  _copyBreakpointSCSS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeBreakpoint) {
-      this.fs.copy(bowerRoot + '/breakpoint/breakpoint', srcsRoot + '/scss/libs/breakpoint');
-    }
-  },
-
-  _copySusySCSS: function(bowerRoot, destRoot, srcsRoot){
-    if(this.includeSusy) {
-      this.fs.copy(bowerRoot + '/susy/sass/_su.scss', srcsRoot + '/scss/libs/susy/_su.scss');
-      this.fs.copy(bowerRoot + '/susy/sass/_susy.scss', srcsRoot + '/scss/libs/susy/_susy.scss');
-      this.fs.copy(bowerRoot + '/susy/sass/_susyone.scss', srcsRoot + '/scss/libs/susy/_susyone.scss');
-      this.fs.copy(bowerRoot + '/susy/sass/susy', srcsRoot + '/scss/libs/susy/susy');
-    }
-  },
-
   _endMsg: function() {
     var allDone =
-      '\n.----------------.' +
-      '\n| Robonkey says: |' +
-      '\n| '+chalk.yellow.bold('ALL DONE!') + '      |' +
-      '\n| ' + chalk.yellow.bold('Happy coding!') + '  |' +
-      '\n\'----------------\'' +
+      '\n.-------------------.' +
+      '\n| Robonkey says:    |' +
+      '\n| '+chalk.yellow.bold('ALL DONE!') + '         |' +
+      '\n| ' + chalk.yellow.bold('Now fly, my pets!') + ' |' +
+      '\n\'-------------------\'' +
       '\n';
 
     this.log(allDone);
@@ -557,19 +499,6 @@ module.exports = generators.Base.extend({
     this.npmInstall();
   },
   end: function() {
-    var bowerRoot = this.destinationRoot() + '/../src/bower_components',
-        destRoot = this.destinationRoot() + '/../website/assets/js/libs',
-        srcsRoot = this.destinationRoot() + '/../src';
-
-    this._copyJQueryJS(bowerRoot, destRoot, srcsRoot);
-    this._copyWaypointsJS(bowerRoot, destRoot, srcsRoot);
-    this._copyEnquireJS(bowerRoot, destRoot, srcsRoot);
-    this._copySignalsJS(bowerRoot, destRoot, srcsRoot);
-    this._copyTweenMaxJS(bowerRoot, destRoot, srcsRoot);
-    this._copyD3JS(bowerRoot, destRoot, srcsRoot);
-    this._copyResetSCSS(bowerRoot, destRoot, srcsRoot);
-    this._copyBreakpointSCSS(bowerRoot, destRoot, srcsRoot);
-    this._copySusySCSS(bowerRoot, destRoot, srcsRoot);
-    // this._endMsg();
+    this._endMsg();
   }
 });
