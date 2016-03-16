@@ -25,8 +25,8 @@ var cssnano         = require('cssnano');<% } %>
   selectorNot,<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
   selectorMatches,<% } %><% if(includePostCSS && includePcssGradientFix){ %>
   gradientFix,<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
-  classPrfx('dc-'),<% } %><% if(includePostCSS && includePcssScopify){ %>
-  scopify('#scope'),<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
+  classPrfx(cfg.prefix),<% } %><% if(includePostCSS && includePcssScopify){ %>
+  scopify(cfg.scope),<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
   mqKeyframes,<% } %><% if(includePostCSS && includePcssMQPacker){ %>
   mqPacker,<% } %><% if(includePostCSS && includePcssNano){ %>
   cssnano({autoprefixer: false, zindex: false}),<% } %><% if(includePostCSS){ %>

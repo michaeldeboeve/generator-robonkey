@@ -13,8 +13,11 @@
 @import "base/variables";
 @import "base/functions/**/*";
 @import "base/mixins/**/*";
+
 <% if(includeCustomIcnFont) { %>@import "base/fonts";<% } %>
-@import "base/reset";
+<% if(includeReset){ %>@import "base/reset";<% } %><% if(includeNormalize){ %>
+@import "base/normalize";<% } %><% if(includeSanitize){ %>
+@import "base/sanitize";<% } %>
 @import "base/placeholders";
 @import "base/typography";
 

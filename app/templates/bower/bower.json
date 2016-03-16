@@ -25,6 +25,8 @@
     "gsap": "^1.18.2",<% } %><% if(includeSignals){ %>
     "js-signals": "signals#^1.0.0",<% } %><% if(includeD3){ %>
     "d3": "^3.5.16",<% } %>
-    "reset-css": "^2.0.2011012603"
+    "reset-css": "^2.0.2011012603",
+    "normalize-scss": "^3.0.3",
+    "sanitize-css": "^3.3.0"
   }
 }

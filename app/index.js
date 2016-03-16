@@ -103,12 +103,12 @@ module.exports = generators.Base.extend({
         default: false
       }
       ,{
+        when: function (answers) {
+          return answers.includeCustomIcnFont === true;
+        },
         name: 'customIconFontName',
         message: 'Name your custom icon font',
-        default: 'robonky-glyphs',
-        when: function (answers) {
-          return answers.includeCustomIcnFont !== -1;
-        }
+        default: 'robonky-glyphs'
       }
       ,{
         type: 'confirm',
@@ -117,12 +117,12 @@ module.exports = generators.Base.extend({
         default: true
       }
       ,{
+        when: function (answers) {
+          return answers.includePostCSS === true;
+        },
         type: 'checkbox',
         name: 'postCSSPlugins',
         message: 'What PostCSS plugin to include?',
-        when: function (answers) {
-          return answers.includePostCSS !== -1;
-        },
         choices: [{
           name: 'CSSNano',
           value: 'includePcssNano',
@@ -152,24 +152,32 @@ module.exports = generators.Base.extend({
           name: 'SelectorMatches',
           value: 'includePcssSelectorMatches',
           checked: false
-        }
-        ,{
-          name: 'ClassPrefix',
-          value: 'includePcssClassPrefix',
-          checked: false
-        }
-        ,{
-          name: 'Scopify',
-          value: 'includePcssScopify',
-          checked: false
         }]
+      }
+      ,{
+        type: 'confirm',
+        name: 'includePcssClassPrefix',
+        message: 'Prefix your selectors?',
+        default: false,
+        when: function (answers) {
+          return answers.includePostCSS === true;
+        }
       }
       ,{
         name: 'customClassPrefix',
         message: 'Name your prefix',
-        default: '.prfx',
+        default: 'prfx-',
         when: function (answers) {
-          return answers.postCSSPlugins.indexOf('includePcssClassPrefix') !== -1;
+          return answers.includePcssClassPrefix === true;
+        }
+      }
+      ,{
+        type: 'confirm',
+        name: 'includePcssScopify',
+        message: 'Scopify your selectors?',
+        default: false,
+        when: function (answers) {
+          return answers.includePostCSS === true;
         }
       }
       ,{
@@ -177,8 +185,28 @@ module.exports = generators.Base.extend({
         message: 'Name your scope',
         default: '#scope',
         when: function (answers) {
-          return answers.postCSSPlugins.indexOf('includePcssScopify') !== -1;
+          return answers.includePcssScopify === true;
         }
+      }
+      ,{
+        type: 'list',
+        name: 'baseStyles',
+        message: 'What base styles to include?',
+        choices: [{
+          name: 'Reset',
+          value: 'includeReset',
+          checked: true
+        }
+        ,{
+          name: 'Normalize',
+          value: 'includeNormalize',
+          checked: false
+        }
+        ,{
+          name: 'Sanitize',
+          value: 'includeSanitize',
+          checked: false
+        }]
       }
       ,{
         type: 'checkbox',
@@ -230,13 +258,14 @@ module.exports = generators.Base.extend({
     var rootFiles = answers.rootFiles;
     var scssLibraries = answers.scssLibraries;
     var postCSSPlugins = answers.postCSSPlugins;
+    var baseStyles = answers.baseStyles;
 
     function hasJSScript(feat) {
       return scriptsJS && scriptsJS.indexOf(feat) !== -1;
     };
-    // function hasGulpFeature(feat) {
-    //   return gulpTasks && gulpTasks.indexOf(feat) !== -1;
-    // };
+    function hasBaseStyles(feat) {
+      return baseStyles && baseStyles.indexOf(feat) !== -1;
+    };
     function hasRootFile(feat) {
       return rootFiles && rootFiles.indexOf(feat) !== -1;
     };
@@ -254,9 +283,16 @@ module.exports = generators.Base.extend({
     this.appauthor = answers.yourname;
     this.appemail = answers.email;
 
+    this.includeReset = hasBaseStyles('includeReset');
+    this.includeNormalize = hasBaseStyles('includeNormalize');
+    this.includeSanitize = hasBaseStyles('includeSanitize');
+
+    this.includePcssClassPrefix = answers.includePcssClassPrefix;
+    this.includePcssScopify = answers.includePcssScopify;
     this.customIconFontName = answers.customIconFontName;
     this.customClassPrefix = answers.customClassPrefix;
     this.customScope = answers.customScope;
+
 
     this.localUrl = answers.localUrl;
     this.includeJQuery = hasJSScript('includeJQuery');
@@ -277,8 +313,6 @@ module.exports = generators.Base.extend({
     this.includePcssGradientFix = hasPostCSSPlugins('includePcssGradientFix');
     this.includePcssMQPacker = hasPostCSSPlugins('includePcssMQPacker');
     this.includePcssMQKeyframes = hasPostCSSPlugins('includePcssMQKeyframes');
-    this.includePcssClassPrefix = hasPostCSSPlugins('includePcssClassPrefix');
-    this.includePcssScopify = hasPostCSSPlugins('includePcssScopify');
     this.includePcssNano = hasPostCSSPlugins('includePcssNano');
 
     this.includeSusy = hasSCSSLibrary('includeSusy');
@@ -395,6 +429,15 @@ module.exports = generators.Base.extend({
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
     }
+    if(this.includeReset) {
+      this.fs.copy(sourceRoot + '/src/scss/reset/_reset.scss', destRoot + '/src/scss/base/_reset.scss');
+    }
+    if(this.includeNormalize) {
+      this.fs.copy(sourceRoot + '/src/scss/reset/_normalize.scss', destRoot + '/src/scss/base/_normalize.scss');
+    }
+    if(this.includeSanitize) {
+      this.fs.copy(sourceRoot + '/src/scss/reset/_sanitize.scss', destRoot + '/src/scss/base/_sanitize.scss');
+    }
   },
 
   _jade: function(destRoot, sourceRoot, templateContext) {
@@ -474,7 +517,10 @@ module.exports = generators.Base.extend({
           includeBreakpoint: this.includeBreakpoint,
           customIconFontName: this.customIconFontName,
           customClassPrefix: this.customClassPrefix,
-          customScope: this.customScope
+          customScope: this.customScope,
+          includeReset: this.includeReset,
+          includeNormalize: this.includeNormalize,
+          includeSanitize: this.includeSanitize
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
