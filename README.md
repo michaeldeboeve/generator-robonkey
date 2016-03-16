@@ -15,6 +15,8 @@
 * PostCSS
 * Autoprefixr
 * Image Optimalisation
+* Custom Icon Font Generator
+* Modernizr Builder
 
 	
 ## Getting Started
@@ -47,8 +49,8 @@
 	* MQKeyframes
 	* SelectorNot
 	* SelectorMatcher
-* Prefix selectors `.myselector` -> `.prefix-myselector`
-* Scope selectors `.myselector` -> `#scope .myselector`
+* Prefix selectors
+* Scopify selectors
 * Base styles
 	* Reset
 	* Normalize
