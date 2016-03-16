@@ -37,80 +37,55 @@ html(lang="#{ lang }" class="no-js #{ lang }")
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    != '\n'
     title #{ pageTitle }
-    != '\n'
     meta(name="description", content="#{ pageDescription }")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     //- meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui")
-    != '\n\n'
-    
     
     if useTwitterMetaTags
-      != '  <!-- [Start: Twitter Meta Tags] -->  '
       meta(name="twitter:card", content="#{ twitterCard }")
       meta(name="twitter:site", content="#{ twitterHandler }")
       meta(name="twitter:url", content="#{ socialURL }")
       meta(name="twitter:title", content="#{ twitterTitle }")
       meta(name="twitter:description", content="#{ twitterDescription }")
-      meta(name="twitter:image", content="#{ twitterImage }")
-      != '\n'
-      != '  <!-- [End: Twitter Meta Tags] -->  '
-      
+      meta(name="twitter:image", content="#{ twitterImage }")      
       
     if useFacebookMetaTags
-      != '  <!-- [Start: Facebook Meta Tags] -->  '
       meta(property="og:type", content="#{ facebookType }")
       meta(property="og:url", content="#{ socialURL }")
       meta(property="og:title", content="#{ facebookTitle }")
       meta(property="og:description", content="#{ facebookDescription }")
       meta(property="og:image", content="#{ facebookImage }")
-      != '\n'
-      != '  <!-- [End: Facebook Meta Tags] -->  '
-    
     
     if useCustomFaviconPath
-      != '\n\n'
-      != '  <!-- [Start: Favicon] -->  '
       link(rel="icon", type="#{ faviconType }", href="#{ faviconPath }")
     if useAppleIcons
       link(rel="apple-touch-icon", href="#{ appleIPhone }")
-      != '\n'
-      != '  <!-- [End: Favicon] -->  '
       
-    != '\n\n'
-    != '  <!-- [Start: Styles] -->'
     block headerStyles
       link(rel="stylesheet", href="assets/css/style.css")
-    != '\n'
-    != '  <!-- [End: Styles] -->  '
 
-
-    != '\n\n'
-    != '  <!-- [Start: Scripts] -->  '
     block headerScripts
       <% if(includeModernizr){ %>script(src="assets/js/libs/modernizr-custom.js")<% } %>
-    != '\n'
-    != '  <!-- [End: Scripts] -->  '
-    != '\n'
-
 
   body(class="#{ bodyClass }")
     block contentMain
 
 
-
+    != '\n\n'
     <% if(includeJQuery){ %>script(src="assets/js/libs/jquery.min.js")<% } %>
     <% if(includeWaypoints && includeJQuery){ %>script(src="assets/js/libs/waypoints/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>script(src="assets/js/libs/waypoints/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
     script(src="assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
     script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
     script(src="assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
     script(src="assets/js/libs/gsap/TweenMax.min.js")<% } %>
-    
+    != '\n'  
     block footerScripts
       script(src="assets/js/script.min.js")
     
-    <% if(includeGA){ %>script.
+    <% if(includeGA){ %>
+    != '\n' 
+    script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

@@ -19,7 +19,7 @@
     "starter"
   ],
   "license": "<%= applicense %>",
-  "dependencies": {
+  "devDependencies": {
     "browser-sync": "^2.11.1",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0",
@@ -28,12 +28,12 @@
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.2.0",
     "gulp-sass-glob": "^1.0.4",
-    "gulp-jshint": "^2.0.0",
-    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-sourcemaps": "^1.6.0",
     <% if(includeJade){ %>"gulp-jade": "^1.1.0",<% } %>
     <% if(includeCustomIcnFont) { %>"gulp-iconfont": "^6.0.0",<% } %>
     <% if(includeCustomIcnFont) { %>"gulp-iconfont-css": "^2.0.0",<% } %>
@@ -53,5 +53,7 @@
     "require-dir": "^0.3.0",
     "gulp-bower-files": "^0.2.7"
   },
-  "devDependencies": {}
+  "dependencies": {
+
+  }
 }
