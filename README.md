@@ -1,5 +1,9 @@
 #Robonkey Generator
 
+	This generator is a work in progress.
+	There probably will be some bugs.
+	Likewise, this README isn't finished yet.
+
 > A [Yeoman](http://yeoman.io) front-end application generator with Jade, Sass &amp; Gulp
 
 ## Features
@@ -10,6 +14,19 @@
 * BrowserSync
 * PostCSS
 * Autoprefixr
+* Image Optimalisation
+
+	
+## Getting Started
+	This generator isn't on npm yet, so if you want to use it, you'll need to:
+
+* Download this repo
+* In terminal, navigate to the folder `$ cd path/to/generator-robonkey`
+* Make a symlink to your node working directory `$ npm link`
+* Install yo: `$ npm install -g yo`;
+
+## Install
+```$ yo robonkey```
 
 ## Options
 
@@ -44,5 +61,3 @@
 	* browserconfig.xml
 	* crossdomain.xml
 	* robots.txt and humans.txt
-	
-	
