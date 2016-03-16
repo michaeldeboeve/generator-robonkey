@@ -15,18 +15,15 @@
     <script src="/assets/js/libs/modernizr-custom.js"></script><% } %>
   </head>
   <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
 
     <% if(includeJQuery){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>
-    <% if(includeWaypoints && includeJQuery){ %><script src="/assets/js/libs/waypoints/jquery.waypoints.min.js"></script><% } else if(includeWaypoints) { %>
-    <script src="/assets/js/libs/waypoints/noframework.waypoints.min.js"></script><% } %><% if(includeSignals){ %>
+    <% if(includeWaypoints && includeJQuery){ %><script src="/assets/js/libs/jquery.waypoints.min.js"></script><% } else if(includeWaypoints) { %>
+    <script src="/assets/js/libs/noframework.waypoints.min.js"></script><% } %><% if(includeSignals){ %>
     <script src="/assets/js/libs/signals.min.js"></script><% } %><% if(includeD3){ %>
     <script src="/assets/js/libs/d3.min.js"></script><% } %><% if(includeEnquire){ %>
     <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(includeTweenmax){ %>
-    <script src="/assets/js/libs/gsap/TweenMax.min.js"></script><% } %>
+    <script src="/assets/js/libs/TweenMax.min.js"></script><% } %>
 
     <script src="/assets/js/script.min.js"></script>
 

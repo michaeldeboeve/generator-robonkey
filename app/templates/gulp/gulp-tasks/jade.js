@@ -7,7 +7,6 @@ var jade            = require('gulp-jade');
 
 
 
-
 // Compile jade files
 gulp.task('jade', function() {
   var jadeOptions = {

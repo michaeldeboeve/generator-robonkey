@@ -19,8 +19,8 @@ gulp.task('moveJquery', function() {
 <% if(includeTweenmax){ %>
 moveRepo += "moveTweenMax,";
 gulp.task('moveTweenMax', function() {
-  var src = '../src/bower_components/gsap/src/minified/**/*',
-      dest = '../website/assets/js/libs/TweenMax/';
+  var src = '../src/bower_components/gsap/src/minified/TweenMax.min.js',
+      dest = '../website/assets/js/libs/';
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -58,27 +58,18 @@ gulp.task('moveSignals', function() {
 <% } %>
 <% if(includeWaypoints && !includeJQuery){ %>
 moveRepo += "moveWaypoints,";
-gulp.task('moveWaypoints', ['moveWaypointsShortcuts'], function() {
-  var src = ['../src/bower_components/waypoints/lib/noframework.waypoints.min.js', '../src/bower_components/waypoints/lib/waypoints.debug.js'],
-      dest = '../website/assets/js/libs/waypoints/';
+gulp.task('moveWaypoints', function() {
+  var src = ['../src/bower_components/waypoints/lib/noframework.waypoints.min.js'],
+      dest = '../website/assets/js/libs/';
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
 });
 <% } else if(includeWaypoints && includeJQuery) { %>
 moveRepo += "moveWaypoints,";
-gulp.task('moveWaypoints', ['moveWaypointsShortcuts'], function() {
-  var src = ['../src/bower_components/waypoints/lib/jquery.waypoints.min.js', '../src/bower_components/waypoints/lib/waypoints.debug.js'],
-      dest = '../website/assets/js/libs/waypoints/';
-
-  gulp.src(src)
-    .pipe(gulp.dest(dest));
-});
-<% } %>
-<% if(includeWaypoints){ %>
-gulp.task('moveWaypointsShortcuts', function() {
-  var src = '../src/bower_components/waypoints/lib/shortcuts/**/*',
-      dest = '../website/assets/js/libs/waypoints/shortcuts/';
+gulp.task('moveWaypoints', function() {
+  var src = ['../src/bower_components/waypoints/lib/jquery.waypoints.min.js'],
+      dest = '../website/assets/js/libs/';
 
   gulp.src(src)
     .pipe(gulp.dest(dest));

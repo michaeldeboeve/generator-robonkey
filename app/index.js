@@ -340,7 +340,9 @@ module.exports = generators.Base.extend({
   },
 
   _html: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
+    if(!this.includeJade) {
+      this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
+    }
   },
 
   _h5bp: function(destRoot, sourceRoot, templateContext) {
@@ -411,7 +413,7 @@ module.exports = generators.Base.extend({
   _js: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
     if(this.includeModernizr) {
-      this.fs.copy(sourceRoot + '/src/modernizr/modernizr-custom.js', destRoot + '/website/assets/js/libs/modernizr-custom.js');
+      this.fs.copy(sourceRoot + '/src/modernizr-custom.js', destRoot + '/website/assets/js/libs/modernizr-custom.js');
     }
   },
 
