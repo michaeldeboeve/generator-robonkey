@@ -1,8 +1,19 @@
+// Uses @include optional-at-root mixin
+
 @mixin placeholder {
-  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
-  @each $placeholder in $placeholders {
-    &:#{$placeholder}-placeholder {
-      @content;
-    }
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
   }
 }

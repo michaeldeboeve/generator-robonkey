@@ -1,3 +1,5 @@
+// Uses @include optional-at-root mixin
+
 @mixin selection($current-selector: false) {
   @if $current-selector {
     &::-moz-selection {
