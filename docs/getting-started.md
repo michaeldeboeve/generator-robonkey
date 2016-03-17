@@ -1,7 +1,5 @@
 # Getting Started
 
-> This section is comming soon.
-
 
 #### This generator isn't on npm yet, so if you want to use it, you'll need to:
 
