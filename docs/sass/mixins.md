@@ -383,20 +383,21 @@
 
 ### Load font
 > Declare font
+> Uses the assets function
 
 ##### Use:
 
 ```sh
-@include load-font('font-name', 'font-file', weight, style);
+@include load-font('fontname', 'fontfolder', 'fontfile', weight, style);
 ```
 
 ##### Output:
 
 ```sh
 @font-face {
-  font-family: "font-name";
-  src: url("font-file.eot");
-  src: url("font-file.eot?#iefix") format("embedded-opentype"), url("font-file.woff2") format("woff2"), url("font-file.woff") format("woff"), url("font-file.ttf") format("truetype"), url("font-file.svg#font-name") format("svg");
+  font-family: 'fontname';
+  src: url("../assets/fonts/fontfolder/fontfile.eot");
+  src: url("../assets/fonts/fontfolder/fontfile.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/fontfolder/fontfile.woff2") format("woff2"), url("../assets/fonts/fontfolder/fontfile.woff") format("woff"), url("../assets/fonts/fontfolder/fontfile.ttf") format("truetype"), url("../assets/fonts/fontfolder/fontfile.svg#fontfile") format("svg");
   font-weight: weight;
   font-style: style;
 }
@@ -665,8 +666,10 @@ a.foo {
 
 ## Docs
 
-- [Home](../README.md)
-- [Getting started](docs/README.md)
-- [Features](docs/features.md)
-- [Options](docs/options.md)
-- [Mixins](docs/mixins.md)
+- [Home](/README.md)
+- [Getting started](/docs/README.md)
+- [Features](/docs/features.md)
+- [Options](/docs/options.md)
+- [Sass](/docs/sass/sass.md)
+	- [Mixins](/docs/sass/mixins.md)
+	- [Mixins](/docs/sass/mixins.md)

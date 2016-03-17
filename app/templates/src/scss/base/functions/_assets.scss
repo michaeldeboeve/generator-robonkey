@@ -2,7 +2,10 @@
 /// should not include trailing slash
 /// @access public
 /// @type String
-$asset-base-path: '../assets' !default;
+
+$base: if(variable-exists(asset-base-path), $asset-base-path, '../assets');
+$img: if(variable-exists(asset-images-path), $asset-images-path, 'images');
+$fnt: if(variable-exists(asset-fonts-path), $asset-fonts-path, 'fonts');
 
 /// Asset URL builder
 /// @access private
@@ -10,7 +13,7 @@ $asset-base-path: '../assets' !default;
 /// @param {String} $file - Asset file name, including extension
 /// @return {URL} - A `url()` function leading to the asset
 @function asset($type, $file) {
-  @return url($asset-base-path + '/' + $type + '/' + $file);
+  @return url($base + '/' + $type + '/' + $file);
 }
 
 /// Image asset helper
@@ -19,7 +22,7 @@ $asset-base-path: '../assets' !default;
 /// @return {URL} - A `url()` function leading to the image
 /// @require {function} asset
 @function image($file) {
-  @return asset('images', $file);
+  @return asset($img, $file);
 }
 
 /// Font asset helper
@@ -28,5 +31,5 @@ $asset-base-path: '../assets' !default;
 /// @return {URL} - A `url()` function leading to the font
 /// @require {function} asset
 @function font($file) {
-  @return asset('fonts', $file);
+  @return asset($fnt, $file);
 }

@@ -1,6 +1,4 @@
-// From Bourbon.io
-
-$em-base: $default-font-size;
+$em-base: if(variable-exists(default-font-size), $default-font-size, 16px);
 
 @function rem($pxval) {
   @if not unitless($pxval) {
