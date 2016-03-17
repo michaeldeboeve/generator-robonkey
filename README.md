@@ -18,23 +18,23 @@
 * Custom Icon Font Generator _(Optional)_
 * Modernizr Builder _(Optional)_
 
-	
+
 ## Getting Started
 	This generator isn't on npm yet, so if you want to use it, you'll need to:
 
 Download this repo, and navigate to the folder:
 
 	$ cd path/to/generator-robonkey
-	
+
 Make a symlink to your node working directory:
 
 	$ npm link
 
 Install yo:
-	
+
 	$ npm install -g yo
 
-Install Robonkey: 
+Install Robonkey:
 
 	$ yo robonkey
 
@@ -80,3 +80,4 @@ Install Robonkey:
 * [Getting started](docs/README.md) with robonkey
 * [Features](docs/features.md)
 * [Options](docs/options.md)
+* [Mixins](docs/mixins.md)
