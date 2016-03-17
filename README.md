@@ -8,6 +8,8 @@
 
 ![image](docs/robonkeyscreenshot.png)
 
+## Table of contents
+
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Options](#options)
@@ -15,15 +17,17 @@
 
 ## Features
 
-- Gulp
-- Jade _(Optional)_
-- SCSS
-- BrowserSync
-- PostCSS _(Optional)_
-- Autoprefixr _(Automatically used **if postCSS is true**)_
-- Image Optimalisation
+- [Gulp](http://gulpjs.com/)
+- [Jade](http://jade-lang.com/) _(Optional)_
+- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md) and [functions](/docs/sass/functions.md)
+- [BrowserSync](https://www.browsersync.io/)
+- [PostCSS](http://postcss.org/) _(Optional)_
+- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
+- [Imagemin](https://github.com/sindresorhus/gulp-imagemin)
 - Custom Icon Font Generator _(Optional)_
-- Modernizr Builder _(Optional)_
+	- [iconfont](https://github.com/nfroidure/gulp-iconfont) 
+	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css) 
+- [Modernizr Builder](https://github.com/doctyper/gulp-modernizr) _(Optional)_
 
 
 ## Getting Started

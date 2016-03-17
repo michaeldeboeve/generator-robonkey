@@ -2,7 +2,7 @@
 
 This is my personal mixin library, gathered over the years.
 
-##### Table of contents
+## Table of contents
 
 - [Aspect Ratio](#aspect-ratio)
 - [BEM](#bem)
@@ -641,7 +641,7 @@ a.foo {
 ```
 
 ### Triangle
-> Make a triangle using the border methos
+> Make a triangle using the border method
 
 ##### Use:
 

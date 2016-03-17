@@ -2,7 +2,7 @@
 
 Some useful functions
 
-##### Table of contents
+## Table of contents
 - [Assets](#assets)
 - [Black and white opacity](#black-and-white-opacity)
 - [Ease](#ease)
