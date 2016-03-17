@@ -543,6 +543,8 @@ More will follow
 }
 ```
 
+##### Output:
+
 ```sh
 .foo {
   border: none;
@@ -612,7 +614,7 @@ a.foo {
 }
 ```
 
-### Output:
+##### Output:
 
 ```sh
 .foo--size {
@@ -639,7 +641,7 @@ a.foo {
 
 ### Triangle
 > Make a triangle using the border methos
->
+
 ##### Use:
 
 ```sh
@@ -659,7 +661,7 @@ a.foo {
   border-width: 14px 0 14px 22px;
   border-color: transparent transparent transparent red;
 }
-``
+```
 
 ## Docs
 
