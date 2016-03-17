@@ -1,9 +1,14 @@
 # Functions
 
-> Some useful functions
+Some useful functions
 
 ##### Table of contents
-
+- [Assets](#assets)
+- [Black and white opacity](#black-and-white-opacity)
+- [Ease](#ease)
+- [px to em or rem](#px-to-em-or-rem)
+- [Fontweights](#fontweights)
+- [Opposite direction](#opposite-direction)
 
 ### Assets
 > Function to set assets path
@@ -77,7 +82,7 @@
 }
 ```
 
-### px to em/rem
+### px to em or rem
 
  ##### Use:
 
@@ -136,9 +141,11 @@
 ## Docs
 
 - [Home](/README.md)
-- [Getting started](/docs/README.md)
+- [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)
 - [Sass](/docs/sass/sass.md)
-	- [Mixins](/docs/sass/mixins.md)
+	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)

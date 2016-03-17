@@ -5,7 +5,7 @@
 
 #### This generator isn't on npm yet, so if you want to use it, you'll need to:
 
-First, download this repo. And install Yo:
+First, [download](https://github.com/michaeldeboeve/generator-robonkey/archive/master.zip) or clone this repo. And install Yo:
 
 ```sh
 $ npm install -g yo
@@ -29,9 +29,11 @@ $ yo robonkey
 ## Docs
 
 - [Home](/README.md)
-- [Getting started](/docs/README.md)
+- [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)
 - [Sass](/docs/sass/sass.md)
-	- [Mixins](/docs/sass/mixins.md)
+	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)

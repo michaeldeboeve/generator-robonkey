@@ -1,5 +1,5 @@
 // ==========================================================================
-// Fonts                                                                     
+// Fonts
 // ==========================================================================
 
 // Font-weights
@@ -13,7 +13,7 @@
 // Extra Bold (Ultra Bold): 800
 // Black (Heavy): 900
 
-
+// TO DO custom font path
 @include load-font("<%= customIconFontName =>", '../fonts/dc-icons/dc-icons');
 
 
@@ -29,6 +29,7 @@
 
 
 // Extends
+// TODO if variable exists!
 %basefont { font-family: $default-font-family; }
 %monofont { font-family: $mono-font-family; }
 %iconfont { font-family: "<%= customIconFontName =>"; }

@@ -3,28 +3,28 @@
 // ==========================================================================
 
 
-$icn-desktop: "\E001";
-$icn-envelope: "\E002";
-$icn-facebook: "\E003";
-$icn-globe: "\E004";
-$icn-google-plus: "\E005";
-$icn-instagram: "\E006";
-$icn-laptop: "\E007";
-$icn-linkedin: "\E008";
-$icn-map-marker: "\E009";
-$icn-mobile: "\E00A";
-$icn-phone: "\E00B";
-$icn-pinterest-p: "\E00C";
-$icn-pinterest: "\E00D";
-$icn-sparky-full: "\E00E";
-$icn-sparky: "\E00F";
-$icn-tablet: "\E010";
-$icn-twitter: "\E011";
-$icn-vimeo: "\E012";
-$icn-vine: "\E013";
-$icn-whatsapp: "\E014";
-$icn-youtube-play: "\E015";
-$icn-youtube: "\E016";
+$icn--desktop: "\E001";
+$icn--envelope: "\E002";
+$icn--facebook: "\E003";
+$icn--globe: "\E004";
+$icn--google-plus: "\E005";
+$icn--instagram: "\E006";
+$icn--laptop: "\E007";
+$icn--linkedin: "\E008";
+$icn--map-marker: "\E009";
+$icn--mobile: "\E00A";
+$icn--phone: "\E00B";
+$icn--pinterest-p: "\E00C";
+$icn--pinterest: "\E00D";
+$icn--sparky-full: "\E00E";
+$icn--sparky: "\E00F";
+$icn--tablet: "\E010";
+$icn--twitter: "\E011";
+$icn--vimeo: "\E012";
+$icn--vine: "\E013";
+$icn--whatsapp: "\E014";
+$icn--youtube-play: "\E015";
+$icn--youtube: "\E016";
 
 
 
@@ -92,14 +92,14 @@ $icons: (
   }
 }
 
-%icn-fw {
+%icn--fw {
   width: $icn-fixed-width-size;
   text-align: center;
 }
 
 
 @each $name, $icn in $icons {
-  .icn-#{$name}:before {
+  .icn--#{$name}:before {
     content: $icn;
   }
 }

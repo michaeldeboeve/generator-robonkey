@@ -419,11 +419,12 @@ module.exports = generators.Base.extend({
 
   _scss: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/scss/base', destRoot + '/src/scss/base');
-    this.fs.copy(sourceRoot + '/src/scss/layout', destRoot + '/src/scss/layout');
     this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
     this.fs.copy(sourceRoot + '/src/scss/playground', destRoot + '/src/scss/playground');
     this.fs.copy(sourceRoot + '/src/scss/views', destRoot + '/src/scss/views');
     this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
+    this.fs.copy(sourceRoot + '/src/scss/pages', destRoot + '/src/scss/pages');
+    this.fs.copy(sourceRoot + '/src/scss/themes', destRoot + '/src/scss/themes');
     this.fs.copy(sourceRoot + '/src/scss/modules/_buttons.scss', destRoot + '/src/scss/modules/_buttons.scss');
     this.fs.copy(sourceRoot + '/src/scss/modules/_forms.scss', destRoot + '/src/scss/modules/_forms.scss');
     this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
