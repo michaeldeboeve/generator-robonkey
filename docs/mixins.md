@@ -4,17 +4,21 @@
 * [BEM](#bem)
 * [Centerer](#centerer)
 * [Clearfix](#clearfix)
+* [Coverer](#coverer)
+* [Ease](#ease)
+* [em rem units](#em-rem-units)
+* [Flexvideo](#flexvideo)
 
  
-####Aspect Ratio
+##Aspect Ratio
 
-Use:
+####Use:
 
 	.foo {
 		@include aspect-ratio(800, 400);
 	}
 
-Output:
+####Output:
 
 	.foo {
 	  position: relative;
@@ -33,30 +37,11 @@ Output:
 	  bottom: 0;
 	}
 
-Mixin:
 
-	@mixin aspect-ratio($width, $height) {
-  		position: relative;
 
-  		&:before {
-   			display: block;
-    		content: ' ';
-    		width: 100%;
-    		padding-top: (($height / $width) * 100%);
-  		}
+##BEM
 
-  		& > &__inner {
-    		position: absolute;
-    		top: 0;
-    		left: 0;
-    		right: 0;
-    		bottom: 0;
-  		}
-	}
-
-####BEM
-
-Use:
+####Use:
 
 	.foo {
 	  foo: block;
@@ -88,7 +73,7 @@ Use:
 	  }
 	}
 
-Output:
+####Output:
 
 	.foo {
 	  foo: block;
@@ -118,38 +103,10 @@ Output:
 	  foo: block--modifier__element;
 	}
 
-Mixin:
 
-	@mixin element($element) {
-	  &__#{$element} {
-	    @content;
-	  }
-	}
-	
-	@mixin modifier($modifier) {
-	  &--#{$modifier} {
-	    @content;
-	  }
-	}
-	
-	
-	// @alias element
-	@mixin e($element) {
-	  @include element($element)  {
-	    @content;
-	  }
-	}
-	
-	// @alias modifier
-	@mixin m($modifier) {
-	  @include modifier($modifier) {
-	    @content;
-	  }
-	}
+##Centerer
 
-####Centerer
-
-Use:
+####Use:
 
 	.foo {
 	  @include centerer();
@@ -175,7 +132,7 @@ Use:
 	  @include centerer-remove(absolute);
 	}
 
-Output: 
+####Output: 
 
 	.foo {
 	  position: absolute;
@@ -218,39 +175,16 @@ Output:
 	}
 
 
-Mixin:
 
-	@mixin centerer($d: both) {
-	  position: absolute;
-	  @if ($d == both or $d == b) {
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	  } @else if ($d == horizontal or $d == h) {
-	    left: 50%;
-	    transform: translate(-50%, 0);
-	  } @else if ($d == vertical or $d == v) {
-	    top: 50%;
-	    transform: translate(0, -50%);
-	  }
-	}
-	
-	@mixin centerer-remove($p: relative) {
-	  position: $p;
-	  top: auto;
-	  left: auto;
-	  transform: translate(0, 0);
-	}
+##Clearfix
 
-####Clearfix
-
-Use:
+####Use:
 
 	.foo {
   		@include clearfix();
 	}
 
-Output: 
+####Output: 
 
 	.foo:after {
 	  content: '';
@@ -258,12 +192,11 @@ Output:
 	  clear: both;
 	}
 
-Mixin:
 
-	@mixin clearfix(){
-	  &:after {
-	    content: '';
-	    display: table;
-	    clear: both;
-	  }
-	}
+## Docs
+
+* [Home](../README.md)
+* [Getting started](docs/README.md)
+* [Features](docs/features.md)
+* [Options](docs/options.md)
+* [Mixins](docs/mixins.md)

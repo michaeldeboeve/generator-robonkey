@@ -1,10 +1,13 @@
 #Robonkey Generator
 
-	This generator is a work in progress.
-	There probably will be some bugs.
-	Likewise, this README isn't finished yet.
 
 > A [Yeoman](http://yeoman.io) front-end application generator with Jade, Sass &amp; Gulp
+
+> **This generator is a work in progress.**
+> **There probably will be some bugs and missing features.**
+> **Likewise, this documentation isn't finished yet either.**
+
+![image](docs/robonkeyscreenshot.png)
 
 ## Features
 
@@ -77,7 +80,7 @@ Install Robonkey:
 
 ## Docs
 
-* [Getting started](docs/README.md) with robonkey
+* [Getting started](docs/README.md)
 * [Features](docs/features.md)
 * [Options](docs/options.md)
 * [Mixins](docs/mixins.md)

@@ -20,3 +20,11 @@ Then you can start building your app with Robonkey:
 	$ cd yourapp
 	$ yo robonkey
 
+
+## Docs
+
+* [Home](../README.md)
+* [Getting started](docs/README.md)
+* [Features](docs/features.md)
+* [Options](docs/options.md)
+* [Mixins](docs/mixins.md)

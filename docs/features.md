@@ -5,7 +5,7 @@
 ### Main features
 * Gulp
 * Jade _(Optional)_
-* SCSS
+* SCSS with [some mixins](mixins.md)
 * BrowserSync
 * PostCSS _(Optional)_
 * Autoprefixr _(Automatically used **if postCSS is true**)_
