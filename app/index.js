@@ -367,7 +367,7 @@ module.exports = generators.Base.extend({
 
   _h5bp: function(destRoot, sourceRoot, templateContext) {
     if(this.includeHtaccess) {
-      this.fs.copy(sourceRoot + '/website/.htaccess', destRoot + '/website/.htaccess');
+      this.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/website/.htaccess');
     }
     if(this.includeBrowserconfig) {
       this.fs.copy(sourceRoot + '/website/browserconfig.xml', destRoot + '/website/browserconfig.xml');
@@ -382,13 +382,13 @@ module.exports = generators.Base.extend({
   },
 
   _editorconfig: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/project/.editorconfig', destRoot + '/.editorconfig');
+    this.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
     this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
   },
 
   _git: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/project/.gitignore', destRoot + '/.gitignore');
-    this.fs.copy(sourceRoot + '/project/.gitattributes', destRoot + '/.gitattributes');
+    this.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
+    this.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
   },
 
   _readme: function(destRoot, sourceRoot, templateContext) {
@@ -396,7 +396,7 @@ module.exports = generators.Base.extend({
   },
 
   _bower: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/bower/.bowerrc', destRoot + '/gulp/.bowerrc');
+    this.fs.copy(sourceRoot + '/bower/bowerrc.txt', destRoot + '/gulp/.bowerrc');
     this.fs.copyTpl(sourceRoot + '/bower/bower.json', destRoot + '/gulp/bower.json', templateContext);
   },
 
