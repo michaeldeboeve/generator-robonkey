@@ -11,7 +11,9 @@
     "yeoman-generator",
     "sass",
     "jade",
-    "gulp"
+    "gulp",
+    "postcss",
+    "modernizr"
   ],
   "author": "Michaël de Boevé",
   "contributors": [
