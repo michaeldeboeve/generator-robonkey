@@ -7,6 +7,7 @@ var concat          = require('gulp-concat');
 var sass            = require('gulp-sass');
 var sassGlob        = require('gulp-sass-glob');
 var sourcemaps      = require('gulp-sourcemaps');
+var rename          = require('gulp-rename');
 
 
 <% if(includePostCSS){ %>// postprocessing<% } %><% if(includePostCSS){ %>
@@ -45,7 +46,7 @@ var cssnano         = require('cssnano');<% } %>
 
 
 // Styles Dev
-gulp.task('styles-dev', function() {
+gulp.task('styles', function() {
   gulp.src(paths.styles.src)
     .pipe(sassGlob())
     .pipe(plumber(onStyleError))
@@ -61,8 +62,9 @@ gulp.task('styles-build', function() {
   gulp.src(paths.styles.src)
     .pipe(sassGlob())
     .pipe(plumber(onStyleError))
-    .pipe(sass())<% if(includePostCSS){ %>
+    .pipe(sass(<% if(!includePostCSS){ %>{outputStyle: 'compressed'}<% } %>))<% if(includePostCSS){ %>
     .pipe(postcss(postCssConfigBuild))<% } %>
+    .pipe(rename('style.min.css'))
     .pipe(gulp.dest(paths.styles.build));
 });
 

@@ -11,7 +11,7 @@ gulp.task('removeDevFiles', function() {
     paths.scripts.build + 'script.js',
     paths.styles.build + '*.css.map',
     paths.styles.build + 'style.css',
-    paths.modernizr.build + 'modernizr.dev.js',
+    paths.modernizr.build + 'modernizr.dev.js'
   ], {read: false})
     .pipe(clean({force: true}));
 });

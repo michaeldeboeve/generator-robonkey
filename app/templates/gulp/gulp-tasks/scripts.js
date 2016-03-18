@@ -12,7 +12,7 @@ var sourcemaps      = require('gulp-sourcemaps');
 
 
 // JS Dev Task
-gulp.task('scripts-dev', function() {
+gulp.task('scripts', function() {
   gulp.src(paths.scripts.src)
     .pipe(plumber(onScriptError))
     .pipe(concat('script.js'))

@@ -89,5 +89,9 @@ gulp.task('moveWaypoints', function() {
 
 moveRepo = moveRepo.substr(0, moveRepo.length-1);
 moveRepo = moveRepo.split(',');
-// console.log(moveRepo);
-gulp.task('moveBower', moveRepo, function() {});
+
+if(moveRepo == "") {
+  gulp.task('moveBower', function() {});
+} else {
+  gulp.task('moveBower', moveRepo, function() {});
+}

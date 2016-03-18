@@ -33,23 +33,25 @@
     "jshint-stylish": "^2.1.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-jshint": "^2.0.0",
-    "gulp-sourcemaps": "^1.6.0",
-    <% if(includeJade){ %>"gulp-jade": "^1.1.0",<% } %>
-    <% if(includeCustomIcnFont) { %>"gulp-iconfont": "^6.0.0",<% } %>
-    <% if(includeCustomIcnFont) { %>"gulp-iconfont-css": "^2.0.0",<% } %>
-    <% if(includeModernizr){ %>"gulp-modernizr": "^1.0.0-alpha",<% } %>
-    <% if(includePostCSS){ %>"gulp-postcss": "^6.1.0",<% } %>
-    <% if(includePostCSS){ %>"autoprefixer": "^6.3.3",<% } %>
-    <% if(includePostCSS && includePcssMQPacker){ %>"css-mqpacker": "^4.0.0",<% } %>
-    <% if(includePostCSS && includePcssNano){ %>"cssnano": "^3.5.2",<% } %>
-    <% if(includePostCSS && includePcssClassPrefix){ %>"postcss-class-prefix": "^0.3.0",<% } %>
-    <% if(includePostCSS && includePcssGradientFix){ %>"postcss-gradient-transparency-fix": "^1.0.1",<% } %>
-    <% if(includePostCSS && includePcssScopify){ %>"postcss-scopify": "^0.1.6",<% } %>
-    <% if(includePostCSS && includePcssSelectorMatches){ %>"postcss-selector-matches": "^2.0.1",<% } %>
-    <% if(includePostCSS && includePcssSelectorNot){ %>"postcss-selector-not": "^2.0.0",<% } %>
-    <% if(includePostCSS && includePcssMQKeyframes){ %>"postcss-mq-keyframes": "^0.2.5",<% } %>
-    <% if(includeBreakpoint){ %>"breakpoint-sass": "^2.7.0",<% } %>
-    <% if(includeSusy){ %>"susy": "^2.2.12",<% } %>
+    "gulp-sourcemaps": "^1.6.0",<% if(includeJade){ %>
+    "gulp-jade": "^1.1.0",<% } %><% if(includeCustomIcnFont) { %>
+    "gulp-iconfont": "^6.0.0",<% } %><% if(includeCustomIcnFont) { %>
+    "gulp-iconfont-css": "^2.0.0",<% } %><% if(includeModernizr){ %>
+    "gulp-modernizr": "^1.0.0-alpha",<% } %><% if(includePostCSS){ %>
+    "gulp-postcss": "^6.1.0",<% } %><% if(includePostCSS){ %>
+    "autoprefixer": "^6.3.3",<% } %><% if(includePostCSS && includePcssMQPacker){ %>
+    "css-mqpacker": "^4.0.0",<% } %><% if(includePostCSS && includePcssNano){ %>
+    "cssnano": "^3.5.2",<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
+    "postcss-class-prefix": "^0.3.0",<% } %><% if(includePostCSS && includePcssGradientFix){ %>
+    "postcss-gradient-transparency-fix": "^1.0.1",<% } %><% if(includePostCSS && includePcssScopify){ %>
+    "postcss-scopify": "^0.1.6",<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
+    "postcss-selector-matches": "^2.0.1",<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
+    "postcss-selector-not": "^2.0.0",<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
+    "postcss-mq-keyframes": "^0.2.5",<% } %><% if(includeBreakpoint){ %>
+    "breakpoint-sass": "^2.7.0",<% } %><% if(includeSusy){ %>
+    "susy": "^2.2.12",<% } %><% if(includeBourbon || includeNeat){ %>
+    "node-bourbon": "^4.2.3",<% } %><% if(includeNeat){ %>
+    "node-neat": "^1.7.2",<% } %>
     "require-dir": "^0.3.0",
     "gulp-bower-files": "^0.2.7",
     "gulp-clean": "^0.3.2",

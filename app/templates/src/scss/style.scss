@@ -2,8 +2,9 @@
 // Robonkey Sass Shizzle
 // ==========================================================================
 <% if(includeBreakpoint){ %>@import "../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(includeSusy){ %>
-@import "../gulp/node_modules/susy/sass/susy";<% } %>
-
+@import "../gulp/node_modules/susy/sass/susy";<% } %><% if(includeBourbon || includeNeat){ %>
+@import "../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(includeNeat){ %>
+@import "../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %>
 
 
 // ==========================================================================

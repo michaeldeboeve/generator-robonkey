@@ -213,14 +213,24 @@ module.exports = generators.Base.extend({
         name: 'scssLibraries',
         message: 'What SCSS libraries to include?',
         choices: [{
+          name: 'Breakpoint (Mediaqueries)',
+          value: 'includeBreakpoint',
+          checked: true
+        }
+        ,{
           name: 'Susy (Grids)',
           value: 'includeSusy',
           checked: true
         }
         ,{
-          name: 'Breakpoint (Mediaqueries)',
-          value: 'includeBreakpoint',
-          checked: true
+          name: 'Bourbon (Mixin Library)',
+          value: 'includeBourbon',
+          checked: false
+        }
+        ,{
+          name: 'Bourbon Neat (Grids for Bourbon)',
+          value: 'includeNeat',
+          checked: false
         }]
       }
       ,{
@@ -325,6 +335,8 @@ module.exports = generators.Base.extend({
 
     this.includeSusy = hasSCSSLibrary('includeSusy');
     this.includeBreakpoint = hasSCSSLibrary('includeBreakpoint');
+    this.includeBourbon = hasSCSSLibrary('includeBourbon');
+    this.includeNeat = hasSCSSLibrary('includeNeat');
 
     this.includeHtaccess = hasRootFile('includeHtaccess');
     this.includeCrossdomain = hasRootFile('includeCrossdomain');
@@ -397,6 +409,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp/gulp-tasks/bower.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp/gulp-tasks/scripts.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp/gulp-tasks/clean.js', templateContext);
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp/gulp-tasks/iconfont.js', templateContext);
     }
@@ -532,6 +545,8 @@ module.exports = generators.Base.extend({
           includePcssNano: this.includePcssNano,
           includeSusy: this.includeSusy,
           includeBreakpoint: this.includeBreakpoint,
+          includeBourbon: this.includeBourbon,
+          includeNeat: this.includeNeat,
           customIconFontName: this.customIconFontName,
           customClassPrefix: this.customClassPrefix,
           customScope: this.customScope,

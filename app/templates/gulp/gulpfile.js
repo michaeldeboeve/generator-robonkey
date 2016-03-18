@@ -45,14 +45,13 @@ gulp.task('default', [
                       'moveBower', <% if(includeJade){ %>
                       'jade', <% } %>
                       'images',
-                      'scripts-dev',
-                      'styles-dev',
+                      'scripts',
+                      'styles',
                       'browser-sync'
   ], function() {
 
   // watch for JS changes, then reload
-  // gulp.watch(paths.scripts.src, ['scripts', 'scripts-min']).on('change', browserSync.reload);
-  gulp.watch(paths.scripts.src, ['scripts-min']).on('change', browserSync.reload);
+  gulp.watch(paths.scripts.src, ['scripts']).on('change', browserSync.reload);
 
   // watch for SASS changes
   gulp.watch(paths.styles.src_files, ['styles']);
