@@ -193,18 +193,18 @@ module.exports = generators.Base.extend({
         name: 'baseStyles',
         message: 'What base styles to include?',
         choices: [{
+          name: 'Sanitize',
+          value: 'includeSanitize',
+          checked: true
+        }
+        ,{
           name: 'Reset',
           value: 'includeReset',
-          checked: true
+          checked: false
         }
         ,{
           name: 'Normalize',
           value: 'includeNormalize',
-          checked: false
-        }
-        ,{
-          name: 'Sanitize',
-          value: 'includeSanitize',
           checked: false
         }]
       }
@@ -418,11 +418,16 @@ module.exports = generators.Base.extend({
   },
 
   _scss: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/src/scss/base', destRoot + '/src/scss/base');
-    this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
+    this.fs.copy(sourceRoot + '/src/scss/base/colors', destRoot + '/src/scss/base/colors');
+    this.fs.copy(sourceRoot + '/src/scss/base/functions', destRoot + '/src/scss/base/functions');
+    this.fs.copy(sourceRoot + '/src/scss/base/mixins', destRoot + '/src/scss/base/mixins');
+    this.fs.copyTpl(sourceRoot + '/src/scss/base/_fonts.scss', destRoot + '/src/scss/base/_fonts.scss', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
+    this.fs.copy(sourceRoot + '/src/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss');
+    this.fs.copy(sourceRoot + '/src/scss/base/_placeholders.scss', destRoot + '/src/scss/base/_placeholders.scss');
+    this.fs.copy(sourceRoot + '/src/scss/base/_typography.scss', destRoot + '/src/scss/base/_typography.scss');
     this.fs.copy(sourceRoot + '/src/scss/playground', destRoot + '/src/scss/playground');
     this.fs.copy(sourceRoot + '/src/scss/views', destRoot + '/src/scss/views');
-    this.fs.copy(sourceRoot + '/src/scss/libs', destRoot + '/src/scss/libs');
     this.fs.copy(sourceRoot + '/src/scss/pages', destRoot + '/src/scss/pages');
     this.fs.copy(sourceRoot + '/src/scss/themes', destRoot + '/src/scss/themes');
     this.fs.copy(sourceRoot + '/src/scss/modules/_buttons.scss', destRoot + '/src/scss/modules/_buttons.scss');

@@ -13,8 +13,7 @@
 // Extra Bold (Ultra Bold): 800
 // Black (Heavy): 900
 
-// TO DO custom font path
-@include load-font("<%= customIconFontName =>", '../fonts/dc-icons/dc-icons');
+<% if(includeCustomIcnFont){ %>@include load-font('<%= customIconFontName %>', '<%= customIconFontName %>', '<%= customIconFontName %>');<% } %>
 
 
 
@@ -29,11 +28,10 @@
 
 
 // Extends
-// TODO if variable exists!
-%basefont { font-family: $default-font-family; }
-%monofont { font-family: $mono-font-family; }
-%iconfont { font-family: "<%= customIconFontName =>"; }
+%basefont { font-family: if(variable-exists(default-font-family), $default-font-family, sans-serif); }
+%monofont { font-family: if(variable-exists(monospace-font-family), $monospace-font-family, monospace); }<% if(includeCustomIcnFont){ %>
+%iconfont { font-family: if(variable-exists(icon-font-family), $icon-font-family, '<%= customIconFontName %>'); }<% } %>
 %titlefont {
-  font-family: $title-font-family;
+  font-family: if(variable-exists(title-font-family), $title-font-family, sans-serif);
   text-transform: uppercase;
 }

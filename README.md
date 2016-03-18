@@ -34,63 +34,26 @@
 
 #### This generator isn't on npm yet, so if you want to use it, you'll need to:
 
-Download this repo, and navigate to the folder:
-
-```sh
-$ cd path/to/generator-robonkey
-```
-
-Make a symlink to your node working directory:
-
-```sh
-$ npm link
-```
-
-Install yo:
+First, [download](https://github.com/michaeldeboeve/generator-robonkey/archive/master.zip) or clone this repo. And install Yo:
 
 ```sh
 $ npm install -g yo
 ```
 
-Install Robonkey:
+Make a symlink to your node working directory:
 
 ```sh
-$ yo robonkey
+$ cd path/to/generator-robonkey
+$ npm link
 ```
 
-## Options
+Then you can start building your app with Robonkey:
 
-- Javascript Libraries
-  - jQuery
-  - Waypoints
-  - Signals
-  - D3
-  - TweenMax
-  - Enquire
-  - Google Analytics Script in body
-- Jade
-- Modernizr
-- Custom Icon Font Generator
-- PostCSS
-  - CSSNano
-  - MQPacker
-  - MQKeyframes
-  - SelectorNot
-  - SelectorMatcher
-  - Prefix selectors
-  - Scopify selectors
-- Base styles
-  - Reset
-  - Normalize
-  - Sanitize
-- SCSS Libraries
-  - Susy
-  - Breakpoint
-- HTML5 Boilerplate extra's
-  - .htaccess
-  - browserconfig.xml
-  - crossdomain.xml
-  - robots.txt and humans.txt
+```sh
+$ mkdir yourapp
+$ cd yourapp
+$ yo robonkey
+```
 
 
 ## Docs

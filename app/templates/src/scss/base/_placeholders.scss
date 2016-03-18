@@ -1,5 +1,5 @@
 // ==========================================================================
-// Extends and Helpers                                                       
+// Extends and Helpers
 // ==========================================================================
 
 %borderbox { box-sizing: border-box; }
@@ -8,4 +8,4 @@
 %right { float: right; }
 %clear { @include clearfix(); }
 
-%transition { transition: $base-transition; }
+%transition { transition: if(variable-exists(base-transition), $base-transition, 'all .3s ease');}

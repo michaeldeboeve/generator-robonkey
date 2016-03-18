@@ -11,9 +11,9 @@ $a-tags-hover: 'a:active, a:hover';
 }
 
 #{$a-tags} {
-  color: $default-link-color;
+  color: if(variable-exists(anchor-text-color), $anchor-text-color, '#222');
 }
 
 #{$a-tags-hover} {
-  color: $default-link-hover-color;
+  color: if(variable-exists(anchor-text-hover-color), $anchor-text-hover-color, '#000');
 }

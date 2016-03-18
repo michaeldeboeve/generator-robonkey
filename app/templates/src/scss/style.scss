@@ -3,7 +3,6 @@
 // ==========================================================================
 <% if(includeBreakpoint){ %>@import "../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(includeSusy){ %>
 @import "../gulp/node_modules/susy/sass/susy";<% } %>
-@import "libs/colors/**/*";
 
 
 

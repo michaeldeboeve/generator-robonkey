@@ -1,4 +1,6 @@
-$fontSmooth:                 true;
+// ==========================================================================
+// Breakpoints
+// ==========================================================================
 
 
 $tiny:                       480px;
@@ -13,67 +15,97 @@ $huge:                       1650px;
 
 
 
-// Font-weights
-// Thin (Hairline):           100
-// Extra Light (Ultra Light): 200
-// Light:                     300
-// Normal:                    400
-// Medium:                    500
-// Semi Bold (Demi Bold):     600
-// Bold:                      700
-// Extra Bold (Ultra Bold):   800
-// Black (Heavy):             900
-
-$thin:                       100;
-$hairline:                   $thin;
-$extralight:                 200;
-$ultralight:                 $extralight;
-$light:                      300;
-$normal:                     400;
-$book:                       500;
-$medium:                     $book;
-$semi:                       600;
-$bold:                       700;
-$extrabold:                  800;
-$ultrabold:                  $extrabold;
-$heavy:                      900;
-
-$fw-normal:                  $normal;
-$fw-bold:                    $bold;
-
-
-// Default Fonts
-$default-font-family:        'lato', sans-serif;
-$title-font-family:          'bebas', sans-serif;
-$serif-font-family:          serif;
-$mono-font-family:           monospace, monospace;
 
 
 
-// Font Size Defaults
-$default-font-size:          16px;
-$default-line-height:        1.2;
+// ==========================================================================
+// Colors
+// ==========================================================================
+@import "colors/materialdesign";
+@import "colors/socialmedia";
 
-$icn-font-size:              .875em;
-$icn-line-height:            1;
-$icn-fixed-width-size:       (18em / 14);
-
-
-
-
-// Default Colours
-
-$black:                      #202020;
+$black:                      $md-grey-900;
 $white:                      #fff;
-$red:                        #d10109;
-$grey:                       #666;
-
-
+$red:                        $md-red-a700;
 $error-color:                $red;
 
-$default-font-color:         $grey;
-$default-link-color:         $grey;
-$default-link-hover-color: darken($grey, 20);
 
+
+
+// ==========================================================================
+// Fonts
+// ==========================================================================
+
+$default-font-family:        'lato', sans-serif;
+$title-font-family:          $default-font-family;
+$serif-font-family:          serif;
+$monospace-font-family:      monospace;
+<% if(includeCustomIcnFont){ %>$icon-font-family:           '<%= customIconFontName %>';<% } %>
+$fontSmooth:                 true;
+
+
+$default-font-color:         $md-grey-700;
+$anchor-text-color:          $md-blue-a700;
+$anchor-text-hover-color:    darken($anchor-text-color, 10);
+$anchor-text-decoration:     none;
+
+
+$default-font-size:          16px;
+$default-line-height:        1.2;
+$small-font-siz:             75%;
+
+$nav-list-style:             none;
+
+<% if(includeCustomIcnFont){ %>$icn-font-size:              1em;
+$icn-line-height:            1;
+$icn-fixed-width-size:       (18em / 14);<% } %>
+
+
+// ==========================================================================
+// Root
+// ==========================================================================
+
+$root-background-color:      #fff;
+$root-color:                 $default-font-color;
+$root-box-sizing:            border-box;
+$root-cursor:                default;
+$root-font-size:             100%;
+$root-line-height:           1.5;
+$root-font-family:           $default-font-family;
+
+
+
+
+// ==========================================================================
+// Animations
+// ==========================================================================
 
 $base-transition:            all .3s ease-out;
+
+
+
+// ==========================================================================
+// Forms
+// ==========================================================================
+
+$form-element-background-color: transparent;
+$form-element-min-height: 1.5em;
+
+// ==========================================================================
+// Tables
+// ==========================================================================
+
+$table-border-collapse: collapse;
+$table-border-spacing: 0;
+$textarea-resize: vertical;
+
+// ==========================================================================
+// Selection
+// ==========================================================================
+$selection-background-color: $md-blue-300;
+$selection-color: #fff;
+$selection-text-shadow: none;
+
+
+
+$media-element-vertical-align: middle;

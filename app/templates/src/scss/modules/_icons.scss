@@ -68,8 +68,8 @@ $icons: (
 
 %icn-base {
   @extend %iconfont;
-  font-size: 1em;
-  line-height: 1;
+  font-size: if(variable-exists(icn-font-size), $icn-font-size, 1em);
+  line-height: if(variable-exists(icn-line-height), $icn-line-height, 1);
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -93,13 +93,13 @@ $icons: (
 }
 
 %icn--fw {
-  width: $icn-fixed-width-size;
+  width: if(variable-exists(icn-fixed-width-size), $icn-fixed-width-size, 1em);
   text-align: center;
 }
 
 
 @each $name, $icn in $icons {
-  .icn--#{$name}:before {
+  %icn--#{$name}:before {
     content: $icn;
   }
 }

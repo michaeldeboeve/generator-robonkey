@@ -22,6 +22,20 @@ Then you can start building your app with Robonkey:
 $ mkdir yourapp
 $ cd yourapp
 $ yo robonkey
+$ cd gulp
+$ gulp
+```
+
+Make a custom Modernizr file:
+
+```sh
+$ gulp modernizr
+```
+
+Make a custom icon font:
+
+```sh
+$ gulp iconfont
 ```
 
 ## Docs
