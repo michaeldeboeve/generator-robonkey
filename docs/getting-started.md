@@ -9,7 +9,7 @@ $ npm install -g yo
 Install Robonkey
 
 ```sh
-$ npm install generator-robonkey -g
+$ npm install -g generator-robonkey
 ```
 
 Then you can start building your app with Robonkey:
