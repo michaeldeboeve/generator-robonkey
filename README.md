@@ -25,26 +25,23 @@
 - [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
 - [Imagemin](https://github.com/sindresorhus/gulp-imagemin)
 - Custom Icon Font Generator _(Optional)_
-	- [iconfont](https://github.com/nfroidure/gulp-iconfont) 
-	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css) 
+	- [iconfont](https://github.com/nfroidure/gulp-iconfont)
+	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css)
 - [Modernizr Builder](https://github.com/doctyper/gulp-modernizr) _(Optional)_
 
 
 ## Getting Started
 
-#### This generator isn't on npm yet, so if you want to use it, you'll need to:
-
-First, [download](https://github.com/michaeldeboeve/generator-robonkey/archive/master.zip) or clone this repo. And install Yo:
+Install yo
 
 ```sh
 $ npm install -g yo
 ```
 
-Make a symlink to your node working directory:
+Install Robonkey
 
 ```sh
-$ cd path/to/generator-robonkey
-$ npm link
+$ npm install generator-robonkey -g
 ```
 
 Then you can start building your app with Robonkey:

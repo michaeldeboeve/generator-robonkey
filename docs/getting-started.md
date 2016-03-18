@@ -1,19 +1,15 @@
 # Getting Started
 
-
-#### This generator isn't on npm yet, so if you want to use it, you'll need to:
-
-First, [download](https://github.com/michaeldeboeve/generator-robonkey/archive/master.zip) or clone this repo. And install Yo:
+Install yo
 
 ```sh
 $ npm install -g yo
 ```
 
-Make a symlink to your node working directory:
+Install Robonkey
 
 ```sh
-$ cd path/to/generator-robonkey
-$ npm link
+$ npm install generator-robonkey -g
 ```
 
 Then you can start building your app with Robonkey:
