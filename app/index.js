@@ -248,6 +248,12 @@ module.exports = generators.Base.extend({
           checked: false
         }]
       }
+      ,{
+        type: 'confirm',
+        name: 'runGulp',
+        message: 'Run gulp command after install?',
+        default: false
+      }
     ];
     return prompts;
   },
@@ -275,6 +281,8 @@ module.exports = generators.Base.extend({
     function hasPostCSSPlugins(feat) {
       return postCSSPlugins && postCSSPlugins.indexOf(feat) !== -1;
     };
+
+    this.runGulp = answers.runGulp;
 
     this.appname = answers.name;
     this.appdescription = answers.description;
@@ -555,5 +563,8 @@ module.exports = generators.Base.extend({
   },
   end: function() {
     this._endMsg();
+    if(this.runGulp) {
+      this.spawnCommand('gulp', ['serve']);
+    }
   }
 });
