@@ -11,8 +11,12 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="/assets/css/style.css"><% if(includeModernizr){ %>
-    <script src="/assets/js/libs/modernizr-custom.js"></script><% } %>
+    <!-- build:css -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- endbuild -->
+    <% if(includeModernizr){ %><!-- build:modernizr -->
+    <script src="/assets/js/libs/modernizr.dev.js"></script>
+    <!-- endbuild --><% } %>
   </head>
   <body>
 
@@ -25,7 +29,9 @@
     <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(includeTweenmax){ %>
     <script src="/assets/js/libs/TweenMax.min.js"></script><% } %>
 
-    <script src="/assets/js/script.min.js"></script>
+    <!-- build:js -->
+    <script src="/assets/js/script.js"></script>
+    <!-- endbuild -->
 
     <% if(includeJQuery){ %><script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -11,18 +11,8 @@ var sourcemaps      = require('gulp-sourcemaps');
 
 
 
-// JS hint task -NOTE-: deze is voor de liefhebbers, runnen we niet per default
-gulp.task('jshint', function() {
-  gulp.src(paths.scripts.src)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('default'));
-});
-
-
-
-// JS concat
-gulp.task('scripts', function() {
+// JS Dev Task
+gulp.task('scripts-dev', function() {
   gulp.src(paths.scripts.src)
     .pipe(plumber(onScriptError))
     .pipe(concat('script.js'))
@@ -32,8 +22,8 @@ gulp.task('scripts', function() {
 
 
 
-// JS concat and minify
-gulp.task('scripts-min', function() {
+// JS Build Task
+gulp.task('scripts-build', function() {
   gulp.src(paths.scripts.src)
     .pipe(plumber(onScriptError))
     .pipe(concat('script.min.js'))

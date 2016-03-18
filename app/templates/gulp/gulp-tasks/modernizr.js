@@ -7,7 +7,6 @@ var modernizr       = require('gulp-modernizr');
 
 
 
-
 gulp.task('modernizr', function() {
   gulp.src([paths.styles.src_files, paths.scripts.src])
     .pipe(modernizr(cfg.modernizr.output, {

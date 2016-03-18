@@ -63,10 +63,14 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       link(rel="apple-touch-icon", href="#{ appleIPhone }")
       
     block headerStyles
+      != '\n    <!-- build:css -->'
       link(rel="stylesheet", href="assets/css/style.css")
+      != '\n    <!-- endbuild -->'
 
     block headerScripts
-      <% if(includeModernizr){ %>script(src="assets/js/libs/modernizr-custom.js")<% } %>
+      <% if(includeModernizr){ %>!= '\n    <!-- build:modernizr -->'
+      script(src="assets/js/libs/modernizr.dev.js")
+      != '\n    <!-- endbuild -->'<% } %>
 
   body(class="#{ bodyClass }")
     block contentMain
@@ -81,7 +85,9 @@ html(lang="#{ lang }" class="no-js #{ lang }")
     script(src="assets/js/libs/TweenMax.min.js")<% } %>
     != '\n'  
     block footerScripts
-      script(src="assets/js/script.min.js")
+      != '\n\n    <!-- build:js -->'
+      script(src="assets/js/script.js")
+      != '\n    <!-- endbuild -->\n'
     
     <% if(includeGA){ %>
     != '\n' 

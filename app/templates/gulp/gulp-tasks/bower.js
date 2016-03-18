@@ -5,6 +5,17 @@ var gulp            = require('gulp');
 var changed         = require('gulp-changed');
 var moveRepo        = "";
 
+<% if(includeModernizr){ %>
+moveRepo += "moveModernizr,";
+gulp.task('moveModernizr', function() {
+  var src = '../src/modernizr/modernizr.dev.js',
+      dest = '../website/assets/js/libs/';
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+<% } %>
 <% if(includeJQuery){ %>
 moveRepo += "moveJquery,";
 gulp.task('moveJquery', function() {

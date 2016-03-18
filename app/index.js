@@ -413,7 +413,8 @@ module.exports = generators.Base.extend({
   _js: function(destRoot, sourceRoot, templateContext) {
     this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
     if(this.includeModernizr) {
-      this.fs.copy(sourceRoot + '/src/modernizr/modernizr-custom.js', destRoot + '/website/assets/js/libs/modernizr-custom.js');
+      // this.fs.copy(sourceRoot + '/src/modernizr/modernizr.dev.js', destRoot + '/website/assets/js/libs/modernizr.dev.js');
+      this.fs.copy(sourceRoot + '/src/modernizr', destRoot + '/src/modernizr');
     }
   },
 

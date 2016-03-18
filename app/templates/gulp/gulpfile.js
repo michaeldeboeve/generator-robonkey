@@ -24,8 +24,31 @@ gulp.task('browser-sync', function() {
 });
 
 
-// default gulp task
-gulp.task('default', ['moveBower', <% if(includeJade){ %>'jade', <% } %>'images', 'scripts-min', 'styles', 'browser-sync'], function() {
+// Dev gulp task
+gulp.task('serve', ['default'], function() {});
+gulp.task('dev', ['default'], function() {});
+
+// Build gulp task
+gulp.task('build', [
+                    <% if(includeModernizr){ %>'modernizr',<% } %><% if(includeCustomIcnFont){ %>
+                    'iconfont',<% } %>
+                    'moveBower', <% if(includeJade){ %>
+                    'jade-build', <% } %>
+                    'images',
+                    'scripts-build',
+                    'styles-build',
+                    'removeDevFiles'
+  ], function() {});
+
+// Default gulp task
+gulp.task('default', [
+                      'moveBower', <% if(includeJade){ %>
+                      'jade', <% } %>
+                      'images',
+                      'scripts-dev',
+                      'styles-dev',
+                      'browser-sync'
+  ], function() {
 
   // watch for JS changes, then reload
   // gulp.watch(paths.scripts.src, ['scripts', 'scripts-min']).on('change', browserSync.reload);

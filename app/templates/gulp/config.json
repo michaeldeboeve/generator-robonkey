@@ -5,7 +5,7 @@
   "modernizr": {
     "excludeTests": [],
     "tests": [],
-    "output": "modernizr-custom.js",
+    "output": "modernizr.custom.js",
     "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
   },<% } %><% if(includeCustomIcnFont) { %>"iconFont": {
     "name": "<%= customIconFontName %>",

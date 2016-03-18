@@ -51,7 +51,10 @@
     <% if(includeBreakpoint){ %>"breakpoint-sass": "^2.7.0",<% } %>
     <% if(includeSusy){ %>"susy": "^2.2.12",<% } %>
     "require-dir": "^0.3.0",
-    "gulp-bower-files": "^0.2.7"
+    "gulp-bower-files": "^0.2.7",
+    "gulp-clean": "^0.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-html-replace": "^1.5.5"
   },
   "dependencies": {
 

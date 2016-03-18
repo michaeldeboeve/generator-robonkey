@@ -21,7 +21,16 @@ var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(
 var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePostCSS && includePcssNano){ %>
 var cssnano         = require('cssnano');<% } %>
 
-<% if(includePostCSS){ %>var postCssConfig = [<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
+<% if(includePostCSS){ %>var postCssConfigDev = [<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
+  selectorNot,<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
+  selectorMatches,<% } %><% if(includePostCSS && includePcssGradientFix){ %>
+  gradientFix,<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
+  classPrfx(cfg.prefix),<% } %><% if(includePostCSS && includePcssScopify){ %>
+  scopify(cfg.scope),<% } %><% if(includePostCSS){ %>
+  autoprefixer({browsers: ['last 3 versions', '> 1%']})<% } %><% if(includePostCSS){ %>
+];<% } %>
+
+<% if(includePostCSS){ %>var postCssConfigBuild = [<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
   selectorNot,<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
   selectorMatches,<% } %><% if(includePostCSS && includePcssGradientFix){ %>
   gradientFix,<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
@@ -34,15 +43,26 @@ var cssnano         = require('cssnano');<% } %>
 ];<% } %>
 
 
-// SCSS convert to CSS, CSS concat, create sourcefile and minify
-gulp.task('styles', function() {
+
+// Styles Dev
+gulp.task('styles-dev', function() {
   gulp.src(paths.styles.src)
     .pipe(sassGlob())
     .pipe(plumber(onStyleError))
     .pipe(sourcemaps.init())
-    .pipe(sass())
-    <% if(includePostCSS){ %>.pipe(postcss(postCssConfig))<% } %>
+    .pipe(sass())<% if(includePostCSS){ %>
+    .pipe(postcss(postCssConfigDev))<% } %>
     .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.styles.build));
+});
+
+// Styles Build
+gulp.task('styles-build', function() {
+  gulp.src(paths.styles.src)
+    .pipe(sassGlob())
+    .pipe(plumber(onStyleError))
+    .pipe(sass())<% if(includePostCSS){ %>
+    .pipe(postcss(postCssConfigBuild))<% } %>
     .pipe(gulp.dest(paths.styles.build));
 });
 
