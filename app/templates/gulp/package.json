@@ -51,7 +51,9 @@
     "breakpoint-sass": "^2.7.0",<% } %><% if(includeSusy){ %>
     "susy": "^2.2.12",<% } %><% if(includeBourbon || includeNeat){ %>
     "node-bourbon": "^4.2.3",<% } %><% if(includeNeat){ %>
-    "node-neat": "^1.7.2",<% } %>
+    "node-neat": "^1.7.2",<% } %><% if(includeIncludeMedia){ %>
+    "include-media": "^1.4.2",<% } %><% if(includeJeet){ %>
+    "jeet": "^6.1.2",<% } %>
     "require-dir": "^0.3.0",
     "gulp-bower-files": "^0.2.7",
     "gulp-clean": "^0.3.2",

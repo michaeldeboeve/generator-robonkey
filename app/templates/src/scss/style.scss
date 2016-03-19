@@ -4,7 +4,9 @@
 <% if(includeBreakpoint){ %>@import "../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(includeSusy){ %>
 @import "../gulp/node_modules/susy/sass/susy";<% } %><% if(includeBourbon || includeNeat){ %>
 @import "../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(includeNeat){ %>
-@import "../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %>
+@import "../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(includeIncludeMedia){ %>
+@import "../gulp/node_modules/include-media/dist/include-media";<% } %><% if(includeJeet){ %>
+@import "../gulp/node_modules/jeet/scss/jeet/index";<% } %>
 
 
 // ==========================================================================

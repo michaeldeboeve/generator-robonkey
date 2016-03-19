@@ -77,11 +77,6 @@ module.exports = generators.Base.extend({
           name: 'Enquire',
           value: 'includeEnquire',
           checked: false
-        }
-        ,{
-          name: 'Google Analytics',
-          value: 'includeGA',
-          checked: false
         }]
       }
       ,{
@@ -206,32 +201,66 @@ module.exports = generators.Base.extend({
           name: 'Normalize',
           value: 'includeNormalize',
           checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noBaseStyles',
+          checked: true
         }]
       }
       ,{
-        type: 'checkbox',
-        name: 'scssLibraries',
-        message: 'What SCSS libraries to include?',
+        type: 'list',
+        name: 'mqLibs',
+        message: 'What MediaQuery Library to use?',
         choices: [{
-          name: 'Breakpoint (Mediaqueries)',
+          name: 'Breakpoint',
           value: 'includeBreakpoint',
           checked: true
         }
         ,{
-          name: 'Susy (Grids)',
-          value: 'includeSusy',
+          name: 'Include Media',
+          value: 'includeIncludeMedia',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noMQLib',
+          checked: true
+        }]
+      }
+      ,{
+        type: 'list',
+        name: 'gridLibs',
+        message: 'What Grids Library to use?',
+        choices: [{
+          name: 'Jeet',
+          value: 'includeJeet',
           checked: true
         }
         ,{
-          name: 'Bourbon (Mixin Library)',
-          value: 'includeBourbon',
+          name: 'Susy',
+          value: 'includeSusy',
           checked: false
         }
         ,{
-          name: 'Bourbon Neat (Grids for Bourbon)',
+          name: 'Neat (Will include Bourbon)',
           value: 'includeNeat',
           checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noGridLib',
+          checked: false
         }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.gridLibs.indexOf('includeNeat') === -1;
+        },
+        type: 'confirm',
+        name: 'includeBourbon',
+        message: 'Include Bourbon Mixin Library?',
+        default: false
       }
       ,{
         type: 'checkbox',
@@ -260,6 +289,12 @@ module.exports = generators.Base.extend({
       }
       ,{
         type: 'confirm',
+        name: 'includeGA',
+        message: 'Provide Google Analytics Script?',
+        default: false
+      }
+      ,{
+        type: 'confirm',
         name: 'runGulp',
         message: 'Run gulp command after install?',
         default: false
@@ -272,9 +307,10 @@ module.exports = generators.Base.extend({
     var scriptsJS = answers.scriptsJS;
     var gulpTasks = answers.gulpTasks;
     var rootFiles = answers.rootFiles;
-    var scssLibraries = answers.scssLibraries;
     var postCSSPlugins = answers.postCSSPlugins;
     var baseStyles = answers.baseStyles;
+    var gridLibs = answers.gridLibs;
+    var mqLibs = answers.mqLibs;
 
     function hasJSScript(feat) {
       return scriptsJS && scriptsJS.indexOf(feat) !== -1;
@@ -285,8 +321,11 @@ module.exports = generators.Base.extend({
     function hasRootFile(feat) {
       return rootFiles && rootFiles.indexOf(feat) !== -1;
     };
-    function hasSCSSLibrary(feat) {
-      return scssLibraries && scssLibraries.indexOf(feat) !== -1;
+    function hasMQLibrary(feat) {
+      return mqLibs && mqLibs.indexOf(feat) !== -1;
+    };
+    function hasGridLibrary(feat) {
+      return gridLibs && gridLibs.indexOf(feat) !== -1;
     };
     function hasPostCSSPlugins(feat) {
       return postCSSPlugins && postCSSPlugins.indexOf(feat) !== -1;
@@ -310,7 +349,8 @@ module.exports = generators.Base.extend({
     this.customIconFontName = answers.customIconFontName;
     this.customClassPrefix = answers.customClassPrefix;
     this.customScope = answers.customScope;
-
+    this.includeGA = answers.includeGA;
+    this.includeBourbon = answers.includeBourbon;
 
     this.localUrl = answers.localUrl;
     this.includeJQuery = hasJSScript('includeJQuery');
@@ -319,7 +359,6 @@ module.exports = generators.Base.extend({
     this.includeD3 = hasJSScript('includeD3');
     this.includeTweenmax = hasJSScript('includeTweenmax');
     this.includeEnquire = hasJSScript('includeEnquire');
-    this.includeGA = hasJSScript('includeGA');
 
     this.includeModernizr = answers.includeModernizr;
     this.includeJade = answers.includeJade;
@@ -333,10 +372,12 @@ module.exports = generators.Base.extend({
     this.includePcssMQKeyframes = hasPostCSSPlugins('includePcssMQKeyframes');
     this.includePcssNano = hasPostCSSPlugins('includePcssNano');
 
-    this.includeSusy = hasSCSSLibrary('includeSusy');
-    this.includeBreakpoint = hasSCSSLibrary('includeBreakpoint');
-    this.includeBourbon = hasSCSSLibrary('includeBourbon');
-    this.includeNeat = hasSCSSLibrary('includeNeat');
+    this.includeSusy = hasGridLibrary('includeSusy');
+    this.includeJeet = hasGridLibrary('includeJeet');
+    this.includeNeat = hasGridLibrary('includeNeat');
+
+    this.includeBreakpoint = hasMQLibrary('includeBreakpoint');
+    this.includeIncludeMedia = hasMQLibrary('includeIncludeMedia');
 
     this.includeHtaccess = hasRootFile('includeHtaccess');
     this.includeCrossdomain = hasRootFile('includeCrossdomain');
@@ -547,12 +588,14 @@ module.exports = generators.Base.extend({
           includeBreakpoint: this.includeBreakpoint,
           includeBourbon: this.includeBourbon,
           includeNeat: this.includeNeat,
+          includeJeet: this.includeJeet,
+          includeIncludeMedia: this.includeIncludeMedia,
           customIconFontName: this.customIconFontName,
           customClassPrefix: this.customClassPrefix,
           customScope: this.customScope,
           includeReset: this.includeReset,
           includeNormalize: this.includeNormalize,
-          includeSanitize: this.includeSanitize
+          includeSanitize: this.includeSanitize,
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
