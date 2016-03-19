@@ -13,6 +13,34 @@ $xlarge:                     1440px;
 $xxlarge:                    1550px;
 $huge:                       1650px;
 
+$phone: $tiny;
+$tablet: $small;
+$desktop: $regular;
+
+<% if(includeBreakpoint){ %>
+// Documentation:
+// http://breakpoint-sass.com/
+//
+// Shortcuts: mixins/_mediaqueries.scss
+<% } %><% if(includeIncludeMedia){ %>
+// Documentation:
+// http://include-media.com/documentation/
+$breakpoints: (
+  'phone': $phone,
+  'tablet': $tablet,
+  'desktop': $desktop
+) !default;
+
+$media-expressions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)'
+) !default;
+<% } %>
 
 
 

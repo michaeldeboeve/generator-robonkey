@@ -402,46 +402,60 @@ module.exports = generators.Base.extend({
 
   _html: function(destRoot, sourceRoot, templateContext) {
     if(!this.includeJade) {
+      // Dynamic
       this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
     }
   },
 
   _h5bp: function(destRoot, sourceRoot, templateContext) {
     if(this.includeHtaccess) {
+      // Static
       this.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/website/.htaccess');
     }
     if(this.includeBrowserconfig) {
+      // Static
       this.fs.copy(sourceRoot + '/website/browserconfig.xml', destRoot + '/website/browserconfig.xml');
     }
     if(this.includeCustomIcnFont) {
+      // Static
       this.fs.copy(sourceRoot + '/website/crossdomain.xml', destRoot + '/website/crossdomain.xml');
     }
     if(this.includeRobots) {
+      // Dynamic
       this.fs.copyTpl(sourceRoot + '/website/humans.txt', destRoot + '/website/humans.txt', templateContext);
+
+      // Static
       this.fs.copy(sourceRoot + '/website/robots.txt', destRoot + '/website/robots.txt');
     }
   },
 
   _editorconfig: function(destRoot, sourceRoot, templateContext) {
+    // Static
     this.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
     this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
   },
 
   _git: function(destRoot, sourceRoot, templateContext) {
+    // Static
     this.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
     this.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
   },
 
   _readme: function(destRoot, sourceRoot, templateContext) {
+    // Dynamic
     this.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
   },
 
   _bower: function(destRoot, sourceRoot, templateContext) {
+    // Static
     this.fs.copy(sourceRoot + '/bower/bowerrc.txt', destRoot + '/gulp/.bowerrc');
+
+    // Dynamic
     this.fs.copyTpl(sourceRoot + '/bower/bower.json', destRoot + '/gulp/bower.json', templateContext);
   },
 
   _gulp: function(destRoot, sourceRoot, templateContext) {
+    // Dynamic
     this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/gulp/package.json', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/gulp/config.json', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/paths.json', destRoot + '/gulp/paths.json', templateContext);
@@ -449,14 +463,24 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/images.js', destRoot + '/gulp/gulp-tasks/images.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp/gulp-tasks/bower.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp/gulp-tasks/scripts.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp/gulp-tasks/clean.js', templateContext);
+
+    // Todo:
+    // if sass/stylus/less
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    // endif
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp/gulp-tasks/iconfont.js', templateContext);
     }
     if(this.includeJade) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp/gulp-tasks/jade.js', templateContext);
     }
+    
+    // TODO: if handlebars
+    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
+
     if(this.includeModernizr) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp/gulp-tasks/modernizr.js', templateContext);
     }
@@ -464,60 +488,58 @@ module.exports = generators.Base.extend({
 
   _iconfont: function(destRoot, sourceRoot, templateContext) {
     if(this.includeCustomIcnFont) {
+      // Static
       this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
     }
   },
 
   _images: function(destRoot, sourceRoot, templateContext) {
+    // Static
     this.fs.copy(sourceRoot + '/src/images', destRoot + '/src/images');
   },
 
   _js: function(destRoot, sourceRoot, templateContext) {
+    // Static
     this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
     if(this.includeModernizr) {
-      // this.fs.copy(sourceRoot + '/src/modernizr/modernizr.dev.js', destRoot + '/website/assets/js/libs/modernizr.dev.js');
       this.fs.copy(sourceRoot + '/src/modernizr', destRoot + '/src/modernizr');
     }
   },
 
   _scss: function(destRoot, sourceRoot, templateContext) {
-    this.fs.copy(sourceRoot + '/src/scss/base/colors', destRoot + '/src/scss/base/colors');
-    this.fs.copy(sourceRoot + '/src/scss/base/functions', destRoot + '/src/scss/base/functions');
-    this.fs.copy(sourceRoot + '/src/scss/base/mixins', destRoot + '/src/scss/base/mixins');
-    this.fs.copyTpl(sourceRoot + '/src/scss/base/_fonts.scss', destRoot + '/src/scss/base/_fonts.scss', templateContext);
-    this.fs.copyTpl(sourceRoot + '/src/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
-    this.fs.copy(sourceRoot + '/src/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss');
-    this.fs.copy(sourceRoot + '/src/scss/base/_placeholders.scss', destRoot + '/src/scss/base/_placeholders.scss');
-    this.fs.copy(sourceRoot + '/src/scss/base/_typography.scss', destRoot + '/src/scss/base/_typography.scss');
-    this.fs.copy(sourceRoot + '/src/scss/playground', destRoot + '/src/scss/playground');
-    this.fs.copy(sourceRoot + '/src/scss/views', destRoot + '/src/scss/views');
-    this.fs.copy(sourceRoot + '/src/scss/pages', destRoot + '/src/scss/pages');
-    this.fs.copy(sourceRoot + '/src/scss/themes', destRoot + '/src/scss/themes');
-    this.fs.copy(sourceRoot + '/src/scss/modules/_buttons.scss', destRoot + '/src/scss/modules/_buttons.scss');
-    this.fs.copy(sourceRoot + '/src/scss/modules/_forms.scss', destRoot + '/src/scss/modules/_forms.scss');
-    this.fs.copyTpl(sourceRoot + '/src/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
+    // Static
+    this.fs.copy(sourceRoot + '/src/scss', destRoot + '/src/scss');
+
+    // Dynamic
+    this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_fonts.scss', destRoot + '/src/scss/base/_fonts.scss', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
 
     if(this.includeCustomIcnFont) {
-      this.fs.copyTpl(sourceRoot + '/src/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
+      this.fs.copyTpl(sourceRoot + '/src-tpl/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
+    }
+    if(this.includeBreakpoint) {
+      this.fs.copy(sourceRoot + '/src-tpl/scss/mixins/_mediaqueries.scss', destRoot + '/src/scss/mixins/_mediaqueries.scss');
     }
     if(this.includeReset) {
-      this.fs.copy(sourceRoot + '/src/scss/reset/_reset.scss', destRoot + '/src/scss/base/_reset.scss');
+      this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_reset.scss', destRoot + '/src/scss/base/_reset.scss');
     }
     if(this.includeNormalize) {
-      this.fs.copy(sourceRoot + '/src/scss/reset/_normalize.scss', destRoot + '/src/scss/base/_normalize.scss');
+      this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_normalize.scss', destRoot + '/src/scss/base/_normalize.scss');
     }
     if(this.includeSanitize) {
-      this.fs.copy(sourceRoot + '/src/scss/reset/_sanitize.scss', destRoot + '/src/scss/base/_sanitize.scss');
+      this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_sanitize.scss', destRoot + '/src/scss/base/_sanitize.scss');
     }
   },
 
   _jade: function(destRoot, sourceRoot, templateContext) {
     if(this.includeJade) {
-      this.fs.copy(sourceRoot + '/src/jade/index.jade', destRoot + '/src/jade/index.jade');
-      this.fs.copy(sourceRoot + '/src/jade/tools', destRoot + '/src/jade/tools');
-      this.fs.copy(sourceRoot + '/src/jade/templates', destRoot + '/src/jade/templates');
-      this.fs.copyTpl(sourceRoot + '/src/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', templateContext);
-      this.fs.copy(sourceRoot + '/src/jade/templates/views', destRoot + '/src/jade/templates/views');
+      // Static
+      this.fs.copy(sourceRoot + '/src/jade', destRoot + '/src/jade');
+
+      // Dyanamic
+      this.fs.copyTpl(sourceRoot + '/src-tpl/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', templateContext);
     }
   },
 
