@@ -3,28 +3,27 @@
 // ==========================================================================
 
 
-$icn--desktop: "\E001";
-$icn--envelope: "\E002";
-$icn--facebook: "\E003";
-$icn--globe: "\E004";
-$icn--google-plus: "\E005";
-$icn--instagram: "\E006";
-$icn--laptop: "\E007";
-$icn--linkedin: "\E008";
-$icn--map-marker: "\E009";
-$icn--mobile: "\E00A";
-$icn--phone: "\E00B";
-$icn--pinterest-p: "\E00C";
-$icn--pinterest: "\E00D";
-$icn--sparky-full: "\E00E";
-$icn--sparky: "\E00F";
-$icn--tablet: "\E010";
-$icn--twitter: "\E011";
-$icn--vimeo: "\E012";
-$icn--vine: "\E013";
-$icn--whatsapp: "\E014";
-$icn--youtube-play: "\E015";
-$icn--youtube: "\E016";
+$icn-desktop: "\E001";
+$icn-envelope: "\E002";
+$icn-facebook: "\E003";
+$icn-globe: "\E004";
+$icn-google-plus: "\E005";
+$icn-instagram: "\E006";
+$icn-laptop: "\E007";
+$icn-linkedin: "\E008";
+$icn-map-marker: "\E009";
+$icn-mobile: "\E00A";
+$icn-phone: "\E00B";
+$icn-pinterest-p: "\E00C";
+$icn-pinterest: "\E00D";
+$icn-sparky: "\E00E";
+$icn-tablet: "\E00F";
+$icn-twitter: "\E010";
+$icn-vimeo: "\E011";
+$icn-vine: "\E012";
+$icn-whatsapp: "\E013";
+$icn-youtube-play: "\E014";
+$icn-youtube: "\E015";
 
 
 
@@ -48,15 +47,14 @@ $icons: (
   phone: "\E00B",
   pinterest-p: "\E00C",
   pinterest: "\E00D",
-  sparky-full: "\E00E",
-  sparky: "\E00F",
-  tablet: "\E010",
-  twitter: "\E011",
-  vimeo: "\E012",
-  vine: "\E013",
-  whatsapp: "\E014",
-  youtube-play: "\E015",
-  youtube: "\E016",
+  sparky: "\E00E",
+  tablet: "\E00F",
+  twitter: "\E010",
+  vimeo: "\E011",
+  vine: "\E012",
+  whatsapp: "\E013",
+  youtube-play: "\E014",
+  youtube: "\E015",
 );
 
 
@@ -83,23 +81,89 @@ $icons: (
   -moz-osx-font-smoothing: grayscale;
 }
 
-%icn{
-  @extend %iconfont;
+@function icn-char($filename) {
+  @return map-get($icons, $filename);
+}
+
+.icn{
   display: inline-block;
-  // vertical-align: bottom;
   &:before {
     @extend %icn-base;
   }
 }
 
-%icn--fw {
+.icn--fw {
   width: if(variable-exists(icn-fixed-width-size), $icn-fixed-width-size, 1em);
   text-align: center;
 }
 
 
-@each $name, $icn in $icons {
-  %icn--#{$name}:before {
-    content: $icn;
+@mixin icn($filename, $insert: before, $extend: true) {
+  &:#{$insert} {
+    content: icn-char($filename);
   }
+}
+
+.icn--desktop {
+  @include icn(desktop);
+}
+.icn--envelope {
+  @include icn(envelope);
+}
+.icn--facebook {
+  @include icn(facebook);
+}
+.icn--globe {
+  @include icn(globe);
+}
+.icn--google-plus {
+  @include icn(google-plus);
+}
+.icn--instagram {
+  @include icn(instagram);
+}
+.icn--laptop {
+  @include icn(laptop);
+}
+.icn--linkedin {
+  @include icn(linkedin);
+}
+.icn--map-marker {
+  @include icn(map-marker);
+}
+.icn--mobile {
+  @include icn(mobile);
+}
+.icn--phone {
+  @include icn(phone);
+}
+.icn--pinterest-p {
+  @include icn(pinterest-p);
+}
+.icn--pinterest {
+  @include icn(pinterest);
+}
+.icn--sparky {
+  @include icn(sparky);
+}
+.icn--tablet {
+  @include icn(tablet);
+}
+.icn--twitter {
+  @include icn(twitter);
+}
+.icn--vimeo {
+  @include icn(vimeo);
+}
+.icn--vine {
+  @include icn(vine);
+}
+.icn--whatsapp {
+  @include icn(whatsapp);
+}
+.icn--youtube-play {
+  @include icn(youtube-play);
+}
+.icn--youtube {
+  @include icn(youtube);
 }

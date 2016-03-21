@@ -24,7 +24,7 @@ $icons: (<%_.each(glyphs, function(glyph) { %>
 // Extends
 // ==========================================================================
 
-%icn-base {
+%<%= cssClass%>-base {
   @extend %iconfont;
   font-size: if(variable-exists(icn-font-size), $icn-font-size, 1em);
   line-height: if(variable-exists(icn-line-height), $icn-line-height, 1);
@@ -41,23 +41,30 @@ $icons: (<%_.each(glyphs, function(glyph) { %>
   -moz-osx-font-smoothing: grayscale;
 }
 
-%icn{
-  @extend %iconfont;
+@function <%= cssClass%>-char($filename) {
+  @return map-get($icons, $filename);
+}
+
+.<%= cssClass%>{
   display: inline-block;
-  // vertical-align: bottom;
   &:before {
     @extend %icn-base;
   }
 }
 
-%icn--fw {
+.<%= cssClass%>--fw {
   width: if(variable-exists(icn-fixed-width-size), $icn-fixed-width-size, 1em);
   text-align: center;
 }
 
 
-@each $name, $icn in $icons {
-  %icn--#{$name}:before {
-    content: $icn;
+@mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+  &:#{$insert} {
+    content: <%= cssClass%>-char($filename);
   }
 }
+
+<% _.each(glyphs, function(glyph) { %>.<%= cssClass%>--<%= glyph.fileName %> {
+  @include <%= cssClass%>(<%= glyph.fileName %>);
+}
+<% }); %>

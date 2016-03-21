@@ -62,7 +62,7 @@ gulp.task('styles-build', function() {
   gulp.src(paths.styles.src)
     .pipe(sassGlob())
     .pipe(plumber(onStyleError))
-    .pipe(sass(<% if(!includePostCSS){ %>{outputStyle: 'compressed'}<% } %>))<% if(includePostCSS){ %>
+    .pipe(sass(<% if(!includePcssNano){ %>{outputStyle: 'compressed'}<% } %>))<% if(includePostCSS){ %>
     .pipe(postcss(postCssConfigBuild))<% } %>
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(paths.styles.build));

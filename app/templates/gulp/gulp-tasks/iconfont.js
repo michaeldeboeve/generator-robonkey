@@ -7,16 +7,6 @@ var iconfontCss     = require('gulp-iconfont-css');
 var runTimestamp    = Math.round(Date.now()/1000);
 
 
-var paths = {
-  font: {
-    src: './../src/iconfont/svg/*.svg',
-    build: './../website/assets/fonts/' + cfg.iconFont.name,
-    templateInput: '../src/iconfont/template/_icons.scss',
-    templateOutput: '../../../../src/scss/modules/_icons.scss',
-    templateFontpath: '../fonts/' + cfg.iconFont.name + '/'
-  }
-};
-
 // Create icon font
 gulp.task('iconfont', function(){
   return gulp.src(paths.font.src)
@@ -24,7 +14,8 @@ gulp.task('iconfont', function(){
       fontName: cfg.iconFont.name,
       path: paths.font.templateInput,
       targetPath: paths.font.templateOutput,
-      fontPath: paths.font.templateFontpath,
+      fontPath: paths.font.templateFontpath + cfg.iconFont.name,
+      cssClass: 'icn'
     }))
     .pipe(iconfont({
       fontName: cfg.iconFont.name,
@@ -35,5 +26,5 @@ gulp.task('iconfont', function(){
       fontHeight: 512,
       descent: 50,
     }))
-    .pipe(gulp.dest(paths.font.build));
+    .pipe(gulp.dest(paths.font.build + cfg.iconFont.name));
 });

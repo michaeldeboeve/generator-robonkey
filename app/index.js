@@ -44,6 +44,271 @@ module.exports = generators.Base.extend({
         name: 'email',
         message: 'Your email address:'
       }
+
+      // Preprocessors
+      ,{
+        type: 'list',
+        name: 'preproType',
+        message: 'What preprocessor would you like to use?',
+        choices: [{
+          name: 'SCSS',
+          value: 'includeSCSS',
+          checked: true
+        }
+        ,{
+          name: 'Stylus',
+          value: 'includeStylus',
+          checked: false
+        }
+        ,{
+          name: 'Less',
+          value: 'includeLess',
+          checked: false
+        }]
+      }
+
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeSCSS') !== -1;
+        },
+        type: 'list',
+        name: 'mixinLibsSCSS',
+        message: 'What mixin libraries would you like to use?',
+        choices: [{
+          name: 'Bourbon',
+          value: 'includeBourbon',
+          checked: false
+        }
+        ,{
+          name: 'Compass Mixins',
+          value: 'includeCompass',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noLib',
+          checked: true
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeStylus') !== -1;
+        },
+        type: 'list',
+        name: 'mixinLibsStylus',
+        message: 'What mixin libraries would you like to use?',
+        choices: [{
+          name: 'Nib',
+          value: 'includeNib',
+          checked: false
+        }
+        ,{
+          name: 'Kouto Swiss',
+          value: 'includeKoutoSwiss',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noLib',
+          checked: true
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeLess') !== -1;
+        },
+        type: 'list',
+        name: 'mixinLibsLess',
+        message: 'What mixin libraries would you like to use?',
+        choices: [{
+          name: 'Less Hat',
+          value: 'includeLessHat',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noLib',
+          checked: true
+        }]
+      }
+
+
+      // Media Query Libraries
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeSCSS') !== -1;
+        },
+        type: 'list',
+        name: 'mqLibsSCSS',
+        message: 'What MediaQuery Library to use?',
+        choices: [{
+          name: 'Breakpoint',
+          value: 'includeBreakpoint',
+          checked: false
+        }
+        ,{
+          name: 'Include Media',
+          value: 'includeIncludeMedia',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noMQLib',
+          checked: true
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeStylus') !== -1;
+        },
+        type: 'list',
+        name: 'mqLibsStylus',
+        message: 'What MediaQuery Library to use?',
+        choices: [{
+          name: 'Rupture',
+          value: 'includeRupture',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noMQLib',
+          checked: true
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeLess') !== -1;
+        },
+        type: 'list',
+        name: 'mqLibsLess',
+        message: 'What MediaQuery Library to use?',
+        choices: [{
+          name: 'Less-MQ',
+          value: 'includeLessMQ',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noMQLib',
+          checked: true
+        }]
+      }
+
+
+      // Grid Libraries
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeSCSS') !== -1;
+        },
+        type: 'list',
+        name: 'gridLibsSCSS',
+        message: 'What Grids Library to use?',
+        choices: [{
+          name: 'Jeet',
+          value: 'includeJeetSCSS',
+          checked: false
+        }
+        ,{
+          name: 'Susy',
+          value: 'includeSusy',
+          checked: false
+        }
+        ,{
+          name: 'Neat (Will include Bourbon)',
+          value: 'includeNeat',
+          checked: false
+        }
+        ,{
+          name: 'Semantic.gs',
+          value: 'includeSemanticSCSS',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noGridLib',
+          checked: false
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeStylus') !== -1;
+        },
+        type: 'list',
+        name: 'gridLibsStylus',
+        message: 'What Grids Library to use?',
+        choices: [{
+          name: 'Jeet',
+          value: 'includeJeetStylus',
+          checked: false
+        }
+        ,{
+          name: 'sGrid',
+          value: 'includeSGrid',
+          checked: false
+        }
+        ,{
+          name: 'Semantic.gs',
+          value: 'includeSemanticStylus',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noGridLib',
+          checked: false
+        }]
+      }
+      ,{
+        when: function (answers) {
+          return answers.preproType.indexOf('includeLess') !== -1;
+        },
+        type: 'list',
+        name: 'gridLibsLess',
+        message: 'What Grids Library to use?',
+        choices: [{
+          name: 'Gee',
+          value: 'includeGee',
+          checked: false
+        }
+        ,{
+          name: 'Semantic.gs',
+          value: 'includeSemanticLess',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noGridLib',
+          checked: false
+        }]
+      }
+
+      // Base Styles
+      ,{
+        type: 'list',
+        name: 'baseStyles',
+        message: 'What base styles to include?',
+        choices: [{
+          name: 'Sanitize',
+          value: 'includeSanitize',
+          checked: false
+        }
+        ,{
+          name: 'Reset',
+          value: 'includeReset',
+          checked: false
+        }
+        ,{
+          name: 'Normalize',
+          value: 'includeNormalize',
+          checked: false
+        }
+        ,{
+          name: 'None',
+          value: 'noBaseStyles',
+          checked: false
+        }]
+      }
+
+      // Javascript
       ,{
         type: 'checkbox',
         name: 'scriptsJS',
@@ -81,14 +346,14 @@ module.exports = generators.Base.extend({
       }
       ,{
         type: 'confirm',
-        name: 'includeJade',
-        message: 'Would you like to use Jade?',
+        name: 'includeModernizr',
+        message: 'Would you like to use Modernizr?',
         default: true
       }
       ,{
         type: 'confirm',
-        name: 'includeModernizr',
-        message: 'Would you like to use Modernizr?',
+        name: 'includeJade',
+        message: 'Would you like to use Jade?',
         default: true
       }
       ,{
@@ -184,85 +449,6 @@ module.exports = generators.Base.extend({
         }
       }
       ,{
-        type: 'list',
-        name: 'baseStyles',
-        message: 'What base styles to include?',
-        choices: [{
-          name: 'Sanitize',
-          value: 'includeSanitize',
-          checked: true
-        }
-        ,{
-          name: 'Reset',
-          value: 'includeReset',
-          checked: false
-        }
-        ,{
-          name: 'Normalize',
-          value: 'includeNormalize',
-          checked: false
-        }
-        ,{
-          name: 'None',
-          value: 'noBaseStyles',
-          checked: true
-        }]
-      }
-      ,{
-        type: 'list',
-        name: 'mqLibs',
-        message: 'What MediaQuery Library to use?',
-        choices: [{
-          name: 'Breakpoint',
-          value: 'includeBreakpoint',
-          checked: true
-        }
-        ,{
-          name: 'Include Media',
-          value: 'includeIncludeMedia',
-          checked: false
-        }
-        ,{
-          name: 'None',
-          value: 'noMQLib',
-          checked: true
-        }]
-      }
-      ,{
-        type: 'list',
-        name: 'gridLibs',
-        message: 'What Grids Library to use?',
-        choices: [{
-          name: 'Jeet',
-          value: 'includeJeet',
-          checked: true
-        }
-        ,{
-          name: 'Susy',
-          value: 'includeSusy',
-          checked: false
-        }
-        ,{
-          name: 'Neat (Will include Bourbon)',
-          value: 'includeNeat',
-          checked: false
-        }
-        ,{
-          name: 'None',
-          value: 'noGridLib',
-          checked: false
-        }]
-      }
-      ,{
-        when: function (answers) {
-          return answers.gridLibs.indexOf('includeNeat') === -1;
-        },
-        type: 'confirm',
-        name: 'includeBourbon',
-        message: 'Include Bourbon Mixin Library?',
-        default: false
-      }
-      ,{
         type: 'checkbox',
         name: 'rootFiles',
         message: 'What extra\'s to include?',
@@ -309,8 +495,24 @@ module.exports = generators.Base.extend({
     var rootFiles = answers.rootFiles;
     var postCSSPlugins = answers.postCSSPlugins;
     var baseStyles = answers.baseStyles;
-    var gridLibs = answers.gridLibs;
-    var mqLibs = answers.mqLibs;
+
+    var preproType = answers.preproType;
+
+    var mixinLibsSCSS = answers.mixinLibsSCSS;
+    var gridLibsSCSS = answers.gridLibsSCSS;
+    var mqLibsSCSS = answers.mqLibsSCSS;
+
+    var mixinLibsStylus = answers.mixinLibsStylus;
+    var gridLibsStylus = answers.gridLibsStylus;
+    var mqLibsStylus = answers.mqLibsStylus;
+
+    var mixinLibsLess = answers.mixinLibsLess;
+    var gridLibsLess = answers.gridLibsLess;
+    var mqLibsLess = answers.mqLibsLess;
+
+    function hasPrepro(feat) {
+      return preproType && preproType.indexOf(feat) !== -1;
+    };
 
     function hasJSScript(feat) {
       return scriptsJS && scriptsJS.indexOf(feat) !== -1;
@@ -321,12 +523,37 @@ module.exports = generators.Base.extend({
     function hasRootFile(feat) {
       return rootFiles && rootFiles.indexOf(feat) !== -1;
     };
-    function hasMQLibrary(feat) {
-      return mqLibs && mqLibs.indexOf(feat) !== -1;
+
+    function hasMixinLibSCSS(feat) {
+      return mixinLibsSCSS && mixinLibsSCSS.indexOf(feat) !== -1;
     };
-    function hasGridLibrary(feat) {
-      return gridLibs && gridLibs.indexOf(feat) !== -1;
+    function hasGridLibrarySCSS(feat) {
+      return gridLibsSCSS && gridLibsSCSS.indexOf(feat) !== -1;
     };
+    function hasMQLibrarySCSS(feat) {
+      return mqLibsSCSS && mqLibsSCSS.indexOf(feat) !== -1;
+    };
+
+    function hasMixinLibStylus(feat) {
+      return mixinLibsStylus && mixinLibsStylus.indexOf(feat) !== -1;
+    };
+    function hasGridLibraryStylus(feat) {
+      return gridLibsStylus && gridLibsStylus.indexOf(feat) !== -1;
+    };
+    function hasMQLibraryStylus(feat) {
+      return mqLibsStylus && mqLibsStylus.indexOf(feat) !== -1;
+    };
+
+    function hasMixinLibLess(feat) {
+      return mixinLibsLess && mixinLibsLess.indexOf(feat) !== -1;
+    };
+    function hasGridLibraryLess(feat) {
+      return gridLibsLess && gridLibsLess.indexOf(feat) !== -1;
+    };
+    function hasMQLibraryLess(feat) {
+      return mqLibsLess && mqLibsLess.indexOf(feat) !== -1;
+    };
+
     function hasPostCSSPlugins(feat) {
       return postCSSPlugins && postCSSPlugins.indexOf(feat) !== -1;
     };
@@ -350,7 +577,6 @@ module.exports = generators.Base.extend({
     this.customClassPrefix = answers.customClassPrefix;
     this.customScope = answers.customScope;
     this.includeGA = answers.includeGA;
-    this.includeBourbon = answers.includeBourbon;
 
     this.localUrl = answers.localUrl;
     this.includeJQuery = hasJSScript('includeJQuery');
@@ -365,6 +591,11 @@ module.exports = generators.Base.extend({
     this.includeCustomIcnFont = answers.includeCustomIcnFont;
     this.includePostCSS = answers.includePostCSS;
 
+    this.includeHtaccess = hasRootFile('includeHtaccess');
+    this.includeCrossdomain = hasRootFile('includeCrossdomain');
+    this.includeBrowserconfig = hasRootFile('includeBrowserconfig');
+    this.includeRobots = hasRootFile('includeRobots');
+
     this.includePcssSelectorNot = hasPostCSSPlugins('includePcssSelectorNot');
     this.includePcssSelectorMatches = hasPostCSSPlugins('includePcssSelectorMatches');
     this.includePcssGradientFix = hasPostCSSPlugins('includePcssGradientFix');
@@ -372,17 +603,30 @@ module.exports = generators.Base.extend({
     this.includePcssMQKeyframes = hasPostCSSPlugins('includePcssMQKeyframes');
     this.includePcssNano = hasPostCSSPlugins('includePcssNano');
 
-    this.includeSusy = hasGridLibrary('includeSusy');
-    this.includeJeet = hasGridLibrary('includeJeet');
-    this.includeNeat = hasGridLibrary('includeNeat');
+    this.includeSCSS = hasPrepro('includeSCSS');
+    this.includeBourbon = hasMixinLibSCSS('includeBourbon');
+    this.includeCompass = hasMixinLibSCSS('includeCompass');
+    this.includeSusy = hasGridLibrarySCSS('includeSusy');
+    this.includeJeetSCSS = hasGridLibrarySCSS('includeJeetSCSS');
+    this.includeNeat = hasGridLibrarySCSS('includeNeat');
+    this.includeSemanticSCSS = hasGridLibrarySCSS('includeSemanticSCSS');
+    this.includeBreakpoint = hasMQLibrarySCSS('includeBreakpoint');
+    this.includeIncludeMedia = hasMQLibrarySCSS('includeIncludeMedia');
 
-    this.includeBreakpoint = hasMQLibrary('includeBreakpoint');
-    this.includeIncludeMedia = hasMQLibrary('includeIncludeMedia');
+    this.includeStylus = hasPrepro('includeStylus');
+    this.includeNib = hasMixinLibStylus('includeNib');
+    this.includeKoutoSwiss = hasMixinLibStylus('includeKoutoSwiss');
+    this.includeJeetStylus = hasGridLibraryStylus('includeJeetStylus');
+    this.includeSGrid = hasGridLibraryStylus('includeSGrid');
+    this.includeSemanticStylus = hasGridLibraryStylus('includeSemanticStylus');
+    this.includeRupture = hasMQLibraryStylus('includeRupture');
 
-    this.includeHtaccess = hasRootFile('includeHtaccess');
-    this.includeCrossdomain = hasRootFile('includeCrossdomain');
-    this.includeBrowserconfig = hasRootFile('includeBrowserconfig');
-    this.includeRobots = hasRootFile('includeRobots');
+
+    this.includeLess = hasPrepro('includeLess');
+    this.includeGee = hasGridLibraryLess('includeGee');
+    this.includeSemanticLess = hasGridLibraryLess('includeSemanticLess');
+    this.includeLessHat = hasMixinLibLess('includeLessHat');
+    this.includeLessMQ = hasMQLibraryLess('includeLessMQ');
 
     callback();
   },
@@ -465,19 +709,24 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp/gulp-tasks/scripts.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp/gulp-tasks/clean.js', templateContext);
 
-    // Todo:
-    // if sass/stylus/less
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
-    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
-    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
-    // endif
+
+    if(this.includeSCSS) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    }
+    if(this.includeStylus) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    }
+    if(this.includeLess) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp/gulp-tasks/styles.js', templateContext);
+    }
+
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp/gulp-tasks/iconfont.js', templateContext);
     }
     if(this.includeJade) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp/gulp-tasks/jade.js', templateContext);
     }
-    
+
     // TODO: if handlebars
     // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
 
@@ -489,8 +738,19 @@ module.exports = generators.Base.extend({
   _iconfont: function(destRoot, sourceRoot, templateContext) {
     if(this.includeCustomIcnFont) {
       // Static
-      this.fs.copy(sourceRoot + '/src/iconfont', destRoot + '/src/iconfont');
+      this.fs.copy(sourceRoot + '/src/iconfont/illustrator', destRoot + '/src/iconfont/illustrator');
+      this.fs.copy(sourceRoot + '/src/iconfont/svg', destRoot + '/src/iconfont/svg');
     }
+    if(this.includeCustomIcnFont && this.includeSCSS) {
+      this.fs.copy(sourceRoot + '/src/iconfont/template/_icons.scss', destRoot + '/src/iconfont/template/_icons.scss');
+    }
+    if(this.includeCustomIcnFont && this.includeStylus) {
+      this.fs.copy(sourceRoot + '/src/iconfont/template/icons.styl', destRoot + '/src/iconfont/template/icons.styl');
+    }
+    if(this.includeCustomIcnFont && this.includeLess) {
+      this.fs.copy(sourceRoot + '/src/iconfont/template/icons.less', destRoot + '/src/iconfont/template/icons.less');
+    }
+
   },
 
   _images: function(destRoot, sourceRoot, templateContext) {
@@ -513,8 +773,13 @@ module.exports = generators.Base.extend({
     // Dynamic
     this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_fonts.scss', destRoot + '/src/scss/base/_fonts.scss', templateContext);
     this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
-    this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
     this.fs.copyTpl(sourceRoot + '/src-tpl/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
+
+    if(this.includeSemanticSCSS) {
+      this.fs.copy(sourceRoot + '/src-tpl/scss/base/_semantic-grid.scss', destRoot + '/src/scss/base/_grid.scss');
+    } else {
+      this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
+    }
 
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/src-tpl/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
@@ -530,6 +795,75 @@ module.exports = generators.Base.extend({
     }
     if(this.includeSanitize) {
       this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_sanitize.scss', destRoot + '/src/scss/base/_sanitize.scss');
+    }
+  },
+
+  _stylus: function(destRoot, sourceRoot, templateContext) {
+    // Static
+    this.fs.copy(sourceRoot + '/src/stylus', destRoot + '/src/stylus');
+
+    // Dynamic
+    this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/fonts.styl', destRoot + '/src/stylus/base/fonts.styl', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/variables.styl', destRoot + '/src/stylus/base/variables.styl', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/style.styl', destRoot + '/src/stylus/style.styl', templateContext);
+
+    if(this.includeSemanticStylus) {
+      this.fs.copy(sourceRoot + '/src-tpl/stylus/base/semantic-grid.styl', destRoot + '/src/stylus/base/grid.styl');
+    } else {
+      this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', templateContext);
+    }
+
+    if(this.includeCustomIcnFont) {
+      this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/modules/icons.styl', destRoot + '/src/stylus/modules/icons.styl', templateContext);
+    }
+
+    if(this.includeReset) {
+      this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/reset.styl', destRoot + '/src/stylus/base/reset.styl');
+    }
+    if(this.includeNormalize) {
+      this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/normalize.styl', destRoot + '/src/stylus/base/normalize.styl');
+    }
+    if(this.includeSanitize) {
+      this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/sanitize.styl', destRoot + '/src/stylus/base/sanitize.styl');
+    }
+  },
+
+  _less: function(destRoot, sourceRoot, templateContext) {
+    this.fs.copy(sourceRoot + '/src/less', destRoot + '/src/less');
+
+    // Dynamic
+    this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/fonts.less', destRoot + '/src/less/base/fonts.less', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/variables.less', destRoot + '/src/less/base/variables.less', templateContext);
+    this.fs.copyTpl(sourceRoot + '/src-tpl/less/style.less', destRoot + '/src/less/style.less', templateContext);
+
+    if(this.includeSemanticLess) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/base/semantic-grid.less', destRoot + '/src/less/base/grid.less');
+    } else {
+      this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/grid.less', destRoot + '/src/less/base/grid.less', templateContext);
+    }
+
+    if(this.includeLessHat) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat.less', destRoot + '/src/less/base/mixins/lesshat.less');
+      this.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat-prefixed.less', destRoot + '/src/less/base/mixins/lesshat-prefixed.less');
+    }
+
+    if(this.includeLessMQ) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq.less', destRoot + '/src/less/base/mixins/mq.less');
+      this.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq-prefixed.less', destRoot + '/src/less/base/mixins/mq-prefixed.less');
+    }
+
+    if(this.includeCustomIcnFont) {
+      this.fs.copyTpl(sourceRoot + '/src-tpl/less/modules/icons.less', destRoot + '/src/less/modules/icons.less', templateContext);
+    }
+
+    if(this.includeReset) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/reset/reset.less', destRoot + '/src/less/base/reset.less');
+    }
+    if(this.includeNormalize) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/reset/normalize.less', destRoot + '/src/less/base/normalize.less');
+    }
+    if(this.includeSanitize) {
+      this.fs.copy(sourceRoot + '/src-tpl/less/reset/sanitize.less', destRoot + '/src/less/base/sanitize.less');
     }
   },
 
@@ -606,18 +940,33 @@ module.exports = generators.Base.extend({
           includePcssClassPrefix: this.includePcssClassPrefix,
           includePcssScopify: this.includePcssScopify,
           includePcssNano: this.includePcssNano,
-          includeSusy: this.includeSusy,
-          includeBreakpoint: this.includeBreakpoint,
-          includeBourbon: this.includeBourbon,
-          includeNeat: this.includeNeat,
-          includeJeet: this.includeJeet,
-          includeIncludeMedia: this.includeIncludeMedia,
           customIconFontName: this.customIconFontName,
           customClassPrefix: this.customClassPrefix,
           customScope: this.customScope,
           includeReset: this.includeReset,
           includeNormalize: this.includeNormalize,
           includeSanitize: this.includeSanitize,
+          includeSCSS: this.includeSCSS,
+          includeSusy: this.includeSusy,
+          includeBreakpoint: this.includeBreakpoint,
+          includeBourbon: this.includeBourbon,
+          includeNeat: this.includeNeat,
+          includeJeetSCSS: this.includeJeetSCSS,
+          includeIncludeMedia: this.includeIncludeMedia,
+          includeCompass: this.includeCompass,
+          includeSemanticSCSS: this.includeSemanticSCSS,
+          includeStylus: this.includeStylus,
+          includeNib: this.includeNib,
+          includeKoutoSwiss: this.includeKoutoSwiss,
+          includeJeetStylus: this.includeJeetStylus,
+          includeSGrid: this.includeSGrid,
+          includeSemanticStylus: this.includeSemanticStylus,
+          includeRupture: this.includeRupture,
+          includeLess: this.includeLess,
+          includeGee: this.includeGee,
+          includeSemanticLess: this.includeSemanticLess,
+          includeLessHat: this.includeLessHat,
+          includeLessMQ: this.includeLessMQ
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
@@ -630,8 +979,17 @@ module.exports = generators.Base.extend({
     this._gulp(destRoot, sourceRoot, templateContext);
     this._iconfont(destRoot, sourceRoot, templateContext);
     this._js(destRoot, sourceRoot, templateContext);
-    this._scss(destRoot, sourceRoot, templateContext);
     this._jade(destRoot, sourceRoot, templateContext);
+
+    if(this.includeSCSS) {
+      this._scss(destRoot, sourceRoot, templateContext);
+    }
+    if(this.includeStylus) {
+      this._stylus(destRoot, sourceRoot, templateContext);
+    }
+    if(this.includeLess) {
+      this._less(destRoot, sourceRoot, templateContext);
+    }
   },
 
   install: function() {

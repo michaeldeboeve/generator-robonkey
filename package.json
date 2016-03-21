@@ -10,6 +10,8 @@
   "keywords": [
     "yeoman-generator",
     "sass",
+    "stylus",
+    "less",
     "jade",
     "gulp",
     "postcss",

@@ -1,0 +1,31 @@
+$textfields: 'input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"]';
+$textfields-focus: 'input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="email"]:focus, input[type="month"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="week"]:focus';
+$textfields-hover: 'input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover';
+$textfields-active: 'input[type="color"]:active, input[type="date"]:active, input[type="datetime"]:active, input[type="datetime-local"]:active, input[type="email"]:active, input[type="month"]:active, input[type="number"]:active, input[type="password"]:active, input[type="search"]:active, input[type="tel"]:active, input[type="text"]:active, input[type="time"]:active, input[type="url"]:active, input[type="week"]:active';
+$textfields-disabled: 'input[type="color"]:disabled, input[type="date"]:disabled, input[type="datetime"]:disabled, input[type="datetime-local"]:disabled, input[type="email"]:disabled, input[type="month"]:disabled, input[type="number"]:disabled, input[type="password"]:disabled, input[type="search"]:disabled, input[type="tel"]:disabled, input[type="text"]:disabled, input[type="time"]:disabled, input[type="url"]:disabled, input[type="week"]:disabled';
+
+$textinputs: $textfields + ', textarea';
+$textinputs: $textfields-focus + ', textarea:focus';
+$textinputs: $textfields-hover + ', textarea:hover';
+$textinputs: $textfields-active + ', textarea:active';
+$textinputs: $textfields-disabled + ', textarea:disabled';
+
+$buttons: 'input[type="submit"], input[type="button"], input[type="reset"], button';
+$buttons-focus: 'input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:focus';
+$buttons-hover: 'input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover';
+$buttons-active: 'input[type="submit"]:active, input[type="button"]:active, input[type="reset"]:active, button:active';
+$buttons-disabled: 'input[type="submit"]:disabled, input[type="button"]:disabled, input[type="reset"]:disabled, button:disabled';
+
+
+
+#{$buttons} {
+  foo: bar;
+}
+
+#{$textfields} {
+  foo: bar;
+}
+
+#{$textinputs} {
+  foo: bar;
+}

@@ -21,12 +21,6 @@
 
 
 
-
-
-
-
-
-
 // Extends
 %basefont { font-family: if(variable-exists(default-font-family), $default-font-family, sans-serif); }
 %monofont { font-family: if(variable-exists(monospace-font-family), $monospace-font-family, monospace); }<% if(includeCustomIcnFont){ %>

@@ -1,0 +1,69 @@
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+<%_.each(glyphs, function(glyph) { %>
+@<%= cssClass%>-<%= glyph.fileName %>: "\<%= glyph.codePoint %>";<% }); %>
+
+
+
+
+
+// ==========================================================================
+// Map
+// ==========================================================================
+
+.<%= cssClass%>-char(@filename) {
+  <% _.each(glyphs, function(glyph) { %>@<%= glyph.fileName %>: "\<%= glyph.codePoint %>";
+  <% }); %>
+  content: @filename;
+}
+
+
+
+// ==========================================================================
+// Extends
+// ==========================================================================
+
+.<%= cssClass%>-base {
+  font-family: @icon-font-family;
+  font-size: @icn-font-size;
+  line-height: @icn-line-height;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  display: inline-block;
+  text-rendering: auto;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.<%= cssClass%>-content(@filename, @insert: before) {
+  @pseudo-selector: ~":@{insert}";
+  &@{pseudo-selector} {
+    &:extend(.<%= cssClass%>-base);
+    .<%= cssClass%>-char(@filename);
+  }
+}
+
+.<%= cssClass%> {
+  display: inline-block;
+  &:before {
+    &:extend(.<%= cssClass%>-base);
+  }
+}
+
+.<%= cssClass%>--fw {
+  width: 1em;
+  text-align: center;
+}
+
+
+<% _.each(glyphs, function(glyph) { %>.<%= cssClass%>--<%= glyph.fileName %> {
+  .<%= cssClass%>-content(<%= glyph.fileName %>);
+}
+<% }); %>

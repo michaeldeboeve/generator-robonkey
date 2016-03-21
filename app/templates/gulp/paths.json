@@ -13,9 +13,13 @@
     "src": "./../src/images/**/*",
     "build": "./../website/assets/images/"
   },
-  "styles": {
+  "styles": {<% if(includeSCSS){ %>
     "src": "./../src/scss/style.scss",
-    "src_files": "./../src/scss/**/*.scss",
+    "src_files": "./../src/scss/**/*.scss",<% } %><% if(includeStylus){ %>
+    "src": "./../src/stylus/style.styl",
+    "src_files": "./../src/stylus/**/*.styl",<% } %><% if(includeLess){ %>
+    "src": "./../src/less/style.less",
+    "src_files": "./../src/less/**/*.less",<% } %>
     "build_srcsmap": "./../website/assets/css/",
     "build": "./../website/assets/css/"
   },
@@ -30,9 +34,13 @@
   },
   "font": {
     "src": "./../src/iconfont/svg/*.svg",
-    "build": "./../website/assets/fonts/iconFontName",
+    "build": "./../website/assets/fonts/",<% if(includeSCSS){ %>
     "templateInput": "../src/iconfont/template/_icons.scss",
-    "templateOutput": "../../../../src/scss/modules/_icons.scss",
-    "templateFontpath": "../fonts/iconFontName/"
+    "templateOutput": "../../../../src/scss/modules/_icons.scss",<% } %><% if(includeStylus){ %>
+    "templateInput": "../src/iconfont/template/icons.styl",
+    "templateOutput": "../../../../src/stylus/modules/icons.styl",<% } %><% if(includeLess){ %>
+    "templateInput": "../src/iconfont/template/icons.less",
+    "templateOutput": "../../../../src/less/modules/icons.less",<% } %>
+    "templateFontpath": "../fonts/"
   }
 }

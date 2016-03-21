@@ -1,0 +1,32 @@
+@default-font-family: sans-serif;
+@monospace-font-family: monospace;
+@icon-font-family: '<%= customIconFontName %>';
+@title-font-family: @default-font-family;
+
+<% if(includeCustomIcnFont){ %>@font-face {
+  font-family: "<%= customIconFontName %>";
+  src: url('<%= customIconFontName %>.eot');
+  src: url('<%= customIconFontName %>.eot?#iefix') format('eot'),
+    url('<%= customIconFontName %>.woff2') format('woff2'),
+    url('<%= customIconFontName %>.woff') format('woff'),
+    url('<%= customIconFontName %>.ttf') format('truetype'),
+    url('<%= customIconFontName %>.svg#<%= customIconFontName %>') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}<% } %>
+
+
+
+// Extends
+.basefont {
+  font-family: @default-font-family;
+}
+.monofont {
+  font-family: @monospace-font-family;
+}
+.titlefont {
+  font-family: @title-font-family;
+}<% if(includeCustomIcnFont){ %>
+.iconfont {
+  font-family: @icon-font-family;
+}<% } %>

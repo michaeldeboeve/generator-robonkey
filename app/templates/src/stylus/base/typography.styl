@@ -1,0 +1,19 @@
+// ==========================================================================
+// Base Type
+// ==========================================================================
+
+$headers = 'h1, h2, h3, h4, h5, h6';
+$a-tags = 'a, a:visited';
+$a-tags-hover = 'a:active, a:hover';
+
+{$headers} {
+  text-transform: uppercase;
+}
+
+{$a-tags} {
+  color: $anchor-text-color;
+}
+
+{$a-tags-hover} {
+  color: $anchor-text-hover-color;
+}
