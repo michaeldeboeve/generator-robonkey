@@ -1,4 +1,4 @@
-# Sass Mixins
+# Stylus Mixins
 
 This is my personal mixin library, gathered over the years.
 

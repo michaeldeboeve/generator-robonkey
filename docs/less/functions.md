@@ -1,4 +1,4 @@
-# Sass Functions
+# Less Functions
 
 Some useful functions
 

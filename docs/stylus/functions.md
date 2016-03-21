@@ -1,4 +1,4 @@
-# Sass Functions
+# Stylus Functions
 
 Some useful functions
 
