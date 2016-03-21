@@ -18,14 +18,23 @@ Then you can start building your app with Robonkey:
 $ mkdir yourapp
 $ cd yourapp
 $ yo robonkey
-$ cd gulp
-$ gulp
 ```
 
-Make a custom Modernizr file:
+Dev task, including BrowserSync and watch (unminified styles and scripts):
 
 ```sh
-$ gulp modernizr
+$ gulp
+```
+or
+
+```sh
+$ gulp dev
+```
+
+or
+
+```sh
+$ gulp serve
 ```
 
 Make a custom icon font:
@@ -33,6 +42,19 @@ Make a custom icon font:
 ```sh
 $ gulp iconfont
 ```
+
+Generate custom modernizr file:
+
+```sh
+$ gulp modernizr
+```
+
+Build task will generate custom modernizr file and run the iconfont task and minify the styles and scripts:
+
+```sh
+$ gulp build
+```
+
 
 ## Docs
 

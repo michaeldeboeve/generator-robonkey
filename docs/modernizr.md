@@ -19,12 +19,33 @@ In `config.json` you can set the modernizr options.
 
 More info on the settings is available on the [gulp-modernizr page](https://github.com/doctyper/gulp-modernizr).
 
+## Dev file
+
+A dev file, with all the tests is available:
+
+```sh
+website/asses/js/libs/modernizr.dev.js
+```
+
+
 ## Build
 
 To build a custom modernizr file, just run:
 
 ```sh
-gulp modernizr
+$ gulp modernizr
+```
+The build task will also create a custom modernizr file, next to a custom icon font and minified styles and script.
+
+```sh
+$ gulp build
+```
+### Output
+
+The output file will be: 
+
+```sh
+website/assets/js/libs/modernizr.custom.js
 ```
 
 ## Docs

@@ -39,84 +39,33 @@ Drop your svg files _(minimum 512px * 512px)_ in the svg folder _(src/iconfont/s
 ###### Run: 
 
 ```sh
-gulp iconfont
+$ gulp iconfont
 ```
 
-### SCSS File
+### Output Files
 
-The rendered .scss file, located in `src/scss/modules/_icons.scss`:
+The font will be placed in: 
 
 ```sh
-// ==========================================================================
-// Variables
-// ==========================================================================
-
-
-$icn--name: "\E001";
-$icn--name2: "\E002";
-$icn--name3: "\E003";
-
-
-
-
-
-// ==========================================================================
-// Map
-// ==========================================================================
-
-$icons: (
-  name: "\E001",
-  name2: "\E002",
-  name3: "\E003"
-);
-
-
-
-
-// ==========================================================================
-// Extends
-// ==========================================================================
-
-%icn-base {
-  @extend %iconfont;
-  font-size: 1em;
-  line-height: 1;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  speak: none;
-  display: inline-block;
-  text-rendering: auto;
-
-  // Better Font Rendering
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-%icn{
-  @extend %iconfont;
-  display: inline-block;
-  // vertical-align: bottom;
-  &:before {
-    @extend %icn-base;
-  }
-}
-
-%icn--fw {
-  width: $icn-fixed-width-size;
-  text-align: center;
-}
-
-
-@each $name, $icn in $icons {
-  .icn--#{$name}:before {
-    content: $icn;
-  }
-}
-
+website/assets/fonts
 ```
 
+The rendered icon files will be placed in:
+
+###### SCSS
+```sh
+src/scss/modules/_icons.scss
+```
+
+###### Stylus
+```sh
+src/stylus/modules/icons.styl
+```
+
+###### Less
+```sh
+src/less/modules/icons.less
+```
 
 ## Docs
 

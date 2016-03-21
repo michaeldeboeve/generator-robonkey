@@ -9,7 +9,30 @@ It gets it's tasks from the subdirectory `gulp-tasks`, which contains the follow
 - jade.js _(jade compile)_
 - modernizr.js _(creating modernizr file)_
 - scripts.js _(concat and minify javascript)_
-- styles.js _(concat and minify scss)_
+- styles.js _(concat and minify SCSS, Stylus or Less)_
+
+## Gulp Dev
+
+The default task will output unminified css, javascript and will start up BrowserSync.
+
+```sh
+$ gulp dev
+$ gulp serve
+```
+Are alsiasses for 
+
+```sh
+$ gulp
+```
+
+## Gulp Build
+
+The build task will output minified css and javascript, run the modernizr and build iconfont script (if selected).
+
+```sh
+$ gulp build
+```
+
 
 ## Settings
 

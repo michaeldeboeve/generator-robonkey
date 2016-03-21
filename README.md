@@ -1,10 +1,11 @@
 # Robonkey Generator
 
-> A [Yeoman](http://yeoman.io) front-end application generator with Jade, Sass, Gulp, PostCSS, Autoprefixer, Modernizr, Custom Icon Font Generator and some JavaScript and Sass Libraries to choose from.
+> A [Yeoman](http://yeoman.io) front-end application generator with Gulp, Jade, Sass/Stylus/Less, PostCSS, Autoprefixer, Modernizr, Custom Icon Font Generator and some JavaScript and Sass/Stylus/Less libraries to choose from.
 
-> **This generator is a work in progress.**
-> **There probably will be some bugs and missing features.**
-> **Likewise, this documentation isn't finished yet either.**
+> _**This generator is a work in progress.<br>
+> There probably will be some bugs and missing features.<br>
+> Likewise, this documentation isn't finished yet either.<br><br>
+> Please contact me if you'd like a feature included**_
 
 ![image](docs/robonkeyscreenshot.png)
 
@@ -13,21 +14,33 @@
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Options](#options)
+- [To Do](#to-do)
 - [Docs](#docs)
 
 ## Features
 
 - [Gulp](http://gulpjs.com/)
-- [Jade](http://jade-lang.com/) _(Optional)_
-- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md) and [functions](/docs/sass/functions.md)
+- [Jade](http://jade-lang.com/)
+- Preprocessors:
+	- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md), [functions](/docs/sass/functions.md) or [optional libraries](/docs/features.md#sass-libraries)
+	- [Stylus](http://stylus-lang.com/) with [optional libraries](/docs/features.md#stylus-libraries)
+	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries) 
 - [BrowserSync](https://www.browsersync.io/)
-- [PostCSS](http://postcss.org/) _(Optional)_
-- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
+- PostCSS:
+	- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
+	- [Css Nano](https://github.com/ben-eb/cssnano)
+	- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)
+	- [MQPacker](https://github.com/hail2u/node-css-mqpacker)
+	- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)
+	- [Selector Not](https://github.com/postcss/postcss-selector-not)
+	- [Selector Matches](https://github.com/postcss/postcss-selector-matches)
+	- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)
+	- [Scopify](https://github.com/pazams/postcss-scopify)
 - [Imagemin](https://github.com/sindresorhus/gulp-imagemin)
-- Custom Icon Font Generator _(Optional)_
-	- [iconfont](https://github.com/nfroidure/gulp-iconfont)
-	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css)
-- [Modernizr Builder](https://github.com/doctyper/gulp-modernizr) _(Optional)_
+- Custom Icon Font Generator:
+	- [iconfont](https://github.com/nfroidure/gulp-iconfont) 
+	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css) 
+- [Modernizr Builder](https://github.com/doctyper/gulp-modernizr)
 
 
 ## Getting Started
@@ -52,6 +65,22 @@ $ cd yourapp
 $ yo robonkey
 ```
 
+## To Do
+
+- Priority:
+	- scss mixins and functions conversion to stylus and less
+	- Mixin and Function documantation
+
+- maybe down the road
+	- handlebars integration
+	- haml integration
+	- …
+
+- maybe further down the road
+	- node/express/angular
+	- …
+
+**Please contact me if you'd like a feature included**
 
 ## Docs
 

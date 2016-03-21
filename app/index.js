@@ -9,8 +9,8 @@ var generators  = require('yeoman-generator'),
 module.exports = generators.Base.extend({
 
   _getPrompts: function(){
-    var prompts = [
-      {
+    var done = this.async();
+    var prompts = [{
         name: 'localUrl',
         message: 'Local URL to use:',
         default: 'mynewawesomeapp.localhost'
