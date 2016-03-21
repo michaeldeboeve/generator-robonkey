@@ -2,27 +2,27 @@
 /*
  * Normalization
  */
-root-box-sizing = border-box
-root-cursor = default
-root-font-family = sans-serif
-root-font-size = 100%
-root-line-height = 1.5
-root-text-rendering = optimizeLegibility
+$root-box-sizing ?= border-box;
+$root-cursor ?= default;
+$root-font-family ?= sans-serif;
+$root-font-size ?= 100%;
+$root-line-height ?= 1.5;
+$root-text-rendering ?= optimizeLegibility;
 
-html-background-color = #FFFFFF
-html-color = #000000
-anchor-text-decoration = none
-media-element-vertical-align = middle
-monospace-font-family = monospace
-form-element-background-color = transparent
-nav-list-style = none
-selection-background-color = #B3D4FC
-selection-color = invert(selection-background-color)
-selection-text-shadow = none
-small-font-size = 75%
-table-border-collapse = collapse
-table-border-spacing = 0
-textarea-resize = vertical
+$html-background-color ?= #FFFFFF;
+$html-color ?= #000000;
+$anchor-text-decoration ?= none;
+$media-element-vertical-align ?= middle;
+$monospace-font-family ?= monospace;
+$form-element-background-color ?= transparent;
+$nav-list-style ?= none;
+$selection-background-color ?= #B3D4FC;
+$selection-color ?= invert(selection-background-color);
+$selection-text-shadow ?= none;
+$small-font-size ?= 75%;
+$table-border-collapse ?= collapse;
+$table-border-spacing ?= 0;
+$textarea-resize ?= vertical;
 
 
 :root
@@ -132,21 +132,21 @@ textarea
 
 // specify the root styles of the document
 :root
-  box-sizing root-box-sizing
-  cursor root-cursor
-  font root-font-size/root-line-height root-font-family
-  text-rendering root-text-rendering;
+  box-sizing $root-box-sizing
+  cursor $root-cursor
+  font $root-font-size/root-line-height root-font-family
+  text-rendering $root-text-rendering;
 
 
 // specify the background color of html
 html
-  background-color html-background-color
-  color html-color
+  background-color $html-background-color
+  color $html-color
 
 
 // specify the text decoration of anchors
 a
-  text-decoration anchor-text-decoration
+  text-decoration $anchor-text-decoration
 
 
 // specify the alignment of media elements
@@ -156,7 +156,7 @@ iframe,
 img,
 svg,
 video
-  vertical-align media-element-vertical-align
+  vertical-align $media-element-vertical-align
 
 
 // specify the background color of form elements
@@ -164,7 +164,7 @@ button,
 input,
 select,
 textarea
-  background-color form-element-background-color
+  background-color $form-element-background-color
 
 
 // specify the inherited color and font of form elements
@@ -180,11 +180,11 @@ textarea
 
 // specify the minimum height of form elements
 // Function form-element-min-height(root-line-height: int)
-form-element-min-height(root-line-height)
-  if unit(root-line-height) == ''
-    {root-line-height}em
-  else if unit(root-line-height) != '%'
-    root-line-height
+form-element-min-height($root-line-height)
+  if unit($root-line-height) == ''
+    {$root-line-height}em
+  else if unit($root-line-height) != '%'
+    $root-line-height
   else
     null
 
@@ -207,7 +207,7 @@ button,
 [type="week"],
 select,
 textarea
-  min-height form-element-min-height(root-line-height)
+  min-height form-element-min-height($root-line-height)
 
 
 // specify the font family of code elements
@@ -215,13 +215,13 @@ code,
 kbd,
 pre,
 samp
-  font-family: monospace-font-family, monospace
+  font-family: $monospace-font-family, monospace
 
 
 // specify the list style of nav lists
 nav ol,
 nav ul
-  list-style nav-list-style
+  list-style $nav-list-style
 
 
 // specify the standard appearance of selects
@@ -238,20 +238,20 @@ select
 
 // specify the border styling of tables
 table
-  border-collapse table-border-collapse
-  border-spacing table-border-spacing
+  border-collapse $table-border-collapse
+  border-spacing $table-border-spacing
 
 
 // specify the resizability of textareas
 textarea
-  resize textarea-resize
+  resize $textarea-resize
 
 
 // specify the background color, font color and drop shadow of text selections
 ::selection
-  background-color selection-background-color // required when declaring ::selection
-  color selection-color
-  text-shadow selection-text-shadow
+  background-color $selection-background-color // required when declaring ::selection
+  color $selection-color
+  text-shadow $selection-text-shadow
 
 
 // specify the progress cursor of updating elements

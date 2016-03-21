@@ -1,7 +1,7 @@
-$default-font-family = sans-serif;
-$monospace-font-family = monospace;
-$icon-font-family = '<%= customIconFontName %>';
-$title-font-family = $default-font-family;
+$default-font-family ?= sans-serif;
+$monospace-font-family ?= monospace;
+$icon-font-family ?= '<%= customIconFontName %>';
+$title-font-family ?= $default-font-family;
 
 <% if(includeCustomIcnFont){ %>@font-face
   font-family: "<%= customIconFontName %>";

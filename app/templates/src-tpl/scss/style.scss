@@ -17,8 +17,8 @@
 @import "base/functions/**/*";
 @import "base/mixins/**/*";
 
-<% if(includeCustomIcnFont) { %>@import "base/fonts";<% } %>
-<% if(includeReset){ %>@import "base/reset";<% } %><% if(includeNormalize){ %>
+@import "base/fonts";<% if(includeReset){ %>
+@import "base/reset";<% } %><% if(includeNormalize){ %>
 @import "base/normalize";<% } %><% if(includeSanitize){ %>
 @import "base/sanitize";<% } %>
 @import "base/placeholders";
@@ -33,8 +33,6 @@
 // ==========================================================================
 // Modules
 // ==========================================================================
-// @import "modules/icons";
-// @import "modules/buttons";
 @import "modules/**/*";
 
 
