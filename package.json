@@ -1,7 +1,7 @@
 {
   "name": "generator-robonkey",
-  "version": "0.0.5",
-  "description": "A front-end application generator for Jade, Sass & Gulp",
+  "version": "0.0.6",
+  "description": "A front-end application generator for Gulp, Jade, Sass/Stylus/Less",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "main": "index.js",
   "scripts": {
