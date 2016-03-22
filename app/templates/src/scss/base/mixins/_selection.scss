@@ -1,21 +1,11 @@
 // Uses @include optional-at-root mixin
 
 @mixin selection($current-selector: false) {
-  @if $current-selector {
-    &::-moz-selection {
-      @content;
-    }
+  @include optional-at-root('::-moz-selection') {
+    @content;
+  }
 
-    &::selection {
-      @content;
-    }
-  } @else {
-    ::-moz-selection {
-      @content;
-    }
-
-    ::selection {
-      @content;
-    }
+  @include optional-at-root('::-selection') {
+    @content;
   }
 }

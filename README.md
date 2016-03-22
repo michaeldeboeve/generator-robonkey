@@ -74,10 +74,14 @@ $ yo robonkey
 - maybe down the road
 	- handlebars integration
 	- haml integration
+	- more js libraries?
 	- …
 
 - maybe further down the road
-	- node/express/angular
+	- express/angular
+	- wordpress
+	- drupal
+	- codeigniter
 	- …
 
 **Please contact me if you'd like a feature included**

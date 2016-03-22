@@ -1,14 +1,9 @@
 {
   "name": "<%= appname %>",
   "version": "<%= appversion %>",
-  "authors": [
-    "<%= appauthor %> <%= appemail %>"
-  ],
   "description": "<%= appdescription %>",
+  "authors": [],
   "main": "gulpfile.js",
-  "scripts": {
-    "test": "test"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/michaeldeboeve/generator-robonkey"

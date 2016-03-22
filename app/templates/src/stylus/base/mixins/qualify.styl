@@ -1,0 +1,28 @@
+/// Since the current way to qualify a class from within its ruleset is quite
+/// ugly, here is a mixin providing a friendly API to do so.
+/// @author Hugo Giraudel
+/// @param {String} $element-selector - Element selector
+qualify($element-selector)
+  {$element-selector}&
+    {block}
+
+
+/// @alias qualify
+when-is($element-selector)
+  +qualify($element-selector)
+    {block}
+
+
+// .button {
+//   border: none;
+//
+//   // Qualify `.button` with `button`
+//   @include qualify(button) {
+//     -webkit-appearance: none;
+//   }
+//
+//   // Qualify `.button` with `a`
+//   @include when-is(a) {
+//     text-decoration: none;
+//   }
+// }

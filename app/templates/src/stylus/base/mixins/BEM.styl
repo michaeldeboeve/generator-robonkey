@@ -1,0 +1,24 @@
+/// Block Element
+/// @access public
+/// @param {String} $element - Element's name
+element($element)
+  &__{$element}
+    {block}
+
+/// Block Modifier
+/// @access public
+/// @param {String} $modifier - Modifier's name
+modifier($modifier)
+  &--{$modifier}
+    {block}
+
+
+/// @alias element
+e($element)
+  +element($element)
+    {block}
+
+/// @alias modifier
+m($modifier)
+  +modifier($modifier)
+    {block}

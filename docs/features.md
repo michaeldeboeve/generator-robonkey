@@ -42,7 +42,7 @@
 - [Jeet](http://jeet.gs/)
 - [Susy](http://susydocs.oddbird.net/en/latest/)
 - [Neat](http://bourbon.io/)
-- [Semantig.gs](https://tylertate.github.io/semantic.gs/)
+- [Semantic.gs](https://tylertate.github.io/semantic.gs/)
 
 ###### Mixins
 - [Compass Mixins](https://github.com/Igosuki/compass-mixins)
@@ -55,7 +55,7 @@
 
 ###### Grids
 - [Jeet](http://jeet.gs/)
-- [Semantig.gs](https://tylertate.github.io/semantic.gs/)
+- [Semantic.gs](https://tylertate.github.io/semantic.gs/)
 - [sGrid](http://stylusgrid.com/)
 
 ###### Mixins
@@ -69,7 +69,7 @@
 
 ###### Grids
 - [Gee](http://sorgalla.com/gee/)
-- [Semantig.gs](https://tylertate.github.io/semantic.gs/)
+- [Semantic.gs](https://tylertate.github.io/semantic.gs/)
 
 ###### Mixins
 - [Less Hat](http://lesshat.madebysource.com/)

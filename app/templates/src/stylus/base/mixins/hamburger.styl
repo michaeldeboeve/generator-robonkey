@@ -1,0 +1,22 @@
+hamburger($size = 30px, $size-inner-width = 70%, $size-inner-height = 2px, $size-inner-offset = 8px)
+  square($size)
+  &__inner,
+  &__inner:before,
+  &__inner:after
+    background: #fff
+    display: block
+    position: absolute
+    height: $size-inner-height
+  &__inner
+    width: $size-inner-width
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+  &__inner:before,
+  &__inner:after
+    content: ''
+    width: 100%
+  &__inner:before
+    bottom: $size-inner-offset
+  &__inner:after
+    top: $size-inner-offset

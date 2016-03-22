@@ -1,0 +1,32 @@
+/// Base path for assets (fonts, images...),
+/// should not include trailing slash
+/// @access public
+/// @type String
+
+$base = $asset-base-path;
+$img = $asset-images-path;
+$fnt = $asset-fonts-path;
+
+/// Asset URL builder
+/// @access private
+/// @param {String} $type - Asset type, matching folder name
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the asset
+asset($type, $file)
+  return url($base + '/' + $type + '/' + $file);
+
+/// Image asset helper
+/// @access public
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the image
+/// @require {function} asset
+image($file)
+  return asset($img, $file);
+
+/// Font asset helper
+/// @access public
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the font
+/// @require {function} asset
+font($file)
+  return asset($fnt, $file);

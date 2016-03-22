@@ -1,0 +1,73 @@
+bp($bp, $type = 'screen and', $mq = 'max-width')
+  $query = $type + ' (' + $mq + ': ' + $bp + ')'
+  @media $query
+    {block}
+
+above($bp, $type = 'screen and')
+  +bp($bp, $type, $mq = 'min-width')
+    {block}
+
+below($bp, $type = 'screen and')
+  +bp($bp, $type, $mq = 'max-width')
+    {block}
+
+between($bp-min, $bp-max, $type= 'screen and')
+  $query = $type + ' (min-width: ' + $bp-min + ') and (max-width: ' + $bp-max + ')'
+  @media $query
+    {block}
+
+
+orientation($orientation = 'landscape')
+  $query = '(orientation: ' + $orientation + ')'
+  @media $query
+    {block}
+
+landscape()
+  +orientation('landscape')
+    {block}
+
+portrait()
+  +orientation('portrait')
+    {block}
+
+
+
+iphone6plus($mode = null)
+  $viewports = (portrait landscape)
+  $phone = 'only screen and (min-device-width : 414px) and (max-device-width : 736px)'
+  if $mode in $viewports
+    $query =  $phone + ' and (orientation : ' + $mode + ')'
+  else
+    $query = $phone
+  @media $query
+    {block}
+
+iphone6($mode = null)
+  $viewports = (portrait landscape)
+  $phone = 'only screen and (min-device-width : 375px) and (max-device-width : 667px)'
+  if $mode in $viewports
+    $query =  $phone + ' and (orientation : ' + $mode + ')'
+  else
+    $query = $phone
+  @media $query
+    {block}
+
+iphone5($mode = null)
+  $viewports = (portrait landscape)
+  $phone = 'only screen and (min-device-width : 320px) and (max-device-width : 568px)'
+  if $mode in $viewports
+    $query =  $phone + ' and (orientation : ' + $mode + ')'
+  else
+    $query = $phone
+  @media $query
+    {block}
+
+iphone4($mode = null)
+  $viewports = (portrait landscape)
+  $phone = 'only screen and (min-device-width : 320px) and (max-device-width : 480px)'
+  if $mode in $viewports
+    $query =  $phone + ' and (orientation : ' + $mode + ')'
+  else
+    $query = $phone
+  @media $query
+    {block}

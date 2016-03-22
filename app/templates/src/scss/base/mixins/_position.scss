@@ -5,3 +5,16 @@
   bottom: $bottom;
   left: $left;
 }
+
+
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+  @include position(absolute, $top, $right, $bottom, $left);
+}
+
+@mixin relative($top: null, $right: null, $bottom: null, $left: null) {
+  @include position(relative, $top, $right, $bottom, $left);
+}
+
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+  @include position(fixed, $top, $right, $bottom, $left);
+}

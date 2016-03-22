@@ -1,0 +1,17 @@
+ghost-arrow($size = 16px, $color = red, $width = 1px, $direction = right)
+  content: ''
+  @extend .transition
+  display: block
+  width: $size
+  height: $size
+  border-width: 0 $width $width 0
+  border-style: solid
+  border-color: $color
+  if $direction == top
+    transform: rotate(-135deg)
+  else if $direction == left
+    transform: rotate(135deg)
+  else if $direction == bottom
+    transform: rotate(45deg)
+  else if $direction == right
+    transform: rotate(-45deg)

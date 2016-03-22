@@ -1,0 +1,13 @@
+triangle($pos = top, $color = red, $size = 20px 10px)
+  if $pos in (top right bottom left)
+    width: 0;
+    height: 0;
+    display: block;
+    border-style: solid;
+    if $pos in (top bottom)
+      border-width: $size;
+    else if $pos in (right left)
+      border-width: $size[1] $size[0];
+    border-color: transparent;
+    border-{$pos}-width: 0;
+    border-{opposite-position($pos)}-color: $color

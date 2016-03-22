@@ -1,0 +1,21 @@
+-convert-to(to-unit, value, context = 16px)
+  from-unit = unit(value)
+  return value if to-unit is from-unit
+  if to-unit in ('em' 'rem')
+    return value if from-unit in ('em' 'rem')
+    return unit((value / context), to-unit)
+  if to-unit is 'px'
+    return unit((value * context), 'px')
+
+_strip-units( val )
+  unit( val, "" )
+
+
+rem(value)
+  -convert-to('rem', value)
+
+em(value, base = @font-size)
+  -convert-to('em', value)
+
+px(value)
+  -convert-to('px', value)

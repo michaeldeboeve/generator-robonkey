@@ -40,10 +40,6 @@ module.exports = generators.Base.extend({
         message: 'Your name',
         default: 'Robonkey Team'
       }
-      ,{
-        name: 'email',
-        message: 'Your email address:'
-      }
 
       // Preprocessors
       ,{

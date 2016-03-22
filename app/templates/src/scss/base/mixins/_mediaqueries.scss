@@ -1,16 +1,28 @@
-@mixin above($bp) {
-  $query: $bp;
-  @include breakpoint($query) { @content; }
+@mixin bp($bp, $type: 'screen and', $mq: 'max-width') {
+  $query: '#{$type} (#{$mq}: #{$bp})';
+  @media #{$query} {
+    @content;
+  }
 }
 
-@mixin below($bp) {
-  $query: (max-width: $bp);
-  @include breakpoint($query) { @content; }
+@mixin above($bp, $type: 'screen and') {
+  @include bp($bp, $type, $mq: 'min-width') {
+    @content;
+  }
 }
 
-@mixin between($bp1, $bp2) {
-  $query: $bp1 $bp2;
-  @include breakpoint($query) { @content; }
+@mixin below($bp, $type: 'screen and') {
+  @include bp($bp, $type, $mq: 'max-width') {
+    @content;
+  }
+}
+
+
+@mixin between($bp-min, $bp-max, $type: 'screen and') {
+  $query: '#{$type} (min-width: #{$bp-min}) and (max-width: #{$bp-max})';
+  @media #{$query} {
+    @content;
+  }
 }
 
 @mixin orientation($orientation) {

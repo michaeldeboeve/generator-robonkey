@@ -1,0 +1,18 @@
+centerer($d = both)
+  position: absolute
+  if $d == both or $d == b
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+  else if $d == horizontal or $d == h
+    left: 50%
+    transform: translate(-50%, 0)
+  else if $d == vertical or $d == v
+    top: 50%
+    transform: translate(0, -50%)
+
+centerer-remove($p = relative)
+  position: $p
+  top: auto
+  left: auto
+  transform: translate(0, 0)

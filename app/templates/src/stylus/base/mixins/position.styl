@@ -1,0 +1,16 @@
+position(type, args)
+  i = 0
+  position: unquote(type)
+  for j in (1..4)
+    if length(args) > i
+      {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+    i += 1
+
+absolute()
+  position('absolute', arguments)
+
+relative()
+  position('relative', arguments)
+
+fixed()
+  position('fixed', arguments)
