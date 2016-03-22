@@ -33,7 +33,8 @@ gulp.task('build', [
                     <% if(includeModernizr){ %>'modernizr',<% } %><% if(includeCustomIcnFont){ %>
                     'iconfont',<% } %>
                     'moveBower', <% if(includeJade){ %>
-                    'jade-build', <% } %>
+                    'jade-build', <% } %><% if(includeHaml){ %>
+                    'haml-build', <% } %>
                     'images',
                     'scripts-build',
                     'styles-build',
@@ -43,7 +44,8 @@ gulp.task('build', [
 // Default gulp task
 gulp.task('default', [
                       'moveBower', <% if(includeJade){ %>
-                      'jade', <% } %>
+                      'jade', <% } %><% if(includeHaml){ %>
+                      'haml', <% } %>
                       'images',
                       'scripts',
                       'styles',
@@ -64,5 +66,7 @@ gulp.task('default', [
 
   <% if(includeJade){ %>// watch for Jade changes, then reload
   gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);<% } %>
+  <% if(includeHaml){ %>// watch for Haml changes, then reload
+  gulp.watch(paths.haml.watch, ['haml']).on('change', browserSync.reload);<% } %>
 
 });

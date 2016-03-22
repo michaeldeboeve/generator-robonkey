@@ -6,12 +6,12 @@ var plumber         = require('gulp-plumber');
 var jade            = require('gulp-jade');
 var htmlreplace     = require("gulp-html-replace");
 
+var jadeOptions = {
+  pretty: true
+};
 
 // Compile jade files
 gulp.task('jade', function() {
-  var jadeOptions = {
-    pretty: true
-  };
   gulp.src(paths.jade.src)
     .pipe(plumber(onJadeError))
     .pipe(jade(jadeOptions))
@@ -19,9 +19,6 @@ gulp.task('jade', function() {
 });
 
 gulp.task('jade-build', function() {
-  var jadeOptions = {
-    pretty: true
-  };
   gulp.src(paths.jade.src)
     .pipe(plumber(onJadeError))
     .pipe(jade(jadeOptions))

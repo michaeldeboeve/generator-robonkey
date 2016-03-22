@@ -49,7 +49,10 @@
     "rupture": "^0.6.1",<% } %><% if(includeNib){ %>
     "nib": "^1.1.0",<% } %><% if(includeSGrid){ %>
     "s-grid": "^1.1.2",<% } %><% if(includeJade){ %>
-    "gulp-jade": "^1.1.0",<% } %><% if(includeCustomIcnFont) { %>
+    "gulp-jade": "^1.1.0",<% } %><% if(includeHaml){ %>
+    "gulp-haml": "^0.1.6",
+    "gulp-prettify": "^0.4.0",<% } %><% if(includeHandlebars){ %>
+    "gulp-handlebars": "^4.0.0",<% } %><% if(includeCustomIcnFont) { %>
     "gulp-iconfont": "^6.0.0",
     "gulp-iconfont-css": "^2.0.0",<% } %><% if(includeModernizr){ %>
     "gulp-modernizr": "^1.0.0-alpha",<% } %><% if(includePostCSS){ %>
@@ -63,7 +66,6 @@
     "postcss-selector-matches": "^2.0.1",<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
     "postcss-selector-not": "^2.0.0",<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
     "postcss-mq-keyframes": "^0.2.5",<% } %>
-    "gulp-handlebars": "^4.0.0",
     "require-dir": "^0.3.0"
   },
   "devDependencies": {

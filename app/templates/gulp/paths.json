@@ -22,12 +22,17 @@
     "src_files": "./../src/less/**/*.less",<% } %>
     "build_srcsmap": "./../website/assets/css/",
     "build": "./../website/assets/css/"
-  },
+  },<% if(includeJade){ %>
   "jade": {
     "src": "./../src/jade/*.jade",
     "watch": "./../src/jade/**/*.jade",
     "build": "./../website/"
-  },
+  },<% } %><% if(includeHaml){ %>
+  "haml": {
+    "src": "./../src/haml/*.haml",
+    "watch": "./../src/haml/**/*.haml",
+    "build": "./../website/"
+  },<% } %>
   "postcss": {
     "src": "./../website/assets/css/style.css",
     "build": "./../website/assets/css/"

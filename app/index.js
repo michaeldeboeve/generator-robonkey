@@ -634,6 +634,9 @@ module.exports = generators.Base.extend({
     this.includeLessMQ = hasMQLibLess('includeLessMQ');
     this.noMQLibLess = hasMQLibLess('noMQLibLess');
 
+    this.includeHaml = false;
+    this.includeHandlebars = false;
+
     callback();
   },
 
@@ -733,8 +736,13 @@ module.exports = generators.Base.extend({
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp/gulp-tasks/jade.js', templateContext);
     }
 
-    // TODO: if handlebars
-    // this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
+    if(this.includeHaml) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/haml.js', destRoot + '/gulp/gulp-tasks/haml.js', templateContext);
+    }
+
+    // if(this.includeHandlebars) {
+    //  this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
+    // }
 
     if(this.includeModernizr) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp/gulp-tasks/modernizr.js', templateContext);
@@ -883,6 +891,18 @@ module.exports = generators.Base.extend({
     }
   },
 
+  _handlebars: function(destRoot, sourceRoot, templateContext) {
+    if(this.includeHandlebars) {
+    }
+  },
+
+  _haml: function(destRoot, sourceRoot, templateContext) {
+    if(this.includeHaml) {
+      // Static
+      this.fs.copyTpl(sourceRoot + '/src-tpl/haml/index.haml', destRoot + '/src/haml/index.haml', templateContext);
+    }
+  },
+
   _endMsg: function() {
     var allDone =
       '\n.-------------------.' +
@@ -982,7 +1002,9 @@ module.exports = generators.Base.extend({
           noGridLibLess: this.noGridLibLess,
           noMixinLibLess: this.noMixinLibLess,
           noMQLibLess: this.noMQLibLess,
-          noBaseStyles: this.noBaseStyles
+          noBaseStyles: this.noBaseStyles,
+          includeHaml: this.includeHaml,
+          includeHandlebars: this.includeHandlebars
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
@@ -996,6 +1018,7 @@ module.exports = generators.Base.extend({
     this._iconfont(destRoot, sourceRoot, templateContext);
     this._js(destRoot, sourceRoot, templateContext);
     this._jade(destRoot, sourceRoot, templateContext);
+    this._haml(destRoot, sourceRoot, templateContext);
 
     if(this.includeSCSS) {
       this._scss(destRoot, sourceRoot, templateContext);
