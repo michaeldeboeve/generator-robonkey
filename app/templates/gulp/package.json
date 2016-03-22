@@ -1,4 +1,4 @@
- {
+  {
   "name": "<%= appname %>",
   "version": "<%= appversion %>",
   "description": "<%= appdescription %>",
@@ -52,7 +52,8 @@
     "gulp-jade": "^1.1.0",<% } %><% if(includeHaml){ %>
     "gulp-haml": "^0.1.6",
     "gulp-prettify": "^0.4.0",<% } %><% if(includeHandlebars){ %>
-    "gulp-handlebars": "^4.0.0",<% } %><% if(includeCustomIcnFont) { %>
+    "gulp-handlebars-html": "0.0.2",
+    "handlebars": "^4.0.5",<% } %><% if(includeCustomIcnFont) { %>
     "gulp-iconfont": "^6.0.0",
     "gulp-iconfont-css": "^2.0.0",<% } %><% if(includeModernizr){ %>
     "gulp-modernizr": "^1.0.0-alpha",<% } %><% if(includePostCSS){ %>

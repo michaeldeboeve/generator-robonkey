@@ -32,6 +32,13 @@
     "src": "./../src/haml/*.haml",
     "watch": "./../src/haml/**/*.haml",
     "build": "./../website/"
+  },<% } %><% if(includeHandlebars){ %>
+  "handlebars": {
+    "src": "./../src/handlebars/*.html",
+    "watch": "./../src/handlebars/**/*.html",
+    "watchdata": "./../src/handlebars/**/*.json",
+    "partials": "./../src/handlebars/partials",
+    "build": "./../website/"
   },<% } %>
   "postcss": {
     "src": "./../website/assets/css/style.css",

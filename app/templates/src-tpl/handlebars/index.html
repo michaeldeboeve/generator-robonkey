@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>| pageTitle</title>
+    <title>{{pageTitle}}</title>
 
-    <meta name="description" content="Description">
+    <meta name="description" content="{{pageDescription}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -19,6 +19,8 @@
     <!-- endbuild --><% } %>
   </head>
   <body>
+
+    {{> kitchensink }}
 
 
     <% if(includeJQuery){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>

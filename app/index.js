@@ -740,9 +740,9 @@ module.exports = generators.Base.extend({
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/haml.js', destRoot + '/gulp/gulp-tasks/haml.js', templateContext);
     }
 
-    // if(this.includeHandlebars) {
-    //  this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
-    // }
+    if(this.includeHandlebars) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
+    }
 
     if(this.includeModernizr) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp/gulp-tasks/modernizr.js', templateContext);
@@ -893,6 +893,8 @@ module.exports = generators.Base.extend({
 
   _handlebars: function(destRoot, sourceRoot, templateContext) {
     if(this.includeHandlebars) {
+      this.fs.copy(sourceRoot + '/src/handlebars', destRoot + '/src/handlebars');
+      this.fs.copyTpl(sourceRoot + '/src-tpl/handlebars/index.html', destRoot + '/src/handlebars/index.html', templateContext);
     }
   },
 
@@ -1019,6 +1021,7 @@ module.exports = generators.Base.extend({
     this._js(destRoot, sourceRoot, templateContext);
     this._jade(destRoot, sourceRoot, templateContext);
     this._haml(destRoot, sourceRoot, templateContext);
+    this._handlebars(destRoot, sourceRoot, templateContext);
 
     if(this.includeSCSS) {
       this._scss(destRoot, sourceRoot, templateContext);
