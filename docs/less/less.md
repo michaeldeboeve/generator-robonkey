@@ -1,18 +1,34 @@
-# Sass
+# Less
 
-This setup uses [node-sass](https://github.com/sass/node-sass), a library that provides a binding for Node.js to [LibSass](https://github.com/sass/libsass)
+## Location
 
+Less source files are located in
 
-## Mixins and Functions
-A set of [mixins](/docs/sass/mixins.md) and [functions](/docs/sass/functions.md) are available
+```sh
+src/less/
+```
+
+and will be compiled to
+
+```sh
+website/assets/css
+```
+
 
 ## Libraries
 The following libraries are included (optional on install): 
 
 See their docs for more information.
 
-- [Breakpoint](http://breakpoint-sass.com/) for mediaqueries
-- [Susy](http://susydocs.oddbird.net/en/latest/) for creating your own grid system
+###### Media Queries
+- [Less-MQ](https://github.com/mrmlnc/less-mq)
+
+###### Grids
+- [Gee](http://sorgalla.com/gee/)
+- [Semantic.gs](https://tylertate.github.io/semantic.gs/)
+
+###### Mixins
+- [Less Hat](http://lesshat.madebysource.com/)
 
 ## Settings
 Information about variables
@@ -20,39 +36,37 @@ Information about variables
 
 ## Structure
 ```sh
-scss
+less
 	├── base
 		├── colors
-			_materialdesign.scss
-			_socialmedia.scss
-			...
-		├── functions
+			materialdesign.less
+			socialmedia.less
 			...
 	 	├── mixins
 	 		...
-	 	_fonts.scss
-	 	_placeholders.scss
-	 	_typography.scss
-	 	_variables.scss
-	 	_reset.scss, _normalize.scss or _sanitize.scss
+	 	fonts.less
+	 	placeholders.less
+	 	typography.less
+	 	variables.less
+	 	reset.less, normalize.less or sanitize.less
 		...
 	├── modules
-		_buttons.scss
-		_forms.scss
-		_icons.scss
+		buttons.less
+		forms.less
+		icons.less
 		...
 	├── playground
-		_playground.scss
+		playground.less
 		...
 	├── views
-		_footer.scss
-		_header.scss
+		footer.less
+		header.less
 		...
 	├── pages
 		...
 	├── themes
 		...
-	styles.scss
+	styles.less
 	
 ```
 
@@ -64,8 +78,14 @@ scss
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Modernizr](/docs/modernizr.md)
-- [Custom Icon Font](/docs/custom-icon-font.md)
+- [Jade](/docs/jade)
+- [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)
+- [Stylus](/docs/stylus/stylus.md)
+	- [Functions](/docs/stylus/functions.md)
+	- [Mixins](/docs/stylus/mixins.md)
+- [Less](/docs/less/less.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)

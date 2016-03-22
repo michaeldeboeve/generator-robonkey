@@ -2,6 +2,19 @@
 
 This setup uses [node-sass](https://github.com/sass/node-sass), a library that provides a binding for Node.js to [LibSass](https://github.com/sass/libsass)
 
+## Location
+
+Sass source files are located in
+
+```sh
+src/scss/
+```
+
+and will be compiled to
+
+```sh
+website/assets/css
+```
 
 ## Mixins and Functions
 A set of [mixins](/docs/sass/mixins.md) and [functions](/docs/sass/functions.md) are available
@@ -11,8 +24,19 @@ The following libraries are included (optional on install):
 
 See their docs for more information.
 
-- [Breakpoint](http://breakpoint-sass.com/) for mediaqueries
-- [Susy](http://susydocs.oddbird.net/en/latest/) for creating your own grid system
+###### Media Queries
+- [Breakpoint](http://breakpoint-sass.com/)
+- [Include Media](https://github.com/Igosuki/compass-mixins)
+
+###### Grids
+- [Jeet](http://jeet.gs/)
+- [Susy](http://susydocs.oddbird.net/en/latest/)
+- [Neat](http://bourbon.io/)
+- [Semantic.gs](https://tylertate.github.io/semantic.gs/)
+
+###### Mixins
+- [Compass Mixins](https://github.com/Igosuki/compass-mixins)
+- [Bourbon](http://bourbon.io/)
 
 ## Settings
 Information about variables
@@ -64,8 +88,14 @@ scss
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Modernizr](/docs/modernizr.md)
-- [Custom Icon Font](/docs/custom-icon-font.md)
+- [Jade](/docs/jade)
+- [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)
+- [Stylus](/docs/stylus/stylus.md)
+	- [Functions](/docs/stylus/functions.md)
+	- [Mixins](/docs/stylus/mixins.md)
+- [Less](/docs/less/less.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)

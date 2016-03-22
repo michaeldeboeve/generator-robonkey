@@ -82,7 +82,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noLib',
+          value: 'noMixinLibSCSS',
           checked: true
         }]
       }
@@ -105,7 +105,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noLib',
+          value: 'noMixinLibStylus',
           checked: true
         }]
       }
@@ -123,7 +123,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noLib',
+          value: 'noMixinLibLess',
           checked: true
         }]
       }
@@ -149,7 +149,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noMQLib',
+          value: 'noMQLibSCSS',
           checked: true
         }]
       }
@@ -167,7 +167,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noMQLib',
+          value: 'noMQLibStylus',
           checked: true
         }]
       }
@@ -185,7 +185,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noMQLib',
+          value: 'noMQLibLess',
           checked: true
         }]
       }
@@ -221,7 +221,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noGridLib',
+          value: 'noGridLibSCSS',
           checked: false
         }]
       }
@@ -249,7 +249,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noGridLib',
+          value: 'noGridLibStylus',
           checked: false
         }]
       }
@@ -272,7 +272,7 @@ module.exports = generators.Base.extend({
         }
         ,{
           name: 'None',
-          value: 'noGridLib',
+          value: 'noGridLibLess',
           checked: false
         }]
       }
@@ -523,30 +523,30 @@ module.exports = generators.Base.extend({
     function hasMixinLibSCSS(feat) {
       return mixinLibsSCSS && mixinLibsSCSS.indexOf(feat) !== -1;
     };
-    function hasGridLibrarySCSS(feat) {
+    function hasGridLibSCSS(feat) {
       return gridLibsSCSS && gridLibsSCSS.indexOf(feat) !== -1;
     };
-    function hasMQLibrarySCSS(feat) {
+    function hasMQLibSCSS(feat) {
       return mqLibsSCSS && mqLibsSCSS.indexOf(feat) !== -1;
     };
 
     function hasMixinLibStylus(feat) {
       return mixinLibsStylus && mixinLibsStylus.indexOf(feat) !== -1;
     };
-    function hasGridLibraryStylus(feat) {
+    function hasGridLibStylus(feat) {
       return gridLibsStylus && gridLibsStylus.indexOf(feat) !== -1;
     };
-    function hasMQLibraryStylus(feat) {
+    function hasMQLibStylus(feat) {
       return mqLibsStylus && mqLibsStylus.indexOf(feat) !== -1;
     };
 
     function hasMixinLibLess(feat) {
       return mixinLibsLess && mixinLibsLess.indexOf(feat) !== -1;
     };
-    function hasGridLibraryLess(feat) {
+    function hasGridLibLess(feat) {
       return gridLibsLess && gridLibsLess.indexOf(feat) !== -1;
     };
-    function hasMQLibraryLess(feat) {
+    function hasMQLibLess(feat) {
       return mqLibsLess && mqLibsLess.indexOf(feat) !== -1;
     };
 
@@ -566,6 +566,7 @@ module.exports = generators.Base.extend({
     this.includeReset = hasBaseStyles('includeReset');
     this.includeNormalize = hasBaseStyles('includeNormalize');
     this.includeSanitize = hasBaseStyles('includeSanitize');
+    this.noBaseStyles = hasBaseStyles('noBaseStyles');
 
     this.includePcssClassPrefix = answers.includePcssClassPrefix;
     this.includePcssScopify = answers.includePcssScopify;
@@ -602,27 +603,36 @@ module.exports = generators.Base.extend({
     this.includeSCSS = hasPrepro('includeSCSS');
     this.includeBourbon = hasMixinLibSCSS('includeBourbon');
     this.includeCompass = hasMixinLibSCSS('includeCompass');
-    this.includeSusy = hasGridLibrarySCSS('includeSusy');
-    this.includeJeetSCSS = hasGridLibrarySCSS('includeJeetSCSS');
-    this.includeNeat = hasGridLibrarySCSS('includeNeat');
-    this.includeSemanticSCSS = hasGridLibrarySCSS('includeSemanticSCSS');
-    this.includeBreakpoint = hasMQLibrarySCSS('includeBreakpoint');
-    this.includeIncludeMedia = hasMQLibrarySCSS('includeIncludeMedia');
+    this.noMixinLibSCSS = hasMixinLibSCSS('noMixinLibSCSS');
+    this.includeSusy = hasGridLibSCSS('includeSusy');
+    this.includeJeetSCSS = hasGridLibSCSS('includeJeetSCSS');
+    this.includeNeat = hasGridLibSCSS('includeNeat');
+    this.includeSemanticSCSS = hasGridLibSCSS('includeSemanticSCSS');
+    this.noGridLibSCSS = hasGridLibSCSS('noGridLibSCSS');
+    this.includeBreakpoint = hasMQLibSCSS('includeBreakpoint');
+    this.includeIncludeMedia = hasMQLibSCSS('includeIncludeMedia');
+    this.noMQLibSCSS = hasMQLibSCSS('noMQLibSCSS');
 
     this.includeStylus = hasPrepro('includeStylus');
     this.includeNib = hasMixinLibStylus('includeNib');
     this.includeKoutoSwiss = hasMixinLibStylus('includeKoutoSwiss');
-    this.includeJeetStylus = hasGridLibraryStylus('includeJeetStylus');
-    this.includeSGrid = hasGridLibraryStylus('includeSGrid');
-    this.includeSemanticStylus = hasGridLibraryStylus('includeSemanticStylus');
-    this.includeRupture = hasMQLibraryStylus('includeRupture');
+    this.noMixinLibStylus = hasMixinLibStylus('noMixinLibStylus');
+    this.includeJeetStylus = hasGridLibStylus('includeJeetStylus');
+    this.includeSGrid = hasGridLibStylus('includeSGrid');
+    this.includeSemanticStylus = hasGridLibStylus('includeSemanticStylus');
+    this.noGridLibStylus = hasGridLibStylus('noGridLibStylus');
+    this.includeRupture = hasMQLibStylus('includeRupture');
+    this.noMQLibStylus = hasMQLibStylus('noMQLibStylus');
 
 
     this.includeLess = hasPrepro('includeLess');
-    this.includeGee = hasGridLibraryLess('includeGee');
-    this.includeSemanticLess = hasGridLibraryLess('includeSemanticLess');
+    this.includeGee = hasGridLibLess('includeGee');
+    this.includeSemanticLess = hasGridLibLess('includeSemanticLess');
+    this.noGridLibLess = hasGridLibLess('noGridLibLess');
     this.includeLessHat = hasMixinLibLess('includeLessHat');
-    this.includeLessMQ = hasMQLibraryLess('includeLessMQ');
+    this.noMixinLibLess = hasMixinLibLess('noMixinLibLess');
+    this.includeLessMQ = hasMQLibLess('includeLessMQ');
+    this.noMQLibLess = hasMQLibLess('noMQLibLess');
 
     callback();
   },
@@ -962,7 +972,17 @@ module.exports = generators.Base.extend({
           includeGee: this.includeGee,
           includeSemanticLess: this.includeSemanticLess,
           includeLessHat: this.includeLessHat,
-          includeLessMQ: this.includeLessMQ
+          includeLessMQ: this.includeLessMQ,
+          noGridLibSCSS: this.noGridLibSCSS,
+          noMixinLibSCSS: this.noMixinLibSCSS,
+          noMQLibSCSS: this.noMQLibSCSS,
+          noGridLibStylus: this.noGridLibStylus,
+          noMixinLibStylus: this.noMixinLibStylus,
+          noMQLibStylus: this.noMQLibStylus,
+          noGridLibLess: this.noGridLibLess,
+          noMixinLibLess: this.noMixinLibLess,
+          noMQLibLess: this.noMQLibLess,
+          noBaseStyles: this.noBaseStyles
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);

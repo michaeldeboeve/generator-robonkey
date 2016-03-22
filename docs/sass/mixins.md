@@ -404,7 +404,7 @@ This is my personal mixin library, gathered over the years.
 ```
 
 ### Media queries
-> Media queries shortcuts for breakpoint
+> Some mediaqueries
 
 ##### Available shortcuts:
 
@@ -670,8 +670,14 @@ a.foo {
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Modernizr](/docs/modernizr.md)
-- [Custom Icon Font](/docs/custom-icon-font.md)
+- [Jade](/docs/jade)
+- [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)
+- [Stylus](/docs/stylus/stylus.md)
+	- [Functions](/docs/stylus/functions.md)
+	- [Mixins](/docs/stylus/mixins.md)
+- [Less](/docs/less/less.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)

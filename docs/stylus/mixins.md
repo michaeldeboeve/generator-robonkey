@@ -16,10 +16,8 @@ This is my personal mixin library, gathered over the years.
 - [Hide text](#hide-text)
 - [Load font](#load-font)
 - [Media queries](#media-queries)
-- [Optional @at-root](#optional-at-root)
 - [Placeholder](#placeholder)
 - [Position](#position)
-- [Qualify](#qualify)
 - [Selection](#selection)
 - [Size](#size)
 - [Triangle](#triangle)
@@ -32,9 +30,8 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-  @include aspect-ratio(800, 400);
-}
+.foo
+  aspect-ratio(800, 400)
 ```
 
 ###### Output:
@@ -65,37 +62,29 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-  foo: block;
+.foo
+  foo: block
 
-  @include e('element') {
-    foo: element;
-  }
+  +e('element')
+    foo: element
 
-  @include m('modifier') {
-    foo: modifier;
-  }
-}
+  +m('modifier')
+    foo: modifier
 
 /* Nested */
 
-.foo {
+.foo
   foo: block;
 
-  @include e('element') {
-    foo: element;
-    @include m('modifier') {
-      foo: element--modifier;
-    }
-  }
+  +e('element')
+    foo: element
+    +m('modifier')
+      foo: element--modifier
 
-  @include m('modifier') {
-    foo: modifier;
-    @include e('element') {
-      foo: modifier__element;
-    }
-  }
-}
+  +m('modifier')
+    foo: modifier
+    +e('element')
+      foo: modifier__element
 ```
 
 ###### Output:
@@ -136,29 +125,23 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-  @include centerer();
-}
+.foo
+  centerer()
 
-.foo--both {
-  @include centerer(both); // both or b
-}
+.foo--both
+  centerer(both) // both or b
 
-.foo--horizontal {
-  @include centerer(horizontal); // horizontal or h
-}
+.foo--horizontal
+  centerer(horizontal) // horizontal or h
 
-.foo--vertical {
-  @include centerer(vertical); // vertical or v
-}
+.foo--vertical
+  centerer(vertical) // vertical or v
 
-.foo--remove {
-  @include centerer-remove();
-}
+.foo--remove
+  centerer-remove()
 
-.foo--remove--pos {
-  @include centerer-remove(absolute);
-}
+.foo--remove--pos
+  centerer-remove(absolute)
 ```
 
 ###### Output:
@@ -212,9 +195,8 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-    @include clearfix();
-}
+.foo
+    clearfix()
 ```
 
 ###### Output:
@@ -232,9 +214,8 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-  @include equal-padding-inline-span(red, 1em);
-}
+.foo
+  equal-padding-inline-span(red, 1em)
 ```
 
 ###### Output:
@@ -254,9 +235,8 @@ This is my personal mixin library, gathered over the years.
 ###### Use:
 
 ```sh
-.foo {
-  @include video-container();
-}
+.foo
+  video-container()
 ```
 ###### Output:
 
@@ -290,9 +270,8 @@ This is my personal mixin library, gathered over the years.
 ##### Use:
 
 ```sh
-.foo {
-  @include ghost-arrow($size: 16px, $color: red, $width: 1px, $direction: right);
-}
+.foo
+  ghost-arrow($size: 16px, $color: red, $width: 1px, $direction: right)
 ```
 
 ##### Output:
@@ -316,9 +295,8 @@ This is my personal mixin library, gathered over the years.
 ##### Use:
 
 ```sh
-.foo {
-  @include hamburger($size: 30px, $size-inner-width: 70%, $size-inner-height: 2px, $size-inner-offset: 8px);
-}
+.foo
+  hamburger($size: 30px, $size-inner-width: 70%, $size-inner-height: 2px, $size-inner-offset: 8px)
 ```
 
 ##### Output:
@@ -358,11 +336,10 @@ This is my personal mixin library, gathered over the years.
 ##### Use:
 
 ```sh
-.foo {
-  width: 200px;
-  height: 100px;
-  @include hidetext();
-}
+.foo
+  width: 200px
+  height: 100px
+  hidetext()
 ```
 
 ##### Output:
@@ -388,7 +365,7 @@ This is my personal mixin library, gathered over the years.
 ##### Use:
 
 ```sh
-@include load-font('fontname', 'fontfolder', 'fontfile', weight, style);
+load-font('fontname', 'fontfolder', 'fontfile', weight, style)
 ```
 
 ##### Output:
@@ -404,36 +381,26 @@ This is my personal mixin library, gathered over the years.
 ```
 
 ### Media queries
-> Media queries shortcuts for breakpoint
+> Some mediaqueries
 
 ##### Available shortcuts:
 
 ```sh
-@include above($bp){};
-@include below($bp){};
-@include between($bp1, $bp2){};
-@include orientation($orientation){};
-@include landscape(){};
-@include portrait(){};
+above($bp){}
+below($bp){}
+between($bp1, $bp2){}
+orientation($orientation){}
+landscape(){}
+portrait(){}
 
-@include iphone6plus(null/portrait/landscape){};
-@include iphone6(null/portrait/landscape){};
-@include iphone5(null/portrait/landscape){};
-@include iphone4(null/portrait/landscape){};
+iphone6plus(null/portrait/landscape){}
+iphone6(null/portrait/landscape){}
+iphone5(null/portrait/landscape){
+iphone4(null/portrait/landscape){};
 
 More will follow
 ```
 
-### Optional @at-root
-> Helper mixin to check if ruleset is at root level
-
-##### Use:
-
-```sh
-@include optional-at-root('::-moz-selection') {
-  @content;
-}
-```
 
 
 ### Placeholder
@@ -441,15 +408,12 @@ More will follow
 ##### Use:
 
 ```sh
-@include placeholder {
++placeholder()
   color: red;
-}
 
-.foo {
-  @include placeholder {
+.foo
+  +placeholder
     color: blue;
-  }
-}
 ```
 
 ##### Output:
@@ -489,17 +453,14 @@ More will follow
 ##### Use:
 
 ```sh
-.foo {
-  @include position(absolute);
-}
+.foo
+  position(absolute);
 
-.foo--bar {
-  @include position(absolute, $top: 0, $right: 20px);
-}
+.foo--bar
+  position(absolute, top 0 right 20px);
 
-.foo--baz {
-  @include position(absolute, 10px, 0, 30px, 1em);
-}
+.foo--baz
+  position(absolute, top 10px right 0 bottom 30px left 1em)
 ```
 
 ##### Output:
@@ -530,18 +491,15 @@ More will follow
 ##### Use:
 
 ```sh
-.foo {
+.foo
   border: none;
 
-  @include qualify(button) {
+  +qualify(button)
     -webkit-appearance: none;
-  }
 
   // @alias qualify
-  @include when-is(a) {
+  +when-is(a)
     text-decoration: none;
-  }
-}
 ```
 
 ##### Output:
@@ -564,15 +522,12 @@ a.foo {
 ##### Use:
 
 ```sh
-@include selection {
++selection()
   background: red;
-}
 
-.foo {
-  @include selection {
+.foo
+  +selection()
     background: red;
-  }
-}
 ```
 
 ##### Output:
@@ -598,21 +553,17 @@ a.foo {
 ##### Use:
 
 ```sh
-.foo--size {
-  @include size(30px, 100px);
-}
+.foo--size
+  size(30px, 100px)
 
-.foo--size--square {
-  @include size(30px);
-}
+.foo--size--square
+  size(30px)
 
-.foo--square {
-  @include square(30px);
-}
+.foo--square
+  square(30px)
 
-.foo--circle {
-  @include circle(30px);
-}
+.foo--circle
+  circle(30px)
 ```
 
 ##### Output:
@@ -646,22 +597,38 @@ a.foo {
 ##### Use:
 
 ```sh
-.foo {
-  @include triangle(red, left);
-}
+.foo--top
+  triangle(top, red, 20px 10px);
+
+.foo--left
+  triangle(left, red, 20px 10px);
 ```
 
 ##### Output:
 
 ```sh
-.foo {
-  display: block;
+.foo--top {
   width: 0;
   height: 0;
+  display: block;
   border-style: solid;
-  border-width: 14px 0 14px 22px;
-  border-color: transparent transparent transparent red;
+  border-width: 20px 10px;
+  border-color: transparent;
+  border-top-width: 0;
+  border-bottom-color: #f00;
 }
+
+.foo--left {
+  width: 0;
+  height: 0;
+  display: block;
+  border-style: solid;
+  border-width: 10px 20px;
+  border-color: transparent;
+  border-left-width: 0;
+  border-right-color: #f00;
+}
+
 ```
 
 ## Docs
@@ -670,8 +637,14 @@ a.foo {
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Modernizr](/docs/modernizr.md)
-- [Custom Icon Font](/docs/custom-icon-font.md)
+- [Jade](/docs/jade)
+- [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)
+- [Stylus](/docs/stylus/stylus.md)
+	- [Functions](/docs/stylus/functions.md)
+	- [Mixins](/docs/stylus/mixins.md)
+- [Less](/docs/less/less.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)

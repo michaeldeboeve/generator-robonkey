@@ -1,16 +1,19 @@
-# Images
+# Jade
 
-Images placed in
-
-```sh
-src/images/
-```
-
-Will be minimized and placed in
+Jade source files are located in
 
 ```sh
-website/assets/images/
+src/jade/
 ```
+
+and will be compiled to
+
+```sh
+website/
+```
+
+### Structure
+
 
 
 ## Docs

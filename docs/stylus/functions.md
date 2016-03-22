@@ -8,7 +8,6 @@ Some useful functions
 - [Ease](#ease)
 - [px to em or rem](#px-to-em-or-rem)
 - [Fontweights](#fontweights)
-- [Opposite direction](#opposite-direction)
 
 ### Assets
 > Function to set assets path
@@ -119,24 +118,6 @@ Some useful functions
 ```
 
 
-### Opposite direction
-
-##### Use:
-
-```sh
-.foo {
-  background-position: opposite-direction(top right);
-}
-```
-
-##### Output:
-
-```sh
-.foo {
-  background-position: bottom left;
-}
-```
-
 
 ## Docs
 
@@ -144,8 +125,14 @@ Some useful functions
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Modernizr](/docs/modernizr.md)
-- [Custom Icon Font](/docs/custom-icon-font.md)
+- [Jade](/docs/jade)
+- [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
 	- [Mixins](/docs/sass/mixins.md)
+- [Stylus](/docs/stylus/stylus.md)
+	- [Functions](/docs/stylus/functions.md)
+	- [Mixins](/docs/stylus/mixins.md)
+- [Less](/docs/less/less.md)
+- [Modernizr](/docs/modernizr.md)
+- [Custom Icon Font](/docs/custom-icon-font.md)
