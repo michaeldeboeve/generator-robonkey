@@ -68,7 +68,6 @@ $ yo robonkey
 ## To Do
 
 - Priority:
-	- scss mixins and functions conversion to stylus and less
 	- Mixin and Function documantation
 
 - maybe down the road

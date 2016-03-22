@@ -1,4 +1,4 @@
-position(type, args)
+pos(type, args)
   i = 0
   position: unquote(type)
   for j in (1..4)
@@ -7,10 +7,10 @@ position(type, args)
     i += 1
 
 absolute()
-  position('absolute', arguments)
+  pos('absolute', arguments)
 
 relative()
-  position('relative', arguments)
+  pos('relative', arguments)
 
 fixed()
-  position('fixed', arguments)
+  pos('fixed', arguments)

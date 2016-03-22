@@ -1,4 +1,4 @@
-{
+ {
   "name": "<%= appname %>",
   "version": "<%= appversion %>",
   "description": "<%= appdescription %>",
@@ -46,7 +46,8 @@
     "gee.less": "^3.0.0",<% } %><% if(includeStylus){ %>
     "gulp-stylus": "^2.3.1",<% } %><% if(includeKoutoSwiss){ %>
     "kouto-swiss": "^0.11.14",<% } %><% if(includeRupture){ %>
-    "rupture": "^0.6.1",<% } %><% if(includeSGrid){ %>
+    "rupture": "^0.6.1",<% } %><% if(includeNib){ %>
+    "nib": "^1.1.0",<% } %><% if(includeSGrid){ %>
     "s-grid": "^1.1.2",<% } %><% if(includeJade){ %>
     "gulp-jade": "^1.1.0",<% } %><% if(includeCustomIcnFont) { %>
     "gulp-iconfont": "^6.0.0",
