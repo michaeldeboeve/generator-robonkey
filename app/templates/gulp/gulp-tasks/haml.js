@@ -23,12 +23,12 @@ gulp.task('haml-build', function() {
   gulp.src(paths.haml.src)
     .pipe(plumber(onHamlError))
     .pipe(haml(hamlOptions))
-    .pipe(prettify({indent_size: 2}))
     .pipe(htmlreplace({
       js: 'assets/js/script.min.js',
       css: 'assets/css/style.min.css',
       modernizr: 'assets/js/libs/modernizr.custom.js'
     }))
+    .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.haml.build));
 });
 

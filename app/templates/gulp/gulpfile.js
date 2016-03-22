@@ -35,7 +35,8 @@ gulp.task('build', [
                     'moveBower', <% if(includeJade){ %>
                     'jade-build', <% } %><% if(includeHaml){ %>
                     'haml-build', <% } %><% if(includeHandlebars){ %>
-                    'handlebars-build', <% } %>
+                    'handlebars-build', <% } %><% if(includeNunjucks){ %>
+                    'nunjucks-build', <% } %>
                     'images',
                     'scripts-build',
                     'styles-build',
@@ -47,7 +48,8 @@ gulp.task('default', [
                       'moveBower', <% if(includeJade){ %>
                       'jade', <% } %><% if(includeHaml){ %>
                       'haml', <% } %><% if(includeHandlebars){ %>
-                      'handlebars', <% } %>
+                      'handlebars', <% } %><% if(includeNunjucks){ %>
+                      'nunjucks', <% } %>
                       'images',
                       'scripts',
                       'styles',
@@ -70,6 +72,8 @@ gulp.task('default', [
   gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);<% } %>
   <% if(includeHaml){ %>// watch for Haml changes, then reload
   gulp.watch(paths.haml.watch, ['haml']).on('change', browserSync.reload);<% } %>
+  <% if(includeNunjucks){ %>// watch for Nunjucks changes, then reload
+  gulp.watch(paths.nunjucks.watch, ['nunjucks']).on('change', browserSync.reload);<% } %>
   <% if(includeHandlebars){ %>// watch for Handlebars changes, then reload
   gulp.watch(paths.handlebars.watch, ['handlebars']).on('change', browserSync.reload);
   gulp.watch(paths.handlebars.watchdata, ['handlebars']).on('change', browserSync.reload);<% } %>

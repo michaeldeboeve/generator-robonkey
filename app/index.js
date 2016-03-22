@@ -636,6 +636,7 @@ module.exports = generators.Base.extend({
 
     this.includeHaml = false;
     this.includeHandlebars = false;
+    this.includeNunjucks = false;
 
     callback();
   },
@@ -654,7 +655,7 @@ module.exports = generators.Base.extend({
   },
 
   _html: function(destRoot, sourceRoot, templateContext) {
-    if(!this.includeJade) {
+    if(!this.includeJade && !this.includeHaml && !this.includeHandlebars && !this.includeNunjucks) {
       // Dynamic
       this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
     }
@@ -742,6 +743,10 @@ module.exports = generators.Base.extend({
 
     if(this.includeHandlebars) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp/gulp-tasks/handlebars.js', templateContext);
+    }
+
+    if(this.includeNunjucks) {
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.js', destRoot + '/gulp/gulp-tasks/nunjucks.js', templateContext);
     }
 
     if(this.includeModernizr) {
@@ -898,6 +903,13 @@ module.exports = generators.Base.extend({
     }
   },
 
+  _nunjucks: function(destRoot, sourceRoot, templateContext) {
+    if(this.includeNunjucks) {
+      this.fs.copy(sourceRoot + '/src/nunjucks', destRoot + '/src/nunjucks');
+      this.fs.copyTpl(sourceRoot + '/src-tpl/nunjucks/base/base.html', destRoot + '/src/nunjucks/base/base.html', templateContext);
+    }
+  },
+
   _haml: function(destRoot, sourceRoot, templateContext) {
     if(this.includeHaml) {
       // Static
@@ -1006,7 +1018,8 @@ module.exports = generators.Base.extend({
           noMQLibLess: this.noMQLibLess,
           noBaseStyles: this.noBaseStyles,
           includeHaml: this.includeHaml,
-          includeHandlebars: this.includeHandlebars
+          includeHandlebars: this.includeHandlebars,
+          includeNunjucks: this.includeNunjucks
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
@@ -1022,6 +1035,7 @@ module.exports = generators.Base.extend({
     this._jade(destRoot, sourceRoot, templateContext);
     this._haml(destRoot, sourceRoot, templateContext);
     this._handlebars(destRoot, sourceRoot, templateContext);
+    this._nunjucks(destRoot, sourceRoot, templateContext);
 
     if(this.includeSCSS) {
       this._scss(destRoot, sourceRoot, templateContext);

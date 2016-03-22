@@ -5,7 +5,6 @@
 > _**This generator is a work in progress.<br>
 > There probably will be some bugs and missing features.<br>
 > Likewise, this documentation isn't finished yet either.<br><br>
-> Please contact me if you'd like a feature included**_
 
 ![image](docs/robonkeyscreenshot.png)
 
@@ -68,11 +67,10 @@ $ yo robonkey
 ## To Do
 
 - Priority:
-	- Mixin and Function documantation
+	- Mixin and Function documentation
 
 - maybe down the road
-	- handlebars integration
-	- haml integration
+	- nunjucks integration
 	- more js libraries?
 	- …
 
@@ -83,7 +81,6 @@ $ yo robonkey
 	- codeigniter
 	- …
 
-**Please contact me if you'd like a feature included**
 
 ## Docs
 

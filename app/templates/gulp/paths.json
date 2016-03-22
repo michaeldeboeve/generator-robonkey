@@ -39,6 +39,12 @@
     "watchdata": "./../src/handlebars/**/*.json",
     "partials": "./../src/handlebars/partials",
     "build": "./../website/"
+  },<% } %><% if(includeNunjucks){ %>
+  "nunjucks": {
+    "src": "./../src/nunjucks/pages/**/*.html",
+    "watch": "./../src/nunjucks/**/*.html",
+    "templates": "./../src/nunjucks/",
+    "build": "./../website/"
   },<% } %>
   "postcss": {
     "src": "./../website/assets/css/style.css",
