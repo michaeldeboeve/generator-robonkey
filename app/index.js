@@ -304,6 +304,28 @@ module.exports = generators.Base.extend({
         }]
       }
 
+      // Templating
+      ,{
+        type: 'list',
+        name: 'templateEngine',
+        message: 'How to generate html?',
+        choices: [{
+          name: 'Jade',
+          value: 'includeJade',
+          checked: false
+        }
+        ,{
+          name: 'Nunjucks',
+          value: 'includeNunjucks',
+          checked: false
+        }
+        ,{
+          name: 'None, just use plain old html',
+          value: 'noTemplateEngine',
+          checked: true
+        }]
+      }
+
       // Javascript
       ,{
         type: 'checkbox',
@@ -346,12 +368,8 @@ module.exports = generators.Base.extend({
         message: 'Would you like to use Modernizr?',
         default: true
       }
-      ,{
-        type: 'confirm',
-        name: 'includeJade',
-        message: 'Would you like to use Jade?',
-        default: true
-      }
+
+      // Icon Font
       ,{
         type: 'confirm',
         name: 'includeCustomIcnFont',
@@ -366,6 +384,8 @@ module.exports = generators.Base.extend({
         message: 'Name your custom icon font',
         default: 'robonky-glyphs'
       }
+
+      // Post CSS
       ,{
         type: 'confirm',
         name: 'includePostCSS',
@@ -444,6 +464,8 @@ module.exports = generators.Base.extend({
           return answers.includePcssScopify === true;
         }
       }
+
+      // Root Files
       ,{
         type: 'checkbox',
         name: 'rootFiles',
@@ -469,12 +491,16 @@ module.exports = generators.Base.extend({
           checked: false
         }]
       }
+
+      // Google Analytics
       ,{
         type: 'confirm',
         name: 'includeGA',
         message: 'Provide Google Analytics Script?',
         default: false
       }
+
+      // Run Gulp
       ,{
         type: 'confirm',
         name: 'runGulp',
@@ -486,157 +512,128 @@ module.exports = generators.Base.extend({
   },
 
   _saveAnswers: function(answers, callback) {
-    var scriptsJS = answers.scriptsJS;
     var gulpTasks = answers.gulpTasks;
+    var scriptsJS = answers.scriptsJS;
     var rootFiles = answers.rootFiles;
     var postCSSPlugins = answers.postCSSPlugins;
     var baseStyles = answers.baseStyles;
-
     var preproType = answers.preproType;
-
     var mixinLibsSCSS = answers.mixinLibsSCSS;
     var gridLibsSCSS = answers.gridLibsSCSS;
     var mqLibsSCSS = answers.mqLibsSCSS;
-
     var mixinLibsStylus = answers.mixinLibsStylus;
     var gridLibsStylus = answers.gridLibsStylus;
     var mqLibsStylus = answers.mqLibsStylus;
-
     var mixinLibsLess = answers.mixinLibsLess;
     var gridLibsLess = answers.gridLibsLess;
     var mqLibsLess = answers.mqLibsLess;
+    var templateEngine = answers.templateEngine;
 
-    function hasPrepro(feat) {
-      return preproType && preproType.indexOf(feat) !== -1;
-    };
-
-    function hasJSScript(feat) {
-      return scriptsJS && scriptsJS.indexOf(feat) !== -1;
-    };
-    function hasBaseStyles(feat) {
-      return baseStyles && baseStyles.indexOf(feat) !== -1;
-    };
-    function hasRootFile(feat) {
-      return rootFiles && rootFiles.indexOf(feat) !== -1;
+    function hasFeature(feat, answer) {
+      return answer && answer.indexOf(feat) !== -1;
     };
 
-    function hasMixinLibSCSS(feat) {
-      return mixinLibsSCSS && mixinLibsSCSS.indexOf(feat) !== -1;
-    };
-    function hasGridLibSCSS(feat) {
-      return gridLibsSCSS && gridLibsSCSS.indexOf(feat) !== -1;
-    };
-    function hasMQLibSCSS(feat) {
-      return mqLibsSCSS && mqLibsSCSS.indexOf(feat) !== -1;
-    };
-
-    function hasMixinLibStylus(feat) {
-      return mixinLibsStylus && mixinLibsStylus.indexOf(feat) !== -1;
-    };
-    function hasGridLibStylus(feat) {
-      return gridLibsStylus && gridLibsStylus.indexOf(feat) !== -1;
-    };
-    function hasMQLibStylus(feat) {
-      return mqLibsStylus && mqLibsStylus.indexOf(feat) !== -1;
-    };
-
-    function hasMixinLibLess(feat) {
-      return mixinLibsLess && mixinLibsLess.indexOf(feat) !== -1;
-    };
-    function hasGridLibLess(feat) {
-      return gridLibsLess && gridLibsLess.indexOf(feat) !== -1;
-    };
-    function hasMQLibLess(feat) {
-      return mqLibsLess && mqLibsLess.indexOf(feat) !== -1;
-    };
-
-    function hasPostCSSPlugins(feat) {
-      return postCSSPlugins && postCSSPlugins.indexOf(feat) !== -1;
-    };
-
+    // Gulp
     this.runGulp = answers.runGulp;
 
+
+    // Project Details
+    this.localUrl = answers.localUrl;
     this.appname = answers.name;
     this.appdescription = answers.description;
     this.appversion = answers.version;
     this.applicense = answers.license;
-    this.appauthor = answers.yourname;
-    this.appemail = answers.email;
 
-    this.includeReset = hasBaseStyles('includeReset');
-    this.includeNormalize = hasBaseStyles('includeNormalize');
-    this.includeSanitize = hasBaseStyles('includeSanitize');
-    this.noBaseStyles = hasBaseStyles('noBaseStyles');
 
-    this.includePcssClassPrefix = answers.includePcssClassPrefix;
-    this.includePcssScopify = answers.includePcssScopify;
-    this.customIconFontName = answers.customIconFontName;
-    this.customClassPrefix = answers.customClassPrefix;
-    this.customScope = answers.customScope;
+    // Base Styles
+    this.includeReset = hasFeature('includeReset', baseStyles);
+    this.includeNormalize = hasFeature('includeNormalize', baseStyles);
+    this.includeSanitize = hasFeature('includeSanitize', baseStyles);
+    this.noBaseStyles = hasFeature('noBaseStyles', baseStyles);
+
+
+    // JavaScript
+    this.includeJQuery = hasFeature('includeJQuery', scriptsJS);
+    this.includeWaypoints = hasFeature('includeWaypoints', scriptsJS);
+    this.includeSignals = hasFeature('includeSignals', scriptsJS);
+    this.includeD3 = hasFeature('includeD3', scriptsJS);
+    this.includeTweenmax = hasFeature('includeTweenmax', scriptsJS);
+    this.includeEnquire = hasFeature('includeEnquire', scriptsJS);
+    this.includeModernizr = answers.includeModernizr;
     this.includeGA = answers.includeGA;
 
-    this.localUrl = answers.localUrl;
-    this.includeJQuery = hasJSScript('includeJQuery');
-    this.includeWaypoints = hasJSScript('includeWaypoints');
-    this.includeSignals = hasJSScript('includeSignals');
-    this.includeD3 = hasJSScript('includeD3');
-    this.includeTweenmax = hasJSScript('includeTweenmax');
-    this.includeEnquire = hasJSScript('includeEnquire');
 
-    this.includeModernizr = answers.includeModernizr;
-    this.includeJade = answers.includeJade;
-    this.includeCustomIcnFont = answers.includeCustomIcnFont;
-    this.includePostCSS = answers.includePostCSS;
-
-    this.includeHtaccess = hasRootFile('includeHtaccess');
-    this.includeCrossdomain = hasRootFile('includeCrossdomain');
-    this.includeBrowserconfig = hasRootFile('includeBrowserconfig');
-    this.includeRobots = hasRootFile('includeRobots');
-
-    this.includePcssSelectorNot = hasPostCSSPlugins('includePcssSelectorNot');
-    this.includePcssSelectorMatches = hasPostCSSPlugins('includePcssSelectorMatches');
-    this.includePcssGradientFix = hasPostCSSPlugins('includePcssGradientFix');
-    this.includePcssMQPacker = hasPostCSSPlugins('includePcssMQPacker');
-    this.includePcssMQKeyframes = hasPostCSSPlugins('includePcssMQKeyframes');
-    this.includePcssNano = hasPostCSSPlugins('includePcssNano');
-
-    this.includeSCSS = hasPrepro('includeSCSS');
-    this.includeBourbon = hasMixinLibSCSS('includeBourbon');
-    this.includeCompass = hasMixinLibSCSS('includeCompass');
-    this.noMixinLibSCSS = hasMixinLibSCSS('noMixinLibSCSS');
-    this.includeSusy = hasGridLibSCSS('includeSusy');
-    this.includeJeetSCSS = hasGridLibSCSS('includeJeetSCSS');
-    this.includeNeat = hasGridLibSCSS('includeNeat');
-    this.includeSemanticSCSS = hasGridLibSCSS('includeSemanticSCSS');
-    this.noGridLibSCSS = hasGridLibSCSS('noGridLibSCSS');
-    this.includeBreakpoint = hasMQLibSCSS('includeBreakpoint');
-    this.includeIncludeMedia = hasMQLibSCSS('includeIncludeMedia');
-    this.noMQLibSCSS = hasMQLibSCSS('noMQLibSCSS');
-
-    this.includeStylus = hasPrepro('includeStylus');
-    this.includeNib = hasMixinLibStylus('includeNib');
-    this.includeKoutoSwiss = hasMixinLibStylus('includeKoutoSwiss');
-    this.noMixinLibStylus = hasMixinLibStylus('noMixinLibStylus');
-    this.includeJeetStylus = hasGridLibStylus('includeJeetStylus');
-    this.includeSGrid = hasGridLibStylus('includeSGrid');
-    this.includeSemanticStylus = hasGridLibStylus('includeSemanticStylus');
-    this.noGridLibStylus = hasGridLibStylus('noGridLibStylus');
-    this.includeRupture = hasMQLibStylus('includeRupture');
-    this.noMQLibStylus = hasMQLibStylus('noMQLibStylus');
-
-
-    this.includeLess = hasPrepro('includeLess');
-    this.includeGee = hasGridLibLess('includeGee');
-    this.includeSemanticLess = hasGridLibLess('includeSemanticLess');
-    this.noGridLibLess = hasGridLibLess('noGridLibLess');
-    this.includeLessHat = hasMixinLibLess('includeLessHat');
-    this.noMixinLibLess = hasMixinLibLess('noMixinLibLess');
-    this.includeLessMQ = hasMQLibLess('includeLessMQ');
-    this.noMQLibLess = hasMQLibLess('noMQLibLess');
-
+    // HTML Templating
+    this.includeJade = hasFeature('includeJade', templateEngine);
+    this.includeNunjucks = hasFeature('includeNunjucks', templateEngine);
     this.includeHaml = false;
     this.includeHandlebars = false;
-    this.includeNunjucks = false;
+    this.noTemplateEngine = hasFeature('noTemplateEngine', templateEngine);
+
+
+    // Fonts
+    this.includeCustomIcnFont = answers.includeCustomIcnFont;
+    this.customIconFontName = answers.customIconFontName;
+
+
+    // Project Root
+    this.includeHtaccess = hasFeature('includeHtaccess', rootFiles);
+    this.includeCrossdomain = hasFeature('includeCrossdomain', rootFiles);
+    this.includeBrowserconfig = hasFeature('includeBrowserconfig', rootFiles);
+    this.includeRobots = hasFeature('includeRobots', rootFiles);
+
+
+    // PostCSS
+    this.includePostCSS = answers.includePostCSS;
+    this.includePcssSelectorNot = hasFeature('includePcssSelectorNot', postCSSPlugins);
+    this.includePcssSelectorMatches = hasFeature('includePcssSelectorMatches', postCSSPlugins);
+    this.includePcssGradientFix = hasFeature('includePcssGradientFix', postCSSPlugins);
+    this.includePcssMQPacker = hasFeature('includePcssMQPacker', postCSSPlugins);
+    this.includePcssMQKeyframes = hasFeature('includePcssMQKeyframes', postCSSPlugins);
+    this.includePcssNano = hasFeature('includePcssNano', postCSSPlugins);
+    this.includePcssClassPrefix = answers.includePcssClassPrefix;
+    this.includePcssScopify = answers.includePcssScopify;
+    this.customClassPrefix = answers.customClassPrefix;
+    this.customScope = answers.customScope;
+
+
+    // Sass
+    this.includeSCSS = hasFeature('includeSCSS', preproType);
+    this.includeBourbon = hasFeature('includeBourbon', mixinLibsSCSS);
+    this.includeCompass = hasFeature('includeCompass', mixinLibsSCSS);
+    this.noMixinLibSCSS = hasFeature('noMixinLibSCSS', mixinLibsSCSS);
+    this.includeSusy = hasFeature('includeSusy', gridLibsSCSS);
+    this.includeJeetSCSS = hasFeature('includeJeetSCSS', gridLibsSCSS);
+    this.includeNeat = hasFeature('includeNeat', gridLibsSCSS);
+    this.includeSemanticSCSS = hasFeature('includeSemanticSCSS', gridLibsSCSS);
+    this.noGridLibSCSS = hasFeature('noGridLibSCSS', gridLibsSCSS);
+    this.includeBreakpoint = hasFeature('includeBreakpoint', mqLibsSCSS);
+    this.includeIncludeMedia = hasFeature('includeIncludeMedia', mqLibsSCSS);
+    this.noMQLibSCSS = hasFeature('noMQLibSCSS', mqLibsSCSS);
+
+
+    // Stylus
+    this.includeStylus = hasFeature('includeStylus', preproType);
+    this.includeNib = hasFeature('includeNib', mixinLibsStylus);
+    this.includeKoutoSwiss = hasFeature('includeKoutoSwiss', mixinLibsStylus);
+    this.noMixinLibStylus = hasFeature('noMixinLibStylus', mixinLibsStylus);
+    this.includeJeetStylus = hasFeature('includeJeetStylus', gridLibsStylus);
+    this.includeSGrid = hasFeature('includeSGrid', gridLibsStylus);
+    this.includeSemanticStylus = hasFeature('includeSemanticStylus', gridLibsStylus);
+    this.noGridLibStylus = hasFeature('noGridLibStylus', gridLibsStylus);
+    this.includeRupture = hasFeature('includeRupture', mqLibsStylus);
+    this.noMQLibStylus = hasFeature('noMQLibStylus', mqLibsStylus);
+
+
+    // Less
+    this.includeLess = hasFeature('includeLess', preproType);
+    this.includeLessHat = hasFeature('includeLessHat', mixinLibsLess);
+    this.noMixinLibLess = hasFeature('noMixinLibLess', mixinLibsLess);
+    this.includeGee = hasFeature('includeGee', gridLibsLess);
+    this.includeSemanticLess = hasFeature('includeSemanticLess', gridLibsLess);
+    this.noGridLibLess = hasFeature('noGridLibLess', gridLibsLess);
+    this.includeLessMQ = hasFeature('includeLessMQ', mqLibsLess);
+    this.noMQLibLess = hasFeature('noMQLibLess', mqLibsLess);
 
     callback();
   },
@@ -655,7 +652,7 @@ module.exports = generators.Base.extend({
   },
 
   _html: function(destRoot, sourceRoot, templateContext) {
-    if(!this.includeJade && !this.includeHaml && !this.includeHandlebars && !this.includeNunjucks) {
+    if(this.noTemplateEngine) {
       // Dynamic
       this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
     }
@@ -965,7 +962,6 @@ module.exports = generators.Base.extend({
           includeEnquire: this.includeEnquire,
           includeModernizr: this.includeModernizr,
           includeGA: this.includeGA,
-          includeJade: this.includeJade,
           includePostCSS: this.includePostCSS,
           includeCustomIcnFont: this.includeCustomIcnFont,
           includeHtaccess: this.includeHtaccess,
@@ -1017,9 +1013,11 @@ module.exports = generators.Base.extend({
           noMixinLibLess: this.noMixinLibLess,
           noMQLibLess: this.noMQLibLess,
           noBaseStyles: this.noBaseStyles,
+          includeJade: this.includeJade,
           includeHaml: this.includeHaml,
           includeHandlebars: this.includeHandlebars,
-          includeNunjucks: this.includeNunjucks
+          includeNunjucks: this.includeNunjucks,
+          noTemplateEngine: this.noTemplateEngine
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
