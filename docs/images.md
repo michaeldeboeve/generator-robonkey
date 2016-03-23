@@ -1,5 +1,9 @@
 # Images
 
+[Gulp imagemin](https://github.com/sindresorhus/gulp-imagemin)
+
+## Locations
+
 Images placed in
 
 ```sh

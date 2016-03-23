@@ -2,6 +2,8 @@
 
 This setup uses [node-sass](https://github.com/sass/node-sass), a library that provides a binding for Node.js to [LibSass](https://github.com/sass/libsass)
 
+[Sass website](http://sass-lang.com/)
+
 ## Location
 
 Sass source files are located in

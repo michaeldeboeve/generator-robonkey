@@ -2,6 +2,10 @@
 
 The custom icon font generator uses svg images from a folder to build the font. Then it generates a .scss file with `@font-face` declaration, `.icn` and `.icn--name` classes.
 
+[Gulp Iconfont](https://www.npmjs.com/package/gulp-iconfont)<br>
+[Gulp Iconfont css](https://github.com/backflip/gulp-iconfont-css)
+
+
 ## Settings
 
 The fontname is set in the options when you use Robonkey. _(Default: `robonkey-glyphs`)_

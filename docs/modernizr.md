@@ -4,6 +4,9 @@ Modernizr gulp plugin is used for the creation of custom Modernizr tests.
 
 When initialized, the plugin will crawl your .scss and .js files for Modernizr references (ie: `.no-svg`) and builds the `modernizr-custom.js` file.
 
+[Modernizr website](https://modernizr.com/)<br>
+[Gulp Modernizr](https://github.com/doctyper/gulp-modernizr)
+
 ## Settings
 
 In `config.json` you can set the modernizr options.
@@ -42,7 +45,7 @@ $ gulp build
 ```
 ### Output
 
-The output file will be: 
+The output file will be:
 
 ```sh
 website/assets/js/libs/modernizr.custom.js

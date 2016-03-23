@@ -1,5 +1,7 @@
 # gulpfile.js
 
+[Gulp website] (http://gulpjs.com/)
+
 The gulpfile.js is split up in parts using [require-dir]().
 It gets it's tasks from the subdirectory `gulp-tasks`, which contains the followig files:
 
@@ -20,7 +22,7 @@ The default task will output unminified css, javascript and will start up Browse
 $ gulp dev
 $ gulp serve
 ```
-Are alsiasses for 
+Are alsiasses for
 
 ```sh
 $ gulp
