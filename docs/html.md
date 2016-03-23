@@ -1,4 +1,9 @@
-# Jade
+# Html templating
+
+You can choose between Jade or Nunjucks as a templating engine.<br>
+Or none at all, and use vanilla html.
+
+## Jade
 
 [Jade website](http://jade-lang.com/)
 
@@ -14,14 +19,14 @@ and will be compiled to
 website/
 ```
 
-# Nunjucks
+## Nunjucks
 
 [Nunjucks website](https://mozilla.github.io/nunjucks/)
 
 Nunjucks source files are located in
 
 ```sh
-src/jade/
+src/nunjucks/
 ```
 
 and will be compiled to
@@ -37,7 +42,7 @@ website/
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [HTML templating](/docs/html)
+- [HTML templating](/docs/html.md)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
