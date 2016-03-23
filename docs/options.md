@@ -121,7 +121,7 @@ The following options are available:
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [HTML templating](/docs/html)
+- [HTML templating](/docs/html.md)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)
