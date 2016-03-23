@@ -88,6 +88,7 @@ gulp
 		clean.js
 		images.js
 		jade.js
+		nunjucks.js
 		modernizr.js
 		scripts.js
 		styles.js
@@ -139,7 +140,7 @@ website
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

@@ -36,7 +36,8 @@ gulp.task('build', [
                     'jade-build', <% } %><% if(includeHaml){ %>
                     'haml-build', <% } %><% if(includeHandlebars){ %>
                     'handlebars-build', <% } %><% if(includeNunjucks){ %>
-                    'nunjucks-build', <% } %>
+                    'nunjucks-build', <% } %><% if(noTemplateEngine){ %>
+                    'html-build', <% } %>
                     'images',
                     'scripts-build',
                     'styles-build',

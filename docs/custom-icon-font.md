@@ -36,7 +36,7 @@ Things to consider when preparing svg for icon fonts:
 Drop your svg files _(minimum 512px * 512px)_ in the svg folder _(src/iconfont/svg)_
 
 
-###### Run: 
+###### Run:
 
 ```sh
 $ gulp iconfont
@@ -44,7 +44,7 @@ $ gulp iconfont
 
 ### Output Files
 
-The font will be placed in: 
+The font will be placed in:
 
 ```sh
 website/assets/fonts
@@ -73,7 +73,7 @@ src/less/modules/icons.less
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

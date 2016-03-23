@@ -7,6 +7,7 @@ It gets it's tasks from the subdirectory `gulp-tasks`, which contains the follow
 - iconfont.js _(creating the iconfont)_
 - images.js _(imagemin)_
 - jade.js _(jade compile)_
+- nunjucks.js _(nunjucks compile)_
 - modernizr.js _(creating modernizr file)_
 - scripts.js _(concat and minify javascript)_
 - styles.js _(concat and minify SCSS, Stylus or Less)_
@@ -51,6 +52,7 @@ Two config files are present:
 	- images - src/build
 	- styles - src/build/scr_watch/build_soucemap
 	- jade - src/watch/build
+	- nunjucks - src/watch/build
 	- postcss - src/build
 	- font - src/build/template/path
 
@@ -61,7 +63,7 @@ Two config files are present:
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

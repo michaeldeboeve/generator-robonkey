@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% set varHello = 'Hello' %}
+
 {% block content %}
+<h1>{{varHello}}</h1>
+
 {% include "views/kitchensink.html" %}
 {% endblock %}

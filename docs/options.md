@@ -59,7 +59,21 @@ The following options are available:
 		- Less Hat
 		- None
 
-#### 3. Javascript Libraries (Checklist)
+#### 3. Base styles (List)
+  	
+- Reset
+- Normalize
+- Sanitize
+- None
+
+#### 4. Template Engine
+
+- Jade
+- Nunjucks
+- None
+
+
+#### 5. Javascript Libraries (Checklist)
 
 - jQuery
 - Waypoints
@@ -68,18 +82,11 @@ The following options are available:
 - TweenMax
 - Enquire
 
-#### 4. Base styles (List)
-  	
-- Reset
-- Normalize
-- Sanitize
-  	
-#### 5. Modernizr (Yes/No Default: Yes)
-
-#### 6. Jade (Yes/No Default: Yes)
+#### 6. Modernizr (Yes/No Default: Yes)
 
 #### 7. Custom Icon Font Generator (Yes/No Default: No)	
 - Custom Icon Font Name (input)	
+
 
 #### 8. PostCSS (Checklist)
 
@@ -114,7 +121,7 @@ The following options are available:
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

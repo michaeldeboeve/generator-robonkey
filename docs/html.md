@@ -1,5 +1,7 @@
 # Jade
 
+[Jade website](http://jade-lang.com/)
+
 Jade source files are located in
 
 ```sh
@@ -12,8 +14,21 @@ and will be compiled to
 website/
 ```
 
-### Structure
+# Nunjucks
 
+[Nunjucks website](https://mozilla.github.io/nunjucks/)
+
+Nunjucks source files are located in
+
+```sh
+src/jade/
+```
+
+and will be compiled to
+
+```sh
+website/
+```
 
 
 ## Docs
@@ -22,7 +37,7 @@ website/
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

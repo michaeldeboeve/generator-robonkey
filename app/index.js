@@ -362,6 +362,8 @@ module.exports = generators.Base.extend({
           checked: false
         }]
       }
+
+      // Modernizr
       ,{
         type: 'confirm',
         name: 'includeModernizr',
@@ -730,6 +732,12 @@ module.exports = generators.Base.extend({
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp/gulp-tasks/iconfont.js', templateContext);
     }
+
+    if(this.noTemplateEngine) {
+      // Dynamic
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.js', destRoot + '/gulp/gulp-tasks/html.js', templateContext);
+    }
+
     if(this.includeJade) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp/gulp-tasks/jade.js', templateContext);
     }

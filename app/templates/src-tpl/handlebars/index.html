@@ -8,8 +8,9 @@
 
     <meta name="description" content="{{pageDescription}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/images/favicons/touch-icon-precomposed.png">
 
     <!-- build:css -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -41,7 +42,7 @@
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+      ga('create','{{gaCode}}','auto');ga('send','pageview');
     </script><% } %>
   </body>
 </html>

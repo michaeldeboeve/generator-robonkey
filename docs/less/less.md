@@ -16,7 +16,7 @@ website/assets/css
 
 
 ## Libraries
-The following libraries are included (optional on install): 
+The following libraries are included (optional on install):
 
 See their docs for more information.
 
@@ -67,7 +67,7 @@ less
 	├── themes
 		...
 	styles.less
-	
+
 ```
 
 
@@ -78,7 +78,7 @@ less
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

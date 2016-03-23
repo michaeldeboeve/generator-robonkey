@@ -6,22 +6,22 @@
     %title pageTitle
     %meta(content="Description" name="description")
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %link(href="apple-touch-icon.png" rel="apple-touch-icon")
-    / Place favicon.ico in the root directory
+    %ink(rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico")
+    %link(rel="apple-touch-icon" href="/assets/images/favicons/touch-icon-precomposed.png")
     / build:css
     %link(href="/assets/css/style.css" rel="stylesheet")
     / endbuild
     <% if(includeModernizr){ %>
     / build:modernizr
-    %script(src="assets/js/libs/modernizr.dev.js")
+    %script(src="/assets/js/libs/modernizr.dev.js")
     /endbuild <% } %>
   %body
-    <% if(includeJQuery){ %>%script(src="assets/js/libs/jquery.min.js")<% } %>
-    <% if(includeWaypoints && includeJQuery){ %>%script(src="assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>%script(src="assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
-    %script(src="assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
-    %script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
-    %script(src="assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
-    %script(src="assets/js/libs/TweenMax.min.js")<% } %>
+    <% if(includeJQuery){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
+    <% if(includeWaypoints && includeJQuery){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
+    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
+    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
+    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
+    %script(src="/assets/js/libs/TweenMax.min.js")<% } %>
     / build:js
     %script(sr="/assets/js/script.js")
     / endbuild

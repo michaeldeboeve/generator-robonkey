@@ -19,7 +19,9 @@
 ## Features
 
 - [Gulp](http://gulpjs.com/)
-- [Jade](http://jade-lang.com/)
+- Html templating
+	- [Jade](http://jade-lang.com/)
+	- [Nunjucks](http://jade-lang.com/)
 - Preprocessors:
 	- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md), [functions](/docs/sass/functions.md) or [optional libraries](/docs/features.md#sass-libraries)
 	- [Stylus](http://stylus-lang.com/) with [some mixins](/docs/stylus/mixins.md), [functions](/docs/stylus/functions.md) or  [optional libraries](/docs/features.md#stylus-libraries)
@@ -70,7 +72,6 @@ $ yo robonkey
 	- Mixin and Function documentation
 
 - maybe down the road
-	- nunjucks integration
 	- more js libraries?
 	- …
 
@@ -88,7 +89,7 @@ $ yo robonkey
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

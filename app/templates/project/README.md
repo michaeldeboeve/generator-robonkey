@@ -9,8 +9,9 @@ It gets it's tasks from the subdirectory `gulp-tasks`, which contains the follow
 
 - bower.js _(moving bower dependencies to the `website/assets` folder)_<% if(includeCustomIcnFont) { %>
 - iconfont.js _(creating the iconfont)_<% } %>
-- images.js _(imagemin)_
-- jade.js _(jade compile)_<% if(includeModernizr) { %>
+- images.js _(imagemin)_<% if(includeNunjucks) { %>
+- nunjucks.js _(nunjucks compile)_<% } %><% if(includeJade) { %>
+- jade.js _(jade compile)_<% } %><% if(includeModernizr) { %>
 - modernizr.js _(creating modernizr file)_<% } %>
 - scripts.js _(concat and minify javascript)_
 - styles.js _(concat and minify SCSS, Stylus or Less)_
@@ -58,8 +59,9 @@ Two config files are present:
   - modernizr - build<% } %>
   - html - scr
   - images - src/build
-  - styles - src/build/scr_watch/build_soucemap
-  - jade - src/watch/build<% if(includePostCSS) { %>
+  - styles - src/build/scr_watch/build_soucemap<% if(includeNunjucks) { %>
+  - nunjucks - src/watch/build<% } %><% if(includeJade) { %>
+  - jade - src/watch/build<% } %><% if(includePostCSS) { %>
   - postcss - src/build<% } %><% if(includeCustomIcnFont) { %>
   - font - src/build/template/path<% } %>
 
@@ -85,6 +87,21 @@ Jade source files are located in
 
 ```sh
 src/jade/
+```
+
+and will be compiled to
+
+```sh
+website/
+```
+<% } %>
+
+<% if(includeNunjucks) { %>
+## Jade
+Nunjucks source files are located in
+
+```sh
+src/nunjucks/
 ```
 
 and will be compiled to
@@ -427,7 +444,7 @@ scc
     ...
   ├── images
     ...
-  ├── jade
+  ├── <% if(includeJade) {%>jade<% } %><% if(includeNunjucks) {%>nunjucks<% } %>
     ...
   ├── js
     ...

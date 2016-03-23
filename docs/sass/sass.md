@@ -20,7 +20,7 @@ website/assets/css
 A set of [mixins](/docs/sass/mixins.md) and [functions](/docs/sass/functions.md) are available
 
 ## Libraries
-The following libraries are included (optional on install): 
+The following libraries are included (optional on install):
 
 See their docs for more information.
 
@@ -77,7 +77,7 @@ scss
 	├── themes
 		...
 	styles.scss
-	
+
 ```
 
 
@@ -88,7 +88,7 @@ scss
 - [Getting started](/docs/getting-started.md)
 - [Features](/docs/features.md)
 - [Options](/docs/options.md)
-- [Jade](/docs/jade)
+- [HTML templating](/docs/html)
 - [Images](/docs/images.md)
 - [Sass](/docs/sass/sass.md)
 	- [Functions](/docs/sass/functions.md)

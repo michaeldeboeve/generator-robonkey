@@ -25,7 +25,7 @@ block socialMedia
 block favicons
   - var useCustomFaviconPath   = false
   - var useAppleIcons          = false
-  - var faviconType            = '/image/x-icon'
+  - var faviconType            = 'image/x-icon'
   - var faviconPath            = '/assets/images/favicons/favicon.ico'
   - var appleIPhone            = '/assets/images/favicons/touch-icon-precomposed.png'
     
@@ -64,12 +64,12 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       
     block headerStyles
       != '\n    <!-- build:css -->'
-      link(rel="stylesheet", href="assets/css/style.css")
+      link(rel="stylesheet", href="/assets/css/style.css")
       != '\n    <!-- endbuild -->'
 
     block headerScripts
       <% if(includeModernizr){ %>!= '\n    <!-- build:modernizr -->'
-      script(src="assets/js/libs/modernizr.dev.js")
+      script(src="/assets/js/libs/modernizr.dev.js")
       != '\n    <!-- endbuild -->'<% } %>
 
   body(class="#{ bodyClass }")
@@ -77,16 +77,16 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
 
     != '\n\n'
-    <% if(includeJQuery){ %>script(src="assets/js/libs/jquery.min.js")<% } %>
-    <% if(includeWaypoints && includeJQuery){ %>script(src="assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>script(src="assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
-    script(src="assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
-    script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
-    script(src="assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
-    script(src="assets/js/libs/TweenMax.min.js")<% } %>
+    <% if(includeJQuery){ %>script(src="/assets/js/libs/jquery.min.js")<% } %>
+    <% if(includeWaypoints && includeJQuery){ %>script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
+    script(src="/assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
+    script(src="/assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
+    script(src="/assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
+    script(src="/assets/js/libs/TweenMax.min.js")<% } %>
     != '\n'  
     block footerScripts
       != '\n\n    <!-- build:js -->'
-      script(src="assets/js/script.js")
+      script(src="/assets/js/script.js")
       != '\n    <!-- endbuild -->\n'
     
     <% if(includeGA){ %>

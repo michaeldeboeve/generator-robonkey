@@ -7,7 +7,8 @@
     "build": "./../website/assets/js/libs/"
   },
   "html": {
-    "src": "./../website/*.html"
+    "src": "./../website/**/*.html",
+    "build": "./../website/"
   },
   "images": {
     "src": "./../src/images/**/*",
