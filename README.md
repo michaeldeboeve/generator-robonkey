@@ -4,7 +4,7 @@
 
 > _**This generator is a work in progress.<br>
 > There probably will be some bugs and missing features.<br>
-> Likewise, this documentation isn't finished yet either.<br><br>
+> Likewise, this documentation isn't finished yet either.**_
 
 ![image](docs/robonkeyscreenshot.png)
 
@@ -25,7 +25,7 @@
 - Preprocessors:
 	- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md), [functions](/docs/sass/functions.md) or [optional libraries](/docs/features.md#sass-libraries)
 	- [Stylus](http://stylus-lang.com/) with [some mixins](/docs/stylus/mixins.md), [functions](/docs/stylus/functions.md) or  [optional libraries](/docs/features.md#stylus-libraries)
-	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries) 
+	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries)
 - [BrowserSync](https://www.browsersync.io/)
 - PostCSS:
 	- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
@@ -39,8 +39,8 @@
 	- [Scopify](https://github.com/pazams/postcss-scopify)
 - [Imagemin](https://github.com/sindresorhus/gulp-imagemin)
 - Custom Icon Font Generator:
-	- [iconfont](https://github.com/nfroidure/gulp-iconfont) 
-	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css) 
+	- [iconfont](https://github.com/nfroidure/gulp-iconfont)
+	- [iconfont-css](https://github.com/backflip/gulp-iconfont-css)
 - [Modernizr Builder](https://github.com/doctyper/gulp-modernizr)
 
 
