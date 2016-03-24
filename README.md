@@ -1,6 +1,6 @@
 # Robonkey Generator
 
-> A [Yeoman](http://yeoman.io) front-end application generator with Gulp, Jade, Sass/Stylus/Less, PostCSS, Autoprefixer, Modernizr, Custom Icon Font Generator and some JavaScript and Sass/Stylus/Less libraries to choose from.
+> A [Yeoman](http://yeoman.io) front-end application generator with Gulp, Jade/Nunjucks, Sass/Stylus/Less, PostCSS, Autoprefixer, Modernizr, Custom Icon Font Generator and some JavaScript and Sass/Stylus/Less libraries to choose from.
 
 > _**This generator is a work in progress.<br>
 > There probably will be some bugs and missing features.<br>

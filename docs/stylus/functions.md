@@ -15,13 +15,11 @@ Some useful functions
 ##### Use:
 
 ```sh
-.foo {
-  background-image: image('image.png');
-}
+.foo
+  background-image: image('image.png')
 
-@fontface {
-  src: font('fontfolder/fontfile.eot');
-}
+@fontface
+  src: font('fontfolder/fontfile.eot')
 ```
 
 ##### Output:
@@ -42,13 +40,11 @@ Some useful functions
 ##### Use:
 
 ```sh
-.foo--black {
-  background: black(.5);
-}
+.foo--black
+  background: black(.5)
 
-.foo--white {
-  background: white(.5);
-}
+.foo--white
+  background: white(.5)
 ```
 
 ##### Output:
@@ -68,9 +64,8 @@ Some useful functions
 ##### Use:
 
 ```sh
-.foo {
-  transition: all .3s ease(in-out-circ);
-}
+.foo
+  transition: all .3s ease(in-out-circ)
 ```
 
 ##### Output:
@@ -86,10 +81,9 @@ Some useful functions
  ##### Use:
 
  ```sh
- .foo {
-   font-size: em(16px);
-   width: rem(100);
- }
+ .foo
+   font-size: em(16px)
+   width: rem(100)
  ```
 
  ##### Output:
@@ -105,9 +99,8 @@ Some useful functions
 
 ##### Use:
 ```sh
-.foo {
-  font-weight: fw(light);
-}
+.foo
+  font-weight: fw(light)
 ```
 
 ##### Output:
