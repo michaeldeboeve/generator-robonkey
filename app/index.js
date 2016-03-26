@@ -437,16 +437,18 @@ module.exports = generators.Base.extend({
           this.themeWordpress = answers.themeWordpress;
           this.themeDrupal = answers.themeDrupal;
 
-          this.templateDest = '/website';
-          if(this.isWordpress) {
-            this.templateDest = '/website/wp-content/wp-themes/' + this.themeWordpress;
-          }
-          if(this.isDrupal) {
-            this.templateDest = '/website/themes/' + this.themeDrupal;
-          }
-          if(this.isExpress) {
-            this.templateDest = '/app/public/';
-          }
+          switch (environment){
+             case 'isWordpress': this.templateDest = '/website/wp-content/themes/' + this.themeWordpress;
+             break;
+
+             case 'isDrupal': this.templateDest = '/website/themes/' + this.themeDrupal;
+             break;
+
+             case 'isExpress': this.templateDest = '/app/public/';
+             break;
+
+             default: this.templateDest = '/website'
+          };
           done();
         }.bind(this));
     },
