@@ -14,13 +14,13 @@
   "src": "./../src/",
   "dest": "./../website/",
   "resrc": {
-    "main": "./../website/assets/",
-    "js": "./../website/assets/js/",
-    "jsvendor": "./../website/assets/js/libs/",
-    "img": "./../website/assets/images/",
-    "css": "./../website/assets/css/",
-    "cssvendor": "./../website/assets/css/libs/",
-    "fonts": "./../website/assets/fonts/",
-    "jade": "./../website/"
+    "main": "./..<%= templateDest %>/assets/",
+    "js": "./..<%= templateDest %>/assets/js/",
+    "jsvendor": "./..<%= templateDest %>/assets/js/libs/",
+    "img": "./..<%= templateDest %>/assets/images/",
+    "css": "./..<%= templateDest %>/assets/css/",
+    "cssvendor": "./..<%= templateDest %>/assets/css/libs/",
+    "fonts": "./..<%= templateDest %>/assets/fonts/",
+    "jade": "./..<%= templateDest %>/"
   }
 }

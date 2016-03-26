@@ -399,6 +399,7 @@ website/assets/js/libs/modernizr.custom.js
 
 ## Structure
 
+<% if(gulpFolder) {%>
 ###### Main structure:
 
 ```sh
@@ -436,6 +437,39 @@ gulp
   ├── node_modules
     ...
 ```
+<% } %>
+
+<% if(!gulpFolder) {%>
+###### Main structure:
+
+```sh
+root
+├── src
+  ...
+├── website
+  ...
+├── gulp-tasks
+  bower.js
+  clean.js
+  images.js
+  jade.js
+  modernizr.js
+  scripts.js
+  styles.js
+├── node_modules
+  ...
+bower.json
+config.json
+package.json
+paths.json
+gulpfile.js
+.editorconfig
+.gitignore
+.gitattributes
+.yo-rc.json
+README.md
+```
+<% } %>
 
 ###### Src structure:
 ```sh

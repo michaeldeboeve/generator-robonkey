@@ -28,7 +28,7 @@
 	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries)
 - [BrowserSync](https://www.browsersync.io/)
 - PostCSS:
-	- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
+	- [Autoprefixer](https://github.com/postcss/autoprefixer)
 	- [Css Nano](https://github.com/ben-eb/cssnano)
 	- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)
 	- [MQPacker](https://github.com/hail2u/node-css-mqpacker)
@@ -73,6 +73,7 @@ $ yo robonkey
 
 - maybe down the road
 	- more js libraries?
+	- coffeescript
 	- …
 
 - maybe further down the road

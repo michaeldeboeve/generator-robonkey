@@ -7,10 +7,10 @@
 - Preprocessors:
 	- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md), [functions](/docs/sass/functions.md) or [optional libraries](/docs/features.md#sass-libraries)
 	- [Stylus](http://stylus-lang.com/) with [some mixins](/docs/stylus/mixins.md), [functions](/docs/stylus/functions.md) or  [optional libraries](/docs/features.md#stylus-libraries)
-	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries) 
+	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries)
 - [BrowserSync](https://www.browsersync.io/)
 - PostCSS:
-	- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_
+	- [Autoprefixer](https://github.com/postcss/autoprefixer)
 	- [Css Nano](https://github.com/ben-eb/cssnano)
 	- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)
 	- [MQPacker](https://github.com/hail2u/node-css-mqpacker)

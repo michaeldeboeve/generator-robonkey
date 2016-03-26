@@ -32,8 +32,8 @@ gulp.task('dev', ['default'], function() {});
 gulp.task('build', [
                     <% if(includeModernizr){ %>'modernizr',<% } %><% if(includeCustomIcnFont){ %>
                     'iconfont', <% } %>
-                    'moveBower',
-                    'html-build',
+                    'moveBower',<% if(isStatic){ %>
+                    'html-build', <% } %>
                     'images',
                     'scripts-build',
                     'styles-build',
@@ -42,7 +42,7 @@ gulp.task('build', [
 
 // Default gulp task
 gulp.task('default', [
-                      'moveBower', <% if(!noTemplateEngine){ %>
+                      'moveBower', <% if(isStatic && !noTemplateEngine){ %>
                       'html', <% } %>
                       'images',
                       'scripts',

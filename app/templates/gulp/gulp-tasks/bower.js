@@ -9,7 +9,7 @@ var moveRepo        = "";
 moveRepo += "moveModernizr,";
 gulp.task('moveModernizr', function() {
   var src = '../src/modernizr/modernizr.dev.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(changed(dest))
@@ -20,7 +20,7 @@ gulp.task('moveModernizr', function() {
 moveRepo += "moveJquery,";
 gulp.task('moveJquery', function() {
   var src = '../src/bower_components/jquery/dist/jquery.min.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(changed(dest))
@@ -31,7 +31,7 @@ gulp.task('moveJquery', function() {
 moveRepo += "moveTweenMax,";
 gulp.task('moveTweenMax', function() {
   var src = '../src/bower_components/gsap/src/minified/TweenMax.min.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -41,7 +41,7 @@ gulp.task('moveTweenMax', function() {
 moveRepo += "moveD3,";
 gulp.task('moveD3', function() {
   var src = '../src/bower_components/d3/d3.min.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -51,7 +51,7 @@ gulp.task('moveD3', function() {
 moveRepo += "moveEnquire,";
 gulp.task('moveEnquire', function() {
   var src = '../src/bower_components/enquire/dist/enquire.min.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -61,7 +61,7 @@ gulp.task('moveEnquire', function() {
 moveRepo += "moveSignals,";
 gulp.task('moveSignals', function() {
   var src = '../src/bower_components/js-signals/dist/signals.min.js',
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -71,7 +71,7 @@ gulp.task('moveSignals', function() {
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
   var src = ['../src/bower_components/waypoints/lib/noframework.waypoints.min.js'],
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));
@@ -80,7 +80,7 @@ gulp.task('moveWaypoints', function() {
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
   var src = ['../src/bower_components/waypoints/lib/jquery.waypoints.min.js'],
-      dest = '../website/assets/js/libs/';
+      dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
     .pipe(gulp.dest(dest));

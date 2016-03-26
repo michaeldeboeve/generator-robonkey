@@ -1,18 +1,18 @@
 {
   "scripts": {
     "src": "./../src/js/**/*.js",
-    "build": "./../website/assets/js/"
+    "build": "./..<%= templateDest %>/assets/js/"
   },
   "modernizr": {
-    "build": "./../website/assets/js/libs/"
+    "build": "./..<%= templateDest %>/assets/js/libs/"
   },
   "html": {
-    "src": "./../website/**/*.html",
-    "build": "./../website/"
+    "src": "./..<%= templateDest %>/**/*.html",
+    "build": "./..<%= templateDest %>/"
   },
   "images": {
     "src": "./../src/images/**/*",
-    "build": "./../website/assets/images/"
+    "build": "./..<%= templateDest %>/assets/images/"
   },
   "styles": {<% if(includeSCSS){ %>
     "src": "./../src/scss/style.scss",
@@ -21,39 +21,39 @@
     "src_files": "./../src/stylus/**/*.styl",<% } %><% if(includeLess){ %>
     "src": "./../src/less/style.less",
     "src_files": "./../src/less/**/*.less",<% } %>
-    "build_srcsmap": "./../website/assets/css/",
-    "build": "./../website/assets/css/"
+    "build_srcsmap": "./..<%= templateDest %>/assets/css/",
+    "build": "./..<%= templateDest %>/assets/css/"
   },<% if(includeJade){ %>
   "jade": {
     "src": "./../src/jade/*.jade",
     "watch": "./../src/jade/**/*.jade",
-    "build": "./../website/"
+    "build": "./..<%= templateDest %>/"
   },<% } %><% if(includeHaml){ %>
   "haml": {
     "src": "./../src/haml/*.haml",
     "watch": "./../src/haml/**/*.haml",
-    "build": "./../website/"
+    "build": "./..<%= templateDest %>/"
   },<% } %><% if(includeHandlebars){ %>
   "handlebars": {
     "src": "./../src/handlebars/*.html",
     "watch": "./../src/handlebars/**/*.html",
     "watchdata": "./../src/handlebars/**/*.json",
     "partials": "./../src/handlebars/partials",
-    "build": "./../website/"
+    "build": "./..<%= templateDest %>/"
   },<% } %><% if(includeNunjucks){ %>
   "nunjucks": {
     "src": "./../src/nunjucks/pages/**/*.html",
     "watch": "./../src/nunjucks/**/*.html",
     "templates": "./../src/nunjucks/",
-    "build": "./../website/"
+    "build": "./..<%= templateDest %>/"
   },<% } %>
   "postcss": {
-    "src": "./../website/assets/css/style.css",
-    "build": "./../website/assets/css/"
+    "src": "./..<%= templateDest %>/assets/css/style.css",
+    "build": "./..<%= templateDest %>/assets/css/"
   },
   "font": {
     "src": "./../src/iconfont/svg/*.svg",
-    "build": "./../website/assets/fonts/",<% if(includeSCSS){ %>
+    "build": "./..<%= templateDest %>/assets/fonts/",<% if(includeSCSS){ %>
     "templateInput": "../src/iconfont/template/_icons.scss",
     "templateOutput": "../../../../src/scss/modules/_icons.scss",<% } %><% if(includeStylus){ %>
     "templateInput": "../src/iconfont/template/icons.styl",

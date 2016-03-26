@@ -17,15 +17,28 @@ function hasFeature(feat, answer) {
 module.exports = generators.Base.extend({
 
   _folders: function(appDir){
-    mkdirp(appDir + '/src');
-    mkdirp(appDir + '/website');
-    mkdirp(appDir + '/website/assets');
-    mkdirp(appDir + '/website/assets/js');
-    mkdirp(appDir + '/website/assets/js/libs');
-    mkdirp(appDir + '/website/assets/images');
-    mkdirp(appDir + '/website/assets/css');
-    mkdirp(appDir + '/website/assets/css/libs');
-    mkdirp(appDir + '/website/assets/fonts');
+    if(this.isStatic) {
+      mkdirp(appDir + '/src');
+      mkdirp(appDir + '/website');
+      mkdirp(appDir + '/website/assets');
+      mkdirp(appDir + '/website/assets/js');
+      mkdirp(appDir + '/website/assets/js/libs');
+      mkdirp(appDir + '/website/assets/images');
+      mkdirp(appDir + '/website/assets/css');
+      mkdirp(appDir + '/website/assets/css/libs');
+      mkdirp(appDir + '/website/assets/fonts');
+    }
+    if(this.isWordpress || this.isDrupal) {
+      mkdirp(appDir + '/src');
+      mkdirp(appDir + this.templateDest);
+      mkdirp(appDir + this.templateDest + '/assets');
+      mkdirp(appDir + this.templateDest + '/assets/js');
+      mkdirp(appDir + this.templateDest + '/assets/js/libs');
+      mkdirp(appDir + this.templateDest + '/assets/images');
+      mkdirp(appDir + this.templateDest + '/assets/css');
+      mkdirp(appDir + this.templateDest + '/assets/css/libs');
+      mkdirp(appDir + this.templateDest + '/assets/fonts');
+    }
   },
 
   _html: function(destRoot, sourceRoot, templateContext) {
@@ -36,6 +49,7 @@ module.exports = generators.Base.extend({
   },
 
   _h5bp: function(destRoot, sourceRoot, templateContext) {
+
     if(this.includeHtaccess) {
       // Static
       this.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/website/.htaccess');
@@ -372,7 +386,73 @@ module.exports = generators.Base.extend({
         }.bind(this));
     },
 
+    environment: function() {
+      this.log(printTitle('Environment'))
+      var done = this.async();
+      this.prompt([{
+        type: 'list',
+        name: 'environment',
+        message: 'Which environment are you using?\nThis will compile everything in the right directories.',
+        choices: [{
+          name: 'None, just a static website',
+          value: 'isStatic',
+          checked: false
+        }, {
+          name: 'Wordpress',
+          value: 'isWordpress',
+          checked: false
+        }, {
+          name: 'Drupal',
+          value: 'isDrupal',
+          checked: false
+        }, {
+          name: 'CodeIgniter',
+          value: 'isCodeigniter',
+          checked: false
+        }]
+      }, {
+        when: function (answers) {
+          return answers.environment.indexOf('isWordpress') !== -1;
+        },
+        type: 'input',
+        name: 'themeWordpress',
+        message: 'What is the name of your Wordpress theme?',
+        default: this.appname + '-theme'
+      }, {
+        when: function (answers) {
+          return answers.environment.indexOf('isDrupal') !== -1;
+        },
+        type: 'input',
+        name: 'themeDrupal',
+        message: 'What is the name of your Drupal theme?',
+        default: this.appname + '-theme'
+      }], function (answers) {
+          var environment = answers.environment;
+          var themeWordpress = answers.themeWordpress;
+          this.isStatic = hasFeature('isStatic', environment);
+          this.isExpress = hasFeature('isExpress', environment);
+          this.isWordpress = hasFeature('isWordpress', environment);
+          this.isDrupal = hasFeature('isDrupal', environment);
+          this.isCodeigniter = hasFeature('isCodeigniter', environment);
+          this.themeWordpress = answers.themeWordpress;
+          this.themeDrupal = answers.themeDrupal;
+
+          this.templateDest = '/website';
+          if(this.isWordpress) {
+            this.templateDest = '/website/wp-content/wp-themes/' + this.themeWordpress;
+          }
+          if(this.isDrupal) {
+            this.templateDest = '/website/themes/' + this.themeDrupal;
+          }
+          if(this.isExpress) {
+            this.templateDest = '/app/public/';
+          }
+          done();
+        }.bind(this));
+    },
+
     html: function() {
+      if(this.isStatic){
       this.log(printTitle('HTML Templating'))
       var done = this.async();
       this.prompt([{
@@ -401,6 +481,7 @@ module.exports = generators.Base.extend({
           this.noTemplateEngine = hasFeature('noTemplateEngine', templateEngine);
           done();
         }.bind(this));
+      }
     },
 
     css: function() {
@@ -664,6 +745,8 @@ module.exports = generators.Base.extend({
           this.noGridLibLess = hasFeature('noGridLibLess', gridLibsLess);
           this.includeLessMQ = hasFeature('includeLessMQ', mqLibsLess);
           this.noMQLibLess = hasFeature('noMQLibLess', mqLibsLess);
+
+
           done();
         }.bind(this));
     },
@@ -909,6 +992,7 @@ module.exports = generators.Base.extend({
         sourceRoot = this.sourceRoot(),
         appDir = destRoot,
         templateContext = {
+          // To Sort
           localUrl: this.localUrl,
           appname: this.appname,
           appdescription: this.appdescription,
@@ -979,7 +1063,16 @@ module.exports = generators.Base.extend({
           includeHandlebars: this.includeHandlebars,
           includeNunjucks: this.includeNunjucks,
           noTemplateEngine: this.noTemplateEngine,
-          gulpFolder: this.gulpFolder
+          gulpFolder: this.gulpFolder,
+          isStatic: this.isStatic,
+          isWordpress: this.isWordpress,
+          isDrupal: this.isDrupal,
+          isExpress: this.isExpress,
+          isCodigniter: this.isCodigniter,
+          themeWordpress: this.themeWordpress,
+          themeDrupal: this.themeDrupal,
+          templateDest: this.templateDest
+
         };
     this._folders(appDir);
     this._html(destRoot, sourceRoot, templateContext);
