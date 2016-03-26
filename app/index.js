@@ -862,6 +862,10 @@ module.exports = generators.Base.extend({
         name: 'scriptsJS',
         message: 'What Javascript libraries to include?',
         choices: [{
+          name: 'Modernizr',
+          value: 'includeModernizr',
+          checked: true
+        }, {
           name: 'jQuery',
           value: 'includeJQuery',
           checked: true
@@ -888,6 +892,7 @@ module.exports = generators.Base.extend({
         }]
       }], function (answers) {
         var scriptsJS = answers.scriptsJS;
+        this.includeModernizr = hasFeature('includeModernizr', scriptsJS);
         this.includeJQuery = hasFeature('includeJQuery', scriptsJS);
         this.includeWaypoints = hasFeature('includeWaypoints', scriptsJS);
         this.includeSignals = hasFeature('includeSignals', scriptsJS);
@@ -933,15 +938,10 @@ module.exports = generators.Base.extend({
     },
 
 
-    extas: function() {
-      this.log(printTitle('Extra\'s'))
+    iconfont: function() {
+      this.log(printTitle('Custom Icon Font'))
       var done = this.async();
       this.prompt([{
-        type: 'confirm',
-        name: 'includeModernizr',
-        message: 'Would you like to use Modernizr?',
-        default: true
-      }, {
           type: 'confirm',
           name: 'includeCustomIcnFont',
           message: 'Would you like to include a custom icon font?',
@@ -953,18 +953,27 @@ module.exports = generators.Base.extend({
         name: 'customIconFontName',
         message: 'Name your custom icon font',
         default: 'robonky-glyphs'
-      }, {
-        type: 'confirm',
-        name: 'includeGA',
-        message: 'Provide Google Analytics Script?',
-        default: false
       }], function (answers) {
-          this.includeModernizr = answers.includeModernizr;
           this.includeCustomIcnFont = answers.includeCustomIcnFont;
           this.customIconFontName = answers.customIconFontName;
+          done();
+        }.bind(this));
+    },
+
+    googleanalytics: function() {
+      if(this.isStatic){
+        this.log(printTitle('Google Analytics'))
+        var done = this.async();
+        this.prompt([{
+          type: 'confirm',
+          name: 'includeGA',
+          message: 'Provide Google Analytics Script?',
+          default: true
+      }], function (answers) {
           this.includeGA = answers.includeGA;
           done();
         }.bind(this));
+      }
     },
 
     gulp: function() {
