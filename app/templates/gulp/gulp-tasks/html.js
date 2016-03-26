@@ -8,6 +8,7 @@ var htmlreplace     = require("gulp-html-replace");
 
 gulp.task('html-build', function () {
 return gulp.src(paths.html.src)
+  .pipe(plumber(onHtmlError))
   .pipe(htmlreplace({
     js: 'assets/js/script.min.js',
     css: 'assets/css/style.min.css',
@@ -15,3 +16,7 @@ return gulp.src(paths.html.src)
   }))
   .pipe(gulp.dest(paths.html.build));
 });
+
+function onHtmlError(e) {
+  console.log('Html Error:', e.message, 'lineNumber:', e.lineNumber);
+}

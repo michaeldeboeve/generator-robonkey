@@ -17,14 +17,14 @@ var options = {
 // Compile haml files
 gulp.task('handlebars', function () {
   return gulp.src(paths.handlebars.src)
-    .pipe(plumber(onHandlebarsError))
+    .pipe(plumber(onHtmlError))
     .pipe(gulpHandlebars(templateData, options))
     .pipe(gulp.dest(paths.handlebars.build));
 });
 
 gulp.task('handlebars-build', function () {
   return gulp.src(paths.handlebars.src)
-    .pipe(plumber(onHandlebarsError))
+    .pipe(plumber(onHtmlError))
     .pipe(gulpHandlebars(templateData, options))
     .pipe(htmlreplace({
       js: 'assets/js/script.min.js',
@@ -34,6 +34,6 @@ gulp.task('handlebars-build', function () {
     .pipe(gulp.dest(paths.handlebars.build));
 });
 
-function onHandlebarsError(e) {
-  console.log('Handlebars Error:', e.message, 'lineNumber:', e.lineNumber);
+function onHtmlError(e) {
+  console.log('Html Error:', e.message, 'lineNumber:', e.lineNumber);
 }

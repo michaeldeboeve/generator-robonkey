@@ -11,16 +11,16 @@ var jadeOptions = {
 };
 
 // Compile jade files
-gulp.task('jade', function() {
+gulp.task('html', function() {
   gulp.src(paths.jade.src)
-    .pipe(plumber(onJadeError))
+    .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
     .pipe(gulp.dest(paths.jade.build));
 });
 
-gulp.task('jade-build', function() {
+gulp.task('html-build', function() {
   gulp.src(paths.jade.src)
-    .pipe(plumber(onJadeError))
+    .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
     .pipe(htmlreplace({
       js: 'assets/js/script.min.js',
@@ -30,6 +30,6 @@ gulp.task('jade-build', function() {
     .pipe(gulp.dest(paths.jade.build));
 });
 
-function onJadeError(e) {
-  console.log('Jade Error:', e.message, 'lineNumber:', e.lineNumber);
+function onHtmlError(e) {
+  console.log('Html Error:', e.message, 'lineNumber:', e.lineNumber);
 }

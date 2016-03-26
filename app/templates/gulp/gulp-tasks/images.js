@@ -14,6 +14,12 @@ gulp.task('images', function() {
 
   gulp.src(imgSrc)
     .pipe(changed(imgDst))
-    .pipe(imagemin())
+    .pipe(imagemin({
+          progressive: true,
+          svgoPlugins: [
+            {removeViewBox: false},
+            {cleanupIDs: false}
+          ]
+        }))
     .pipe(gulp.dest(imgDst));
 });

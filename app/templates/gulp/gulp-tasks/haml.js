@@ -11,17 +11,17 @@ var hamlOptions = {
 };
 
 // Compile haml files
-gulp.task('haml', function() {
+gulp.task('html', function() {
   gulp.src(paths.haml.src)
-    .pipe(plumber(onHamlError))
+    .pipe(plumber(onHtmlError))
     .pipe(haml(hamlOptions))
     .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.haml.build));
 });
 
-gulp.task('haml-build', function() {
+gulp.task('html-build', function() {
   gulp.src(paths.haml.src)
-    .pipe(plumber(onHamlError))
+    .pipe(plumber(onHtmlError))
     .pipe(haml(hamlOptions))
     .pipe(htmlreplace({
       js: 'assets/js/script.min.js',
@@ -32,6 +32,6 @@ gulp.task('haml-build', function() {
     .pipe(gulp.dest(paths.haml.build));
 });
 
-function onHamlError(e) {
-  console.log('Haml Error:', e.message, 'lineNumber:', e.lineNumber);
+function onHtmlError(e) {
+  console.log('Html Error:', e.message, 'lineNumber:', e.lineNumber);
 }

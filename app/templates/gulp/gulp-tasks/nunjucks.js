@@ -9,9 +9,9 @@ var htmlreplace     = require("gulp-html-replace");
 
 
 // Compile Nunjucks files
-gulp.task('nunjucks', function () {
+gulp.task('html', function () {
 return gulp.src(paths.nunjucks.src)
-  .pipe(plumber(onNunjucksError))
+  .pipe(plumber(onHtmlError))
   .pipe(nunjucks({
     path: [paths.nunjucks.templates] // String or Array
   }))
@@ -19,9 +19,9 @@ return gulp.src(paths.nunjucks.src)
   .pipe(gulp.dest(paths.nunjucks.build));
 });
 
-gulp.task('nunjucks-build', function () {
+gulp.task('html-build', function () {
 return gulp.src(paths.nunjucks.src)
-  .pipe(plumber(onNunjucksError))
+  .pipe(plumber(onHtmlError))
   .pipe(nunjucks({
     path: [paths.nunjucks.templates] // String or Array
   }))
@@ -36,6 +36,6 @@ return gulp.src(paths.nunjucks.src)
 
 
 
-function onNunjucksError(e) {
-console.log('Nunjucks Error:', e.message, 'lineNumber:', e.lineNumber);
+function onHtmlError(e) {
+  console.log('Html Error:', e.message, 'lineNumber:', e.lineNumber);
 }

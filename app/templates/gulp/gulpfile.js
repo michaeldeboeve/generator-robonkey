@@ -31,13 +31,9 @@ gulp.task('dev', ['default'], function() {});
 // Build gulp task
 gulp.task('build', [
                     <% if(includeModernizr){ %>'modernizr',<% } %><% if(includeCustomIcnFont){ %>
-                    'iconfont',<% } %>
-                    'moveBower', <% if(includeJade){ %>
-                    'jade-build', <% } %><% if(includeHaml){ %>
-                    'haml-build', <% } %><% if(includeHandlebars){ %>
-                    'handlebars-build', <% } %><% if(includeNunjucks){ %>
-                    'nunjucks-build', <% } %><% if(noTemplateEngine){ %>
-                    'html-build', <% } %>
+                    'iconfont', <% } %>
+                    'moveBower',
+                    'html-build',
                     'images',
                     'scripts-build',
                     'styles-build',
@@ -46,11 +42,8 @@ gulp.task('build', [
 
 // Default gulp task
 gulp.task('default', [
-                      'moveBower', <% if(includeJade){ %>
-                      'jade', <% } %><% if(includeHaml){ %>
-                      'haml', <% } %><% if(includeHandlebars){ %>
-                      'handlebars', <% } %><% if(includeNunjucks){ %>
-                      'nunjucks', <% } %>
+                      'moveBower', <% if(!noTemplateEngine){ %>
+                      'html', <% } %>
                       'images',
                       'scripts',
                       'styles',

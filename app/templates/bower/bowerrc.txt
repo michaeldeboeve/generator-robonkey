@@ -1,3 +1,3 @@
 {
-  "directory": "../src/bower_components"
+  <% if (gulpFolder){ %>"directory": "../src/bower_components"<% } else { %>"directory": "src/bower_components"<% } %>
 }
