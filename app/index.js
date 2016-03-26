@@ -372,40 +372,36 @@ module.exports = generators.Base.extend({
         }.bind(this));
     },
 
-    cssBase: function() {
-      this.log(printTitle('CSS Base Styles'))
+    html: function() {
+      this.log(printTitle('HTML Templating'))
       var done = this.async();
       this.prompt([{
         type: 'list',
-        name: 'baseStyles',
-        message: 'What base styles to include?',
+        name: 'templateEngine',
+        message: 'How to generate html?',
         choices: [{
-          name: 'Sanitize',
-          value: 'includeSanitize',
+          name: 'Jade',
+          value: 'includeJade',
           checked: false
         }, {
-          name: 'Reset',
-          value: 'includeReset',
+          name: 'Nunjucks',
+          value: 'includeNunjucks',
           checked: false
         }, {
-          name: 'Normalize',
-          value: 'includeNormalize',
-          checked: false
-        }, {
-          name: 'None',
-          value: 'noBaseStyles',
-          checked: false
+          name: 'None, just use plain old html',
+          value: 'noTemplateEngine',
+          checked: true
         }]
       }], function (answers) {
-          var baseStyles = answers.baseStyles;
-          this.includeReset = hasFeature('includeReset', baseStyles);
-          this.includeNormalize = hasFeature('includeNormalize', baseStyles);
-          this.includeSanitize = hasFeature('includeSanitize', baseStyles);
-          this.noBaseStyles = hasFeature('noBaseStyles', baseStyles);
+          var templateEngine = answers.templateEngine;
+          this.includeJade = hasFeature('includeJade', templateEngine);
+          this.includeNunjucks = hasFeature('includeNunjucks', templateEngine);
+          this.includeHaml = false;
+          this.includeHandlebars = false;
+          this.noTemplateEngine = hasFeature('noTemplateEngine', templateEngine);
           done();
         }.bind(this));
     },
-
 
     css: function() {
       this.log(printTitle('Preprocessors'))
@@ -672,34 +668,36 @@ module.exports = generators.Base.extend({
         }.bind(this));
     },
 
-
-    html: function() {
-      this.log(printTitle('HTML Templating'))
+    cssBase: function() {
+      this.log(printTitle('CSS Base Styles'))
       var done = this.async();
       this.prompt([{
         type: 'list',
-        name: 'templateEngine',
-        message: 'How to generate html?',
+        name: 'baseStyles',
+        message: 'What base styles to include?',
         choices: [{
-          name: 'Jade',
-          value: 'includeJade',
+          name: 'Sanitize',
+          value: 'includeSanitize',
           checked: false
         }, {
-          name: 'Nunjucks',
-          value: 'includeNunjucks',
+          name: 'Reset',
+          value: 'includeReset',
           checked: false
         }, {
-          name: 'None, just use plain old html',
-          value: 'noTemplateEngine',
-          checked: true
+          name: 'Normalize',
+          value: 'includeNormalize',
+          checked: false
+        }, {
+          name: 'None',
+          value: 'noBaseStyles',
+          checked: false
         }]
       }], function (answers) {
-          var templateEngine = answers.templateEngine;
-          this.includeJade = hasFeature('includeJade', templateEngine);
-          this.includeNunjucks = hasFeature('includeNunjucks', templateEngine);
-          this.includeHaml = false;
-          this.includeHandlebars = false;
-          this.noTemplateEngine = hasFeature('noTemplateEngine', templateEngine);
+          var baseStyles = answers.baseStyles;
+          this.includeReset = hasFeature('includeReset', baseStyles);
+          this.includeNormalize = hasFeature('includeNormalize', baseStyles);
+          this.includeSanitize = hasFeature('includeSanitize', baseStyles);
+          this.noBaseStyles = hasFeature('noBaseStyles', baseStyles);
           done();
         }.bind(this));
     },
