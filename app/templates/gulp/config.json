@@ -1,7 +1,7 @@
 {
   "projectURL": "<%= localUrl %>",<% if(includePcssScopify){ %>
-  "scope": "<%= customScope %>",<% } %><% if(includePcssClassPrefix){ %>
-  "prefix": "<%= customClassPrefix %>",<% } %><% if(includeModernizr){ %>
+  "scope": "#scope",<% } %><% if(includePcssClassPrefix){ %>
+  "prefix": "prfx-",<% } %><% if(includeModernizr){ %>
   "modernizr": {
     "excludeTests": [],
     "tests": [],
@@ -12,15 +12,15 @@
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
   }, <% } %>
   "src": "./../src/",
-  "dest": "./../website/",
+  "dest": "./..<%= templateDest %>",
   "resrc": {
-    "main": "./..<%= templateDest %>/assets/",
-    "js": "./..<%= templateDest %>/assets/js/",
-    "jsvendor": "./..<%= templateDest %>/assets/js/libs/",
-    "img": "./..<%= templateDest %>/assets/images/",
-    "css": "./..<%= templateDest %>/assets/css/",
-    "cssvendor": "./..<%= templateDest %>/assets/css/libs/",
-    "fonts": "./..<%= templateDest %>/assets/fonts/",
+    "main": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/",
+    "js": "./..<%= templateDest %><% if(!isExpress){ %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>",
+    "jsvendor": "./..<%= templateDest %><% if(!isExpress){ %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>libs/",
+    "img": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/images/",
+    "css": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>",
+    "cssvendor": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>libs/",
+    "fonts": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/fonts/",
     "jade": "./..<%= templateDest %>/"
   }
 }

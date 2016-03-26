@@ -1,18 +1,18 @@
 {
   "scripts": {
     "src": "./../src/js/**/*.js",
-    "build": "./..<%= templateDest %>/assets/js/"
+    "build": "./..<%= templateDest %><% if(!isExpress){ %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>"
   },
   "modernizr": {
-    "build": "./..<%= templateDest %>/assets/js/libs/"
-  },
+    "build": "./..<%= templateDest %><% if(!isExpress){  %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>libs/"
+  },<% if(isStatic){ %>
   "html": {
     "src": "./..<%= templateDest %>/**/*.html",
     "build": "./..<%= templateDest %>/"
-  },
+  },<% } %>
   "images": {
     "src": "./../src/images/**/*",
-    "build": "./..<%= templateDest %>/assets/images/"
+    "build": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/images/"
   },
   "styles": {<% if(includeSCSS){ %>
     "src": "./../src/scss/style.scss",
@@ -21,8 +21,8 @@
     "src_files": "./../src/stylus/**/*.styl",<% } %><% if(includeLess){ %>
     "src": "./../src/less/style.less",
     "src_files": "./../src/less/**/*.less",<% } %>
-    "build_srcsmap": "./..<%= templateDest %>/assets/css/",
-    "build": "./..<%= templateDest %>/assets/css/"
+    "build_srcsmap": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>",
+    "build": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>"
   },<% if(includeJade){ %>
   "jade": {
     "src": "./../src/jade/*.jade",
@@ -53,7 +53,7 @@
   },
   "font": {
     "src": "./../src/iconfont/svg/*.svg",
-    "build": "./..<%= templateDest %>/assets/fonts/",<% if(includeSCSS){ %>
+    "build": "./..<%= templateDest %><% if(!isExpress){  %>/assets<% } %>/fonts/",<% if(includeSCSS){ %>
     "templateInput": "../src/iconfont/template/_icons.scss",
     "templateOutput": "../../../../src/scss/modules/_icons.scss",<% } %><% if(includeStylus){ %>
     "templateInput": "../src/iconfont/template/icons.styl",

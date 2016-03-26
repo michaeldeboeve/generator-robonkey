@@ -17,18 +17,8 @@ function hasFeature(feat, answer) {
 module.exports = generators.Base.extend({
 
   _folders: function(appDir){
-    if(this.isStatic) {
-      mkdirp(appDir + '/src');
-      mkdirp(appDir + '/website');
-      mkdirp(appDir + '/website/assets');
-      mkdirp(appDir + '/website/assets/js');
-      mkdirp(appDir + '/website/assets/js/libs');
-      mkdirp(appDir + '/website/assets/images');
-      mkdirp(appDir + '/website/assets/css');
-      mkdirp(appDir + '/website/assets/css/libs');
-      mkdirp(appDir + '/website/assets/fonts');
-    }
-    if(this.isWordpress || this.isDrupal) {
+
+    if(!this.isExpress) {
       mkdirp(appDir + '/src');
       mkdirp(appDir + this.templateDest);
       mkdirp(appDir + this.templateDest + '/assets');
@@ -38,6 +28,15 @@ module.exports = generators.Base.extend({
       mkdirp(appDir + this.templateDest + '/assets/css');
       mkdirp(appDir + this.templateDest + '/assets/css/libs');
       mkdirp(appDir + this.templateDest + '/assets/fonts');
+    } else {
+      mkdirp(appDir + '/src');
+      mkdirp(appDir + this.templateDest);
+      mkdirp(appDir + this.templateDest + '/javascripts');
+      mkdirp(appDir + this.templateDest + '/javascripts/libs');
+      mkdirp(appDir + this.templateDest + '/images');
+      mkdirp(appDir + this.templateDest + '/stylesheets');
+      mkdirp(appDir + this.templateDest + '/stylesheets/libs');
+      mkdirp(appDir + this.templateDest + '/fonts');
     }
   },
 
@@ -398,6 +397,10 @@ module.exports = generators.Base.extend({
           value: 'isStatic',
           checked: false
         }, {
+          name: 'Node + Express',
+          value: 'isExpress',
+          checked: false
+        }, {
           name: 'Wordpress',
           value: 'isWordpress',
           checked: false
@@ -444,10 +447,10 @@ module.exports = generators.Base.extend({
              case 'isDrupal': this.templateDest = '/website/themes/' + this.themeDrupal;
              break;
 
-             case 'isExpress': this.templateDest = '/app/public/';
+             case 'isExpress': this.templateDest = '/app/public';
              break;
 
-             default: this.templateDest = '/website'
+             default: this.templateDest = '/website';
           };
           done();
         }.bind(this));
@@ -455,26 +458,26 @@ module.exports = generators.Base.extend({
 
     html: function() {
       if(this.isStatic){
-      this.log(printTitle('HTML Templating'))
-      var done = this.async();
-      this.prompt([{
-        type: 'list',
-        name: 'templateEngine',
-        message: 'How to generate html?',
-        choices: [{
-          name: 'Jade',
-          value: 'includeJade',
-          checked: false
-        }, {
-          name: 'Nunjucks',
-          value: 'includeNunjucks',
-          checked: false
-        }, {
-          name: 'None, just use plain old html',
-          value: 'noTemplateEngine',
-          checked: true
-        }]
-      }], function (answers) {
+        this.log(printTitle('HTML Templating'))
+        var done = this.async();
+        this.prompt([{
+          type: 'list',
+          name: 'templateEngine',
+          message: 'How to generate html?',
+          choices: [{
+            name: 'Jade',
+            value: 'includeJade',
+            checked: false
+          }, {
+            name: 'Nunjucks',
+            value: 'includeNunjucks',
+            checked: false
+          }, {
+            name: 'None, just use plain old html',
+            value: 'noTemplateEngine',
+            checked: true
+          }]
+        }], function (answers) {
           var templateEngine = answers.templateEngine;
           this.includeJade = hasFeature('includeJade', templateEngine);
           this.includeNunjucks = hasFeature('includeNunjucks', templateEngine);
@@ -964,7 +967,7 @@ module.exports = generators.Base.extend({
         }.bind(this));
     },
 
-    extas: function() {
+    gulp: function() {
       this.log(printTitle('Gulp'))
       var done = this.async();
       this.prompt([{
@@ -1012,6 +1015,7 @@ module.exports = generators.Base.extend({
           includeGA: this.includeGA,
           includePostCSS: this.includePostCSS,
           includeCustomIcnFont: this.includeCustomIcnFont,
+          customIconFontName: this.customIconFontName,
           includeHtaccess: this.includeHtaccess,
           includeCrossdomain: this.includeCrossdomain,
           includeBrowserconfig: this.includeBrowserconfig,
