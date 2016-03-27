@@ -16,12 +16,13 @@
     %script(src="/assets/js/libs/modernizr.dev.js")
     /endbuild <% } %>
   %body
-    <% if(includeJQuery){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
-    <% if(includeWaypoints && includeJQuery){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
-    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
-    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
-    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
-    %script(src="/assets/js/libs/TweenMax.min.js")<% } %>
+    <% if(includeJQuery && !includeRequire){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
+    <% if(includeWaypoints && includeJQuery && !includeRequire){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints && !includeRequire) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals && !includeRequire){ %>
+    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(includeD3 && !includeRequire){ %>
+    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(includeEnquire && !includeRequire){ %>
+    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax && !includeRequire){ %>
+    %script(src="/assets/js/libs/TweenMax.min.js")<% } %><% if(includeRequire){ %>
+    %script(src="/assets/js/libs/require.js")<% } %>
     / build:js
     %script(sr="/assets/js/script.js")
     / endbuild

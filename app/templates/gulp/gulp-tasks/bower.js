@@ -16,6 +16,17 @@ gulp.task('moveModernizr', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
+<% if(includeRequire){ %>
+moveRepo += "moveRequire,";
+gulp.task('moveRequire', function() {
+  var src = '../src/bower_components/requirejs/require.js',
+      dest = cfg.resrc.jsvendor;
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+<% } %>
 <% if(includeJQuery){ %>
 moveRepo += "moveJquery,";
 gulp.task('moveJquery', function() {

@@ -18,7 +18,16 @@ module.exports = generators.Base.extend({
 
   _folders: function(appDir){
 
-    if(!this.isExpress) {
+    if(this.isExpress) {
+      mkdirp(appDir + '/src');
+      mkdirp(appDir + this.templateDest);
+      mkdirp(appDir + this.templateDest + '/javascripts');
+      mkdirp(appDir + this.templateDest + '/javascripts/libs');
+      mkdirp(appDir + this.templateDest + '/images');
+      mkdirp(appDir + this.templateDest + '/stylesheets');
+      mkdirp(appDir + this.templateDest + '/stylesheets/libs');
+      mkdirp(appDir + this.templateDest + '/fonts');
+    } else {
       mkdirp(appDir + '/src');
       mkdirp(appDir + this.templateDest);
       mkdirp(appDir + this.templateDest + '/assets');
@@ -28,15 +37,6 @@ module.exports = generators.Base.extend({
       mkdirp(appDir + this.templateDest + '/assets/css');
       mkdirp(appDir + this.templateDest + '/assets/css/libs');
       mkdirp(appDir + this.templateDest + '/assets/fonts');
-    } else {
-      mkdirp(appDir + '/src');
-      mkdirp(appDir + this.templateDest);
-      mkdirp(appDir + this.templateDest + '/javascripts');
-      mkdirp(appDir + this.templateDest + '/javascripts/libs');
-      mkdirp(appDir + this.templateDest + '/images');
-      mkdirp(appDir + this.templateDest + '/stylesheets');
-      mkdirp(appDir + this.templateDest + '/stylesheets/libs');
-      mkdirp(appDir + this.templateDest + '/fonts');
     }
   },
 
@@ -465,6 +465,10 @@ module.exports = generators.Base.extend({
           name: 'templateEngine',
           message: 'How to generate html?',
           choices: [{
+            name: 'None, just use plain old html',
+            value: 'noTemplateEngine',
+            checked: true
+          }, {
             name: 'Jade',
             value: 'includeJade',
             checked: false
@@ -472,10 +476,6 @@ module.exports = generators.Base.extend({
             name: 'Nunjucks',
             value: 'includeNunjucks',
             checked: false
-          }, {
-            name: 'None, just use plain old html',
-            value: 'noTemplateEngine',
-            checked: true
           }]
         }], function (answers) {
           var templateEngine = answers.templateEngine;
@@ -517,6 +517,10 @@ module.exports = generators.Base.extend({
         name: 'mixinLibsSCSS',
         message: 'What mixin libraries would you like to use?',
         choices: [{
+          name: 'None',
+          value: 'noMixinLibSCSS',
+          checked: true
+        }, {
           name: 'Bourbon',
           value: 'includeBourbon',
           checked: false
@@ -524,10 +528,6 @@ module.exports = generators.Base.extend({
           name: 'Compass Mixins',
           value: 'includeCompass',
           checked: false
-        }, {
-          name: 'None',
-          value: 'noMixinLibSCSS',
-          checked: true
         }]
       }
       ,{
@@ -538,6 +538,10 @@ module.exports = generators.Base.extend({
         name: 'mixinLibsStylus',
         message: 'What mixin libraries would you like to use?',
         choices: [{
+          name: 'None',
+          value: 'noMixinLibStylus',
+          checked: true
+        }, {
           name: 'Nib',
           value: 'includeNib',
           checked: false
@@ -545,10 +549,6 @@ module.exports = generators.Base.extend({
           name: 'Kouto Swiss',
           value: 'includeKoutoSwiss',
           checked: false
-        }, {
-          name: 'None',
-          value: 'noMixinLibStylus',
-          checked: true
         }]
       }
       ,{
@@ -559,13 +559,13 @@ module.exports = generators.Base.extend({
         name: 'mixinLibsLess',
         message: 'What mixin libraries would you like to use?',
         choices: [{
-          name: 'Less Hat',
-          value: 'includeLessHat',
-          checked: false
-        }, {
           name: 'None',
           value: 'noMixinLibLess',
           checked: true
+        }, {
+          name: 'Less Hat',
+          value: 'includeLessHat',
+          checked: false
         }]
       }
 
@@ -579,6 +579,10 @@ module.exports = generators.Base.extend({
         name: 'mqLibsSCSS',
         message: 'What MediaQuery Library to use?',
         choices: [{
+          name: 'None',
+          value: 'noMQLibSCSS',
+          checked: true
+        }, {
           name: 'Breakpoint',
           value: 'includeBreakpoint',
           checked: false
@@ -586,10 +590,6 @@ module.exports = generators.Base.extend({
           name: 'Include Media',
           value: 'includeIncludeMedia',
           checked: false
-        }, {
-          name: 'None',
-          value: 'noMQLibSCSS',
-          checked: true
         }]
       }
       ,{
@@ -600,13 +600,13 @@ module.exports = generators.Base.extend({
         name: 'mqLibsStylus',
         message: 'What MediaQuery Library to use?',
         choices: [{
-          name: 'Rupture',
-          value: 'includeRupture',
-          checked: false
-        }, {
           name: 'None',
           value: 'noMQLibStylus',
           checked: true
+        }, {
+          name: 'Rupture',
+          value: 'includeRupture',
+          checked: false
         }]
       }
       ,{
@@ -617,13 +617,13 @@ module.exports = generators.Base.extend({
         name: 'mqLibsLess',
         message: 'What MediaQuery Library to use?',
         choices: [{
-          name: 'Less-MQ',
-          value: 'includeLessMQ',
-          checked: false
-        }, {
           name: 'None',
           value: 'noMQLibLess',
           checked: true
+        }, {
+          name: 'Less-MQ',
+          value: 'includeLessMQ',
+          checked: false
         }]
       }
 
@@ -637,6 +637,10 @@ module.exports = generators.Base.extend({
         name: 'gridLibsSCSS',
         message: 'What Grids Library to use?',
         choices: [{
+          name: 'None',
+          value: 'noGridLibSCSS',
+          checked: false
+        }, {
           name: 'Jeet',
           value: 'includeJeetSCSS',
           checked: false
@@ -652,10 +656,6 @@ module.exports = generators.Base.extend({
           name: 'Semantic.gs',
           value: 'includeSemanticSCSS',
           checked: false
-        }, {
-          name: 'None',
-          value: 'noGridLibSCSS',
-          checked: false
         }]
       }
       ,{
@@ -666,6 +666,10 @@ module.exports = generators.Base.extend({
         name: 'gridLibsStylus',
         message: 'What Grids Library to use?',
         choices: [{
+          name: 'None',
+          value: 'noGridLibStylus',
+          checked: false
+        }, {
           name: 'Jeet',
           value: 'includeJeetStylus',
           checked: false
@@ -677,10 +681,6 @@ module.exports = generators.Base.extend({
           name: 'Semantic.gs',
           value: 'includeSemanticStylus',
           checked: false
-        }, {
-          name: 'None',
-          value: 'noGridLibStylus',
-          checked: false
         }]
       }
       ,{
@@ -691,16 +691,16 @@ module.exports = generators.Base.extend({
         name: 'gridLibsLess',
         message: 'What Grids Library to use?',
         choices: [{
+          name: 'None',
+          value: 'noGridLibLess',
+          checked: false
+        }, {
           name: 'Gee',
           value: 'includeGee',
           checked: false
         }, {
           name: 'Semantic.gs',
           value: 'includeSemanticLess',
-          checked: false
-        }, {
-          name: 'None',
-          value: 'noGridLibLess',
           checked: false
         }]
       }], function (answers) {
@@ -764,6 +764,10 @@ module.exports = generators.Base.extend({
         name: 'baseStyles',
         message: 'What base styles to include?',
         choices: [{
+          name: 'None',
+          value: 'noBaseStyles',
+          checked: true
+        }, {
           name: 'Sanitize',
           value: 'includeSanitize',
           checked: false
@@ -774,10 +778,6 @@ module.exports = generators.Base.extend({
         }, {
           name: 'Normalize',
           value: 'includeNormalize',
-          checked: false
-        }, {
-          name: 'None',
-          value: 'noBaseStyles',
           checked: false
         }]
       }], function (answers) {
@@ -870,6 +870,10 @@ module.exports = generators.Base.extend({
           value: 'includeJQuery',
           checked: true
         }, {
+          name: 'Requirejs',
+          value: 'includeRequire',
+          checked: false
+        }, {
           name: 'Waypoints',
           value: 'includeWaypoints',
           checked: false
@@ -899,6 +903,7 @@ module.exports = generators.Base.extend({
         this.includeD3 = hasFeature('includeD3', scriptsJS);
         this.includeTweenmax = hasFeature('includeTweenmax', scriptsJS);
         this.includeEnquire = hasFeature('includeEnquire', scriptsJS);
+        this.includeRequire = hasFeature('includeRequire', scriptsJS);
           done();
         }.bind(this));
     },
@@ -1020,6 +1025,7 @@ module.exports = generators.Base.extend({
           includeD3: this.includeD3,
           includeTweenmax: this.includeTweenmax,
           includeEnquire: this.includeEnquire,
+          includeRequire: this.includeRequire,
           includeModernizr: this.includeModernizr,
           includeGA: this.includeGA,
           includePostCSS: this.includePostCSS,
