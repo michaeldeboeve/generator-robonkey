@@ -22,8 +22,8 @@ var mqPacker        = require('css-mqpacker');<% } %><% if(includePcssScopify){ 
 var scopify         = require('postcss-scopify');<% } %><% if(includePcssClassPrefix){ %>
 var classPrfx       = require('postcss-class-prefix');<% } %><% if(includePcssGradientFix){ %>
 var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(includePcssMQKeyframes){ %>
-var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePcssCsso){ %>
-var csso            = require('postcss-csso');<% } %><% if(includePcssDeclsort){ %>
+var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePcssNano){ %>
+var cssnano({autoprefixer: false})            = require('cssnano');<% } %><% if(includePcssDeclsort){ %>
 var cssdeclsort     = require('css-declaration-sorter');<% } %><% if(includePcssRucksack){ %>
 var rucksack        = require('rucksack-css');<% } %><% if(includePcssCssNext){ %>
 var next            = require('postcss-cssnext');<% } %><% if(includePcssCssGrace){ %>
@@ -55,8 +55,8 @@ var cssSortOrder    = 'smacss';<% } %>
   cssdeclsort({order: cssSortOrder}),<% } %><% if(includePcssMQKeyframes){ %>
   mqKeyframes,<% } %><% if(includePcssMQPacker){ %>
   mqPacker,<% } %><% if(includePcssAutoprefixer && !includePcssCssGrace){ %>
-  autoprefixer({browsers: browserSupport}),<% } %><% if(includePcssCsso){ %>
-  csso<% } %><% if(includePostCSS){ %>
+  autoprefixer({browsers: browserSupport}),<% } %><% if(includePcssNano){ %>
+  cssnano({autoprefixer: false})<% } %><% if(includePostCSS){ %>
 ];<% } %>
 
 
@@ -80,9 +80,9 @@ gulp.task('styles-build', function() {
   gulp.src(paths.styles.src)<% if(includeSCSS){ %>
     .pipe(sassGlob())<% } %>
     .pipe(plumber(onStyleError))<% if(includeSCSS){ %>
-    .pipe(sass(<% if(!includePcssCsso){ %>{outputStyle: 'compressed'}<% } %>))<% } %><% if(includeStylus){ %>
+    .pipe(sass(<% if(!includePcssNano){ %>{outputStyle: 'compressed'}<% } %>))<% } %><% if(includeStylus){ %>
     .pipe(stylus(<% if(!includePostCSS){ %>{ compress: true }<% } %>))<% } %><% if(includeLess){ %>
-    .pipe(less({ plugins: [lessGlob<% if(!includePcssCsso){ %>, cleancss<% } %>] }))<% } %><% if(includePostCSS){ %>
+    .pipe(less({ plugins: [lessGlob<% if(!includePcssNano){ %>, cleancss<% } %>] }))<% } %><% if(includePostCSS){ %>
     .pipe(postcss(postCssConfigBuild))<% } %>
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(paths.styles.build));

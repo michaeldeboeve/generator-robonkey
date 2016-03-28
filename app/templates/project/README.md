@@ -263,7 +263,7 @@ website/less/css
 > More PostCSS plugins: http://postcss.parts/
 
 <% if(includePcssAutoprefixer) {%>
-- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(includePcssCsso) {%>
+- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(includePcssNano) {%>
 - [Csso](https://github.com/lahmatiy/postcss-csso)<% } %><% if(includePcssGradientFix) {%>
 - [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } %><% if(includePcssMQPacker) {%>
 - [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } %><% if(includePcssMQKeyframes) {%>

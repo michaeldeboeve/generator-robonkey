@@ -820,8 +820,8 @@ module.exports = generators.Base.extend({
           value: 'includePcssAutoprefixer',
           checked: true
         }, {
-          name: 'CSSO (Css Minification)',
-          value: 'includePcssCsso',
+          name: 'CSS Nano (Css Optimalization)',
+          value: 'includePcssNano',
           checked: true
         }, {
           name: 'Gradient Transparency Fix',
@@ -868,13 +868,13 @@ module.exports = generators.Base.extend({
           this.includePcssGradientFix = hasFeature('includePcssGradientFix', postCSSPlugins);
           this.includePcssMQPacker = hasFeature('includePcssMQPacker', postCSSPlugins);
           this.includePcssMQKeyframes = hasFeature('includePcssMQKeyframes', postCSSPlugins);
-          this.includePcssCsso = hasFeature('includePcssCsso', postCSSPlugins);
+          this.includePcssNano = hasFeature('includePcssNano', postCSSPlugins);
           this.includePcssClassPrefix = hasFeature('includePcssClassPrefix', postCSSPlugins);
           this.includePcssScopify = hasFeature('includePcssScopify', postCSSPlugins);
           this.includePcssDeclsort = hasFeature('includePcssDeclsort', postCSSPlugins);
           this.includePcssGrace = hasFeature('includePcssGrace', postCSSPlugins);
           this.includePostCSS = false;
-          if(this.includePcssAutoprefixer || this.includePcssCssGrace || this.includePcssCssNext || this.includePcssGradientFix || this.includePcssMQPacker || this.includePcssMQKeyframes || this.includePcssCsso || this.includePcssClassPrefix || this.includePcssScopify || this.includePcssDeclsort || this.includePcssRucksack) {
+          if(this.includePcssAutoprefixer || this.includePcssCssGrace || this.includePcssCssNext || this.includePcssGradientFix || this.includePcssMQPacker || this.includePcssMQKeyframes || this.includePcssNano || this.includePcssClassPrefix || this.includePcssScopify || this.includePcssDeclsort || this.includePcssRucksack) {
             this.includePostCSS = true;
           }
 
@@ -1072,7 +1072,7 @@ module.exports = generators.Base.extend({
           includePcssMQKeyframes: this.includePcssMQKeyframes,
           includePcssClassPrefix: this.includePcssClassPrefix,
           includePcssScopify: this.includePcssScopify,
-          includePcssCsso: this.includePcssCsso,
+          includePcssNano: this.includePcssNano,
           includePcssDeclsort: this.includePcssDeclsort,
           includeReset: this.includeReset,
           includeNormalize: this.includeNormalize,
