@@ -1,6 +1,6 @@
 {
   "name": "generator-robonkey",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A front-end application generator for Gulp, Jade/Nunjucks, Sass/Stylus/Less, PostCSS, Modernizr and custom icon font generator",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "main": "index.js",
