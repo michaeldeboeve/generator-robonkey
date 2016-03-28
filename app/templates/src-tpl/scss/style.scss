@@ -6,7 +6,9 @@
 @import "../../gulp/node_modules/susy/sass/susy";<% } %><% if(includeBourbon || includeNeat){ %>
 @import "../../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(includeNeat){ %>
 @import "../../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(includeIncludeMedia){ %>
-@import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(includeJeetSCSS){ %>
+@import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(includeGridle){ %>
+@import "./../gulp/node_modules/gridle/sass/gridle/gridle";<% } %><% if(includeGFlex){ %>
+@import "./../gulp/node_modules/gridle/sass/gridle/gridle-flex";<% } %><% if(includeJeetSCSS){ %>
 @import "base/jeet/jeet";<% } %>
 
 // ==========================================================================

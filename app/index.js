@@ -649,16 +649,24 @@ module.exports = generators.Base.extend({
           value: 'noGridLibSCSS',
           checked: false
         }, {
-          name: 'Jeet',
-          value: 'includeJeetSCSS',
-          checked: false
-        }, {
           name: 'Susy',
           value: 'includeSusy',
           checked: false
         }, {
+          name: 'Gridle',
+          value: 'includeGridle',
+          checked: false
+        }, {
+          name: 'Gridle Flex',
+          value: 'includeGFlex',
+          checked: false
+        }, {
           name: 'Neat (Will include Bourbon)',
           value: 'includeNeat',
+          checked: false
+        }, {
+          name: 'Jeet',
+          value: 'includeJeetSCSS',
           checked: false
         }, {
           name: 'Semantic.gs',
@@ -725,6 +733,8 @@ module.exports = generators.Base.extend({
           this.includeSusy = hasFeature('includeSusy', gridLibsSCSS);
           this.includeJeetSCSS = hasFeature('includeJeetSCSS', gridLibsSCSS);
           this.includeNeat = hasFeature('includeNeat', gridLibsSCSS);
+          this.includeGridle = hasFeature('includeGridle', gridLibsSCSS);
+          this.includeGFlex = hasFeature('includeGFlex', gridLibsSCSS);
           this.includeSemanticSCSS = hasFeature('includeSemanticSCSS', gridLibsSCSS);
           this.noGridLibSCSS = hasFeature('noGridLibSCSS', gridLibsSCSS);
           this.includeBreakpoint = hasFeature('includeBreakpoint', mqLibsSCSS);
@@ -1072,6 +1082,8 @@ module.exports = generators.Base.extend({
           includeBreakpoint: this.includeBreakpoint,
           includeBourbon: this.includeBourbon,
           includeNeat: this.includeNeat,
+          includeGridle: this.includeGridle,
+          includeGFlex: this.includeGFlex,
           includeJeetSCSS: this.includeJeetSCSS,
           includeIncludeMedia: this.includeIncludeMedia,
           includeCompass: this.includeCompass,
