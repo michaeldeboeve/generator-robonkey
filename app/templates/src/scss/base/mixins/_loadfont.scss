@@ -1,5 +1,7 @@
 @mixin load-font($font-name, $fontfolder, $font-file, $font-weight: normal, $font-style: normal, $font-svg-id: $font-name) {
   @font-face {
+    font-weight: $font-weight;
+    font-style: $font-style;
     font-family: $font-name;
     src: font($fontfolder + '/' + $font-file + '.eot');
     src: font($fontfolder + '/' + $font-file + '.eot?#iefix') format('embedded-opentype'),
@@ -7,7 +9,5 @@
          font($fontfolder + '/' + $font-file + '.woff') format('woff'),
          font($fontfolder + '/' + $font-file + '.ttf') format('truetype'),
          font($fontfolder + '/' + $font-file + '.svg#' + $font-svg-id) format('svg');
-    font-weight: $font-weight;
-    font-style: $font-style;
   }
 }

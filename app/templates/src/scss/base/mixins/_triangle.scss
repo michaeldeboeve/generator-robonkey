@@ -1,19 +1,20 @@
 @mixin triangle($pos: top, $color: red, $size: 20px) {
   $size-h: null;
+
   @each $s in $size {
     $size-h: join($s, $size-h);
   }
-  width: 0;
-  height: 0;
-  display: block;
-  border-style: solid;
-  foo: $pos;
   @if $pos == top or $pos == bottom {
     border-width: $size;
   } @else if $pos == left or $pos == right {
     border-width: $size-h;
   }
+
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
   border-color: transparent;
   border-#{$pos}-width: 0;
-  border-#{opposite-direction($pos)}-color: $color;
+  border-#{opposite-direction($pos)}-color: $color;  
 }

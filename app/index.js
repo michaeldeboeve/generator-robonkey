@@ -111,17 +111,17 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp-tasks/bower.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp-tasks/scripts.js', templateContext);
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp-tasks/clean.js', templateContext);
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp-tasks/styles.js', templateContext);
 
-
-    if(this.includeSCSS) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    }
-    if(this.includeStylus) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    }
-    if(this.includeLess) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    }
+    // if(this.includeSCSS) {
+    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp-tasks/styles.js', templateContext);
+    // }
+    // if(this.includeStylus) {
+    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp-tasks/styles.js', templateContext);
+    // }
+    // if(this.includeLess) {
+    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp-tasks/styles.js', templateContext);
+    // }
 
     if(this.includeCustomIcnFont) {
       this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp-tasks/iconfont.js', templateContext);
@@ -200,6 +200,10 @@ module.exports = generators.Base.extend({
         this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
       }
 
+      if(this.includeJeetSCSS) {
+        this.fs.copy(sourceRoot + '/src/scss/base/jeet/', destRoot + '/src/scss/base/jeet/');
+      }
+
       if(this.includeCustomIcnFont) {
         this.fs.copyTpl(sourceRoot + '/src-tpl/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
       }
@@ -232,6 +236,10 @@ module.exports = generators.Base.extend({
         this.fs.copy(sourceRoot + '/src-tpl/stylus/base/semantic-grid.styl', destRoot + '/src/stylus/base/grid.styl');
       } else {
         this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', templateContext);
+      }
+
+      if(this.includeJeetStylus) {
+        this.fs.copy(sourceRoot + '/src/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
       }
 
       if(this.includeCustomIcnFont) {
@@ -802,12 +810,16 @@ module.exports = generators.Base.extend({
           value: 'includePcssAutoprefixer',
           checked: true
         }, {
-          name: 'CSS Nano',
-          value: 'includePcssNano',
+          name: 'CSSO (Css Minification)',
+          value: 'includePcssCsso',
           checked: true
         }, {
           name: 'Gradient Transparency Fix',
           value: 'includePcssGradientFix',
+          checked: true
+        }, {
+          name: 'Css Declaration Sorter',
+          value: 'includePcssDeclsort',
           checked: true
         }, {
           name: 'MQ Packer',
@@ -818,12 +830,16 @@ module.exports = generators.Base.extend({
           value: 'includePcssMQKeyframes',
           checked: false
         }, {
-          name: 'Selector Not',
-          value: 'includePcssSelectorNot',
+          name: 'CSS Next',
+          value: 'includePcssCssNext',
           checked: false
         }, {
-          name: 'Selector Matches',
-          value: 'includePcssSelectorMatches',
+          name: 'Rucksack',
+          value: 'includePcssRucksack',
+          checked: false
+        }, {
+          name: 'CSS Grace',
+          value: 'includePcssCssGrace',
           checked: false
         }, {
           name: 'Class Prefix',
@@ -837,16 +853,18 @@ module.exports = generators.Base.extend({
       }], function (answers) {
           var postCSSPlugins = answers.postCSSPlugins;
           this.includePcssAutoprefixer = hasFeature('includePcssAutoprefixer', postCSSPlugins);
-          this.includePcssSelectorNot = hasFeature('includePcssSelectorNot', postCSSPlugins);
-          this.includePcssSelectorMatches = hasFeature('includePcssSelectorMatches', postCSSPlugins);
+          this.includePcssCssNext = hasFeature('includePcssCssNext', postCSSPlugins);
+          this.includePcssRucksack = hasFeature('includePcssRucksack', postCSSPlugins);
           this.includePcssGradientFix = hasFeature('includePcssGradientFix', postCSSPlugins);
           this.includePcssMQPacker = hasFeature('includePcssMQPacker', postCSSPlugins);
           this.includePcssMQKeyframes = hasFeature('includePcssMQKeyframes', postCSSPlugins);
-          this.includePcssNano = hasFeature('includePcssNano', postCSSPlugins);
+          this.includePcssCsso = hasFeature('includePcssCsso', postCSSPlugins);
           this.includePcssClassPrefix = hasFeature('includePcssClassPrefix', postCSSPlugins);
           this.includePcssScopify = hasFeature('includePcssScopify', postCSSPlugins);
+          this.includePcssDeclsort = hasFeature('includePcssDeclsort', postCSSPlugins);
+          this.includePcssGrace = hasFeature('includePcssGrace', postCSSPlugins);
           this.includePostCSS = false;
-          if(this.includePcssAutoprefixer || this.includePcssSelectorNot || this.includePcssSelectorMatches || this.includePcssGradientFix || this.includePcssMQPacker || this.includePcssMQKeyframes || this.includePcssNano || this.includePcssClassPrefix || this.includePcssScopify) {
+          if(this.includePcssAutoprefixer || this.includePcssCssGrace || this.includePcssCssNext || this.includePcssGradientFix || this.includePcssMQPacker || this.includePcssMQKeyframes || this.includePcssCsso || this.includePcssClassPrefix || this.includePcssScopify || this.includePcssDeclsort || this.includePcssRucksack) {
             this.includePostCSS = true;
           }
 
@@ -1036,15 +1054,16 @@ module.exports = generators.Base.extend({
           includeBrowserconfig: this.includeBrowserconfig,
           includeRobots: this.includeRobots,
           includePcssAutoprefixer: this.includePcssAutoprefixer,
-          includePcssSelectorNot: this.includePcssSelectorNot,
-          includePcssSelectorMatches: this.includePcssSelectorMatches,
+          includePcssCssNext: this.includePcssCssNext,
+          includePcssCssGrace: this.includePcssCssGrace,
+          includePcssRucksack: this.includePcssRucksack,
           includePcssGradientFix: this.includePcssGradientFix,
           includePcssMQPacker: this.includePcssMQPacker,
           includePcssMQKeyframes: this.includePcssMQKeyframes,
           includePcssClassPrefix: this.includePcssClassPrefix,
           includePcssScopify: this.includePcssScopify,
-          includePcssNano: this.includePcssNano,
-          customScope: this.customScope,
+          includePcssCsso: this.includePcssCsso,
+          includePcssDeclsort: this.includePcssDeclsort,
           includeReset: this.includeReset,
           includeNormalize: this.includeNormalize,
           includeSanitize: this.includeSanitize,
@@ -1110,8 +1129,8 @@ module.exports = generators.Base.extend({
     this._iconfont(destRoot, sourceRoot, templateContext);
     this._js(destRoot, sourceRoot, templateContext);
     this._jade(destRoot, sourceRoot, templateContext);
-    this._haml(destRoot, sourceRoot, templateContext);
-    this._handlebars(destRoot, sourceRoot, templateContext);
+    // this._haml(destRoot, sourceRoot, templateContext);
+    // this._handlebars(destRoot, sourceRoot, templateContext);
     this._nunjucks(destRoot, sourceRoot, templateContext);
 
   },

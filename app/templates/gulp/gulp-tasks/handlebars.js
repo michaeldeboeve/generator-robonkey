@@ -5,6 +5,7 @@ var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var handlebars      = require('handlebars');
 var gulpHandlebars  = require('gulp-handlebars-html')(handlebars);
+var prettify        = require('gulp-prettify');
 var htmlreplace     = require("gulp-html-replace");
 
 // Template Data
@@ -19,6 +20,7 @@ gulp.task('handlebars', function () {
   return gulp.src(paths.handlebars.src)
     .pipe(plumber(onHtmlError))
     .pipe(gulpHandlebars(templateData, options))
+    .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.handlebars.build));
 });
 
@@ -31,6 +33,7 @@ gulp.task('handlebars-build', function () {
       css: 'assets/css/style.min.css',
       modernizr: 'assets/js/libs/modernizr.custom.js'
     }))
+    .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.handlebars.build));
 });
 

@@ -262,13 +262,12 @@ website/less/css
 > PostCSS: https://github.com/postcss/postcss<br>
 > More PostCSS plugins: http://postcss.parts/
 
-- [Autoprefixer](https://github.com/postcss/autoprefixer) _(Automatically used **if postCSS is true**)_<% if(includePcssNano) {%>
-- [Css Nano](https://github.com/ben-eb/cssnano)<% } %><% if(includePcssGradientFix) {%>
+<% if(includePcssAutoprefixer) {%>
+- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(includePcssCsso) {%>
+- [Csso](https://github.com/lahmatiy/postcss-csso)<% } %><% if(includePcssGradientFix) {%>
 - [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } %><% if(includePcssMQPacker) {%>
 - [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } %><% if(includePcssMQKeyframes) {%>
-- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } %><% if(includePcssSelectorNot) {%>
-- [Selector Not](https://github.com/postcss/postcss-selector-not)<% } %><% if(includePcssSelectorMatches) {%>
-- [Selector Matches](https://github.com/postcss/postcss-selector-matches)<% } %><% if(includePcssClassPrefix) {%>
+- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } %><% if(includePcssClassPrefix) {%>
 - [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)<% } %><% if(includePcssScopify) {%>
 - [Scopify](https://github.com/pazams/postcss-scopify)<% } %>
 

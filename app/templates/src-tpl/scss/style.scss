@@ -7,7 +7,7 @@
 @import "../../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(includeNeat){ %>
 @import "../../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(includeIncludeMedia){ %>
 @import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(includeJeetSCSS){ %>
-@import "../../gulp/node_modules/jeet/scss/jeet/index";<% } %>
+@import "base/jeet/jeet";<% } %>
 
 // ==========================================================================
 // BASE - Base Variable file along with starting point Mixins and Placeholders.

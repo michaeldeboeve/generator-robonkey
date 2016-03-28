@@ -37,8 +37,7 @@
     "susy": "^2.2.12",<% } %><% if(includeBourbon || includeNeat){ %>
     "node-bourbon": "^4.2.3",<% } %><% if(includeNeat){ %>
     "node-neat": "^1.7.2",<% } %><% if(includeIncludeMedia){ %>
-    "include-media": "^1.4.2",<% } %><% if(includeJeetSCSS || includeJeetStylus){ %>
-    "jeet": "^6.1.2",<% } %><% if(includeCompass){ %>
+    "include-media": "^1.4.2",<% } %><% if(includeCompass){ %>
     "compass-mixins": "^0.12.7",<% } %><% if(includeLess){ %>
     "gulp-less": "^3.0.5",
     "less-plugin-glob": "^1.1.1",
@@ -59,16 +58,19 @@
     "gulp-iconfont": "^6.0.0",
     "gulp-iconfont-css": "^2.0.0",<% } %><% if(includeModernizr){ %>
     "gulp-modernizr": "^1.0.0-alpha",<% } %><% if(includePostCSS){ %>
-    "gulp-postcss": "^6.1.0",<% } %><% if(includePostCSS){ %>
-    "autoprefixer": "^6.3.3",<% } %><% if(includePostCSS && includePcssMQPacker){ %>
-    "css-mqpacker": "^4.0.0",<% } %><% if(includePostCSS && includePcssNano){ %>
-    "cssnano": "^3.5.2",<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
-    "postcss-class-prefix": "^0.3.0",<% } %><% if(includePostCSS && includePcssGradientFix){ %>
-    "postcss-gradient-transparency-fix": "^1.0.1",<% } %><% if(includePostCSS && includePcssScopify){ %>
-    "postcss-scopify": "^0.1.6",<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
-    "postcss-selector-matches": "^2.0.1",<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
-    "postcss-selector-not": "^2.0.0",<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
-    "postcss-mq-keyframes": "^0.2.5",<% } %>
+    "gulp-postcss": "^6.1.0",<% } %><% if(includePcssAutoprefixer){ %>
+    "autoprefixer": "^6.3.3",<% } %><% if(includePcssMQPacker){ %>
+    "css-mqpacker": "^4.0.0",<% } %><% if(includePcssCsso){ %>
+    "postcss-csso": "^1.0.1",<% } %><% if(includePcssClassPrefix){ %>
+    "postcss-class-prefix": "^0.3.0",<% } %><% if(includePcssGradientFix){ %>
+    "postcss-gradient-transparency-fix": "^1.0.1",<% } %><% if(includePcssScopify){ %>
+    "postcss-scopify": "^0.1.6",<% } %><% if(includePcssMQKeyframes){ %>
+    "postcss-mq-keyframes": "^0.2.5",<% } %><% if(includePcssDeclsort){ %>
+    "css-declaration-sorter": "^1.2.1",<% } %><% if(includePcssCssGrace){ %>
+    "cssgrace": "^3.0.0",<% } %><% if(includePcssCssNext){ %>
+    "postcss-cssnext": "^2.5.1",<% } %><% if(includePcssRucksack){ %>
+    "rucksack-css": "^0.8.5",<% } %>
+    "postcss-discard-comments": "^2.0.4",
     "require-dir": "^0.3.0"
   },
   "devDependencies": {

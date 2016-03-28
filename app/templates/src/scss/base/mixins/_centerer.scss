@@ -1,5 +1,4 @@
 @mixin centerer($d: both) {
-  position: absolute;
   @if ($d == both or $d == b) {
     top: 50%;
     left: 50%;
@@ -11,6 +10,8 @@
     top: 50%;
     transform: translate(0, -50%);
   }
+
+  position: absolute
 }
 
 @mixin centerer-remove($p: relative) {

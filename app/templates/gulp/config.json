@@ -11,6 +11,7 @@
     "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
   }, <% } %>
+  "foo": "bar",
   "src": "./../src/",
   "dest": "./..<%= templateDest %>",
   "resrc": {

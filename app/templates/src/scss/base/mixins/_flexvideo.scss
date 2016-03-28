@@ -1,9 +1,9 @@
 @mixin flexvideo() {
   position: relative;
-  padding-bottom:56.25%;
-  height:0;
   overflow:hidden;
   margin: auto;
+  padding-bottom:56.25%;
+  height:0;
 
   > iframe, > object, > embed, > video {
     position:absolute;
@@ -18,9 +18,9 @@
 
 @mixin video-container($max-width: 800px) {
   position: relative;
-  max-width: $max-width;
   top: 50%;
   left: 50%;
+  max-width: $max-width;
   transform: translate(-50%, -50%);
 
   &__inner {

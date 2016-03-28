@@ -3,6 +3,7 @@ var cfg             = JSON.parse(fs.readFileSync('./config.json'));
 var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
+var prettify        = require('gulp-prettify');
 var htmlreplace     = require("gulp-html-replace");
 
 
@@ -14,6 +15,7 @@ return gulp.src(paths.html.src)
     css: 'assets/css/style.min.css',
     modernizr: 'assets/js/libs/modernizr.custom.js'
   }))
+  .pipe(prettify({indent_size: 2}))
   .pipe(gulp.dest(paths.html.build));
 });
 
