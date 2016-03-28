@@ -26,13 +26,13 @@ var browserSync     = require('browser-sync');
 
 
 // html
-<% if(includeJade){ %>var jade            = require('gulp-jade');<% } %>
+<% if(templateOption === 'jade'){ %>var jade            = require('gulp-jade');<% } %>
 
 
 
 // javascript
 var jshint          = require('gulp-jshint');
-var uglify          = require('gulp-uglify');<% if(includeModernizr){ %>
+var uglify          = require('gulp-uglify');<% if(modernizrOption){ %>
 var modernizr       = require('gulp-modernizr');<% } %>
 
 
@@ -41,19 +41,19 @@ var imagemin        = require('gulp-imagemin');
 
 
 
-<% if(includePostCSS){ %>// postprocessing<% } %><% if(includePostCSS){ %>
-var postcss         = require('gulp-postcss');<% } %><% if(includePostCSS){ %>
-var autoprefixer    = require('autoprefixer');<% } %><% if(includePostCSS && includePcssMQPacker){ %>
-var mqPacker        = require('css-mqpacker');<% } %><% if(includePostCSS && includePcssScopify){ %>
-var scopify         = require('postcss-scopify');<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
-var selectorNot     = require('postcss-selector-not');<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
-var selectorMatches = require('postcss-selector-matches');<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
-var classPrfx       = require('postcss-class-prefix');<% } %><% if(includePostCSS && includePcssGradientFix){ %>
-var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
-var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePostCSS && includePcssNano){ %>
+<% if(postCssOption){ %>// postprocessing<% } %><% if(postCssOption){ %>
+var postcss         = require('gulp-postcss');<% } %><% if(postCssOption){ %>
+var autoprefixer    = require('autoprefixer');<% } %><% if(postCssOption && mqpackerOption){ %>
+var mqPacker        = require('css-mqpacker');<% } %><% if(postCssOption && scopifyOption){ %>
+var scopify         = require('postcss-scopify');<% } %><% if(postCssOption && includePcssSelectorNot){ %>
+var selectorNot     = require('postcss-selector-not');<% } %><% if(postCssOption && includePcssSelectorMatches){ %>
+var selectorMatches = require('postcss-selector-matches');<% } %><% if(postCssOption && classprefixOption){ %>
+var classPrfx       = require('postcss-class-prefix');<% } %><% if(postCssOption && gradientfixOption){ %>
+var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(postCssOption && mqkeyframesOption){ %>
+var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(postCssOption && cssnanoOption){ %>
 var cssnano         = require('cssnano');<% } %>
 
-<% if(includeCustomIcnFont){ %>
+<% if(customIconfontOption){ %>
 // Fonts
 var iconfont        = require('gulp-iconfont');
 var iconfontCss     = require('gulp-iconfont-css');
@@ -66,16 +66,16 @@ var sourcemaps      = require('gulp-sourcemaps'); // should use another concat p
 
 
 
-<% if(includePostCSS){ %>var postCssConfig = [<% } %><% if(includePostCSS && includePcssSelectorNot){ %>
-  selectorNot,<% } %><% if(includePostCSS && includePcssSelectorMatches){ %>
-  selectorMatches,<% } %><% if(includePostCSS && includePcssGradientFix){ %>
-  gradientFix,<% } %><% if(includePostCSS && includePcssClassPrefix){ %>
-  classPrfx('dc-'),<% } %><% if(includePostCSS && includePcssScopify){ %>
-  scopify('#scope'),<% } %><% if(includePostCSS && includePcssMQKeyframes){ %>
-  mqKeyframes,<% } %><% if(includePostCSS && includePcssMQPacker){ %>
-  mqPacker,<% } %><% if(includePostCSS && includePcssNano){ %>
-  cssnano({autoprefixer: false, zindex: false}),<% } %><% if(includePostCSS){ %>
-  autoprefixer({browsers: ['last 3 versions', '> 1%']})<% } %><% if(includePostCSS){ %>
+<% if(postCssOption){ %>var postCssConfig = [<% } %><% if(postCssOption && includePcssSelectorNot){ %>
+  selectorNot,<% } %><% if(postCssOption && includePcssSelectorMatches){ %>
+  selectorMatches,<% } %><% if(postCssOption && gradientfixOption){ %>
+  gradientFix,<% } %><% if(postCssOption && classprefixOption){ %>
+  classPrfx('dc-'),<% } %><% if(postCssOption && scopifyOption){ %>
+  scopify('#scope'),<% } %><% if(postCssOption && mqkeyframesOption){ %>
+  mqKeyframes,<% } %><% if(postCssOption && mqpackerOption){ %>
+  mqPacker,<% } %><% if(postCssOption && cssnanoOption){ %>
+  cssnano({autoprefixer: false, zindex: false}),<% } %><% if(postCssOption){ %>
+  autoprefixer({browsers: ['last 3 versions', '> 1%']})<% } %><% if(postCssOption){ %>
 ];<% } %>
 
 
@@ -89,14 +89,14 @@ var path_build_js           = cfg.resrc.js; // where the scripts are stored
 var path_build_js_vendor    = cfg.resrc.jsvendor; // where the vendor scripts are stored
 var path_build_css          = cfg.resrc.css; // where the styles are stored
 var path_build_css_vendor   = cfg.resrc.jsvendor; // where the vendor styles are stored
-var path_build_img          = cfg.resrc.img; // where the images are stored<% if(includeCustomIcnFont){ %>
-var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored<% } %><% if(includeJade){ %>
+var path_build_img          = cfg.resrc.img; // where the images are stored<% if(customIconfontOption){ %>
+var path_build_fonts        = cfg.resrc.fonts; // where the fonts are stored<% } %><% if(templateOption === 'jade'){ %>
 var path_build_jade         = cfg.resrc.jade; // where teh HTML is generated<% } %>
 
 
 // Settings
-<% if(includeCustomIcnFont){ %>var iconFontName      = cfg.iconFont.name;<% } %><% if(includePcssScopify){ %>
-var scope             = cfg.scope;<% } %><% if(includePcssClassPrefix){ %>
+<% if(customIconfontOption){ %>var iconFontName      = cfg.iconFont.name;<% } %><% if(scopifyOption){ %>
+var scope             = cfg.scope;<% } %><% if(classprefixOption){ %>
 var prefix            = cfg.prefix;<% } %>
 var projectURL        = cfg.projectURL;
 
@@ -134,19 +134,19 @@ var paths = {
     src_files: path_src + 'scss/**/*.scss',
     build_srcsmap: path_build_css,
     build: path_build_css
-  },<% if(includeJade){ %>
+  },<% if(templateOption === 'jade'){ %>
   jade: {
     src: path_src + 'jade/*.jade',
     watch: path_src + 'jade/**/*.jade',
     build: path_build_jade
-  },<% } %><% if(includeCustomIcnFont){ %>
+  },<% } %><% if(customIconfontOption){ %>
   font: {
     src: path_src + 'iconfont/svg/*.svg',
     build: path_build_fonts + iconFontName,
     templateInput: '../src/iconfont/template/_icons.scss',
     templateOutput: '../../../../src/scss/modules/_icons.scss',
     templateFontpath: '../fonts/' + iconFontName + '/'
-  },<% } %><% if(includePostCSS){ %>
+  },<% } %><% if(postCssOption){ %>
   postcss: {
     src: path_build_css + 'style.css',
     build: path_build_css
@@ -175,7 +175,7 @@ gulp.task('browser-sync', function() {
 
 
 
-<% if(includeModernizr){ %>
+<% if(modernizrOption){ %>
 // modernizr
 gulp.task('modernizr', function() {
   gulp.src([paths.styles.src_files, paths.scripts.src])
@@ -246,7 +246,7 @@ gulp.task('styles', function() {
     .pipe(plumber(onStyleError))
     .pipe(sourcemaps.init())
     .pipe(sass()) // Compile sass to css
-    <% if(includePostCSS){ %>.pipe(postcss(postCssConfig)) // Perform postcss tasks<% } %>
+    <% if(postCssOption){ %>.pipe(postcss(postCssConfig)) // Perform postcss tasks<% } %>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.build));
 });
@@ -254,7 +254,7 @@ gulp.task('styles', function() {
 
 
 
-<% if(includeJade){ %>
+<% if(templateOption === 'jade'){ %>
 // Compile jade files
 gulp.task('jade', function() {
   var jadeOptions = {
@@ -269,7 +269,7 @@ gulp.task('jade', function() {
 
 
 
-<% if(includeCustomIcnFont){ %>
+<% if(customIconfontOption){ %>
 // Create icon font
 gulp.task('iconfont', function(){
   return gulp.src(paths.font.src)
@@ -295,7 +295,7 @@ gulp.task('iconfont', function(){
 
 
 // default gulp task
-gulp.task('default', [<% if(includeJade){ %>'jade', <% } %>'images', 'scripts-min', 'styles', 'browser-sync'], function() {
+gulp.task('default', [<% if(templateOption === 'jade'){ %>'jade', <% } %>'images', 'scripts-min', 'styles', 'browser-sync'], function() {
 
   // watch for JS changes
   // gulp.watch(paths.scripts.src, ['scripts', 'scripts-min']).on('change', browserSync.reload);
@@ -310,7 +310,7 @@ gulp.task('default', [<% if(includeJade){ %>'jade', <% } %>'images', 'scripts-mi
   // watch for image changes
   gulp.watch(paths.images.src, ['images']);
 
-  <% if(includeJade){ %>// watch for Jade changes
+  <% if(templateOption === 'jade'){ %>// watch for Jade changes
   gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);<% } %>
 
 });
@@ -326,6 +326,6 @@ function onStyleError(e) {
   console.log('CSS Error:', e.message, 'lineNumber:', e.lineNumber);
 }
 
-<% if(includeJade){ %>function onJadeError(e) {
+<% if(templateOption === 'jade'){ %>function onJadeError(e) {
   console.log('Jade Error:', e.message, 'lineNumber:', e.lineNumber);
 }<% } %>

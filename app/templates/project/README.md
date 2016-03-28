@@ -1,5 +1,5 @@
-# <%= appname %>
-> <%= appdescription %><br>
+# <%= projectName %>
+> <%= projectDescription %><br>
 > _Generated with [robonkey](https://github.com/michaeldeboeve/generator-robonkey/blob/master/docs/features.md)_
 
 ## gulpfile.js
@@ -7,11 +7,11 @@
 The gulpfile.js is split up in parts using [require-dir]().
 It gets it's tasks from the subdirectory `gulp-tasks`, which contains the followig files:
 
-- bower.js _(moving bower dependencies to the `website/assets` folder)_<% if(includeCustomIcnFont) { %>
+- bower.js _(moving bower dependencies to the `website/assets` folder)_<% if(customIconfontOption) { %>
 - iconfont.js _(creating the iconfont)_<% } %>
-- images.js _(imagemin)_<% if(includeNunjucks) { %>
-- nunjucks.js _(nunjucks compile)_<% } %><% if(includeJade) { %>
-- jade.js _(jade compile)_<% } %><% if(includeModernizr) { %>
+- images.js _(imagemin)_<% if(templateOption === 'nunjucks') { %>
+- nunjucks.js _(nunjucks compile)_<% } %><% if(templateOption === 'jade') { %>
+- jade.js _(jade compile)_<% } %><% if(modernizrOption) { %>
 - modernizr.js _(creating modernizr file)_<% } %>
 - scripts.js _(concat and minify javascript)_
 - styles.js _(concat and minify SCSS, Stylus or Less)_
@@ -37,7 +37,7 @@ $ gulp dev
 
 ### Gulp Build
 
-Build task will <% if(includeModernizr) { %>generate a custom modernizr file and<% } %> <% if(includeCustomIcnFont) { %>run the iconfont task and<% } %> minify the styles and scripts:
+Build task will <% if(modernizrOption) { %>generate a custom modernizr file and<% } %> <% if(customIconfontOption) { %>run the iconfont task and<% } %> minify the styles and scripts:
 
 ```sh
 $ gulp build
@@ -49,23 +49,23 @@ $ gulp build
 Two config files are present:
 
 - config.json - contains basic settings for:
-  - url for browsersync<% if(includeModernizr) { %>
-  - modernizr settings<% } %><% if(includeCustomIcnFont) { %>
-  - icon font settings<% } %><% if(includePcssClassPrefix) { %>
-  - class perfix name<% } %><% if(includePcssScopify) { %>
+  - url for browsersync<% if(modernizrOption) { %>
+  - modernizr settings<% } %><% if(customIconfontOption) { %>
+  - icon font settings<% } %><% if(classprefixOption) { %>
+  - class perfix name<% } %><% if(scopifyOption) { %>
   - scope name<% } %>
 - paths.json - contains paths for:
-  - scripts - scr/build<% if(includeModernizr) { %>
+  - scripts - scr/build<% if(modernizrOption) { %>
   - modernizr - build<% } %>
   - html - scr
   - images - src/build
-  - styles - src/build/scr_watch/build_soucemap<% if(includeNunjucks) { %>
-  - nunjucks - src/watch/build<% } %><% if(includeJade) { %>
-  - jade - src/watch/build<% } %><% if(includePostCSS) { %>
-  - postcss - src/build<% } %><% if(includeCustomIcnFont) { %>
+  - styles - src/build/scr_watch/build_soucemap<% if(templateOption === 'nunjucks') { %>
+  - nunjucks - src/watch/build<% } %><% if(templateOption === 'jade') { %>
+  - jade - src/watch/build<% } %><% if(postCssOption) { %>
+  - postcss - src/build<% } %><% if(customIconfontOption) { %>
   - font - src/build/template/path<% } %>
 
-<% if(includeCustomIcnFont) { %>
+<% if(customIconfontOption) { %>
 Make a custom icon font:
 
 ```sh
@@ -73,7 +73,7 @@ $ gulp iconfont
 ```
 <% } %>
 
-<% if(includeModernizr) { %>
+<% if(modernizrOption) { %>
 Generate custom modernizr file:
 
 ```sh
@@ -81,7 +81,7 @@ $ gulp modernizr
 ```
 <% } %>
 
-<% if(includeJade) { %>
+<% if(templateOption === 'jade') { %>
 ## Jade
 Jade source files are located in
 
@@ -96,7 +96,7 @@ website/
 ```
 <% } %>
 
-<% if(includeNunjucks) { %>
+<% if(templateOption === 'nunjucks') { %>
 ## Jade
 Nunjucks source files are located in
 
@@ -111,7 +111,7 @@ website/
 ```
 <% } %>
 
-<% if(includeSCSS) { %>
+<% if(preproOption === 'sass') { %>
 ## Sass
 
 Sass source files are located in
@@ -126,38 +126,38 @@ and will be compiled to
 website/assets/css
 ```
 
-<% if(!noMixinLibSCSS) { %>
+<% if(preproOption === 'sass' && mixinOption !== 'none') { %>
 ###### Mixin library:
 
-<% if(includeBourbon) { %>
-- [Bourbon](http://bourbon.io/)<% } %><% if(includeCompass) { %>
+<% if(mixinOption === 'bourbon') { %>
+- [Bourbon](http://bourbon.io/)<% } %><% if(mixinOption === 'compassmixins') { %>
 - [Compass Mixins](https://github.com/Igosuki/compass-mixins)<% } %>
 
 <% } %>
 
-<% if(!noGridLibSCSS) { %>
+<% if(preproOption === 'sass' && gridOption !== 'none') { %>
 ###### Grid library:
 
-<% if(includeJeetSCSS) { %>
-- [Jeet](http://jeet.gs/)<% } %><% if(includeSusy) { %>
-- [Susy](http://susydocs.oddbird.net/en/latest/)<% } %><% if(includeNeat) { %>
-- [Neat](http://bourbon.io/)<% } %><% if(includeSemanticSCSS) { %>
+<% if(preproOption === 'sass' && gridOption === 'jeet') { %>
+- [Jeet](http://jeet.gs/)<% } %><% if(gridOption === 'susy') { %>
+- [Susy](http://susydocs.oddbird.net/en/latest/)<% } %><% if(gridOption === 'neat') { %>
+- [Neat](http://bourbon.io/)<% } %><% if(preproOption === 'sass' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
 
-<% if(!noMQLibSCSS) { %>
+<% if(preproOption === 'sass' && mqOption !== 'none') { %>
 ###### Mediaqueries library:
 
-<% if(includeBreakpoint) { %>
-- [Breakpoint](http://breakpoint-sass.com/)<% } %><% if(includeIncludeMedia) { %>
+<% if(mqOption === 'breakpoint') { %>
+- [Breakpoint](http://breakpoint-sass.com/)<% } %><% if(gridOption === 'includemedia') { %>
 - [Include Media](https://github.com/Igosuki/compass-mixins)<% } %>
 
 <% } %>
 
 <% } %>
 
-<% if(includeStylus) { %>
+<% if(preproOption === 'stylus') { %>
 ## Stylus
 
 Stylus source files are located in
@@ -172,34 +172,34 @@ and will be compiled to
 website/stylus/css
 ```
 
-<% if(!noMixinLibStylus) { %>
+<% if(preproOption === 'stylus' && gridOption !== 'none') { %>
 ###### Mixin library:
-<% if(includeNib) { %>
-- [Nib](https://tj.github.io/nib/)<% } %><% if(includeKoutoSwiss) { %>
+<% if(mixinOption === 'nib') { %>
+- [Nib](https://tj.github.io/nib/)<% } %><% if(mixinOption === 'koutoswiss') { %>
 - [Kouto Swiss](http://kouto-swiss.io/)<% } %>
 <% } %>
 
-<% if(!noGridLibSCSS) { %>
+<% if(preproOption === 'stylus' && gridOption !== 'none') { %>
 ###### Grid library:
 
-<% if(includeJeetStylus) { %>
-- [Jeet](http://jeet.gs/)<% } %><% if(includeSGrid) { %>
-- [sGrid](http://stylusgrid.com/)<% } %><% if(includeSemanticStylus) { %>
+<% if(preproOption === 'stylus' && gridOption === 'jeet') { %>
+- [Jeet](http://jeet.gs/)<% } %><% if(gridOption === 'sgrid') { %>
+- [sGrid](http://stylusgrid.com/)<% } %><% if(preproOption === 'stylus' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
 
-<% if(!noMQLibSCSS) { %>
+<% if(preproOption === 'stylus' && mqOption !== 'none') { %>
 ###### Mediaqueries library:
 
-<% if(includeRupture) { %>
+<% if(mqOption === 'rupture') { %>
 - [Rupture](https://jenius.github.io/rupture/)<% } %>
 
 <% } %>
 
 <% } %>
 
-<% if(includeLess) { %>
+<% if(preproOption === 'less') { %>
 ## Less
 
 Less source files are located in
@@ -214,69 +214,69 @@ and will be compiled to
 website/less/css
 ```
 
-<% if(!noMixinLibLess) { %>
+<% if(preproOption === 'less' && mixinOption !== 'none') { %>
 ###### Mixin library:
 
-<% if(includeLessHat) { %>
+<% if(mixinOption === 'lesshat') { %>
 - [Less Hat](http://lesshat.madebysource.com/)<% } %>
 
 <% } %>
 
-<% if(!noGridLibLess) { %>
+<% if(preproOption === 'less' && gridOption !== 'none') { %>
 ###### Grid library:
 
-<% if(includeGee) { %>
-- [Gee](http://sorgalla.com/gee/)<% } %><% if(includeSemanticLess) { %>
+<% if(gridOption === 'gee') { %>
+- [Gee](http://sorgalla.com/gee/)<% } %><% if(preproOption === 'less' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
 
-<% if(!noMQLibLess) { %>
+<% if(preproOption === 'stylus' && mqOption !== 'none') { %>
 ###### Mediaqueries library:
 
-<% if(includeLessMQ) { %>
+<% if(mqOption === 'lessmq') { %>
 - [Less-MQ](https://github.com/mrmlnc/less-mq)<% } %>
 
 <% } %>
 
 <% } %>
 
-<% if(!noBaseStyles) {%>
+<% if(baseStyleOption !== 'none') {%>
 ## Base Styles
 
-<% if(includeReset && includeSCSS) { %>
-- [Reset](https://github.com/shannonmoeller/reset-css)<% } %><% if(includeNormalize && includeSCSS) { %>
-- [Normalize](https://github.com/JohnAlbin/normalize-scss)<% } %><% if(includeSanitize && includeSCSS) { %>
-- [Sanitize](https://github.com/10up/sanitize.css)<% } %><% if(includeReset && includeStylus) { %>
-- [Reset](https://github.com/dtan/html5-reset-stylus)<% } %><% if(includeNormalize && includeStylus) { %>
-- [Normalize](https://github.com/bymathias/normalize.styl)<% } %><% if(includeSanitize && includeStylus) { %>
-- [Sanitize]()<% } %><% if(includeReset && includeLess) { %>
-- [Reset](https://github.com/kuatsure/Eric-Meyer-Reset---less--)<% } %><% if(includeNormalize && includeLess) { %>
-- [Normalize](https://github.com/additiveinverse/normalize.less)<% } %><% if(includeSanitize && includeLess) { %>
+<% if(baseStyleOption === 'reset' && preproOption === 'sass') { %>
+- [Reset](https://github.com/shannonmoeller/reset-css)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'sass') { %>
+- [Normalize](https://github.com/JohnAlbin/normalize-scss)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'sass') { %>
+- [Sanitize](https://github.com/10up/sanitize.css)<% } %><% if(baseStyleOption === 'reset' && preproOption === 'stylus') { %>
+- [Reset](https://github.com/dtan/html5-reset-stylus)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'stylus') { %>
+- [Normalize](https://github.com/bymathias/normalize.styl)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'stylus') { %>
+- [Sanitize]()<% } %><% if(baseStyleOption === 'reset' && preproOption === 'less') { %>
+- [Reset](https://github.com/kuatsure/Eric-Meyer-Reset---less--)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'less') { %>
+- [Normalize](https://github.com/additiveinverse/normalize.less)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'less') { %>
 - [Sanitize](https://github.com/luixxiul/sanitize.less/blob/master/sanitize.less)<% } %>
 
 <% } %>
 
-<% if(includePostCSS) { %>
+<% if(postCssOption) { %>
 ## PostCSS
 > PostCSS: https://github.com/postcss/postcss<br>
 > More PostCSS plugins: http://postcss.parts/
 
-<% if(includePcssAutoprefixer) {%>
-- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(includePcssNano) {%>
-- [Csso](https://github.com/lahmatiy/postcss-csso)<% } %><% if(includePcssGradientFix) {%>
-- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } %><% if(includePcssMQPacker) {%>
-- [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } %><% if(includePcssMQKeyframes) {%>
-- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } %><% if(includePcssClassPrefix) {%>
-- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)<% } %><% if(includePcssScopify) {%>
+<% if(autoprefixerOption) {%>
+- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(cssnanoOption) {%>
+- [Csso](https://github.com/lahmatiy/postcss-csso)<% } %><% if(gradientfixOption) {%>
+- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } %><% if(mqpackerOption) {%>
+- [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } %><% if(mqkeyframesOption) {%>
+- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } %><% if(classprefixOption) {%>
+- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)<% } %><% if(scopifyOption) {%>
 - [Scopify](https://github.com/pazams/postcss-scopify)<% } %>
 
 <% } %>
 
-<% if(includeCustomIcnFont) { %>
+<% if(customIconfontOption) { %>
 ## Custom Icon Font
 
-The custom icon font generator uses svg images from a folder to build the font. Then it generates a <% if(includeSCSS) { %>.scss<% } %><% if(includeStylus) { %>.stylus<% } %><% if(includeLess) { %>.less<% } %> file with `@font-face` declaration, `.icn` and `.icn--name` classes.
+The custom icon font generator uses svg images from a folder to build the font. Then it generates a <% if(preproOption === 'sass') { %>.scss<% } %><% if(preproOption === 'stylus') { %>.stylus<% } %><% if(preproOption === 'less') { %>.less<% } %> file with `@font-face` declaration, `.icn` and `.icn--name` classes.
 
 ### Settings
 
@@ -319,7 +319,7 @@ To build a custom icon font, just run:
 ```sh
 $ gulp iconfont
 ```
-Build task will <% if(includeModernizr) { %>generate a custom modernizr file and <% } %> run the iconfont task and minify the styles and scripts:
+Build task will <% if(modernizrOption) { %>generate a custom modernizr file and <% } %> run the iconfont task and minify the styles and scripts:
 
 ```sh
 $ gulp build
@@ -336,18 +336,18 @@ website/assets/fonts
 The rendered icon file will be placed in:
 
 ```sh
-<% if(includeSCSS) {%>src/scss/modules/_icons.scss<% } %><% if(includeStylus) {%>
-src/stylus/modules/icons.styl<% } %><% if(includeLess) {%>
+<% if(preproOption === 'sass') {%>src/scss/modules/_icons.scss<% } %><% if(preproOption === 'stylus') {%>
+src/stylus/modules/icons.styl<% } %><% if(preproOption === 'less') {%>
 src/less/modules/icons.less<% } %>
 ```
 <% } %>
 
-<% if(includeModernizr) { %>
+<% if(modernizrOption) { %>
 ## Modernizr
 
 Modernizr gulp plugin is used for the creation of custom Modernizr tests.
 
-When initialized, the plugin will crawl your <% if(includeSCSS) { %>.scss<% } %><% if(includeStylus) { %>.stylus<% } %><% if(includeLess) { %>.less<% } %> and .js files for Modernizr references (ie: `.no-svg`) and builds the `modernizr-custom.js` file.
+When initialized, the plugin will crawl your <% if(preproOption === 'sass') { %>.scss<% } %><% if(preproOption === 'stylus') { %>.stylus<% } %><% if(preproOption === 'less') { %>.less<% } %> and .js files for Modernizr references (ie: `.no-svg`) and builds the `modernizr-custom.js` file.
 
 ### Settings
 
@@ -380,7 +380,7 @@ To build a custom modernizr file, just run:
 ```sh
 $ gulp modernizr
 ```
-Build task will generate a custom modernizr file and <% if(includeCustomIcnFont) { %>run the iconfont task and<% } %> minify the styles and scripts:
+Build task will generate a custom modernizr file and <% if(customIconfontOption) { %>run the iconfont task and<% } %> minify the styles and scripts:
 
 ```sh
 $ gulp build
@@ -398,7 +398,7 @@ website/assets/js/libs/modernizr.custom.js
 
 ## Structure
 
-<% if(gulpFolder) {%>
+<% if(gulpDirOption) {%>
 ###### Main structure:
 
 ```sh
@@ -438,7 +438,7 @@ gulp
 ```
 <% } %>
 
-<% if(!gulpFolder) {%>
+<% if(!gulpDirOption) {%>
 ###### Main structure:
 
 ```sh
@@ -477,13 +477,13 @@ scc
     ...
   ├── images
     ...
-  ├── <% if(includeJade) {%>jade<% } %><% if(includeNunjucks) {%>nunjucks<% } %>
+  ├── <% if(templateOption === 'jade') {%>jade<% } %><% if(templateOption === 'nunjucks') {%>nunjucks<% } %>
     ...
   ├── js
     ...
   ├── modernizr
     ...
-  ├── <% if(includeSCSS) {%>scss<% } %><% if(includeStylus) {%>stylus<% } %><% if(includeLess) {%>less<% } %>
+  ├── <% if(preproOption === 'sass') {%>scss<% } %><% if(preproOption === 'stylus') {%>stylus<% } %><% if(preproOption === 'less') {%>less<% } %>
     ...
 ```
 
@@ -500,9 +500,9 @@ website
     ├── libs
       ...
     ...
-  <% if(includeHtaccess) {%>.htaccess<% } %><% if(includeBrowserconfig) {%>
-  browserconfig.xml<% } %><% if(includeCrossdomain) {%>
-  crossdomain.xml<% } %><% if(includeRobots) {%>
+  <% if(htaccessOption) {%>.htaccess<% } %><% if(browserconfigOption) {%>
+  browserconfig.xml<% } %><% if(crossdomainOption) {%>
+  crossdomain.xml<% } %><% if(robotsOption) {%>
   humans.txt
   robots.txt<% } %>
   index.html

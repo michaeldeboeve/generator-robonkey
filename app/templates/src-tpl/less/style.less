@@ -1,15 +1,15 @@
 // ==========================================================================
 // Robonkey Sass Shizzle
 // ==========================================================================
-<% if(includeGee){ %>@import "../../gulp/node_modules/gee.less/gee";<% } %>
+<% if(gridOption === 'gee'){ %>@import "../../gulp/node_modules/gee.less/gee";<% } %>
 
 
 // ==========================================================================
 // BASE - Base Variable file along with starting point Mixins and Placeholders.
 // ==========================================================================
 @import "base/fonts";
-<% if(includeReset){ %>@import "base/reset";<% } %><% if(includeNormalize){ %>
-@import "base/normalize";<% } %><% if(includeSanitize){ %>
+<% if(baseStyleOption === 'reset'){ %>@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
+@import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>
 @import "base/sanitize";<% } %>
 
 @import "base/colors/**/*";

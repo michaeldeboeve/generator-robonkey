@@ -68,7 +68,7 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       != '\n    <!-- endbuild -->'
 
     block headerScripts
-      <% if(includeModernizr){ %>!= '\n    <!-- build:modernizr -->'
+      <% if(modernizrOption){ %>!= '\n    <!-- build:modernizr -->'
       script(src="assets/js/libs/modernizr.dev.js")
       != '\n    <!-- endbuild -->'<% } %>
 
@@ -77,11 +77,11 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
 
     != '\n\n'
-    <% if(includeJQuery){ %>script(src="assets/js/libs/jquery.min.js")<% } %>
-    <% if(includeWaypoints && includeJQuery){ %>script(src="assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints) { %>script(src="assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals){ %>
-    script(src="assets/js/libs/signals.min.js")<% } %><% if(includeD3){ %>
-    script(src="assets/js/libs/d3.min.js")<% } %><% if(includeEnquire){ %>
-    script(src="assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax){ %>
+    <% if(jqueryOption){ %>script(src="assets/js/libs/jquery.min.js")<% } %>
+    <% if(waypointsOption && jqueryOption){ %>script(src="assets/js/libs/jquery.waypoints.min.js")<% } else if(waypointsOption) { %>script(src="assets/js/libs/noframework.waypoints.min.js")<% } %><% if(signalsOption){ %>
+    script(src="assets/js/libs/signals.min.js")<% } %><% if(d3jsOption){ %>
+    script(src="assets/js/libs/d3.min.js")<% } %><% if(enquireOption){ %>
+    script(src="assets/js/libs/enquire.min.js")<% } %><% if(tweenmaxOption){ %>
     script(src="assets/js/libs/TweenMax.min.js")<% } %>
     != '\n'  
     block footerScripts
@@ -89,7 +89,7 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       script(src="assets/js/script.js")
       != '\n    <!-- endbuild -->\n'
     
-    <% if(includeGA){ %>
+    <% if(analyticsOption){ %>
     != '\n' 
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

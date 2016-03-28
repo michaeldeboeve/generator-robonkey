@@ -1,13 +1,13 @@
 // ==========================================================================
 // Robonkey Sass Shizzle
 // ==========================================================================
-<% if(includeJeetStylus) {%>
-@import "base/jeet/jeet";<% } %><% if(includeSGrid) {%>
+<% if(preproOption === 'stylus' && gridOption === 'jeet') {%>
+@import "base/jeet/jeet";<% } %><% if(gridOption === 'sgrid') {%>
 @import "../../gulp/node_modules/s-grid/s-grid-settings";
 @import "../../gulp/node_modules/s-grid/s-grid-functions";
-@import "../../gulp/node_modules/s-grid/s-grid-classes";<% } %><% if(includeRupture) {%>
-@import "../../gulp/node_modules/rupture/rupture/";<% } %><% if(includeKoutoSwiss) {%>
-@import "../../gulp/node_modules/kouto-swiss/lib/kouto-swiss/";<% } %><% if(includeNib) {%>
+@import "../../gulp/node_modules/s-grid/s-grid-classes";<% } %><% if(mqOption === 'rupture') {%>
+@import "../../gulp/node_modules/rupture/rupture/";<% } %><% if(mixinOption === 'koutoswiss') {%>
+@import "../../gulp/node_modules/kouto-swiss/lib/kouto-swiss/";<% } %><% if(mixinOption === 'nib') {%>
 @import "../../gulp/node_modules/nib/lib/nib/";<% } %>
 
 // ==========================================================================
@@ -19,8 +19,8 @@
 @import "base/mixins/**/*";
 
 @import "base/fonts";
-<% if(includeReset){ %>@import "base/reset";<% } %><% if(includeNormalize){ %>
-@import "base/normalize";<% } %><% if(includeSanitize){ %>
+<% if(baseStyleOption === 'reset'){ %>@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
+@import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>
 @import "base/sanitize";<% } %>
 @import "base/placeholders";
 @import "base/grid";

@@ -5,71 +5,71 @@ var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var concat          = require('gulp-concat');
 var sourcemaps      = require('gulp-sourcemaps');
-var rename          = require('gulp-rename');<% if(includeSCSS){ %>
+var rename          = require('gulp-rename');<% if(preproOption === 'sass'){ %>
 var sass            = require('gulp-sass');
-var sassGlob        = require('gulp-sass-glob');<% } %><% if(includeStylus){ %>
-var stylus          = require('gulp-stylus');<% } %><% if(includeLess){ %>
+var sassGlob        = require('gulp-sass-glob');<% } %><% if(preproOption === 'stylus'){ %>
+var stylus          = require('gulp-stylus');<% } %><% if(preproOption === 'less'){ %>
 var less            = require('gulp-less');
 var lessGlob        = require('less-plugin-glob');
 var LessClean       = require('less-plugin-clean-css');
 var cleancss        = new LessClean({ advanced: true });<% } %>
 
 
-<% if(includePostCSS){ %>// postprocessing<% } %><% if(includePostCSS){ %>
-var postcss         = require('gulp-postcss');<% } %><% if(includePcssAutoprefixer && !includePcssCssGrace){ %>
-var autoprefixer    = require('autoprefixer');<% } %><% if(includePcssMQPacker){ %>
-var mqPacker        = require('css-mqpacker');<% } %><% if(includePcssScopify){ %>
-var scopify         = require('postcss-scopify');<% } %><% if(includePcssClassPrefix){ %>
-var classPrfx       = require('postcss-class-prefix');<% } %><% if(includePcssGradientFix){ %>
-var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(includePcssMQKeyframes){ %>
-var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePcssNano){ %>
-var cssnano({autoprefixer: false})            = require('cssnano');<% } %><% if(includePcssDeclsort){ %>
-var cssdeclsort     = require('css-declaration-sorter');<% } %><% if(includePcssRucksack){ %>
-var rucksack        = require('rucksack-css');<% } %><% if(includePcssCssNext){ %>
-var next            = require('postcss-cssnext');<% } %><% if(includePcssCssGrace){ %>
+<% if(postCssOption){ %>// postprocessing<% } %><% if(postCssOption){ %>
+var postcss         = require('gulp-postcss');<% } %><% if(autoprefixerOption && !cssgraceOption){ %>
+var autoprefixer    = require('autoprefixer');<% } %><% if(mqpackerOption){ %>
+var mqPacker        = require('css-mqpacker');<% } %><% if(scopifyOption){ %>
+var scopify         = require('postcss-scopify');<% } %><% if(classprefixOption){ %>
+var classPrfx       = require('postcss-class-prefix');<% } %><% if(gradientfixOption){ %>
+var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(mqkeyframesOption){ %>
+var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(cssnanoOption){ %>
+var cssnano         = require('cssnano');<% } %><% if(csssorterOption){ %>
+var cssdeclsort     = require('css-declaration-sorter');<% } %><% if(rucksackOption){ %>
+var rucksack        = require('rucksack-css');<% } %><% if(cssnextOption){ %>
+var next            = require('postcss-cssnext');<% } %><% if(cssgraceOption){ %>
 var grace           = require('cssgrace');<% } %>
 
-<% if(includePcssAutoprefixer || includePcssCssNext){ %>var browserSupport  = ['last 3 versions', '> 1%'];<% } %><% if(includePcssDeclsort){ %>
+<% if(autoprefixerOption || cssnextOption){ %>var browserSupport  = ['last 3 versions', '> 1%'];<% } %><% if(csssorterOption){ %>
 var cssSortOrder    = 'smacss';<% } %>
 
-<% if(includePostCSS){ %>var postCssConfigDev = [<% } %><% if(includePcssGradientFix){ %>
-  gradientFix,<% } %><% if(includePcssRucksack){ %>
-  rucksack,<% } %><% if(includePcssCssNext){ %>
-  next({browsers: browserSupport}),<% } %><% if(includePcssCssGrace){ %>
-  grace,<% } %><% if(includePcssClassPrefix){ %>
-  classPrfx(cfg.prefix),<% } %><% if(includePcssScopify){ %>
-  scopify(cfg.scope),<% } %><% if(includePcssDeclsort){ %>
-  cssdeclsort({order: cssSortOrder}),<% } %><% if(includePcssMQKeyframes){ %>
-  mqKeyframes,<% } %><% if(includePcssMQPacker){ %>
-  mqPacker,<% } %><% if(includePcssAutoprefixer && !includePcssCssGrace){ %>
-  autoprefixer({browsers: browserSupport})<% } %><% if(includePostCSS){ %>
+<% if(postCssOption){ %>var postCssConfigDev = [<% } %><% if(gradientfixOption){ %>
+  gradientFix,<% } %><% if(rucksackOption){ %>
+  rucksack,<% } %><% if(cssnextOption){ %>
+  next({browsers: browserSupport}),<% } %><% if(cssgraceOption){ %>
+  grace,<% } %><% if(classprefixOption){ %>
+  classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
+  scopify(cfg.scope),<% } %><% if(csssorterOption){ %>
+  cssdeclsort({order: cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
+  mqKeyframes,<% } %><% if(mqpackerOption){ %>
+  mqPacker,<% } %><% if(autoprefixerOption && !cssgraceOption){ %>
+  autoprefixer({browsers: browserSupport})<% } %><% if(postCssOption){ %>
 ];<% } %>
 
-<% if(includePostCSS){ %>var postCssConfigBuild = [<% } %><% if(includePcssGradientFix){ %>
-  gradientFix,<% } %><% if(includePcssRucksack){ %>
-  rucksack,<% } %><% if(includePcssCssNext){ %>
-  next({browsers: browserSupport}),<% } %><% if(includePcssCssGrace){ %>
-  grace,<% } %><% if(includePcssClassPrefix){ %>
-  classPrfx(cfg.prefix),<% } %><% if(includePcssScopify){ %>
-  scopify(cfg.scope),<% } %><% if(includePcssDeclsort){ %>
-  cssdeclsort({order: cssSortOrder}),<% } %><% if(includePcssMQKeyframes){ %>
-  mqKeyframes,<% } %><% if(includePcssMQPacker){ %>
-  mqPacker,<% } %><% if(includePcssAutoprefixer && !includePcssCssGrace){ %>
-  autoprefixer({browsers: browserSupport}),<% } %><% if(includePcssNano){ %>
-  cssnano({autoprefixer: false})<% } %><% if(includePostCSS){ %>
+<% if(postCssOption){ %>var postCssConfigBuild = [<% } %><% if(gradientfixOption){ %>
+  gradientFix,<% } %><% if(rucksackOption){ %>
+  rucksack,<% } %><% if(cssnextOption){ %>
+  next({browsers: browserSupport}),<% } %><% if(cssgraceOption){ %>
+  grace,<% } %><% if(classprefixOption){ %>
+  classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
+  scopify(cfg.scope),<% } %><% if(csssorterOption){ %>
+  cssdeclsort({order: cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
+  mqKeyframes,<% } %><% if(mqpackerOption){ %>
+  mqPacker,<% } %><% if(autoprefixerOption && !cssgraceOption){ %>
+  autoprefixer({browsers: browserSupport}),<% } %><% if(cssnanoOption){ %>
+  cssnano({autoprefixer: false})<% } %><% if(postCssOption){ %>
 ];<% } %>
 
 
 
 // Styles Dev
 gulp.task('styles', function() {
-  gulp.src(paths.styles.src)<% if(includeSCSS){ %>
+  gulp.src(paths.styles.src)<% if(preproOption === 'sass'){ %>
     .pipe(sassGlob())<% } %>
     .pipe(plumber(onStyleError))
-    .pipe(sourcemaps.init())<% if(includeSCSS){ %>
-    .pipe(sass())<% } %><% if(includeStylus){ %>
-    .pipe(stylus())<% } %><% if(includeLess){ %>
-    .pipe(less({ plugins: [lessGlob] }))<% } %><% if(includePostCSS){ %>
+    .pipe(sourcemaps.init())<% if(preproOption === 'sass'){ %>
+    .pipe(sass())<% } %><% if(preproOption === 'stylus'){ %>
+    .pipe(stylus())<% } %><% if(preproOption === 'less'){ %>
+    .pipe(less({ plugins: [lessGlob] }))<% } %><% if(postCssOption){ %>
     .pipe(postcss(postCssConfigDev))<% } %>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.build));
@@ -77,12 +77,12 @@ gulp.task('styles', function() {
 
 // Styles Build
 gulp.task('styles-build', function() {
-  gulp.src(paths.styles.src)<% if(includeSCSS){ %>
+  gulp.src(paths.styles.src)<% if(preproOption === 'sass'){ %>
     .pipe(sassGlob())<% } %>
-    .pipe(plumber(onStyleError))<% if(includeSCSS){ %>
-    .pipe(sass(<% if(!includePcssNano){ %>{outputStyle: 'compressed'}<% } %>))<% } %><% if(includeStylus){ %>
-    .pipe(stylus(<% if(!includePostCSS){ %>{ compress: true }<% } %>))<% } %><% if(includeLess){ %>
-    .pipe(less({ plugins: [lessGlob<% if(!includePcssNano){ %>, cleancss<% } %>] }))<% } %><% if(includePostCSS){ %>
+    .pipe(plumber(onStyleError))<% if(preproOption === 'sass'){ %>
+    .pipe(sass(<% if(!cssnanoOption){ %>{outputStyle: 'compressed'}<% } %>))<% } %><% if(preproOption === 'stylus'){ %>
+    .pipe(stylus(<% if(!postCssOption){ %>{ compress: true }<% } %>))<% } %><% if(preproOption === 'less'){ %>
+    .pipe(less({ plugins: [lessGlob<% if(!cssnanoOption){ %>, cleancss<% } %>] }))<% } %><% if(postCssOption){ %>
     .pipe(postcss(postCssConfigBuild))<% } %>
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(paths.styles.build));

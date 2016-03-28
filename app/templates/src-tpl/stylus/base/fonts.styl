@@ -1,9 +1,9 @@
 $default-font-family ?= sans-serif;
-$monospace-font-family ?= monospace;<% if(includeCustomIcnFont){ %>
+$monospace-font-family ?= monospace;<% if(customIconfontOption){ %>
 $icon-font-family ?= '<%= customIconFontName %>';<% } %>
 $title-font-family ?= $default-font-family;
 
-<% if(includeCustomIcnFont){ %>@font-face
+<% if(customIconfontOption){ %>@font-face
   font-family: "<%= customIconFontName %>";
   src: url('<%= customIconFontName %>.eot');
   src: url('<%= customIconFontName %>.eot?#iefix') format('eot'),
@@ -22,6 +22,6 @@ $monofont
   font-family: $monospace-font-family;
 $titlefont
   font-family: $title-font-family;
-  text-transform: uppercase;<% if(includeCustomIcnFont){ %>
+  text-transform: uppercase;<% if(customIconfontOption){ %>
 $iconfont
   font-family: $icon-font-family;<% } %>

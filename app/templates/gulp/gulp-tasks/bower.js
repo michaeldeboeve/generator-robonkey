@@ -5,7 +5,7 @@ var gulp            = require('gulp');
 var changed         = require('gulp-changed');
 var moveRepo        = "";
 
-<% if(includeModernizr){ %>
+<% if(modernizrOption){ %>
 moveRepo += "moveModernizr,";
 gulp.task('moveModernizr', function() {
   var src = '../src/modernizr/modernizr.dev.js',
@@ -16,7 +16,7 @@ gulp.task('moveModernizr', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeRequire){ %>
+<% if(requireOption){ %>
 moveRepo += "moveRequire,";
 gulp.task('moveRequire', function() {
   var src = '../src/bower_components/requirejs/require.js',
@@ -27,7 +27,7 @@ gulp.task('moveRequire', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeJQuery){ %>
+<% if(jqueryOption){ %>
 moveRepo += "moveJquery,";
 gulp.task('moveJquery', function() {
   var src = '../src/bower_components/jquery/dist/jquery.min.js',
@@ -38,7 +38,7 @@ gulp.task('moveJquery', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeTweenmax){ %>
+<% if(tweenmaxOption){ %>
 moveRepo += "moveTweenMax,";
 gulp.task('moveTweenMax', function() {
   var src = '../src/bower_components/gsap/src/minified/TweenMax.min.js',
@@ -48,7 +48,7 @@ gulp.task('moveTweenMax', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeD3){ %>
+<% if(d3jsOption){ %>
 moveRepo += "moveD3,";
 gulp.task('moveD3', function() {
   var src = '../src/bower_components/d3/d3.min.js',
@@ -58,7 +58,7 @@ gulp.task('moveD3', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeEnquire){ %>
+<% if(enquireOption){ %>
 moveRepo += "moveEnquire,";
 gulp.task('moveEnquire', function() {
   var src = '../src/bower_components/enquire/dist/enquire.min.js',
@@ -68,7 +68,7 @@ gulp.task('moveEnquire', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeSignals){ %>
+<% if(signalsOption){ %>
 moveRepo += "moveSignals,";
 gulp.task('moveSignals', function() {
   var src = '../src/bower_components/js-signals/dist/signals.min.js',
@@ -78,7 +78,7 @@ gulp.task('moveSignals', function() {
     .pipe(gulp.dest(dest));
 });
 <% } %>
-<% if(includeWaypoints && !includeJQuery){ %>
+<% if(waypointsOption && !jqueryOption){ %>
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
   var src = ['../src/bower_components/waypoints/lib/noframework.waypoints.min.js'],
@@ -87,7 +87,7 @@ gulp.task('moveWaypoints', function() {
   gulp.src(src)
     .pipe(gulp.dest(dest));
 });
-<% } else if(includeWaypoints && includeJQuery) { %>
+<% } else if(waypointsOption && jqueryOption) { %>
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
   var src = ['../src/bower_components/waypoints/lib/jquery.waypoints.min.js'],

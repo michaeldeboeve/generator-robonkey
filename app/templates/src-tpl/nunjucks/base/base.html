@@ -15,7 +15,7 @@
     <!-- build:css -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- endbuild -->
-    <% if(includeModernizr){ %><!-- build:modernizr -->
+    <% if(modernizrOption){ %><!-- build:modernizr -->
     <script src="/assets/js/libs/modernizr.dev.js"></script>
     <!-- endbuild --><% } %>
   </head>
@@ -25,19 +25,19 @@
     {% endblock %}
 
 
-    <% if(includeJQuery && !includeRequire){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>
-    <% if(includeWaypoints && includeJQuery && !includeRequire){ %><script src="/assets/js/libs/jquery.waypoints.min.js"></script><% } else if(includeWaypoints && !includeRequire) { %>
-    <script src="/assets/js/libs/noframework.waypoints.min.js"></script><% } %><% if(includeSignals && !includeRequire){ %>
-    <script src="/assets/js/libs/signals.min.js"></script><% } %><% if(includeD3 && !includeRequire){ %>
-    <script src="/assets/js/libs/d3.min.js"></script><% } %><% if(includeEnquire && !includeRequire){ %>
-    <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(includeTweenmax && !includeRequire){ %>
-    <script src="/assets/js/libs/TweenMax.min.js"></script><% } %><% if(includeRequire){ %>
+    <% if(jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.waypoints.min.js"></script><% } else if(waypointsOption && !requireOption) { %>
+    <script src="/assets/js/libs/noframework.waypoints.min.js"></script><% } %><% if(signalsOption && !requireOption){ %>
+    <script src="/assets/js/libs/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
+    <script src="/assets/js/libs/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
+    <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
+    <script src="/assets/js/libs/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
     <script src="/assets/js/libs/require.js"></script><% } %>
     <!-- build:js -->
     <script src="/assets/js/script.js"></script>
     <!-- endbuild -->
 
-    <% if(includeGA){ %><script>
+    <% if(analyticsOption){ %><script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];

@@ -30,9 +30,9 @@ gulp.task('dev', ['default'], function() {});
 
 // Build gulp task
 gulp.task('build', [
-                    <% if(includeModernizr){ %>'modernizr',<% } %><% if(includeCustomIcnFont){ %>
+                    <% if(modernizrOption){ %>'modernizr',<% } %><% if(customIconfontOption){ %>
                     'iconfont', <% } %>
-                    'moveBower',<% if(isStatic){ %>
+                    'moveBower',<% if(environmentOption === 'static'){ %>
                     'html-build', <% } %>
                     'images',
                     'scripts-build',
@@ -42,7 +42,7 @@ gulp.task('build', [
 
 // Default gulp task
 gulp.task('default', [
-                      'moveBower', <% if(isStatic && !noTemplateEngine){ %>
+                      'moveBower', <% if(environmentOption === 'static' && !templateOption === 'html'){ %>
                       'html', <% } %>
                       'images',
                       'scripts',
@@ -62,13 +62,13 @@ gulp.task('default', [
   // watch for image changes
   gulp.watch(paths.images.src, ['images']);
 
-  <% if(includeJade){ %>// watch for Jade changes, then reload
+  <% if(templateOption === 'jade'){ %>// watch for Jade changes, then reload
   gulp.watch(paths.jade.watch, ['jade']).on('change', browserSync.reload);<% } %>
-  <% if(includeHaml){ %>// watch for Haml changes, then reload
+  <% if(templateOption === 'haml'){ %>// watch for Haml changes, then reload
   gulp.watch(paths.haml.watch, ['haml']).on('change', browserSync.reload);<% } %>
-  <% if(includeNunjucks){ %>// watch for Nunjucks changes, then reload
+  <% if(templateOption === 'nunjucks'){ %>// watch for Nunjucks changes, then reload
   gulp.watch(paths.nunjucks.watch, ['nunjucks']).on('change', browserSync.reload);<% } %>
-  <% if(includeHandlebars){ %>// watch for Handlebars changes, then reload
+  <% if(templateOption === 'handlebars'){ %>// watch for Handlebars changes, then reload
   gulp.watch(paths.handlebars.watch, ['handlebars']).on('change', browserSync.reload);
   gulp.watch(paths.handlebars.watchdata, ['handlebars']).on('change', browserSync.reload);<% } %>
 });

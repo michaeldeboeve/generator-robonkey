@@ -1,13 +1,13 @@
 {
-  "projectURL": "<%= localUrl %>",<% if(includePcssScopify){ %>
-  "scope": "#scope",<% } %><% if(includePcssClassPrefix){ %>
-  "prefix": "prfx-",<% } %><% if(includeModernizr){ %>
+  "projectURL": "<%= projectUrl %>",<% if(scopifyOption){ %>
+  "scope": "#scope",<% } %><% if(classprefixOption){ %>
+  "prefix": "prfx-",<% } %><% if(modernizrOption){ %>
   "modernizr": {
     "excludeTests": [],
     "tests": [],
     "output": "modernizr.custom.js",
     "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
-  },<% } %><% if(includeCustomIcnFont) { %>"iconFont": {
+  },<% } %><% if(customIconfontOption) { %>"iconFont": {
     "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
   }, <% } %>
@@ -15,13 +15,13 @@
   "src": "./../src/",
   "dest": "./..<%= templateDest %>",
   "resrc": {
-    "main": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/",
-    "js": "./..<%= templateDest %><% if(!isExpress){ %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>",
-    "jsvendor": "./..<%= templateDest %><% if(!isExpress){ %>/assets/js/<% } %><% if(isExpress){ %>/javascripts/<% } %>libs/",
-    "img": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/images/",
-    "css": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>",
-    "cssvendor": "./..<%= templateDest %><% if(!isExpress){ %>/assets/css/<% } %><% if(isExpress){ %>/stylesheets/<% } %>libs/",
-    "fonts": "./..<%= templateDest %><% if(!isExpress){ %>/assets<% } %>/fonts/",
+    "main": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/",
+    "js": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>",
+    "jsvendor": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>libs/",
+    "img": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/images/",
+    "css": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>",
+    "cssvendor": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>libs/",
+    "fonts": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/fonts/",
     "jade": "./..<%= templateDest %>/"
   }
 }

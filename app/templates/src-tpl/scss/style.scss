@@ -1,14 +1,14 @@
 // ==========================================================================
 // Robonkey Sass Shizzle
 // ==========================================================================
-<% if(includeBreakpoint){ %>
-@import "../../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(includeSusy){ %>
-@import "../../gulp/node_modules/susy/sass/susy";<% } %><% if(includeBourbon || includeNeat){ %>
-@import "../../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(includeNeat){ %>
-@import "../../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(includeIncludeMedia){ %>
-@import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(includeGridle){ %>
-@import "./../gulp/node_modules/gridle/sass/gridle/gridle";<% } %><% if(includeGFlex){ %>
-@import "./../gulp/node_modules/gridle/sass/gridle/gridle-flex";<% } %><% if(includeJeetSCSS){ %>
+<% if(mqOption === 'breakpoint'){ %>
+@import "../../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(gridOption === 'susy'){ %>
+@import "../../gulp/node_modules/susy/sass/susy";<% } %><% if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
+@import "../../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(gridOption === 'neat'){ %>
+@import "../../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(gridOption === 'includemedia'){ %>
+@import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(gridOption === 'gridle'){ %>
+@import "./../gulp/node_modules/gridle/sass/gridle/gridle";<% } %><% if(gridOption === 'gridleFlex'){ %>
+@import "./../gulp/node_modules/gridle/sass/gridle/gridle-flex";<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
 @import "base/jeet/jeet";<% } %>
 
 // ==========================================================================
@@ -19,9 +19,9 @@
 @import "base/functions/**/*";
 @import "base/mixins/**/*";
 
-@import "base/fonts";<% if(includeReset){ %>
-@import "base/reset";<% } %><% if(includeNormalize){ %>
-@import "base/normalize";<% } %><% if(includeSanitize){ %>
+@import "base/fonts";<% if(baseStyleOption === 'reset'){ %>
+@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
+@import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>
 @import "base/sanitize";<% } %>
 @import "base/placeholders";
 @import "base/grid";

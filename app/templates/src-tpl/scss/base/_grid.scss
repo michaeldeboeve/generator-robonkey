@@ -1,4 +1,4 @@
-<% if(includeSusy){ %>
+<% if(gridOption === 'susy'){ %>
 // Documentation:
 // http://susydocs.oddbird.net/en/latest/
 $susy: (
@@ -10,13 +10,13 @@ $susy: (
 );
 
 $shorthand: 12 1/4 fluid float inside;
-<% } %><% if(includeJeetSCSS){ %>
+<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
 // Documentation:
 // http://jeet.gs/
-<% } %><% if(includeNeat){ %>
+<% } %><% if(gridOption === 'neat'){ %>
 // Documentation:
 // https://thoughtbot.github.io/neat-docs/latest/
-<% } %><% if(includeGridle || includeGFlex){ %>// @include gridle_setup( {settings} );
+<% } %><% if(gridOption === 'gridle' || gridOption === 'gridleFlex'){ %>// @include gridle_setup( {settings} );
 // default settings
 // $settings : (
 //     context : 12,

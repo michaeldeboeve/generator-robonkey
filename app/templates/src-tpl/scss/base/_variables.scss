@@ -48,7 +48,7 @@ $default-font-family:        'lato', sans-serif;
 $title-font-family:          $default-font-family;
 $serif-font-family:          serif;
 $monospace-font-family:      monospace;
-<% if(includeCustomIcnFont){ %>$icon-font-family:           '<%= customIconFontName %>';<% } %>
+<% if(customIconfontOption){ %>$icon-font-family:           '<%= customIconFontName %>';<% } %>
 $fontSmooth:                 true;
 
 
@@ -64,7 +64,7 @@ $small-font-siz:             75%;
 
 $nav-list-style:             none;
 
-<% if(includeCustomIcnFont){ %>$icn-font-size:              1em;
+<% if(customIconfontOption){ %>$icn-font-size:              1em;
 $icn-line-height:            1;
 $icn-fixed-width-size:       (18em / 14);<% } %>
 

@@ -11,23 +11,23 @@
     / build:css
     %link(href="/assets/css/style.css" rel="stylesheet")
     / endbuild
-    <% if(includeModernizr){ %>
+    <% if(modernizrOption){ %>
     / build:modernizr
     %script(src="/assets/js/libs/modernizr.dev.js")
     /endbuild <% } %>
   %body
-    <% if(includeJQuery && !includeRequire){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
-    <% if(includeWaypoints && includeJQuery && !includeRequire){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(includeWaypoints && !includeRequire) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(includeSignals && !includeRequire){ %>
-    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(includeD3 && !includeRequire){ %>
-    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(includeEnquire && !includeRequire){ %>
-    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(includeTweenmax && !includeRequire){ %>
-    %script(src="/assets/js/libs/TweenMax.min.js")<% } %><% if(includeRequire){ %>
+    <% if(jqueryOption && !requireOption){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(waypointsOption && !requireOption) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(signalsOption && !requireOption){ %>
+    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
+    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
+    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
+    %script(src="/assets/js/libs/TweenMax.min.js")<% } %><% if(requireOption){ %>
     %script(src="/assets/js/libs/require.js")<% } %>
     / build:js
     %script(sr="/assets/js/script.js")
     / endbuild
 
-    <% if(includeGA){ %>
+    <% if(analyticsOption){ %>
     %script
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

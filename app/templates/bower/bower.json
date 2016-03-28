@@ -1,15 +1,15 @@
 {
-  "name": "<%= appname %>",
-  "version": "<%= appversion %>",
+  "name": "<%= projectName %>",
+  "version": "<%= projectVersion %>",
   "authors": [
-    "<%= appauthor %> <%= appemail %>"
+    "<%= projectAuthor %> <%= authorEmail %>"
   ],
-  "description": "<%= appdescription %>",
+  "description": "<%= projectDescription %>",
   "main": "",
   "moduleType": [
     "globals"
   ],
-  "license": "<%= applicense %>",
+  "license": "<%= projectLicense %>",
   "homepage": "",
   "ignore": [
     "**/.*",
@@ -18,13 +18,13 @@
     "test",
     "tests"
   ],
-  "dependencies": {<% if(includeJQuery){ %>
-    "jquery": "^2.2.1",<% } %><% if(includeWaypoints){ %>
-    "waypoints": "^4.0.0",<% } %><% if(includeEnquire){ %>
-    "enquire": "^2.1.2",<% } %><% if(includeTweenmax){ %>
-    "gsap": "^1.18.2",<% } %><% if(includeSignals){ %>
-    "js-signals": "signals#^1.0.0",<% } %><% if(includeD3){ %>
-    "d3": "^3.5.16",<% } %><% if(includeRequire){ %>
+  "dependencies": {<% if(jqueryOption){ %>
+    "jquery": "^2.2.1",<% } %><% if(waypointsOption){ %>
+    "waypoints": "^4.0.0",<% } %><% if(enquireOption){ %>
+    "enquire": "^2.1.2",<% } %><% if(tweenmaxOption){ %>
+    "gsap": "^1.18.2",<% } %><% if(signalsOption){ %>
+    "js-signals": "signals#^1.0.0",<% } %><% if(d3jsOption){ %>
+    "d3": "^3.5.16",<% } %><% if(requireOption){ %>
     "requirejs": "^2.2.0",<% } %>
     "reset-css": "^2.0.2011012603",
     "normalize-scss": "^3.0.3",

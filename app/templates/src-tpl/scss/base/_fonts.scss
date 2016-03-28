@@ -13,7 +13,7 @@
 // Extra Bold (Ultra Bold): 800
 // Black (Heavy): 900
 
-<% if(includeCustomIcnFont){ %>@include load-font('<%= customIconFontName %>', '<%= customIconFontName %>', '<%= customIconFontName %>');<% } %>
+<% if(customIconfontOption){ %>@include load-font('<%= customIconFontName %>', '<%= customIconFontName %>', '<%= customIconFontName %>');<% } %>
 
 
 
@@ -23,7 +23,7 @@
 
 // Extends
 %basefont { font-family: if(variable-exists(default-font-family), $default-font-family, sans-serif); }
-%monofont { font-family: if(variable-exists(monospace-font-family), $monospace-font-family, monospace); }<% if(includeCustomIcnFont){ %>
+%monofont { font-family: if(variable-exists(monospace-font-family), $monospace-font-family, monospace); }<% if(customIconfontOption){ %>
 %iconfont { font-family: if(variable-exists(icon-font-family), $icon-font-family, '<%= customIconFontName %>'); }<% } %>
 %titlefont {
   font-family: if(variable-exists(title-font-family), $title-font-family, sans-serif);

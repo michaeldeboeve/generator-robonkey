@@ -1,334 +1,38 @@
 'use strict';
 
-var generators  = require('yeoman-generator'),
-    mkdirp      = require('mkdirp'),
-    yosay       = require('yosay'),
-    chalk       = require('chalk');
+var generators    = require('yeoman-generator'),
+    mkdirp        = require('mkdirp'),
+    yosay         = require('yosay'),
+    chalk         = require('chalk'),
+    path          = require('path'),
+    partialsPath  = './generator/',
+    filesPath     = partialsPath + 'files/',
+    promptsPath   = partialsPath + 'prompts/',
+    configPath    = partialsPath + 'config/';
     //wordpress   = require('../util/wordpress.js');
+
+var projectFiles   = require(filesPath + 'project.js'),
+    gulpFiles      = require(filesPath + 'gulp.js'),
+    bowerFiles     = require(filesPath + 'bower.js'),
+    h5bpFiles      = require(filesPath + 'h5bp.js'),
+    htmlFiles      = require(filesPath + 'html.js'),
+    sassFiles      = require(filesPath + 'sass.js'),
+    stylusFiles    = require(filesPath + 'stylus.js'),
+    lessFiles      = require(filesPath + 'less.js'),
+    scriptFiles    = require(filesPath + 'script.js'),
+    imageFiles     = require(filesPath + 'images.js'),
+    iconfontFiles  = require(filesPath + 'iconfont.js');
+
 
 var printTitle = function(title){
   return '\n\n\n\n---- ' + chalk.bgWhite.black(' ' + title + ' ') + ' ----\n';
 }
-function hasFeature(feat, answer) {
-  return answer && answer.indexOf(feat) !== -1;
+function hasFeature(feat, query) {
+  return query && query.indexOf(feat) !== -1;
 };
 
 
 module.exports = generators.Base.extend({
-
-  _folders: function(appDir){
-
-    if(this.isExpress) {
-      mkdirp(appDir + '/src');
-      mkdirp(appDir + this.templateDest);
-      mkdirp(appDir + this.templateDest + '/javascripts');
-      mkdirp(appDir + this.templateDest + '/javascripts/libs');
-      mkdirp(appDir + this.templateDest + '/images');
-      mkdirp(appDir + this.templateDest + '/stylesheets');
-      mkdirp(appDir + this.templateDest + '/stylesheets/libs');
-      mkdirp(appDir + this.templateDest + '/fonts');
-    } else {
-      mkdirp(appDir + '/src');
-      mkdirp(appDir + this.templateDest);
-      mkdirp(appDir + this.templateDest + '/assets');
-      mkdirp(appDir + this.templateDest + '/assets/js');
-      mkdirp(appDir + this.templateDest + '/assets/js/libs');
-      mkdirp(appDir + this.templateDest + '/assets/images');
-      mkdirp(appDir + this.templateDest + '/assets/css');
-      mkdirp(appDir + this.templateDest + '/assets/css/libs');
-      mkdirp(appDir + this.templateDest + '/assets/fonts');
-    }
-  },
-
-  _html: function(destRoot, sourceRoot, templateContext) {
-    if(this.noTemplateEngine) {
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/website/index.html', destRoot + '/website/index.html', templateContext);
-    }
-  },
-
-  _h5bp: function(destRoot, sourceRoot, templateContext) {
-
-    if(this.includeHtaccess) {
-      // Static
-      this.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/website/.htaccess');
-    }
-    if(this.includeBrowserconfig) {
-      // Static
-      this.fs.copy(sourceRoot + '/website/browserconfig.xml', destRoot + '/website/browserconfig.xml');
-    }
-    if(this.includeCustomIcnFont) {
-      // Static
-      this.fs.copy(sourceRoot + '/website/crossdomain.xml', destRoot + '/website/crossdomain.xml');
-    }
-    if(this.includeRobots) {
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/website/humans.txt', destRoot + '/website/humans.txt', templateContext);
-
-      // Static
-      this.fs.copy(sourceRoot + '/website/robots.txt', destRoot + '/website/robots.txt');
-    }
-  },
-
-  _editorconfig: function(destRoot, sourceRoot, templateContext) {
-    // Static
-    this.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
-    this.fs.copy(sourceRoot + '/project/README.md', destRoot + '/README.md');
-  },
-
-  _git: function(destRoot, sourceRoot, templateContext) {
-    // Static
-    this.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
-    this.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
-  },
-
-  _readme: function(destRoot, sourceRoot, templateContext) {
-    // Dynamic
-    this.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
-  },
-
-  _bower: function(destRoot, sourceRoot, templateContext) {
-    if(this.gulpFolder) {
-      destRoot = destRoot + '/gulp';
-    }
-    // Static
-    this.fs.copyTpl(sourceRoot + '/bower/bowerrc.txt', destRoot + '/.bowerrc', templateContext);
-
-    // Dynamic
-    this.fs.copyTpl(sourceRoot + '/bower/bower.json', destRoot + '/bower.json', templateContext);
-  },
-
-  _gulp: function(destRoot, sourceRoot, templateContext) {
-    if(this.gulpFolder) {
-      destRoot = destRoot + '/gulp';
-    }
-    // Dynamic
-    this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/package.json', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/config.json', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/paths.json', destRoot + '/paths.json', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulpfile.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/images.js', destRoot + '/gulp-tasks/images.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp-tasks/bower.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp-tasks/scripts.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp-tasks/clean.js', templateContext);
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-
-    // if(this.includeSCSS) {
-    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/sass.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    // }
-    // if(this.includeStylus) {
-    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styl.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    // }
-    // if(this.includeLess) {
-    //   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/less.js', destRoot + '/gulp-tasks/styles.js', templateContext);
-    // }
-
-    if(this.includeCustomIcnFont) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp-tasks/iconfont.js', templateContext);
-    }
-
-    if(this.noTemplateEngine) {
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.js', destRoot + '/gulp-tasks/html.js', templateContext);
-    }
-
-    if(this.includeJade) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp-tasks/html.js', templateContext);
-    }
-
-    if(this.includeHaml) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/haml.js', destRoot + '/gulp-tasks/html.js', templateContext);
-    }
-
-    if(this.includeHandlebars) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp-tasks/html.js', templateContext);
-    }
-
-    if(this.includeNunjucks) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.js', destRoot + '/gulp-tasks/html.js', templateContext);
-    }
-
-    if(this.includeModernizr) {
-      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp-tasks/modernizr.js', templateContext);
-    }
-  },
-
-  _iconfont: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeCustomIcnFont) {
-      // Static
-      this.fs.copy(sourceRoot + '/src/iconfont/illustrator', destRoot + '/src/iconfont/illustrator');
-      this.fs.copy(sourceRoot + '/src/iconfont/svg', destRoot + '/src/iconfont/svg');
-    }
-    if(this.includeCustomIcnFont && this.includeSCSS) {
-      this.fs.copy(sourceRoot + '/src/iconfont/template/_icons.scss', destRoot + '/src/iconfont/template/_icons.scss');
-    }
-    if(this.includeCustomIcnFont && this.includeStylus) {
-      this.fs.copy(sourceRoot + '/src/iconfont/template/icons.styl', destRoot + '/src/iconfont/template/icons.styl');
-    }
-    if(this.includeCustomIcnFont && this.includeLess) {
-      this.fs.copy(sourceRoot + '/src/iconfont/template/icons.less', destRoot + '/src/iconfont/template/icons.less');
-    }
-
-  },
-
-  _images: function(destRoot, sourceRoot, templateContext) {
-    // Static
-    this.fs.copy(sourceRoot + '/src/images', destRoot + '/src/images');
-  },
-
-  _js: function(destRoot, sourceRoot, templateContext) {
-    // Static
-    this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
-    if(this.includeModernizr) {
-      this.fs.copy(sourceRoot + '/src/modernizr', destRoot + '/src/modernizr');
-    }
-  },
-
-  _scss: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeSCSS) {
-      // Static
-      this.fs.copy(sourceRoot + '/src/scss/base', destRoot + '/src/scss/base');
-
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_fonts.scss', destRoot + '/src/scss/base/_fonts.scss', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
-
-      if(this.includeSemanticSCSS) {
-        this.fs.copy(sourceRoot + '/src-tpl/scss/base/_semantic-grid.scss', destRoot + '/src/scss/base/_grid.scss');
-      } else {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
-      }
-
-      if(this.includeJeetSCSS) {
-        this.fs.copy(sourceRoot + '/src/scss/base/jeet/', destRoot + '/src/scss/base/jeet/');
-      }
-
-      if(this.includeCustomIcnFont) {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
-      }
-      if(this.includeBreakpoint) {
-        this.fs.copy(sourceRoot + '/src-tpl/scss/mixins/_mediaqueries.scss', destRoot + '/src/scss/mixins/_mediaqueries.scss');
-      }
-      if(this.includeReset) {
-        this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_reset.scss', destRoot + '/src/scss/base/_reset.scss');
-      }
-      if(this.includeNormalize) {
-        this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_normalize.scss', destRoot + '/src/scss/base/_normalize.scss');
-      }
-      if(this.includeSanitize) {
-        this.fs.copy(sourceRoot + '/src-tpl/scss/reset/_sanitize.scss', destRoot + '/src/scss/base/_sanitize.scss');
-      }
-    }
-  },
-
-  _stylus: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeStylus) {
-      // Static
-      this.fs.copy(sourceRoot + '/src/stylus', destRoot + '/src/stylus');
-
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/fonts.styl', destRoot + '/src/stylus/base/fonts.styl', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/variables.styl', destRoot + '/src/stylus/base/variables.styl', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/style.styl', destRoot + '/src/stylus/style.styl', templateContext);
-
-      if(this.includeSemanticStylus) {
-        this.fs.copy(sourceRoot + '/src-tpl/stylus/base/semantic-grid.styl', destRoot + '/src/stylus/base/grid.styl');
-      } else {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', templateContext);
-      }
-
-      if(this.includeJeetStylus) {
-        this.fs.copy(sourceRoot + '/src/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
-      }
-
-      if(this.includeCustomIcnFont) {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/modules/icons.styl', destRoot + '/src/stylus/modules/icons.styl', templateContext);
-      }
-
-      if(this.includeReset) {
-        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/reset.styl', destRoot + '/src/stylus/base/reset.styl');
-      }
-      if(this.includeNormalize) {
-        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/normalize.styl', destRoot + '/src/stylus/base/normalize.styl');
-      }
-      if(this.includeSanitize) {
-        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/sanitize.styl', destRoot + '/src/stylus/base/sanitize.styl');
-      }
-    }
-  },
-
-  _less: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeLess) {
-      this.fs.copy(sourceRoot + '/src/less', destRoot + '/src/less');
-
-      // Dynamic
-      this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/fonts.less', destRoot + '/src/less/base/fonts.less', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/variables.less', destRoot + '/src/less/base/variables.less', templateContext);
-      this.fs.copyTpl(sourceRoot + '/src-tpl/less/style.less', destRoot + '/src/less/style.less', templateContext);
-
-      if(this.includeSemanticLess) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/base/semantic-grid.less', destRoot + '/src/less/base/grid.less');
-      } else {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/less/base/grid.less', destRoot + '/src/less/base/grid.less', templateContext);
-      }
-
-      if(this.includeLessHat) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat.less', destRoot + '/src/less/base/mixins/lesshat.less');
-        this.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat-prefixed.less', destRoot + '/src/less/base/mixins/lesshat-prefixed.less');
-      }
-
-      if(this.includeLessMQ) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq.less', destRoot + '/src/less/base/mixins/mq.less');
-        this.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq-prefixed.less', destRoot + '/src/less/base/mixins/mq-prefixed.less');
-      }
-
-      if(this.includeCustomIcnFont) {
-        this.fs.copyTpl(sourceRoot + '/src-tpl/less/modules/icons.less', destRoot + '/src/less/modules/icons.less', templateContext);
-      }
-
-      if(this.includeReset) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/reset/reset.less', destRoot + '/src/less/base/reset.less');
-      }
-      if(this.includeNormalize) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/reset/normalize.less', destRoot + '/src/less/base/normalize.less');
-      }
-      if(this.includeSanitize) {
-        this.fs.copy(sourceRoot + '/src-tpl/less/reset/sanitize.less', destRoot + '/src/less/base/sanitize.less');
-      }
-    }
-  },
-
-  _jade: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeJade) {
-      // Static
-      this.fs.copy(sourceRoot + '/src/jade', destRoot + '/src/jade');
-
-      // Dyanamic
-      this.fs.copyTpl(sourceRoot + '/src-tpl/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', templateContext);
-    }
-  },
-
-  _handlebars: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeHandlebars) {
-      this.fs.copy(sourceRoot + '/src/handlebars', destRoot + '/src/handlebars');
-      this.fs.copyTpl(sourceRoot + '/src-tpl/handlebars/index.html', destRoot + '/src/handlebars/index.html', templateContext);
-    }
-  },
-
-  _nunjucks: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeNunjucks) {
-      this.fs.copy(sourceRoot + '/src/nunjucks', destRoot + '/src/nunjucks');
-      this.fs.copyTpl(sourceRoot + '/src-tpl/nunjucks/base/base.html', destRoot + '/src/nunjucks/base/base.html', templateContext);
-    }
-  },
-
-  _haml: function(destRoot, sourceRoot, templateContext) {
-    if(this.includeHaml) {
-      // Static
-      this.fs.copyTpl(sourceRoot + '/src-tpl/haml/index.haml', destRoot + '/src/haml/index.haml', templateContext);
-    }
-  },
 
   _endMsg: function() {
     var allDone =
@@ -353,42 +57,41 @@ module.exports = generators.Base.extend({
   },
 
   prompting: {
-
     project: function() {
       this.log(printTitle('Project Details'))
       var done = this.async();
       this.prompt([{
-        name: 'localUrl',
+        name: 'projectUrl',
         message: 'Local URL to use:',
         default: 'mynewawesomeapp.localhost'
       }, {
-        name: 'name',
+        name: 'projectName',
         message: 'Name your project:',
-        default: this.appname
+        default: this.appname,
       }, {
-        name: 'description',
+        name: 'projectDescription',
         message: 'Describe your project:',
-        default: 'My new awesome app'
+        default: 'My new awesome app',
       }, {
-        name: 'version',
+        name: 'projectVersion',
         message: 'Project version:',
         default: '0.0.0'
       }, {
-        name: 'author',
+        name: 'projectAuthor',
         message: 'Author:',
         default: ''
       }, {
-        name: 'email',
+        name: 'authorEmail',
         message: 'Author\'s Email Address:',
         default: ''
       }], function (answers) {
-          this.localUrl = answers.localUrl;
-          this.appname = answers.name;
-          this.appdescription = answers.description;
-          this.appversion = answers.version;
-          this.appauthor = answers.author;
-          this.appemail = answers.email;
-          this.applicense = 'MIT';
+          this.projectUrl = answers.projectUrl;
+          this.projectName = answers.projectName;
+          this.projectDescription = answers.projectDescription;
+          this.projectVersion = answers.projectVersion;
+          this.projectAuthor = answers.projectAuthor;
+          this.authorEmail = answers.authorEmail;
+          this.projectLicense = 'MIT';
           done();
         }.bind(this));
     },
@@ -398,64 +101,48 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'list',
-        name: 'environment',
+        name: 'environmentOption',
         message: 'Which environment are you using?\nThis will compile everything in the right directories.',
-        choices: [{
-          name: 'None, just a static website',
-          value: 'isStatic',
-          checked: false
-        }, {
-          name: 'Node + Express',
-          value: 'isExpress',
-          checked: false
-        }, {
-          name: 'Wordpress',
-          value: 'isWordpress',
-          checked: false
-        }, {
-          name: 'Drupal',
-          value: 'isDrupal',
-          checked: false
-        }, {
-          name: 'CodeIgniter',
-          value: 'isCodeigniter',
-          checked: false
-        }]
+        choices: ['None, just a static website', 'Node + Express', 'Wordpress', 'Drupal', 'CodeIgniter'],
+        filter: function(val) {
+          var filterMap = {
+            'None, just a static website': 'static',
+            'Node + Express': 'express',
+            'Wordpress': 'wordpress',
+            'Drupal': 'drupal',
+            'CodeIgniter': 'codeigniter'
+          };
+
+          return filterMap[val];
+        }
       }, {
         when: function (answers) {
-          return answers.environment.indexOf('isWordpress') !== -1;
+          return answers.environmentOption === 'wordpress';
         },
         type: 'input',
-        name: 'themeWordpress',
+        name: 'themeName',
         message: 'What is the name of your Wordpress theme?',
-        default: this.appname + '-theme'
+        default: this.projectName + '-theme'
       }, {
         when: function (answers) {
-          return answers.environment.indexOf('isDrupal') !== -1;
+          return answers.environmentOption === 'drupal';
         },
         type: 'input',
-        name: 'themeDrupal',
+        name: 'themeName',
         message: 'What is the name of your Drupal theme?',
-        default: this.appname + '-theme'
+        default: this.projectName + '-theme'
       }], function (answers) {
-          var environment = answers.environment;
-          var themeWordpress = answers.themeWordpress;
-          this.isStatic = hasFeature('isStatic', environment);
-          this.isExpress = hasFeature('isExpress', environment);
-          this.isWordpress = hasFeature('isWordpress', environment);
-          this.isDrupal = hasFeature('isDrupal', environment);
-          this.isCodeigniter = hasFeature('isCodeigniter', environment);
-          this.themeWordpress = answers.themeWordpress;
-          this.themeDrupal = answers.themeDrupal;
+          this.environmentOption = answers.environmentOption;
+          this.themeName = answers.themeName;
 
-          switch (environment){
-             case 'isWordpress': this.templateDest = '/website/wp-content/themes/' + this.themeWordpress;
+          switch (this.environmentOption){
+             case 'wordpress': this.templateDest = '/website/wp-content/themes/' + this.themeName;
              break;
 
-             case 'isDrupal': this.templateDest = '/website/themes/' + this.themeDrupal;
+             case 'drupal': this.templateDest = '/website/themes/' + this.themeName;
              break;
 
-             case 'isExpress': this.templateDest = '/app/public';
+             case 'express': this.templateDest = '/app/public';
              break;
 
              default: this.templateDest = '/website';
@@ -465,33 +152,26 @@ module.exports = generators.Base.extend({
     },
 
     html: function() {
-      if(this.isStatic){
+      if(this.environmentOption === 'static'){
         this.log(printTitle('HTML Templating'))
         var done = this.async();
         this.prompt([{
           type: 'list',
-          name: 'templateEngine',
+          name: 'templateOption',
           message: 'How to generate html?',
-          choices: [{
-            name: 'None, just use plain old html',
-            value: 'noTemplateEngine',
-            checked: true
-          }, {
-            name: 'Jade',
-            value: 'includeJade',
-            checked: false
-          }, {
-            name: 'Nunjucks',
-            value: 'includeNunjucks',
-            checked: false
-          }]
+          choices: ['None, just use plain old html', 'Jade', 'Nunjucks'],
+          filter: function(val) {
+            var filterMap = {
+              'None, just use plain old html': 'html',
+              'Jade': 'jade',
+              'Nunjucks': 'nunjucks'
+            };
+
+            return filterMap[val];
+          }
+
         }], function (answers) {
-          var templateEngine = answers.templateEngine;
-          this.includeJade = hasFeature('includeJade', templateEngine);
-          this.includeNunjucks = hasFeature('includeNunjucks', templateEngine);
-          this.includeHaml = false;
-          this.includeHandlebars = false;
-          this.noTemplateEngine = hasFeature('noTemplateEngine', templateEngine);
+          this.templateOption = answers.templateOption;
           done();
         }.bind(this));
       }
@@ -502,272 +182,194 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'list',
-        name: 'preproType',
+        name: 'preproOption',
         message: 'What preprocessor would you like to use?',
-        choices: [{
-          name: 'SCSS',
-          value: 'includeSCSS',
-          checked: true
-        }, {
-          name: 'Stylus',
-          value: 'includeStylus',
-          checked: false
-        }, {
-          name: 'Less',
-          value: 'includeLess',
-          checked: false
-        }]
+        choices: ['Sass', 'Stylus', 'Less'],
+        filter: function(val) {
+          var filterMap = {
+            'Sass': 'sass',
+            'Stylus': 'stylus',
+            'Less': 'less'
+          };
+
+          return filterMap[val];
+        }
       } ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeSCSS') !== -1;
+          return answers.preproOption === 'sass';
         },
         type: 'list',
-        name: 'mixinLibsSCSS',
+        name: 'mixinOption',
         message: 'What mixin libraries would you like to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMixinLibSCSS',
-          checked: true
-        }, {
-          name: 'Bourbon',
-          value: 'includeBourbon',
-          checked: false
-        }, {
-          name: 'Compass Mixins',
-          value: 'includeCompass',
-          checked: false
-        }]
+        choices: ['None', 'Bourbon', 'Compass Mixins'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Bourbon': 'bourbon',
+            'Compass Mixins': 'compassmixins'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeStylus') !== -1;
+          return answers.preproOption === 'stylus';
         },
         type: 'list',
-        name: 'mixinLibsStylus',
+        name: 'mixinOption',
         message: 'What mixin libraries would you like to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMixinLibStylus',
-          checked: true
-        }, {
-          name: 'Nib',
-          value: 'includeNib',
-          checked: false
-        }, {
-          name: 'Kouto Swiss',
-          value: 'includeKoutoSwiss',
-          checked: false
-        }]
+        choices: ['None', 'Nib', 'Kouto Swiss'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Nib': 'nib',
+            'Kouto Swiss': 'koutoswiss'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeLess') !== -1;
+          return answers.preproOption === 'less';
         },
         type: 'list',
-        name: 'mixinLibsLess',
+        name: 'mixinOption',
         message: 'What mixin libraries would you like to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMixinLibLess',
-          checked: true
-        }, {
-          name: 'Less Hat',
-          value: 'includeLessHat',
-          checked: false
-        }]
+        choices: ['None', 'Less Hat'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Less Hat': 'lesshat'
+          };
+
+          return filterMap[val];
+        }
       }
 
 
       // Media Query Libraries
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeSCSS') !== -1;
+          return answers.preproOption === 'sass';
         },
         type: 'list',
-        name: 'mqLibsSCSS',
+        name: 'mqOption',
         message: 'What MediaQuery Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMQLibSCSS',
-          checked: true
-        }, {
-          name: 'Breakpoint',
-          value: 'includeBreakpoint',
-          checked: false
-        }, {
-          name: 'Include Media',
-          value: 'includeIncludeMedia',
-          checked: false
-        }]
+        choices: ['None', 'Breakpoint', 'Include Media'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Breakpoint': 'breakpoint',
+            'Include Media': 'includemedia'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeStylus') !== -1;
+          return answers.preproOption === 'stylus';
         },
         type: 'list',
-        name: 'mqLibsStylus',
+        name: 'mqOption',
         message: 'What MediaQuery Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMQLibStylus',
-          checked: true
-        }, {
-          name: 'Rupture',
-          value: 'includeRupture',
-          checked: false
-        }]
+        choices: ['None', 'Rupture'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Rupture': 'rupture'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeLess') !== -1;
+          return answers.preproOption === 'less';
         },
         type: 'list',
-        name: 'mqLibsLess',
+        name: 'mqOption',
         message: 'What MediaQuery Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noMQLibLess',
-          checked: true
-        }, {
-          name: 'Less-MQ',
-          value: 'includeLessMQ',
-          checked: false
-        }]
+        choices: ['None', 'Less-MQ'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Less-MQ': 'lessmq'
+          };
+
+          return filterMap[val];
+        }
       }
 
 
       // Grid Libraries
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeSCSS') !== -1;
+          return answers.preproOption === 'sass';
         },
         type: 'list',
-        name: 'gridLibsSCSS',
+        name: 'gridOption',
         message: 'What Grids Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noGridLibSCSS',
-          checked: false
-        }, {
-          name: 'Susy',
-          value: 'includeSusy',
-          checked: false
-        }, {
-          name: 'Gridle',
-          value: 'includeGridle',
-          checked: false
-        }, {
-          name: 'Gridle Flex',
-          value: 'includeGFlex',
-          checked: false
-        }, {
-          name: 'Neat (Will include Bourbon)',
-          value: 'includeNeat',
-          checked: false
-        }, {
-          name: 'Jeet',
-          value: 'includeJeetSCSS',
-          checked: false
-        }, {
-          name: 'Semantic.gs',
-          value: 'includeSemanticSCSS',
-          checked: false
-        }]
+        choices: ['None', 'Jeet', 'Susy', 'Gridle', 'Gridle Flex', 'Neat (Will include Bourbon)', 'Semantic.gs'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Jeet': 'jeet',
+            'Susy': 'sysy',
+            'Gridle': 'gridle',
+            'Gridle Flex': 'gridleFlex',
+            'Neat (Will include Bourbon)': 'neat',
+            'Semantic.gs': 'semanticStylus'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeStylus') !== -1;
+          return answers.preproOption === 'stylus';
         },
         type: 'list',
-        name: 'gridLibsStylus',
+        name: 'gridOption',
         message: 'What Grids Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noGridLibStylus',
-          checked: false
-        }, {
-          name: 'Jeet',
-          value: 'includeJeetStylus',
-          checked: false
-        }, {
-          name: 'sGrid',
-          value: 'includeSGrid',
-          checked: false
-        }, {
-          name: 'Semantic.gs',
-          value: 'includeSemanticStylus',
-          checked: false
-        }]
+        choices: ['None', 'Jeet', 'sGrid', 'Semantic.gs'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Jeet': 'jeet',
+            'sGrid': 'sgrid',
+            'Semantic.gs': 'semanticStylus'
+          };
+
+          return filterMap[val];
+        }
       }
       ,{
         when: function (answers) {
-          return answers.preproType.indexOf('includeLess') !== -1;
+          return answers.preproOption === 'less';
         },
         type: 'list',
-        name: 'gridLibsLess',
+        name: 'gridOption',
         message: 'What Grids Library to use?',
-        choices: [{
-          name: 'None',
-          value: 'noGridLibLess',
-          checked: false
-        }, {
-          name: 'Gee',
-          value: 'includeGee',
-          checked: false
-        }, {
-          name: 'Semantic.gs',
-          value: 'includeSemanticLess',
-          checked: false
-        }]
+        choices: ['None', 'Gee', 'Semantic.gs'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Gee': 'gee',
+            'Semantic.gs': 'semanticLess'
+          };
+
+          return filterMap[val];
+        }
       }], function (answers) {
-          var preproType = answers.preproType;
 
           // Sass
-          var mixinLibsSCSS = answers.mixinLibsSCSS;
-          var gridLibsSCSS = answers.gridLibsSCSS;
-          var mqLibsSCSS = answers.mqLibsSCSS;
-          this.includeSCSS = hasFeature('includeSCSS', preproType);
-          this.includeBourbon = hasFeature('includeBourbon', mixinLibsSCSS);
-          this.includeCompass = hasFeature('includeCompass', mixinLibsSCSS);
-          this.noMixinLibSCSS = hasFeature('noMixinLibSCSS', mixinLibsSCSS);
-          this.includeSusy = hasFeature('includeSusy', gridLibsSCSS);
-          this.includeJeetSCSS = hasFeature('includeJeetSCSS', gridLibsSCSS);
-          this.includeNeat = hasFeature('includeNeat', gridLibsSCSS);
-          this.includeGridle = hasFeature('includeGridle', gridLibsSCSS);
-          this.includeGFlex = hasFeature('includeGFlex', gridLibsSCSS);
-          this.includeSemanticSCSS = hasFeature('includeSemanticSCSS', gridLibsSCSS);
-          this.noGridLibSCSS = hasFeature('noGridLibSCSS', gridLibsSCSS);
-          this.includeBreakpoint = hasFeature('includeBreakpoint', mqLibsSCSS);
-          this.includeIncludeMedia = hasFeature('includeIncludeMedia', mqLibsSCSS);
-          this.noMQLibSCSS = hasFeature('noMQLibSCSS', mqLibsSCSS);
-
-          // Stylus
-          var mixinLibsStylus = answers.mixinLibsStylus;
-          var gridLibsStylus = answers.gridLibsStylus;
-          var mqLibsStylus = answers.mqLibsStylus;
-          this.includeStylus = hasFeature('includeStylus', preproType);
-          this.includeNib = hasFeature('includeNib', mixinLibsStylus);
-          this.includeKoutoSwiss = hasFeature('includeKoutoSwiss', mixinLibsStylus);
-          this.noMixinLibStylus = hasFeature('noMixinLibStylus', mixinLibsStylus);
-          this.includeJeetStylus = hasFeature('includeJeetStylus', gridLibsStylus);
-          this.includeSGrid = hasFeature('includeSGrid', gridLibsStylus);
-          this.includeSemanticStylus = hasFeature('includeSemanticStylus', gridLibsStylus);
-          this.noGridLibStylus = hasFeature('noGridLibStylus', gridLibsStylus);
-          this.includeRupture = hasFeature('includeRupture', mqLibsStylus);
-          this.noMQLibStylus = hasFeature('noMQLibStylus', mqLibsStylus);
-
-          // Less
-          var mixinLibsLess = answers.mixinLibsLess;
-          var gridLibsLess = answers.gridLibsLess;
-          var mqLibsLess = answers.mqLibsLess;
-          this.includeLess = hasFeature('includeLess', preproType);
-          this.includeLessHat = hasFeature('includeLessHat', mixinLibsLess);
-          this.noMixinLibLess = hasFeature('noMixinLibLess', mixinLibsLess);
-          this.includeGee = hasFeature('includeGee', gridLibsLess);
-          this.includeSemanticLess = hasFeature('includeSemanticLess', gridLibsLess);
-          this.noGridLibLess = hasFeature('noGridLibLess', gridLibsLess);
-          this.includeLessMQ = hasFeature('includeLessMQ', mqLibsLess);
-          this.noMQLibLess = hasFeature('noMQLibLess', mqLibsLess);
+          this.preproOption = answers.preproOption;
+          this.mixinOption = answers.mixinOption;
+          this.mqOption = answers.mqOption;
+          this.gridOption = answers.gridOption;
 
 
           done();
@@ -779,31 +381,21 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'list',
-        name: 'baseStyles',
+        name: 'baseStyleOption',
         message: 'What base styles to include?',
-        choices: [{
-          name: 'None',
-          value: 'noBaseStyles',
-          checked: true
-        }, {
-          name: 'Sanitize',
-          value: 'includeSanitize',
-          checked: false
-        }, {
-          name: 'Reset',
-          value: 'includeReset',
-          checked: false
-        }, {
-          name: 'Normalize',
-          value: 'includeNormalize',
-          checked: false
-        }]
+        choices: ['None', 'Sanitize', 'Reset', 'Normalize'],
+        filter: function(val) {
+          var filterMap = {
+            'None': 'none',
+            'Sanitize': 'sanitize',
+            'Reset': 'reset',
+            'Normalize': 'normalize'
+          };
+
+          return filterMap[val];
+        }
       }], function (answers) {
-          var baseStyles = answers.baseStyles;
-          this.includeReset = hasFeature('includeReset', baseStyles);
-          this.includeNormalize = hasFeature('includeNormalize', baseStyles);
-          this.includeSanitize = hasFeature('includeSanitize', baseStyles);
-          this.noBaseStyles = hasFeature('noBaseStyles', baseStyles);
+          this.baseStyleOption = answers.baseStyleOption;
           done();
         }.bind(this));
     },
@@ -813,70 +405,70 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'checkbox',
-        name: 'postCSSPlugins',
+        name: 'postCssOption',
         message: 'What postCSS plugins to include?',
         choices: [{
           name: 'Autoprefixer',
-          value: 'includePcssAutoprefixer',
+          value: 'autoprefixer',
           checked: true
         }, {
           name: 'CSS Nano (Css Optimalization)',
-          value: 'includePcssNano',
+          value: 'cssnano',
           checked: true
         }, {
           name: 'Gradient Transparency Fix',
-          value: 'includePcssGradientFix',
+          value: 'gradientfix',
           checked: true
         }, {
           name: 'Css Declaration Sorter',
-          value: 'includePcssDeclsort',
+          value: 'csssorter',
           checked: true
         }, {
           name: 'MQ Packer',
-          value: 'includePcssMQPacker',
+          value: 'mqpacker',
           checked: true
         }, {
           name: 'MQ Keyframes',
-          value: 'includePcssMQKeyframes',
+          value: 'mqkeyframes',
           checked: false
         }, {
           name: 'CSS Next',
-          value: 'includePcssCssNext',
+          value: 'cssnext',
           checked: false
         }, {
           name: 'Rucksack',
-          value: 'includePcssRucksack',
+          value: 'rucksack',
           checked: false
         }, {
           name: 'CSS Grace',
-          value: 'includePcssCssGrace',
+          value: 'cssgrace',
           checked: false
         }, {
           name: 'Class Prefix',
-          value: 'includePcssClassPrefix',
+          value: 'classprefix',
           checked: false
         }, {
           name: 'Scopify',
-          value: 'includePcssScopify',
+          value: 'scopify',
           checked: false
         }]
       }], function (answers) {
-          var postCSSPlugins = answers.postCSSPlugins;
-          this.includePcssAutoprefixer = hasFeature('includePcssAutoprefixer', postCSSPlugins);
-          this.includePcssCssNext = hasFeature('includePcssCssNext', postCSSPlugins);
-          this.includePcssRucksack = hasFeature('includePcssRucksack', postCSSPlugins);
-          this.includePcssGradientFix = hasFeature('includePcssGradientFix', postCSSPlugins);
-          this.includePcssMQPacker = hasFeature('includePcssMQPacker', postCSSPlugins);
-          this.includePcssMQKeyframes = hasFeature('includePcssMQKeyframes', postCSSPlugins);
-          this.includePcssNano = hasFeature('includePcssNano', postCSSPlugins);
-          this.includePcssClassPrefix = hasFeature('includePcssClassPrefix', postCSSPlugins);
-          this.includePcssScopify = hasFeature('includePcssScopify', postCSSPlugins);
-          this.includePcssDeclsort = hasFeature('includePcssDeclsort', postCSSPlugins);
-          this.includePcssGrace = hasFeature('includePcssGrace', postCSSPlugins);
-          this.includePostCSS = false;
-          if(this.includePcssAutoprefixer || this.includePcssCssGrace || this.includePcssCssNext || this.includePcssGradientFix || this.includePcssMQPacker || this.includePcssMQKeyframes || this.includePcssNano || this.includePcssClassPrefix || this.includePcssScopify || this.includePcssDeclsort || this.includePcssRucksack) {
-            this.includePostCSS = true;
-          }
+          // if(answers.postCssOption.length < 1) {
+          //   this.postCssOption = false;
+          // } else {
+          // }
+          var postCssOption = answers.postCssOption;
+          this.autoprefixerOption = hasFeature('autoprefixer', postCssOption);
+          this.cssnextOption = hasFeature('cssnext', postCssOption);
+          this.cssgraceOption = hasFeature('cssgrace', postCssOption);
+          this.rucksackOption = hasFeature('rucksack', postCssOption);
+          this.gradientfixOption = hasFeature('gradientfix', postCssOption);
+          this.mqpackerOption = hasFeature('mqpacker', postCssOption);
+          this.mqkeyframesOption = hasFeature('mqkeyframes', postCssOption);
+          this.classprefixOption = hasFeature('classprefix', postCssOption);
+          this.scopifyOption = hasFeature('scopify', postCssOption);
+          this.cssnanoOption = hasFeature('cssnano', postCssOption);
+          this.csssorterOption = hasFeature('csssorter', postCssOption);
 
           done();
         }.bind(this));
@@ -887,51 +479,56 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'checkbox',
-        name: 'scriptsJS',
+        name: 'scriptsOption',
         message: 'What Javascript libraries to include?',
         choices: [{
           name: 'Modernizr',
-          value: 'includeModernizr',
+          value: 'modernizr',
           checked: true
         }, {
           name: 'jQuery',
-          value: 'includeJQuery',
+          value: 'jquery',
           checked: true
         }, {
           name: 'Requirejs',
-          value: 'includeRequire',
+          value: 'require',
           checked: false
         }, {
           name: 'Waypoints',
-          value: 'includeWaypoints',
+          value: 'waypoints',
           checked: false
         }, {
           name: 'Signals',
-          value: 'includeSignals',
+          value: 'signals',
           checked: false
         }, {
           name: 'D3js',
-          value: 'includeD3',
+          value: 'd3js',
           checked: false
         }, {
           name: 'TweenMax',
-          value: 'includeTweenmax',
+          value: 'tweenmax',
           checked: false
         }, {
           name: 'Enquire',
-          value: 'includeEnquire',
+          value: 'enquire',
           checked: false
         }]
       }], function (answers) {
-        var scriptsJS = answers.scriptsJS;
-        this.includeModernizr = hasFeature('includeModernizr', scriptsJS);
-        this.includeJQuery = hasFeature('includeJQuery', scriptsJS);
-        this.includeWaypoints = hasFeature('includeWaypoints', scriptsJS);
-        this.includeSignals = hasFeature('includeSignals', scriptsJS);
-        this.includeD3 = hasFeature('includeD3', scriptsJS);
-        this.includeTweenmax = hasFeature('includeTweenmax', scriptsJS);
-        this.includeEnquire = hasFeature('includeEnquire', scriptsJS);
-        this.includeRequire = hasFeature('includeRequire', scriptsJS);
+        // if(answers.scriptsOption.length < 1) {
+        //   this.scriptsOption = false;
+        // } else {
+        // }
+        var scriptsOption = answers.scriptsOption;
+        this.jqueryOption = hasFeature('jquery', scriptsOption);
+        this.waypointsOption = hasFeature('waypoints', scriptsOption);
+        this.signalsOption = hasFeature('signals', scriptsOption);
+        this.d3jsOption = hasFeature('D3js', scriptsOption);
+        this.tweenmaxOption = hasFeature('tweenmax', scriptsOption);
+        this.enquireOption = hasFeature('enquire', scriptsOption);
+        this.requireOption = hasFeature('require', scriptsOption);
+        this.modernizrOption = hasFeature('modernizr', scriptsOption);
+
           done();
         }.bind(this));
     },
@@ -941,31 +538,41 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'checkbox',
-        name: 'rootFiles',
+        name: 'h5bpOption',
         message: 'What h5bp extra\'s to include?',
         choices: [{
           name: '.htaccess',
-          value: 'includeHtaccess',
+          value: 'htaccess',
           checked: true
         }, {
           name: 'browserconfig.xml (for windows 10 tiles)',
-          value: 'includeBrowserconfig',
+          value: 'browserconfig',
           checked: true
         }, {
           name: 'crossdomain.xml',
-          value: 'includeCrossdomain',
+          value: 'crossdomain',
           checked: false
         }, {
-          name: 'robots.txt and humans.txt',
-          value: 'includeRobots',
+          name: 'robots.txt',
+          value: 'robots',
+          checked: false
+        }, {
+          name: 'humans.txt',
+          value: 'humans',
           checked: false
         }]
       }], function (answers) {
-          var rootFiles = answers.rootFiles;
-          this.includeHtaccess = hasFeature('includeHtaccess', rootFiles);
-          this.includeCrossdomain = hasFeature('includeCrossdomain', rootFiles);
-          this.includeBrowserconfig = hasFeature('includeBrowserconfig', rootFiles);
-          this.includeRobots = hasFeature('includeRobots', rootFiles);
+          // if(answers.h5bpOption.length < 1) {
+          //   this.h5bpOption = false;
+          // } else {
+          // }
+          var h5bpOption = answers.h5bpOption;
+          this.htaccessOption = hasFeature('htaccess', h5bpOption);
+          this.crossdomainOption = hasFeature('crossdomain', h5bpOption);
+          this.browserconfigOption = hasFeature('browserconfig', h5bpOption);
+          this.robotsOption = hasFeature('robots', h5bpOption);
+          this.humansOption = hasFeature('humans', h5bpOption);
+
           done();
         }.bind(this));
     },
@@ -976,34 +583,34 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
           type: 'confirm',
-          name: 'includeCustomIcnFont',
+          name: 'customIconfontOption',
           message: 'Would you like to include a custom icon font?',
           default: false
       }, {
         when: function (answers) {
-          return answers.includeCustomIcnFont === true;
+          return answers.customIconfontOption === true;
         },
         name: 'customIconFontName',
         message: 'Name your custom icon font',
         default: 'robonky-glyphs'
       }], function (answers) {
-          this.includeCustomIcnFont = answers.includeCustomIcnFont;
+          this.customIconfontOption = answers.customIconfontOption;
           this.customIconFontName = answers.customIconFontName;
           done();
         }.bind(this));
     },
 
     googleanalytics: function() {
-      if(this.isStatic){
+      if(this.environmentOption === 'static'){
         this.log(printTitle('Google Analytics'))
         var done = this.async();
         this.prompt([{
           type: 'confirm',
-          name: 'includeGA',
+          name: 'analyticsOption',
           message: 'Provide Google Analytics Script?',
           default: true
       }], function (answers) {
-          this.includeGA = answers.includeGA;
+          this.analyticsOption = answers.analyticsOption;
           done();
         }.bind(this));
       }
@@ -1014,17 +621,17 @@ module.exports = generators.Base.extend({
       var done = this.async();
       this.prompt([{
         type: 'confirm',
-        name: 'gulpFolder',
+        name: 'gulpDirOption',
         message: 'Place Gulp files in a subfolder?',
         default: true
       }, {
         type: 'confirm',
-        name: 'runGulp',
+        name: 'gulpCmdOption',
         message: 'Run gulp command after install?',
         default: false
       }], function (answers) {
-          this.gulpFolder = answers.gulpFolder;
-          this.runGulp = answers.runGulp;
+          this.gulpDirOption = answers.gulpDirOption;
+          this.gulpCmdOption = answers.gulpCmdOption;
           done();
         }.bind(this));
     }
@@ -1037,118 +644,87 @@ module.exports = generators.Base.extend({
   writing: function(){
     var destRoot = this.destinationRoot(),
         sourceRoot = this.sourceRoot(),
-        appDir = destRoot,
         templateContext = {
-          // To Sort
-          localUrl: this.localUrl,
-          appname: this.appname,
-          appdescription: this.appdescription,
-          appauthor: this.appauthor,
-          appemail: this.appemail,
-          appversion: this.appversion,
-          applicense: this.applicense,
-          includeJQuery: this.includeJQuery,
-          includeWaypoints: this.includeWaypoints,
-          includeSignals: this.includeSignals,
-          includeD3: this.includeD3,
-          includeTweenmax: this.includeTweenmax,
-          includeEnquire: this.includeEnquire,
-          includeRequire: this.includeRequire,
-          includeModernizr: this.includeModernizr,
-          includeGA: this.includeGA,
-          includePostCSS: this.includePostCSS,
-          includeCustomIcnFont: this.includeCustomIcnFont,
+          // Project
+          projectUrl: this.projectUrl,
+          projectName: this.projectName,
+          projectDescription: this.projectDescription,
+          projectAuthor: this.projectAuthor,
+          authorEmail: this.authorEmail,
+          projectVersion: this.projectVersion,
+          projectLicense: this.projectLicense,
+
+          // Environment
+          environmentOption: this.environmentOption,
+          themeName: this.themeName,
+          templateOption: this.templateOption,
+          templateDest: this.templateDest,
+
+          // Styles
+          preproOption: this.preproOption,
+          mixinOption: this.mixinOption,
+          mqOption: this.mqOption,
+          gridOption: this.gridOption,
+          baseStyleOption: this.baseStyleOption,
+
+          postCssOption: this.postCssOption,
+          autoprefixerOption: this.postCssOption,
+          cssnextOption: this.postCssOption,
+          cssgraceOption: this.postCssOption,
+          rucksackOption: this.postCssOption,
+          gradientfixOption: this.postCssOption,
+          mqpackerOption: this.postCssOption,
+          mqkeyframesOption: this.postCssOption,
+          classprefixOption: this.postCssOption,
+          scopifyOption: this.postCssOption,
+          cssnanoOption: this.postCssOption,
+          csssorterOption: this.postCssOption,
+
+          // Javascript
+          jqueryOption: this.jqueryOption,
+          waypointsOption: this.waypointsOption,
+          signalsOption: this.signalsOption,
+          d3jsOption: this.d3jsOption,
+          tweenmaxOption: this.tweenmaxOption,
+          enquireOption: this.enquireOption,
+          requireOption: this.requireOption,
+          modernizrOption: this.modernizrOption,
+
+          // Root Files
+          htaccessOption: this.htaccessOption,
+          crossdomainOption: this.crossdomainOption,
+          browserconfigOption: this.browserconfigOption,
+          robotsOption: this.robotsOption,
+          humansOption: this.humansOption,
+
+          // Icon Font
+          customIconfontOption: this.customIconfontOption,
           customIconFontName: this.customIconFontName,
-          includeHtaccess: this.includeHtaccess,
-          includeCrossdomain: this.includeCrossdomain,
-          includeBrowserconfig: this.includeBrowserconfig,
-          includeRobots: this.includeRobots,
-          includePcssAutoprefixer: this.includePcssAutoprefixer,
-          includePcssCssNext: this.includePcssCssNext,
-          includePcssCssGrace: this.includePcssCssGrace,
-          includePcssRucksack: this.includePcssRucksack,
-          includePcssGradientFix: this.includePcssGradientFix,
-          includePcssMQPacker: this.includePcssMQPacker,
-          includePcssMQKeyframes: this.includePcssMQKeyframes,
-          includePcssClassPrefix: this.includePcssClassPrefix,
-          includePcssScopify: this.includePcssScopify,
-          includePcssNano: this.includePcssNano,
-          includePcssDeclsort: this.includePcssDeclsort,
-          includeReset: this.includeReset,
-          includeNormalize: this.includeNormalize,
-          includeSanitize: this.includeSanitize,
-          includeSCSS: this.includeSCSS,
-          includeSusy: this.includeSusy,
-          includeBreakpoint: this.includeBreakpoint,
-          includeBourbon: this.includeBourbon,
-          includeNeat: this.includeNeat,
-          includeGridle: this.includeGridle,
-          includeGFlex: this.includeGFlex,
-          includeJeetSCSS: this.includeJeetSCSS,
-          includeIncludeMedia: this.includeIncludeMedia,
-          includeCompass: this.includeCompass,
-          includeSemanticSCSS: this.includeSemanticSCSS,
-          includeStylus: this.includeStylus,
-          includeNib: this.includeNib,
-          includeKoutoSwiss: this.includeKoutoSwiss,
-          includeJeetStylus: this.includeJeetStylus,
-          includeSGrid: this.includeSGrid,
-          includeSemanticStylus: this.includeSemanticStylus,
-          includeRupture: this.includeRupture,
-          includeLess: this.includeLess,
-          includeGee: this.includeGee,
-          includeSemanticLess: this.includeSemanticLess,
-          includeLessHat: this.includeLessHat,
-          includeLessMQ: this.includeLessMQ,
-          noGridLibSCSS: this.noGridLibSCSS,
-          noMixinLibSCSS: this.noMixinLibSCSS,
-          noMQLibSCSS: this.noMQLibSCSS,
-          noGridLibStylus: this.noGridLibStylus,
-          noMixinLibStylus: this.noMixinLibStylus,
-          noMQLibStylus: this.noMQLibStylus,
-          noGridLibLess: this.noGridLibLess,
-          noMixinLibLess: this.noMixinLibLess,
-          noMQLibLess: this.noMQLibLess,
-          noBaseStyles: this.noBaseStyles,
-          includeJade: this.includeJade,
-          includeHaml: this.includeHaml,
-          includeHandlebars: this.includeHandlebars,
-          includeNunjucks: this.includeNunjucks,
-          noTemplateEngine: this.noTemplateEngine,
-          gulpFolder: this.gulpFolder,
-          isStatic: this.isStatic,
-          isWordpress: this.isWordpress,
-          isDrupal: this.isDrupal,
-          isExpress: this.isExpress,
-          isCodigniter: this.isCodigniter,
-          themeWordpress: this.themeWordpress,
-          themeDrupal: this.themeDrupal,
-          templateDest: this.templateDest
+
+          // Google Analytics
+          analyticsOption: this.analyticsOption,
+
+          // Gulp
+          gulpDirOption: this.gulpDirOption
 
         };
-    this._folders(appDir);
-    this._html(destRoot, sourceRoot, templateContext);
-    this._h5bp(destRoot, sourceRoot, templateContext);
-    this._images(destRoot, sourceRoot, templateContext);
-    this._scss(destRoot, sourceRoot, templateContext);
-    this._stylus(destRoot, sourceRoot, templateContext);
-    this._less(destRoot, sourceRoot, templateContext);
-    this._editorconfig(destRoot, sourceRoot, templateContext);
-    this._git(destRoot, sourceRoot, templateContext);
-    this._readme(destRoot, sourceRoot, templateContext);
-    this._bower(destRoot, sourceRoot, templateContext);
-    this._gulp(destRoot, sourceRoot, templateContext);
-    this._iconfont(destRoot, sourceRoot, templateContext);
-    this._js(destRoot, sourceRoot, templateContext);
-    this._jade(destRoot, sourceRoot, templateContext);
-    // this._haml(destRoot, sourceRoot, templateContext);
-    // this._handlebars(destRoot, sourceRoot, templateContext);
-    this._nunjucks(destRoot, sourceRoot, templateContext);
+
+    projectFiles(destRoot, sourceRoot, templateContext, this);
+    gulpFiles(destRoot, sourceRoot, templateContext, this);
+    bowerFiles(destRoot, sourceRoot, templateContext, this);
+    h5bpFiles(destRoot, sourceRoot, templateContext, this);
+    htmlFiles(destRoot, sourceRoot, templateContext, this);
+    sassFiles(destRoot, sourceRoot, templateContext, this);
+    stylusFiles(destRoot, sourceRoot, templateContext, this);
+    lessFiles(destRoot, sourceRoot, templateContext, this);
+    scriptFiles(destRoot, sourceRoot, templateContext, this);
+    imageFiles(destRoot, sourceRoot, templateContext, this);
+    iconfontFiles(destRoot, sourceRoot, templateContext, this);
 
   },
 
   install: function() {
-    if(this.gulpFolder) {
+    if(this.gulpDirOption) {
       // Change working directory to 'gulp' for dependency install
       var npmdir = process.cwd() + '/gulp';
       process.chdir(npmdir);
@@ -1158,7 +734,7 @@ module.exports = generators.Base.extend({
   },
   end: function() {
     this._endMsg();
-    if(this.runGulp) {
+    if(this.gulpCmdOption) {
       this.spawnCommand('gulp', ['serve']);
     }
   }

@@ -10,40 +10,40 @@ var rename          = require('gulp-rename');
 var stylus          = require('gulp-stylus');
 
 
-<% if(includePostCSS){ %>// postprocessing<% } %><% if(includePostCSS){ %>
-var postcss         = require('gulp-postcss');<% } %><% if(includePcssAutoprefixer){ %>
-var autoprefixer    = require('autoprefixer');<% } %><% if(includePcssMQPacker){ %>
-var mqPacker        = require('css-mqpacker');<% } %><% if(includePcssScopify){ %>
+<% if(postCssOption){ %>// postprocessing<% } %><% if(postCssOption){ %>
+var postcss         = require('gulp-postcss');<% } %><% if(autoprefixerOption){ %>
+var autoprefixer    = require('autoprefixer');<% } %><% if(mqpackerOption){ %>
+var mqPacker        = require('css-mqpacker');<% } %><% if(scopifyOption){ %>
 var scopify         = require('postcss-scopify');<% } %><% if(includePcssSelectorNot){ %>
 var selectorNot     = require('postcss-selector-not');<% } %><% if(includePcssSelectorMatches){ %>
-var selectorMatches = require('postcss-selector-matches');<% } %><% if(includePcssClassPrefix){ %>
-var classPrfx       = require('postcss-class-prefix');<% } %><% if(includePcssGradientFix){ %>
-var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(includePcssMQKeyframes){ %>
-var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(includePcssNano){ %>
+var selectorMatches = require('postcss-selector-matches');<% } %><% if(classprefixOption){ %>
+var classPrfx       = require('postcss-class-prefix');<% } %><% if(gradientfixOption){ %>
+var gradientFix     = require('postcss-gradient-transparency-fix');<% } %><% if(mqkeyframesOption){ %>
+var mqKeyframes     = require('postcss-mq-keyframes');<% } %><% if(cssnanoOption){ %>
 var cssnano         = require('cssnano');<% } %><% if(includePcssSort){ %>
 var sort            = require('postcss-sort');<% } %>
 
-<% if(includePostCSS){ %>var postCssConfigDev = [<% } %><% if(includePcssSelectorNot){ %>
+<% if(postCssOption){ %>var postCssConfigDev = [<% } %><% if(includePcssSelectorNot){ %>
   selectorNot,<% } %><% if(includePcssSelectorMatches){ %>
-  selectorMatches,<% } %><% if(includePcssGradientFix){ %>
-  gradientFix,<% } %><% if(includePcssClassPrefix){ %>
-  classPrfx(cfg.prefix),<% } %><% if(includePcssScopify){ %>
-  scopify(cfg.scope),<% } %><% if(includePcssAutoprefixer){ %>
+  selectorMatches,<% } %><% if(gradientfixOption){ %>
+  gradientFix,<% } %><% if(classprefixOption){ %>
+  classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
+  scopify(cfg.scope),<% } %><% if(autoprefixerOption){ %>
   autoprefixer({browsers: ['last 3 versions', '> 1%']}),<% } %><% if(includePcssSort){ %>
-  sort<% } %><% if(includePostCSS){ %>
+  sort<% } %><% if(postCssOption){ %>
 ];<% } %>
 
-<% if(includePostCSS){ %>var postCssConfigBuild = [<% } %><% if(includePcssSelectorNot){ %>
+<% if(postCssOption){ %>var postCssConfigBuild = [<% } %><% if(includePcssSelectorNot){ %>
   selectorNot,<% } %><% if(includePcssSelectorMatches){ %>
-  selectorMatches,<% } %><% if(includePcssGradientFix){ %>
-  gradientFix,<% } %><% if(includePcssClassPrefix){ %>
-  classPrfx(cfg.prefix),<% } %><% if(includePcssScopify){ %>
-  scopify(cfg.scope),<% } %><% if(includePcssMQKeyframes){ %>
-  mqKeyframes,<% } %><% if(includePcssMQPacker){ %>
-  mqPacker,<% } %><% if(includePcssAutoprefixer){ %>
+  selectorMatches,<% } %><% if(gradientfixOption){ %>
+  gradientFix,<% } %><% if(classprefixOption){ %>
+  classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
+  scopify(cfg.scope),<% } %><% if(mqkeyframesOption){ %>
+  mqKeyframes,<% } %><% if(mqpackerOption){ %>
+  mqPacker,<% } %><% if(autoprefixerOption){ %>
   autoprefixer({browsers: ['last 3 versions', '> 1%']}),<% } %><% if(includePcssSort){ %>
-  sort,<% } %><% if(includePcssNano){ %>
-  cssnano({autoprefixer: false, zindex: false}),<% } %><% if(includePostCSS){ %>
+  sort,<% } %><% if(cssnanoOption){ %>
+  cssnano({autoprefixer: false, zindex: false}),<% } %><% if(postCssOption){ %>
 ];<% } %>
 
 
@@ -53,7 +53,7 @@ gulp.task('styles', function() {
   gulp.src(paths.styles.src)
     .pipe(plumber(onStyleError))
     .pipe(sourcemaps.init())
-    .pipe(stylus())<% if(includePostCSS){ %>
+    .pipe(stylus())<% if(postCssOption){ %>
     .pipe(postcss(postCssConfigDev))<% } %>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.build));
@@ -63,7 +63,7 @@ gulp.task('styles', function() {
 gulp.task('styles-build', function() {
   gulp.src(paths.styles.src)
     .pipe(plumber(onStyleError))
-    .pipe(stylus(<% if(!includePostCSS){ %>{ compress: true }<% } %>))<% if(includePostCSS){ %>
+    .pipe(stylus(<% if(!postCssOption){ %>{ compress: true }<% } %>))<% if(postCssOption){ %>
     .pipe(postcss(postCssConfigBuild))<% } %>
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(paths.styles.build));
