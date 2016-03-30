@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var bowerFiles = function bowerFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.gulpDirOption) {
+  if(is.gulpDirOption) {
     destRoot = destRoot + '/gulp';
   }
   // Static

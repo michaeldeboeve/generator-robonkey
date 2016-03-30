@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var lessFiles = function lessFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.preproOption === 'less') {
+  if(is.preproOption === 'less') {
     self.fs.copy(sourceRoot + '/src/less/base', destRoot + '/src/less/base');
     self.fs.copy(sourceRoot + '/src/less/modules', destRoot + '/src/less/modules');
     self.fs.copy(sourceRoot + '/src/less/pages', destRoot + '/src/less/pages');
@@ -22,28 +23,28 @@ var lessFiles = function lessFiles(destRoot, sourceRoot, templateContext, contex
     self.fs.copyTpl(sourceRoot + '/src-tpl/less/base/variables.less', destRoot + '/src/less/base/variables.less', templateContext);
     self.fs.copyTpl(sourceRoot + '/src-tpl/less/style.less', destRoot + '/src/less/style.less', templateContext);
 
-    if(templateContext.gridOption === 'semantic') {
+    if(is.gridOption === 'semantic') {
       self.fs.copy(sourceRoot + '/src-tpl/less/base/semantic-grid.less', destRoot + '/src/less/base/grid.less');
     } else {
       self.fs.copyTpl(sourceRoot + '/src-tpl/less/base/grid.less', destRoot + '/src/less/base/grid.less', templateContext);
     }
 
-    if(templateContext.mixinOption === 'lesshat') {
+    if(is.mixinOption === 'lesshat') {
       self.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat.less', destRoot + '/src/less/base/mixins/lesshat.less');
       self.fs.copy(sourceRoot + '/src-tpl/less/mixins/lesshat-prefixed.less', destRoot + '/src/less/base/mixins/lesshat-prefixed.less');
     }
 
-    if(templateContext.mqOption === 'lessmq') {
+    if(is.mqOption === 'lessmq') {
       self.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq.less', destRoot + '/src/less/base/mixins/mq.less');
       self.fs.copy(sourceRoot + '/src-tpl/less/mixins/mq-prefixed.less', destRoot + '/src/less/base/mixins/mq-prefixed.less');
     }
 
-    if(templateContext.customIconfontOption) {
+    if(is.customIconfontOption) {
       self.fs.copyTpl(sourceRoot + '/src-tpl/less/modules/icons.less', destRoot + '/src/less/modules/icons.less', templateContext);
       self.fs.copy(sourceRoot + '/src/iconfont/template/icons.less', destRoot + '/src/iconfont/template/icons.less');
     }
 
-    switch (templateContext.baseStyleOption){
+    switch (is.baseStyleOption){
       case 'reset': self.fs.copy(sourceRoot + '/src-tpl/less/reset/reset.less', destRoot + '/src/less/base/reset.less');
       break;
 

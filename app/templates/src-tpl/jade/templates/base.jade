@@ -26,8 +26,8 @@ block favicons
   - var useCustomFaviconPath   = false
   - var useAppleIcons          = false
   - var faviconType            = 'image/x-icon'
-  - var faviconPath            = '/assets/images/favicons/favicon.ico'
-  - var appleIPhone            = '/assets/images/favicons/touch-icon-precomposed.png'
+  - var faviconPath            = '/<%= imgDirPath %>/favicons/favicon.ico'
+  - var appleIPhone            = '/<%= imgDirPath %>/favicons/touch-icon-precomposed.png'
     
     
 doctype html
@@ -64,12 +64,12 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       
     block headerStyles
       != '\n    <!-- build:css -->'
-      link(rel="stylesheet", href="/assets/css/style.css")
+      link(rel="stylesheet", href="/<%= cssDirPath %>/style.css")
       != '\n    <!-- endbuild -->'
 
     block headerScripts
       <% if(modernizrOption){ %>!= '\n    <!-- build:modernizr -->'
-      script(src="/assets/js/libs/modernizr.dev.js")
+      script(src="/<%= jsLibDirPath %>/modernizr.dev.js")
       != '\n    <!-- endbuild -->'<% } %>
 
   body(class="#{ bodyClass }")
@@ -77,17 +77,17 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
 
     != '\n\n'
-    <% if(jqueryOption && !requireOption){ %>script(src="/assets/js/libs/jquery.min.js")<% } %>
-    <% if(waypointsOption && jqueryOption && !requireOption){ %>script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(waypointsOption && !requireOption) { %>script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(signalsOption && !requireOption){ %>
-    script(src="/assets/js/libs/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
-    script(src="/assets/js/libs/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
-    script(src="/assets/js/libs/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
-    script(src="/assets/js/libs/TweenMax.min.js")<% } %><% if(requireOption){ %>
-    script(src="/assets/js/libs/require.js")<% } %>
+    <% if(jqueryOption && !requireOption){ %>script(src="/<%= jsLibDirPath %>/jquery.min.js")<% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %>script(src="/<%= jsLibDirPath %>/jquery.waypoints.min.js")<% } else if(waypointsOption && !requireOption) { %>script(src="/<%= jsLibDirPath %>/noframework.waypoints.min.js")<% } %><% if(signalsOption && !requireOption){ %>
+    script(src="/<%= jsLibDirPath %>/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
+    script(src="/<%= jsLibDirPath %>/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
+    script(src="/<%= jsLibDirPath %>/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
+    script(src="/<%= jsLibDirPath %>/TweenMax.min.js")<% } %><% if(requireOption){ %>
+    script(src="/<%= jsLibDirPath %>/require.js")<% } %>
     != '\n'  
     block footerScripts
       != '\n\n    <!-- build:js -->'
-      script(src="/assets/js/script.js")
+      script(src="/<%= jsDirPath %>/script.js")
       != '\n    <!-- endbuild -->\n'
     
     <% if(analyticsOption){ %>

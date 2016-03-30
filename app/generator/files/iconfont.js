@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var iconfontFiles = function iconfontFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.customIconfontOption) {
+  if(is.customIconfontOption) {
     // Static
     self.fs.copy(sourceRoot + '/src/iconfont/illustrator', destRoot + '/src/iconfont/illustrator');
     self.fs.copy(sourceRoot + '/src/iconfont/svg', destRoot + '/src/iconfont/svg');

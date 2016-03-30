@@ -8,10 +8,10 @@ var htmlreplace     = require("gulp-html-replace");
 // console.log(moveRepo);
 gulp.task('removeDevFiles', function() {
   return gulp.src([
-    paths.scripts.build + 'script.js',
-    paths.styles.build + '*.css.map',
-    paths.styles.build + 'style.css',
-    paths.modernizr.build + 'modernizr.dev.js'
+    // paths.scripts.build + 'script.js',
+    // paths.styles.build + 'style.css',
+    // paths.modernizr.build + 'modernizr.dev.js',
+    paths.styles.build + '*.css.map'
   ], {read: false})
     .pipe(clean({force: true}));
 });

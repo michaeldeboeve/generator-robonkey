@@ -8,25 +8,26 @@ var mkdirp = require('mkdirp'),
 
 var h5bpFiles = function h5bpFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.htaccessOption) {
-    self.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/website/.htaccess');
+  if(is.htaccessOption) {
+    self.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/' + self.mainDir + '/.htaccess');
   }
-  if(templateContext.browserconfigOption) {
+  if(is.browserconfigOption) {
     // Static
-    self.fs.copy(sourceRoot + '/website/browserconfig.xml', destRoot + '/website/browserconfig.xml');
+    self.fs.copyTpl(sourceRoot + '/website/browserconfig.xml', destRoot + '/' + self.mainDir + '/browserconfig.xml', templateContext);
   }
-  if(templateContext.customIconfontOption) {
+  if(is.customIconfontOption) {
     // Static
-    self.fs.copy(sourceRoot + '/website/crossdomain.xml', destRoot + '/website/crossdomain.xml');
+    self.fs.copy(sourceRoot + '/website/crossdomain.xml', destRoot + '/' + self.mainDir + '/crossdomain.xml');
   }
-  if(templateContext.robotsOption) {
+  if(is.robotsOption) {
     // Static
-    self.fs.copy(sourceRoot + '/website/robots.txt', destRoot + '/website/robots.txt');
+    self.fs.copy(sourceRoot + '/website/robots.txt', destRoot + '/' + self.mainDir + '/robots.txt');
   }
-  if(templateContext.humansOption) {
+  if(is.humansOption) {
     // Dynamic
-    self.fs.copyTpl(sourceRoot + '/website/humans.txt', destRoot + '/website/humans.txt', templateContext);
+    self.fs.copyTpl(sourceRoot + '/website/humans.txt', destRoot + '/' + self.mainDir + '/humans.txt', templateContext);
   }
 };
 

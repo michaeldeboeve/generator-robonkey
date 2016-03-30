@@ -9,14 +9,14 @@
     <meta name="description" content="{{pageDescription}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/images/favicons/touch-icon-precomposed.png">
+    <link rel="icon" type="image/x-icon" href="<%= assetsDir %>/images/favicons/favicon.ico">
+    <link rel="apple-touch-icon" href="<%= assetsDir %>/images/favicons/touch-icon-precomposed.png">
 
     <!-- build:css -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- endbuild -->
     <% if(modernizrOption){ %><!-- build:modernizr -->
-    <script src="/assets/js/libs/modernizr.dev.js"></script>
+    <script src="<%= assetsDir %>/js/lib/modernizr.dev.js"></script>
     <!-- endbuild --><% } %>
   </head>
   <body>
@@ -24,16 +24,16 @@
     {{> kitchensink }}
 
 
-    <% if(jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>
-    <% if(waypointsOption && jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.waypoints.min.js"></script><% } else if(waypointsOption && !requireOption) { %>
-    <script src="/assets/js/libs/noframework.waypoints.min.js"></script><% } %><% if(signalsOption && !requireOption){ %>
-    <script src="/assets/js/libs/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
-    <script src="/assets/js/libs/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
-    <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
-    <script src="/assets/js/libs/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
-    <script src="/assets/js/libs/require.js"></script><% } %>
+    <% if(jqueryOption && !requireOption){ %><script src="<%= jsLibDirPath %>/jquery.min.js"></script><% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %><script src="<%= jsLibDirPath %>/jquery.waypoints.min.js"></script><% } else if(waypointsOption && !requireOption) { %>
+    <script src="<%= jsLibDirPath %>/noframework.waypoints.min.js"></script><% } %><% if(signalsOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
+    <script src="<%= jsLibDirPath %>/require.js"></script><% } %>
     <!-- build:js -->
-    <script src="/assets/js/script.js"></script>
+    <script src="<%= jsDirPath %>/script.js"></script>
     <!-- endbuild -->
 
     <% if(analyticsOption){ %><script>
@@ -42,7 +42,7 @@
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','{{gaCode}}','auto');ga('send','pageview');
+      ga('create','UA-XXXXX-X','auto');ga('send','pageview');
     </script><% } %>
   </body>
 </html>

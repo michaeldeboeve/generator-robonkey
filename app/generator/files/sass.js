@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var sassFiles = function sassFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.preproOption === 'sass') {
+  if(is.preproOption === 'sass') {
     // Static
     self.fs.copy(sourceRoot + '/src/scss/base', destRoot + '/src/scss/base');
     self.fs.copy(sourceRoot + '/src/scss/modules', destRoot + '/src/scss/modules');
@@ -23,7 +24,7 @@ var sassFiles = function sassFiles(destRoot, sourceRoot, templateContext, contex
     self.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_variables.scss', destRoot + '/src/scss/base/_variables.scss', templateContext);
     self.fs.copyTpl(sourceRoot + '/src-tpl/scss/style.scss', destRoot + '/src/scss/style.scss', templateContext);
 
-    switch (templateContext.gridOption){
+    switch (is.gridOption){
       case 'semantic': self.fs.copy(sourceRoot + '/src-tpl/scss/base/_semantic-grid.scss', destRoot + '/src/scss/base/_grid.scss');
       break;
 
@@ -33,16 +34,16 @@ var sassFiles = function sassFiles(destRoot, sourceRoot, templateContext, contex
       default: self.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);
     }
 
-    if(templateContext.customIconfontOption) {
+    if(is.customIconfontOption) {
       self.fs.copyTpl(sourceRoot + '/src-tpl/scss/modules/_icons.scss', destRoot + '/src/scss/modules/_icons.scss', templateContext);
       self.fs.copy(sourceRoot + '/src/iconfont/template/_icons.scss', destRoot + '/src/iconfont/template/_icons.scss');
     }
 
-    if(templateContext.mqOption === 'breakpoint') {
+    if(is.mqOption === 'breakpoint') {
       self.fs.copy(sourceRoot + '/src-tpl/scss/mixins/_mediaqueries.scss', destRoot + '/src/scss/mixins/_mediaqueries.scss');
     }
 
-    switch (templateContext.baseStyleOption){
+    switch (is.baseStyleOption){
       case 'reset': self.fs.copy(sourceRoot + '/src-tpl/scss/reset/_reset.scss', destRoot + '/src/scss/base/_reset.scss');
       break;
 

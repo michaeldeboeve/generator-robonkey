@@ -1,18 +1,18 @@
 {
   "scripts": {
     "src": "./../src/js/**/*.js",
-    "build": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>"
+    "build": "./..<%= templateDest %><%= jsDirPath %>"
   },
   "modernizr": {
-    "build": "./..<%= templateDest %><% if(environmentOption !== 'express'){  %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>libs/"
+    "build": "./..<%= templateDest %><%= jsLibDirPath %>/"
   },<% if(environmentOption === 'static'){ %>
   "html": {
     "src": "./..<%= templateDest %>/**/*.html",
     "build": "./..<%= templateDest %>/"
   },<% } %>
   "images": {
-    "src": "./../src/images/**/*",
-    "build": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/images/"
+    "src": "./../src/img/**/*",
+    "build": "./..<%= templateDest %><%= imgDirPath %>"
   },
   "styles": {<% if(preproOption === 'sass'){ %>
     "src": "./../src/scss/style.scss",
@@ -21,8 +21,8 @@
     "src_files": "./../src/stylus/**/*.styl",<% } %><% if(preproOption === 'less'){ %>
     "src": "./../src/less/style.less",
     "src_files": "./../src/less/**/*.less",<% } %>
-    "build_srcsmap": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>",
-    "build": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>"
+    "build_srcsmap": "./..<%= templateDest %><%= cssDirPath %>/",
+    "build": "./..<%= templateDest %><%= cssDirPath %>/"
   },<% if(templateOption === 'jade'){ %>
   "jade": {
     "src": "./../src/jade/*.jade",
@@ -48,12 +48,12 @@
     "build": "./..<%= templateDest %>/"
   },<% } %>
   "postcss": {
-    "src": "./..<%= templateDest %>/assets/css/style.css",
-    "build": "./..<%= templateDest %>/assets/css/"
+    "src": "./..<%= templateDest %><%= cssDirPath %>/style.css",
+    "build": "./..<%= templateDest %><%= cssDirPath %>/"
   },
   "font": {
     "src": "./../src/iconfont/svg/*.svg",
-    "build": "./..<%= templateDest %><% if(environmentOption !== 'express'){  %>/assets<% } %>/fonts/",<% if(preproOption === 'sass'){ %>
+    "build": "./..<%= templateDest %><%= fontDirPath %>/",<% if(preproOption === 'sass'){ %>
     "templateInput": "../src/iconfont/template/_icons.scss",
     "templateOutput": "../../../../src/scss/modules/_icons.scss",<% } %><% if(preproOption === 'stylus'){ %>
     "templateInput": "../src/iconfont/template/icons.styl",

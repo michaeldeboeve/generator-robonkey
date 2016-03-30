@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var stylusFiles = function stylusFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.preproOption === 'stylus') {
+  if(is.preproOption === 'stylus') {
     // Static
     self.fs.copy(sourceRoot + '/src/stylus/base', destRoot + '/src/stylus/base');
     self.fs.copy(sourceRoot + '/src/stylus/modules', destRoot + '/src/stylus/modules');
@@ -23,7 +24,7 @@ var stylusFiles = function stylusFiles(destRoot, sourceRoot, templateContext, co
     self.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/variables.styl', destRoot + '/src/stylus/base/variables.styl', templateContext);
     self.fs.copyTpl(sourceRoot + '/src-tpl/stylus/style.styl', destRoot + '/src/stylus/style.styl', templateContext);
 
-    switch (templateContext.gridOption){
+    switch (is.gridOption){
       case 'semantic': self.fs.copy(sourceRoot + '/src-tpl/stylus/base/_semantic-grid.styl', destRoot + '/src/stylus/base/_grid.styl');
       break;
 
@@ -34,12 +35,12 @@ var stylusFiles = function stylusFiles(destRoot, sourceRoot, templateContext, co
     }
 
 
-    if(templateContext.customIconfontOption) {
+    if(is.customIconfontOption) {
       self.fs.copyTpl(sourceRoot + '/src-tpl/stylus/modules/icons.styl', destRoot + '/src/stylus/modules/icons.styl', templateContext);
       self.fs.copy(sourceRoot + '/src/iconfont/template/icons.styl', destRoot + '/src/iconfont/template/icons.styl');
     }
 
-    switch (templateContext.baseStyleOption){
+    switch (is.baseStyleOption){
       case 'reset': self.fs.copy(sourceRoot + '/src-tpl/stylus/reset/reset.styl', destRoot + '/src/stylus/base/reset.styl');
       break;
 

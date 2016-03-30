@@ -8,32 +8,21 @@ var mkdirp = require('mkdirp'),
 
 var projectFiles = function projectFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
   mkdirp(destRoot + '/src');
-  mkdirp(destRoot + self.templateDest);
-
-  if(templateContext.environmentOption === 'express') {
-    mkdirp(destRoot + self.templateDest + '/javascripts');
-    mkdirp(destRoot + self.templateDest + '/javascripts/libs');
-    mkdirp(destRoot + self.templateDest + '/images');
-    mkdirp(destRoot + self.templateDest + '/stylesheets');
-    mkdirp(destRoot + self.templateDest + '/stylesheets/libs');
-    mkdirp(destRoot + self.templateDest + '/fonts');
-  } else {
-    mkdirp(destRoot + self.templateDest + '/assets');
-    mkdirp(destRoot + self.templateDest + '/assets/js');
-    mkdirp(destRoot + self.templateDest + '/assets/js/libs');
-    mkdirp(destRoot + self.templateDest + '/assets/images');
-    mkdirp(destRoot + self.templateDest + '/assets/css');
-    mkdirp(destRoot + self.templateDest + '/assets/css/libs');
-    mkdirp(destRoot + self.templateDest + '/assets/fonts');
-  }
+  mkdirp(destRoot + is.templateDest + '/' + is.jsDirPath);
+  mkdirp(destRoot + is.templateDest + '/' + is.jsLibDirPath);
+  mkdirp(destRoot + is.templateDest + '/' + is.imgDirPath);
+  mkdirp(destRoot + is.templateDest + '/' + is.cssDirPath);
+  mkdirp(destRoot + is.templateDest + '/' + is.cssLibDirPath);
+  mkdirp(destRoot + is.templateDest + '/' + is.fontDirPath);
 
 
-    self.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
-    self.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
-    self.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
-    self.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
+  self.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
+  self.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
+  self.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
+  self.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
 
 };
 

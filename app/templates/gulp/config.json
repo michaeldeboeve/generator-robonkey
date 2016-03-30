@@ -15,13 +15,13 @@
   "src": "./../src/",
   "dest": "./..<%= templateDest %>",
   "resrc": {
-    "main": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/",
-    "js": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>",
-    "jsvendor": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/js/<% } %><% if(environmentOption === 'express'){ %>/javascripts/<% } %>libs/",
-    "img": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/images/",
-    "css": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>",
-    "cssvendor": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets/css/<% } %><% if(environmentOption === 'express'){ %>/stylesheets/<% } %>libs/",
-    "fonts": "./..<%= templateDest %><% if(environmentOption !== 'express'){ %>/assets<% } %>/fonts/",
+    "main": "./..<%= assetsDirPath %>/",
+    "js": "./..<%= templateDest %><%= jsDirPath %>/",
+    "jsvendor": "./..<%= templateDest %><%= jsLibDirPath %>/",
+    "img": "./..<%= templateDest %><%= imgDirPath %>/",
+    "css": "./..<%= templateDest %><%= cssDirPath %>/",
+    "cssvendor": "./..<%= templateDest %><%= cssLibDirPath %>/",
+    "fonts": "./..<%= templateDest %><%= fontDirPath %>/",
     "jade": "./..<%= templateDest %>/"
   }
 }

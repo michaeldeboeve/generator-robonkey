@@ -8,8 +8,9 @@ var mkdirp = require('mkdirp'),
 
 var gulpFiles = function gulpFiles(destRoot, sourceRoot, templateContext, context) {
   var self = context;
+  var is = templateContext;
 
-  if(templateContext.gulpDirOption) {
+  if(is.gulpDirOption) {
     destRoot = destRoot + '/gulp';
   }
   // Dynamic
@@ -23,7 +24,7 @@ var gulpFiles = function gulpFiles(destRoot, sourceRoot, templateContext, contex
   self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp-tasks/clean.js', templateContext);
   self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp-tasks/styles.js', templateContext);
 
-  if(templateContext.customIconfontOption) {
+  if(is.customIconfontOption) {
     self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp-tasks/iconfont.js', templateContext);
   }
 
@@ -44,7 +45,7 @@ var gulpFiles = function gulpFiles(destRoot, sourceRoot, templateContext, contex
     break;
   }
 
-  if(templateContext.modernizrOption) {
+  if(is.modernizrOption) {
     self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/modernizr.js', destRoot + '/gulp-tasks/modernizr.js', templateContext);
   }
 

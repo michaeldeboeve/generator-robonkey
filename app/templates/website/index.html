@@ -9,29 +9,29 @@
     <meta name="description" content="Description">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/images/favicons/touch-icon-precomposed.png">
+    <link rel="icon" type="image/x-icon" href="<%= imgDirPath %>/favicons/favicon.ico">
+    <link rel="apple-touch-icon" href="<%= imgDirPath %>/favicons/touch-icon-precomposed.png">
 
     <!-- build:css -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="<%= cssDirPath %>/style.css">
     <!-- endbuild -->
     <% if(modernizrOption){ %><!-- build:modernizr -->
-    <script src="/assets/js/libs/modernizr.dev.js"></script>
+    <script src="<%= jsLibDirPath %>/modernizr.dev.js"></script>
     <!-- endbuild --><% } %>
   </head>
   <body>
 
 
-    <% if(jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.min.js"></script><% } %>
-    <% if(waypointsOption && jqueryOption && !requireOption){ %><script src="/assets/js/libs/jquery.waypoints.min.js"></script><% } else if(waypointsOption && !requireOption) { %>
-    <script src="/assets/js/libs/noframework.waypoints.min.js"></script><% } %><% if(signalsOption && !requireOption){ %>
-    <script src="/assets/js/libs/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
-    <script src="/assets/js/libs/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
-    <script src="/assets/js/libs/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
-    <script src="/assets/js/libs/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
-    <script src="/assets/js/libs/require.js"></script><% } %>
+    <% if(jqueryOption && !requireOption){ %><script src="<%= jsLibDirPath %>/jquery.min.js"></script><% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %><script src="<%= jsLibDirPath %>/jquery.waypoints.min.js"></script><% } else if(waypointsOption && !requireOption) { %>
+    <script src="<%= jsLibDirPath %>/noframework.waypoints.min.js"></script><% } %><% if(signalsOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
+    <script src="<%= jsLibDirPath %>/require.js"></script><% } %>
     <!-- build:js -->
-    <script src="/assets/js/script.js"></script>
+    <script src="<%= jsDirPath %>/script.js"></script>
     <!-- endbuild -->
 
     <% if(analyticsOption){ %><script>

@@ -6,25 +6,25 @@
     %title pageTitle
     %meta(content="Description" name="description")
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %ink(rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico")
-    %link(rel="apple-touch-icon" href="/assets/images/favicons/touch-icon-precomposed.png")
+    %ink(rel="icon" type="image/x-icon" href="<%= imgDirPath %>/favicons/favicon.ico")
+    %link(rel="apple-touch-icon" href="<%= imgDirPath %>/favicons/touch-icon-precomposed.png")
     / build:css
-    %link(href="/assets/css/style.css" rel="stylesheet")
+    %link(href="<%= cssDirPath %>/style.css" rel="stylesheet")
     / endbuild
     <% if(modernizrOption){ %>
     / build:modernizr
-    %script(src="/assets/js/libs/modernizr.dev.js")
+    %script(src="<%= jsLibDirPath %>/modernizr.dev.js")
     /endbuild <% } %>
   %body
-    <% if(jqueryOption && !requireOption){ %>%script(src="/assets/js/libs/jquery.min.js")<% } %>
-    <% if(waypointsOption && jqueryOption && !requireOption){ %>%script(src="/assets/js/libs/jquery.waypoints.min.js")<% } else if(waypointsOption && !requireOption) { %>%script(src="/assets/js/libs/noframework.waypoints.min.js")<% } %><% if(signalsOption && !requireOption){ %>
-    %script(src="/assets/js/libs/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
-    %script(src="/assets/js/libs/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
-    %script(src="/assets/js/libs/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
-    %script(src="/assets/js/libs/TweenMax.min.js")<% } %><% if(requireOption){ %>
-    %script(src="/assets/js/libs/require.js")<% } %>
+    <% if(jqueryOption && !requireOption){ %>%script(src="<%= jsLibDirPath %>/jquery.min.js")<% } %>
+    <% if(waypointsOption && jqueryOption && !requireOption){ %>%script(src="<%= jsLibDirPath %>/jquery.waypoints.min.js")<% } else if(waypointsOption && !requireOption) { %>%script(src="<%= jsLibDirPath %>/noframework.waypoints.min.js")<% } %><% if(signalsOption && !requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/TweenMax.min.js")<% } %><% if(requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/require.js")<% } %>
     / build:js
-    %script(sr="/assets/js/script.js")
+    %script(sr="<%= jsDirPath %>/script.js")
     / endbuild
 
     <% if(analyticsOption){ %>
