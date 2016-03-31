@@ -28,7 +28,7 @@ var sassFiles = function sassFiles(destRoot, sourceRoot, templateContext, contex
       case 'semantic': self.fs.copy(sourceRoot + '/src-tpl/scss/base/_semantic-grid.scss', destRoot + '/src/scss/base/_grid.scss');
       break;
 
-      case 'jeet': self.fs.copy(sourceRoot + '/src/scss/base/jeet/', destRoot + '/src/scss/base/jeet/');
+      case 'jeet': self.fs.copy(sourceRoot + '/src-tpl/scss/base/jeet/', destRoot + '/src/scss/base/jeet/');
       break;
 
       default: self.fs.copyTpl(sourceRoot + '/src-tpl/scss/base/_grid.scss', destRoot + '/src/scss/base/_grid.scss', templateContext);

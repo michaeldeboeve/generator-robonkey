@@ -1,5 +1,5 @@
 // ==========================================================================
-// Robonkey Sass Shizzle
+// IMPORTS
 // ==========================================================================
 <% if(preproOption === 'stylus' && gridOption === 'jeet') {%>
 @import "base/jeet/jeet";<% } %><% if(gridOption === 'sgrid') {%>
@@ -8,16 +8,21 @@
 @import "../../gulp/node_modules/s-grid/s-grid-classes";<% } %><% if(mqOption === 'rupture') {%>
 @import "../../gulp/node_modules/rupture/rupture/";<% } %><% if(mixinOption === 'koutoswiss') {%>
 @import "../../gulp/node_modules/kouto-swiss/lib/kouto-swiss/";<% } %><% if(mixinOption === 'nib') {%>
-@import "../../gulp/node_modules/nib/lib/nib/";<% } %>
+@import "../../gulp/node_modules/nib/lib/nib/";<% } %><% if(mixinOption === 'none') {%>
+@import "../../gulp/node_modules/superlatief-mixins/stylus/superlatief";<% } %>
+@import "../../gulp/node_modules/superlatief-colors/stylus/colors";
+
+
+
+
+
+
 
 // ==========================================================================
-// BASE - Base Variable file along with starting point Mixins and Placeholders.
+// BASE
 // ==========================================================================
-@import "base/colors/**/*";
+
 @import "base/variables";
-@import "base/functions/**/*";
-@import "base/mixins/**/*";
-
 @import "base/fonts";
 <% if(baseStyleOption === 'reset'){ %>@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
 @import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>

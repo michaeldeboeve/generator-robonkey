@@ -1,21 +1,22 @@
 // ==========================================================================
-// Robonkey Sass Shizzle
+// IMPORTS
 // ==========================================================================
 <% if(gridOption === 'gee'){ %>@import "../../gulp/node_modules/gee.less/gee";<% } %>
+@import "../../gulp/node_modules/superlatief-colors/less/colors";
+
+
+
 
 
 // ==========================================================================
-// BASE - Base Variable file along with starting point Mixins and Placeholders.
+// BASE
 // ==========================================================================
 @import "base/fonts";
 <% if(baseStyleOption === 'reset'){ %>@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
 @import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>
 @import "base/sanitize";<% } %>
-
-@import "base/colors/**/*";
-@import "base/variables";
-@import "base/functions/**/*";
-@import "base/mixins/**/*";
+@import "base/variables";<% if(mqOption === 'mqless' || mixinOption === 'lesshat'){ %>
+@import "base/mixins/**/*";<% } %>
 
 @import "base/grid";
 @import "base/typography";

@@ -196,7 +196,11 @@ module.exports = generators.Base.extend({
     }], function (answers) {
         this.environmentOption = answers.environmentOption;
         this.themeName = answers.themeName;
-        this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
+        if(this.themeName) {
+          this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
+        } else {
+          this.themeFolder = this.themeName;
+        }
         this.customStyle = answers.customStyle;
 
         if(answers.customDirs) {

@@ -28,7 +28,7 @@ var stylusFiles = function stylusFiles(destRoot, sourceRoot, templateContext, co
       case 'semantic': self.fs.copy(sourceRoot + '/src-tpl/stylus/base/_semantic-grid.styl', destRoot + '/src/stylus/base/_grid.styl');
       break;
 
-      case 'jeet': self.fs.copy(sourceRoot + '/src/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
+      case 'jeet': self.fs.copy(sourceRoot + '/src-tpl/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
       break;
 
       default: self.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', templateContext);

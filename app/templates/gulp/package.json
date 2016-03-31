@@ -69,7 +69,9 @@
     "css-declaration-sorter": "^1.2.1",<% } %><% if(cssgraceOption){ %>
     "cssgrace": "^3.0.0",<% } %><% if(cssnextOption){ %>
     "postcss-cssnext": "^2.5.1",<% } %><% if(rucksackOption){ %>
-    "rucksack-css": "^0.8.5",<% } %>
+    "rucksack-css": "^0.8.5",<% } %><% if(preproOption !== 'less' && mixinOption === 'none'){ %>
+    "superlatief-mixins": "*",<% } %>
+    "superlatief-colors": "*",
     "postcss-discard-comments": "^2.0.4",
     "gulp-prettify": "^0.4.0",
     "require-dir": "^0.3.0"
