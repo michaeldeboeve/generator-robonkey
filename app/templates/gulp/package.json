@@ -71,7 +71,7 @@
     "postcss-cssnext": "^2.5.1",<% } %><% if(rucksackOption){ %>
     "rucksack-css": "^0.8.5",<% } %><% if(preproOption !== 'less' && mixinOption === 'default'){ %>
     "superlatief-mixins": "*",<% } %><% if(mqOption === 'default'){ %>
-    "superlatief-mediaqueries" "*",<% } %>
+    "superlatief-mediaqueries": "*",<% } %>
     "superlatief-colors": "*",
     "postcss-discard-comments": "^2.0.4",
     "gulp-prettify": "^0.4.0",

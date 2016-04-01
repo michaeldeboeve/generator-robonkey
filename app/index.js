@@ -137,25 +137,47 @@ module.exports = generators.Base.extend({
       },
       type: 'confirm',
       name: 'customDirs',
-      message: 'Use default output directory? (website, assets, js, css, lib, img)',
+      message: 'Use default output directory? (website, assets, js, css, img, lib, fonts)',
       default: true
     }, {
       when: function (answers) {
-        return answers.customDirs === false;
+        return answers.environmentOption === 'express';
+      },
+      type: 'confirm',
+      name: 'customDirs',
+      message: 'Use default output directory? (app, public, javascripts, stylesheets, images, lib, fonts)',
+      default: true
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption !== 'express';
       },
       name: 'mainDir',
       message: 'Name your output directory:',
       default: 'website'
     }, {
       when: function (answers) {
-        return answers.customDirs === false;
+        return answers.customDirs === false && answers.environmentOption === 'express';
+      },
+      name: 'mainDir',
+      message: 'Name your output directory:',
+      default: 'app'
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption !== 'express';
       },
       name: 'assetsDir',
       message: 'Name your assets directory (css/fonts/js/images):',
       default: 'assets'
     }, {
       when: function (answers) {
-        return answers.customDirs === false;
+        return answers.customDirs === false && answers.environmentOption === 'express';
+      },
+      name: 'assetsDir',
+      message: 'Name your assets directory (css/fonts/js/images):',
+      default: 'public'
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption !== 'express';
       },
       type: 'input',
       name: 'jsDir',
@@ -163,7 +185,15 @@ module.exports = generators.Base.extend({
       default: 'js'
     }, {
       when: function (answers) {
-        return answers.customDirs === false;
+        return answers.customDirs === false && answers.environmentOption === 'express';
+      },
+      type: 'input',
+      name: 'jsDir',
+      message: 'Name your js directory:',
+      default: 'javascripts'
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption !== 'express';
       },
       type: 'input',
       name: 'cssDir',
@@ -171,12 +201,28 @@ module.exports = generators.Base.extend({
       default: 'css'
     }, {
       when: function (answers) {
-        return answers.customDirs === false;
+        return answers.customDirs === false && answers.environmentOption === 'express';
+      },
+      type: 'input',
+      name: 'cssDir',
+      message: 'Name your css directory:',
+      default: 'stylesheets'
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption !== 'express';
       },
       type: 'input',
       name: 'imgDir',
       message: 'Name your images directory:',
       default: 'img'
+    }, {
+      when: function (answers) {
+        return answers.customDirs === false && answers.environmentOption === 'express';
+      },
+      type: 'input',
+      name: 'imgDir',
+      message: 'Name your images directory:',
+      default: 'images'
     }, {
       when: function (answers) {
         return answers.customDirs === false;
@@ -203,12 +249,21 @@ module.exports = generators.Base.extend({
         }
         this.customStyle = answers.customStyle;
 
-        if(answers.customDirs) {
+        // Folders
+        if(answers.environmentOption !== 'express' && answers.customDirs) {
           this.mainDir = 'website';
           this.assetsDir = 'assets';
           this.cssDir = 'css';
           this.jsDir = 'js';
           this.imgDir = 'img';
+          this.libDir = 'lib';
+          this.fontDir = 'fonts';
+        } else if(answers.environmentOption === 'express' && answers.customDirs) {
+          this.mainDir = 'app';
+          this.assetsDir = 'public';
+          this.cssDir = 'stylesheets';
+          this.jsDir = 'javascripts';
+          this.imgDir = 'images';
           this.libDir = 'lib';
           this.fontDir = 'fonts';
         } else {
@@ -221,6 +276,7 @@ module.exports = generators.Base.extend({
           this.fontDir = answers.fontDir;
         }
 
+        // Themes Location
         switch (this.environmentOption){
            case 'wordpress': this.templateDest = '/' + this.mainDir + '/wp-content/themes/' + this.themeFolder;
            break;
@@ -228,32 +284,20 @@ module.exports = generators.Base.extend({
            case 'drupal': this.templateDest = '/' + this.mainDir + '/themes/' + this.themeFolder;
            break;
 
-           case 'express':
-              this.mainDir = 'app';
-              this.assetsDir = 'public';
-              this.templateDest = '/' + this.mainDir + '/' + this.assetsDir;
            break;
 
            default: this.templateDest = '/' + this.mainDir;
         };
 
-        if(this.environmentOption !== 'express') {
-          this.assetsDirPath = this.templateDest + '/' + this.assetsDir;
-          this.cssDirPath = '/' + this.assetsDir + '/' + this.cssDir;
-          this.jsDirPath = '/' + this.assetsDir + '/' + this.jsDir;
-          this.imgDirPath = '/' + this.assetsDir + '/' + this.imgDir;
-          this.fontDirPath = '/' + this.assetsDir + '/' + this.fontDir;
-          this.cssLibDirPath = this.cssDirPath + '/' + this.libDir;
-          this.jsLibDirPath = this.jsDirPath + '/' + this.libDir;
-        } else {
-          this.assetsDirPath = this.templateDest;
-          this.cssDirPath = '/stylesheets';
-          this.jsDirPath = '/javascripts';
-          this.imgDirPath = '/images';
-          this.fontDirPath = '/fonts';
-          this.cssLibDirPath = this.cssDirPath + '/libs';
-          this.jsLibDirPath = this.jsDirPath + '/libs';
-        }
+        // Folders Locations
+        this.assetsDirPath = this.templateDest + '/' + this.assetsDir;
+        this.cssDirPath = '/' + this.assetsDir + '/' + this.cssDir;
+        this.jsDirPath = '/' + this.assetsDir + '/' + this.jsDir;
+        this.imgDirPath = '/' + this.assetsDir + '/' + this.imgDir;
+        this.fontDirPath = '/' + this.assetsDir + '/' + this.fontDir;
+        this.cssLibDirPath = this.cssDirPath + '/' + this.libDir;
+        this.jsLibDirPath = this.jsDirPath + '/' + this.libDir;
+
         done();
       }.bind(this));
   },
