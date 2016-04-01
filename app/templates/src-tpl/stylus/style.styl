@@ -9,7 +9,8 @@
 @import "../../gulp/node_modules/rupture/rupture/";<% } %><% if(mixinOption === 'koutoswiss') {%>
 @import "../../gulp/node_modules/kouto-swiss/lib/kouto-swiss/";<% } %><% if(mixinOption === 'nib') {%>
 @import "../../gulp/node_modules/nib/lib/nib/";<% } %><% if(mixinOption === 'none') {%>
-@import "../../gulp/node_modules/superlatief-mixins/stylus/superlatief";<% } %>
+@import "../../gulp/node_modules/superlatief-mixins/stylus/superlatief";<% } %><% if(mqOption === 'default') {%>
+@import "../../gulp/node_modules/superlatief-mediaqueries/stylus/mediaqueries";<% } %>
 @import "../../gulp/node_modules/superlatief-colors/stylus/colors";
 
 

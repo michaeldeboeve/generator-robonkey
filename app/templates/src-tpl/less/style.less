@@ -1,7 +1,8 @@
 // ==========================================================================
 // IMPORTS
 // ==========================================================================
-<% if(gridOption === 'gee'){ %>@import "../../gulp/node_modules/gee.less/gee";<% } %>
+<% if(gridOption === 'gee'){ %>@import "../../gulp/node_modules/gee.less/gee";<% } %><% if(mqOption === 'default') {%>
+@import "../../gulp/node_modules/superlatief-mediaqueries/less/mediaqueries";<% } %>
 @import "../../gulp/node_modules/superlatief-colors/less/colors";
 
 

@@ -308,10 +308,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mixinOption',
       message: 'What mixin libraries would you like to use?',
-      choices: ['None', 'Bourbon', 'Compass Mixins'],
+      choices: ['Default', 'Bourbon', 'Compass Mixins'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'Default': 'default',
           'Bourbon': 'bourbon',
           'Compass Mixins': 'compassmixins'
         };
@@ -326,10 +326,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mixinOption',
       message: 'What mixin libraries would you like to use?',
-      choices: ['None', 'Nib', 'Kouto Swiss'],
+      choices: ['Default', 'Nib', 'Kouto Swiss'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'Default': 'default',
           'Nib': 'nib',
           'Kouto Swiss': 'koutoswiss'
         };
@@ -344,10 +344,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mixinOption',
       message: 'What mixin libraries would you like to use?',
-      choices: ['None', 'Less Hat'],
+      choices: ['Default', 'Less Hat'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'none': 'default',
           'Less Hat': 'lesshat'
         };
 
@@ -364,10 +364,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mqOption',
       message: 'What MediaQuery Library to use?',
-      choices: ['None', 'Breakpoint', 'Include Media'],
+      choices: ['Default', 'Breakpoint', 'Include Media'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'Default': 'default',
           'Breakpoint': 'breakpoint',
           'Include Media': 'includemedia'
         };
@@ -382,10 +382,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mqOption',
       message: 'What MediaQuery Library to use?',
-      choices: ['None', 'Rupture'],
+      choices: ['Default', 'Rupture'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'Default': 'default',
           'Rupture': 'rupture'
         };
 
@@ -399,10 +399,10 @@ module.exports = generators.Base.extend({
       type: 'list',
       name: 'mqOption',
       message: 'What MediaQuery Library to use?',
-      choices: ['None', 'Less-MQ'],
+      choices: ['Default', 'Less-MQ'],
       filter: function(val) {
         var filterMap = {
-          'None': 'none',
+          'Default': 'default',
           'Less-MQ': 'lessmq'
         };
 
@@ -565,6 +565,7 @@ module.exports = generators.Base.extend({
         // } else {
         // }
         var postCssOption = answers.postCssOption;
+        this.postCssOption = answers.postCssOption;
         this.autoprefixerOption = hasFeature('autoprefixer', postCssOption);
         this.cssnextOption = hasFeature('cssnext', postCssOption);
         this.cssgraceOption = hasFeature('cssgrace', postCssOption);
@@ -785,17 +786,19 @@ module.exports = generators.Base.extend({
           baseStyleOption: this.baseStyleOption,
 
           postCssOption: this.postCssOption,
-          autoprefixerOption: this.postCssOption,
-          cssnextOption: this.postCssOption,
-          cssgraceOption: this.postCssOption,
-          rucksackOption: this.postCssOption,
-          gradientfixOption: this.postCssOption,
-          mqpackerOption: this.postCssOption,
-          mqkeyframesOption: this.postCssOption,
-          classprefixOption: this.postCssOption,
-          scopifyOption: this.postCssOption,
-          cssnanoOption: this.postCssOption,
-          csssorterOption: this.postCssOption,
+          autoprefixerOption: this.autoprefixerOption,
+          cssnextOption: this.cssnextOption,
+          cssgraceOption: this.cssgraceOption,
+          rucksackOption: this.rucksackOption,
+          gradientfixOption: this.gradientfixOption,
+          mqpackerOption: this.mqpackerOption,
+          mqkeyframesOption: this.mqkeyframesOption,
+          classprefixOption: this.classprefixOption,
+          scopifyOption: this.scopifyOption,
+          cssnanoOption: this.cssnanoOption,
+          csssorterOption: this.csssorterOption,
+
+
 
           // Javascript
           jqueryOption: this.jqueryOption,

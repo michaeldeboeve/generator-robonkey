@@ -9,8 +9,9 @@
 @import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(gridOption === 'gridle'){ %>
 @import "./../gulp/node_modules/gridle/sass/gridle/gridle";<% } %><% if(gridOption === 'gridleFlex'){ %>
 @import "./../gulp/node_modules/gridle/sass/gridle/gridle-flex";<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
-@import "base/jeet/jeet";<% } %><% if(mixinOption === 'none') {%>
-@import "../../gulp/node_modules/superlatief-mixins/scss/superlatief";<% } %>
+@import "base/jeet/jeet";<% } %><% if(mixinOption === 'default') {%>
+@import "../../gulp/node_modules/superlatief-mixins/scss/superlatief";<% } %><% if(mqOption === 'default') {%>
+@import "../../gulp/node_modules/superlatief-mediaqueries/scss/mediaqueries";<% } %>
 @import "../../gulp/node_modules/superlatief-colors/scss/colors";
 
 
