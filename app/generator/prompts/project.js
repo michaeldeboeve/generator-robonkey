@@ -1,7 +1,16 @@
-var projectPrompt = function projectPrompt(context) {
-  var self = context;
+/**
+ * Create prompts for project info
+ */
 
-  self.prompt([{
+'use strict';
+
+var chalk       = require('chalk'),
+    printTitle  = require('./../../helpers/printTitle');
+
+var projectPrompt = function projectPrompt() {
+  this.log(printTitle('Project Details'))
+  var done = this.async();
+  this.prompt([{
     name: 'projectUrl',
     message: 'Local URL to use:',
     default: 'mynewawesomeapp.localhost'
@@ -25,8 +34,11 @@ var projectPrompt = function projectPrompt(context) {
     name: 'authorEmail',
     message: 'Author\'s Email Address:',
     default: ''
-  }], function () {
-  }.bind(self));
+  }], function (answers) {
+    this.projectPrompt = answers
+
+    done();
+  }.bind(this));
 }
 
 module.exports = projectPrompt;
