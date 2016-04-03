@@ -11,6 +11,9 @@ var h5bpFiles = function h5bpFiles() {
   var destRoot = this.destinationRoot(),
       sourceRoot = this.sourceRoot();
 
+  if(this.environmentOption === 'express' || this.environmentOption === 'laravel') {
+    this.mainDir = this.mainDir + '/' + this.assetsDir
+  }
   if(this.htaccessOption) {
     this.fs.copy(sourceRoot + '/website/htaccess.txt', destRoot + '/' + this.mainDir + '/.htaccess');
   }

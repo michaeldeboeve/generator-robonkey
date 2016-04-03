@@ -46,6 +46,10 @@ var scriptsPrompt = function scriptsPrompt() {
       name: 'Enquire',
       value: 'enquire',
       checked: false
+    }, {
+      name: 'Angular',
+      value: 'angular',
+      checked: false
     }]
   }], function (answers) {
     this.scriptsPrompt = answers;

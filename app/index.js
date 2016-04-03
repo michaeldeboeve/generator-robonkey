@@ -17,7 +17,9 @@ var order = [
   'intro',
   'existing', // Check for existing .yo-rc.json file
   'project',
+  'environmentCheck',
   'environment',
+  'folders',
   'html',
   'css',
   'cssBase',

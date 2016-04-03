@@ -18,6 +18,8 @@ var answersConfig = function answersConfig() {
         this.answers = _.merge(
         this.projectPrompt,
         this.environmentPrompt,
+        this.environmentCheckPrompt,
+        this.foldersPrompt,
         this.htmlPrompt,
         this.cssPrompt,
         this.cssBasePrompt,
@@ -42,7 +44,14 @@ var answersConfig = function answersConfig() {
 
 
     //Environment
-    this.environmentOption = this.answers.environmentOption;
+    if (this.environmentInstalled) {
+      this.environmentOption = this.environmentInstalled;
+    } else {
+      this.environmentOption = this.answers.environmentOption;
+    }
+
+    console.log(this.environmentOption);
+
     this.themeName = this.answers.themeName;
     if(this.themeName) {
       this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
@@ -53,22 +62,49 @@ var answersConfig = function answersConfig() {
 
 
     // Folders
-    if(this.answers.environmentOption !== 'express' && this.answers.customDirs) {
-      this.mainDir = 'website';
-      this.assetsDir = 'assets';
-      this.cssDir = 'css';
-      this.jsDir = 'js';
-      this.imgDir = 'img';
-      this.libDir = 'lib';
-      this.fontDir = 'fonts';
-    } else if(this.answers.environmentOption === 'express' && this.answers.customDirs) {
-      this.mainDir = 'app';
-      this.assetsDir = 'public';
-      this.cssDir = 'stylesheets';
-      this.jsDir = 'javascripts';
-      this.imgDir = 'images';
-      this.libDir = 'lib';
-      this.fontDir = 'fonts';
+    if(this.answers.defaultDirs) {
+      switch (this.environmentOption) {
+
+        case 'express':
+          this.mainDir = 'app';
+          this.assetsDir = 'public';
+          this.cssDir = 'stylesheets';
+          this.jsDir = 'javascripts';
+          this.imgDir = 'images';
+          this.libDir = 'lib';
+          this.fontDir = 'fonts';
+        break;
+
+        case 'codeigniter':
+          this.mainDir = 'website';
+          this.assetsDir = 'public';
+          this.cssDir = 'css';
+          this.jsDir = 'js';
+          this.imgDir = 'img';
+          this.libDir = 'lib';
+          this.fontDir = 'fonts';
+        break;
+
+        case 'laravel':
+          this.mainDir = 'website';
+          this.assetsDir = 'public';
+          this.cssDir = 'css';
+          this.jsDir = 'js';
+          this.imgDir = 'img';
+          this.libDir = 'lib';
+          this.fontDir = 'fonts';
+        break;
+
+        default:
+          this.mainDir = 'website';
+          this.assetsDir = 'assets';
+          this.cssDir = 'css';
+          this.jsDir = 'js';
+          this.imgDir = 'img';
+          this.libDir = 'lib';
+          this.fontDir = 'fonts';
+
+      }
     } else {
       this.mainDir = this.answers.mainDir;
       this.assetsDir = this.answers.assetsDir;
@@ -78,6 +114,7 @@ var answersConfig = function answersConfig() {
       this.libDir = this.answers.libDir;
       this.fontDir = this.answers.fontDir;
     }
+
 
 
     // Themes Location
@@ -145,6 +182,7 @@ var answersConfig = function answersConfig() {
     this.enquireOption = hasFeature('enquire', scriptsOption);
     this.requireOption = hasFeature('require', scriptsOption);
     this.modernizrOption = hasFeature('modernizr', scriptsOption);
+    this.angularOption = hasFeature('angular', scriptsOption);
 
 
     // h5bp
@@ -229,6 +267,7 @@ var answersConfig = function answersConfig() {
       enquireOption: this.enquireOption,
       requireOption: this.requireOption,
       modernizrOption: this.modernizrOption,
+      angularOption: this.angularOption,
 
       // Root Files
       htaccessOption: this.htaccessOption,

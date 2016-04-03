@@ -25,7 +25,8 @@
     "gsap": "^1.18.2",<% } %><% if(signalsOption){ %>
     "js-signals": "signals#^1.0.0",<% } %><% if(d3jsOption){ %>
     "d3": "^3.5.16",<% } %><% if(requireOption){ %>
-    "requirejs": "^2.2.0",<% } %>
+    "requirejs": "^2.2.0",<% } %><% if(angularOption){ %>
+    "angular": "^1.5.3",<% } %>
     "reset-css": "^2.0.2011012603",
     "normalize-scss": "^3.0.3",
     "sanitize-css": "^3.3.0"
