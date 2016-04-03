@@ -116,6 +116,21 @@ var answersConfig = function answersConfig() {
     }
 
 
+    // BrowserSync
+    switch (this.environmentOption) {
+
+      case 'express':
+        this.browsersyncOption = true;
+      break;
+
+      case 'static':
+        this.browsersyncOption = true;
+      break;
+
+      default:
+        this.browsersyncOption = false;
+
+    }
 
     // Themes Location
     switch (this.environmentOption){
@@ -218,6 +233,7 @@ var answersConfig = function answersConfig() {
       authorEmail: this.authorEmail,
       projectVersion: this.projectVersion,
       projectLicense: this.projectLicense,
+      browsersyncOption: this.browsersyncOption,
 
       // Environment
       environmentOption: this.environmentOption,

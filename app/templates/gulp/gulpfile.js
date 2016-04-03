@@ -4,24 +4,12 @@ var cfg             = JSON.parse(fs.readFileSync('./config.json'));
 var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var watch           = require('gulp-watch');
-var browserSync     = require('browser-sync');
-var requireDir      = require('require-dir');
+var requireDir      = require('require-dir');<% if(browsersyncOption){ %>
+var browserSync     = require('browser-sync');<% } %><% if(environmentOption === 'express'){ %>
+var nodemon         = require('gulp-nodemon');<% } %>
+
 requireDir('./gulp-tasks');
 
-
-gulp.task('css', function () {
-  return gulp.src(paths.styles.build + '/**/*.css')
-    .pipe(browserSync.reload({ stream: true }));
-})
-
-gulp.task('browser-sync', function() {
-    browserSync({
-      files: [paths.styles.build + '/**/*.css'],
-      open: 'external',
-      proxy: cfg.projectURL,
-      host: cfg.projectURL
-    });
-});
 
 
 // Dev gulp task
@@ -46,29 +34,29 @@ gulp.task('default', [
                       'html', <% } %>
                       'images',
                       'scripts',
-                      'styles',
-                      'browser-sync'
+                      'styles'<% if(browsersyncOption){ %>,
+                      'browser-sync'<% } %>
   ], function() {
 
   // watch for JS changes, then reload
-  gulp.watch(paths.scripts.src, ['scripts']).on('change', browserSync.reload);
+  gulp.watch(paths.scripts.src, ['scripts'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;
 
   // watch for SASS changes
   gulp.watch(paths.styles.src_files, ['styles']);
 
-  // Watch for css changes, then inject css
-  gulp.watch(paths.styles.build + '/**/*.css',  ['css']);
+  <% if(browsersyncOption){ %>// Watch for css changes, then inject css
+  gulp.watch(paths.styles.build + '/**/*.css',  ['css']);<% } %>
 
   // watch for image changes
   gulp.watch(paths.images.src, ['images']);
 
   <% if(templateOption === 'jade'){ %>// watch for Jade changes, then reload
-  gulp.watch(paths.jade.watch, ['html']).on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.jade.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
   <% if(templateOption === 'haml'){ %>// watch for Haml changes, then reload
-  gulp.watch(paths.haml.watch, ['html']).on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.haml.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
   <% if(templateOption === 'nunjucks'){ %>// watch for Nunjucks changes, then reload
-  gulp.watch(paths.nunjucks.watch, ['html']).on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.nunjucks.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
   <% if(templateOption === 'handlebars'){ %>// watch for Handlebars changes, then reload
-  gulp.watch(paths.handlebars.watch, ['html']).on('change', browserSync.reload);
-  gulp.watch(paths.handlebars.watchdata, ['html']).on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.handlebars.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);
+  gulp.watch(paths.handlebars.watchdata, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
 });

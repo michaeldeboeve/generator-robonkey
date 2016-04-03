@@ -25,6 +25,9 @@ var gulpFiles = function gulpFiles() {
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp-tasks/clean.js', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp-tasks/styles.js', this.templateContext);
 
+  if(this.browsersyncOption) {
+    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync.js', destRoot + '/gulp-tasks/browsersync.js', this.templateContext);
+  }
   if(this.customIconfontOption) {
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp-tasks/iconfont.js', this.templateContext);
   }
