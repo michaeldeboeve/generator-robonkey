@@ -17,7 +17,7 @@ var environmentPrompt = function environmentPrompt() {
       type: 'list',
       name: 'environmentOption',
       message: 'Which environment are you using?\nThis will compile everything in the right directories.',
-      choices: ['None, just a static website', 'Node + Express', 'Wordpress', 'Drupal', 'CodeIgniter'],
+      choices: ['None, just a static website', 'Node + Express', 'Wordpress', 'Drupal', 'CodeIgniter', 'Laravel'],
       filter: function(val) {
         var filterMap = {
           'None, just a static website': 'static',
