@@ -11,7 +11,7 @@ var scriptFiles = function scriptFiles() {
   var destRoot = this.destinationRoot(),
       sourceRoot = this.sourceRoot();
 
-  this.fs.copy(sourceRoot + '/src/js', destRoot + '/src/js');
+  this.fs.copyTpl(sourceRoot + '/src-tpl/js/main.js', destRoot + '/src/js/main.js', this.templateContext);
   if(this.modernizrOption) {
     this.fs.copy(sourceRoot + '/src/modernizr', destRoot + '/src/modernizr');
   }
