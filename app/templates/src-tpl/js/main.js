@@ -1,7 +1,7 @@
 <% if(requireOption || !jqueryOption) {%>document.addEventListener("DOMContentLoaded", function() {<% } %><% if(!requireOption && jqueryOption) {%>
 $(document).ready(function() {<% } %>
   <% if(requireOption) {%>requirejs.config({
-    baseUrl: 'assets/js/lib',
+    baseUrl: '<%= jsLibDirPath %>',
     paths: {
         // the left side is the module ID,
         // the right side is the path to
