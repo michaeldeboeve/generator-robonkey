@@ -12,7 +12,6 @@ var installConfig = function installConfig() {
   }
   this.bowerInstall();
   this.npmInstall();
-
 };
 
 module.exports = installConfig;

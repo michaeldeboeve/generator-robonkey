@@ -51,12 +51,12 @@ gulp.task('default', [
   gulp.watch(paths.images.src, ['images']);
 
   <% if(templateOption === 'jade'){ %>// watch for Jade changes, then reload
-  gulp.watch(paths.jade.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.jade.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
   <% if(templateOption === 'haml'){ %>// watch for Haml changes, then reload
-  gulp.watch(paths.haml.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.haml.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
   <% if(templateOption === 'nunjucks'){ %>// watch for Nunjucks changes, then reload
-  gulp.watch(paths.nunjucks.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.nunjucks.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
   <% if(templateOption === 'handlebars'){ %>// watch for Handlebars changes, then reload
-  gulp.watch(paths.handlebars.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);
-  gulp.watch(paths.handlebars.watchdata, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload);<% } %>
+  gulp.watch(paths.handlebars.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;
+  gulp.watch(paths.handlebars.watchdata, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
 });

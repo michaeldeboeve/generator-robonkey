@@ -28,6 +28,7 @@ var gulpFiles = function gulpFiles() {
   if(this.browsersyncOption) {
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync.js', destRoot + '/gulp-tasks/browsersync.js', this.templateContext);
   }
+
   if(this.customIconfontOption) {
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/iconfont.js', destRoot + '/gulp-tasks/iconfont.js', this.templateContext);
   }

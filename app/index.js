@@ -16,6 +16,7 @@ var order = [
   /* Prompts */
   'intro',
   'existing', // Check for existing .yo-rc.json file
+  'defaults',
   'project',
   'environmentCheck',
   'environment',

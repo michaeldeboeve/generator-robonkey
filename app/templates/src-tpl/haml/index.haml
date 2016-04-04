@@ -21,7 +21,11 @@
     %script(src="<%= jsLibDirPath %>/signals.min.js")<% } %><% if(d3jsOption && !requireOption){ %>
     %script(src="<%= jsLibDirPath %>/d3.min.js")<% } %><% if(enquireOption && !requireOption){ %>
     %script(src="<%= jsLibDirPath %>/enquire.min.js")<% } %><% if(tweenmaxOption && !requireOption){ %>
-    %script(src="<%= jsLibDirPath %>/TweenMax.min.js")<% } %><% if(requireOption){ %>
+    %script(src="<%= jsLibDirPath %>/TweenMax.min.js")<% } %><% if(underscoreOption && !requireOption){ %>
+    %script(src="/<%= jsLibDirPath %>/underscore-min.js")<% } %><% if(backboneOption && !requireOption){ %>
+    %script(src="/<%= jsLibDirPath %>/backbone-min.js")<% } %><% if(reactOption && !requireOption){ %>
+    %script(src="/<%= jsLibDirPath %>/react-dom.min.js")
+    %script(src="/<%= jsLibDirPath %>/react.min.js")<% } %><% if(requireOption){ %>
     %script(src="<%= jsLibDirPath %>/require.js")<% } %>
     / build:js
     %script(sr="<%= jsDirPath %>/script.js")

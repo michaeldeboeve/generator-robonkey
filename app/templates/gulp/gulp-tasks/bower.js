@@ -4,7 +4,41 @@ var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var changed         = require('gulp-changed');
 var moveRepo        = "";
+var bowerPath       = '../src/bower_components/'
 
+<% if(underscoreOption){ %>
+moveRepo += "moveUnderscore,";
+gulp.task('moveUnderscore', function() {
+  var src = bowerPath + 'underscore/underscore-min.js',
+      dest = cfg.resrc.jsvendor;
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+<% } %>
+<% if(backboneOption){ %>
+moveRepo += "moveBackbone,";
+gulp.task('moveBackbone', function() {
+  var src = bowerPath + 'backbone/backbone-min.js',
+      dest = cfg.resrc.jsvendor;
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+<% } %>
+<% if(reactOption){ %>
+moveRepo += "moveReact,";
+gulp.task('moveReact', function() {
+  var src = [bowerPath + 'react/react-dom.min.js', bowerPath + 'react/react-with-addons.min.js', bowerPath + 'react/react-dom-server.js', bowerPath + 'react/react.min.js'],
+      dest = cfg.resrc.jsvendor;
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+<% } %>
 <% if(modernizrOption){ %>
 moveRepo += "moveModernizr,";
 gulp.task('moveModernizr', function() {
@@ -19,7 +53,7 @@ gulp.task('moveModernizr', function() {
 <% if(angularOption){ %>
 moveRepo += "moveAngular,";
 gulp.task('moveAngular', function() {
-  var src = '../src/bower_components/angular/angular.min.js',
+  var src = bowerPath + 'angular/angular.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -30,7 +64,7 @@ gulp.task('moveAngular', function() {
 <% if(requireOption){ %>
 moveRepo += "moveRequire,";
 gulp.task('moveRequire', function() {
-  var src = '../src/bower_components/requirejs/require.js',
+  var src = bowerPath + 'requirejs/require.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -41,7 +75,7 @@ gulp.task('moveRequire', function() {
 <% if(jqueryOption){ %>
 moveRepo += "moveJquery,";
 gulp.task('moveJquery', function() {
-  var src = '../src/bower_components/jquery/dist/jquery.min.js',
+  var src = bowerPath + 'jquery/dist/jquery.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -52,7 +86,7 @@ gulp.task('moveJquery', function() {
 <% if(tweenmaxOption){ %>
 moveRepo += "moveTweenMax,";
 gulp.task('moveTweenMax', function() {
-  var src = '../src/bower_components/gsap/src/minified/TweenMax.min.js',
+  var src = bowerPath + 'gsap/src/minified/TweenMax.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -62,7 +96,7 @@ gulp.task('moveTweenMax', function() {
 <% if(d3jsOption){ %>
 moveRepo += "moveD3,";
 gulp.task('moveD3', function() {
-  var src = '../src/bower_components/d3/d3.min.js',
+  var src = bowerPath + 'd3/d3.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -72,7 +106,7 @@ gulp.task('moveD3', function() {
 <% if(enquireOption){ %>
 moveRepo += "moveEnquire,";
 gulp.task('moveEnquire', function() {
-  var src = '../src/bower_components/enquire/dist/enquire.min.js',
+  var src = bowerPath + 'enquire/dist/enquire.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -82,7 +116,7 @@ gulp.task('moveEnquire', function() {
 <% if(signalsOption){ %>
 moveRepo += "moveSignals,";
 gulp.task('moveSignals', function() {
-  var src = '../src/bower_components/js-signals/dist/signals.min.js',
+  var src = bowerPath + 'js-signals/dist/signals.min.js',
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -92,7 +126,7 @@ gulp.task('moveSignals', function() {
 <% if(waypointsOption && !jqueryOption){ %>
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
-  var src = ['../src/bower_components/waypoints/lib/noframework.waypoints.min.js'],
+  var src = [bowerPath + 'waypoints/lib/noframework.waypoints.min.js'],
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)
@@ -101,7 +135,7 @@ gulp.task('moveWaypoints', function() {
 <% } else if(waypointsOption && jqueryOption) { %>
 moveRepo += "moveWaypoints,";
 gulp.task('moveWaypoints', function() {
-  var src = ['../src/bower_components/waypoints/lib/jquery.waypoints.min.js'],
+  var src = [bowerPath + 'waypoints/lib/jquery.waypoints.min.js'],
       dest = cfg.resrc.jsvendor;
 
   gulp.src(src)

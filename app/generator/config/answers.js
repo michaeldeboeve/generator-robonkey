@@ -16,6 +16,7 @@ var answersConfig = function answersConfig() {
         this.answers = this.config.get('config');
     } else {
         this.answers = _.merge(
+        // this.defaultPrompt,
         this.projectPrompt,
         this.environmentPrompt,
         this.environmentCheckPrompt,
@@ -32,6 +33,10 @@ var answersConfig = function answersConfig() {
     }
 
     // Assign each answer property to `this` context to give the generator access to it
+
+    // Defaults
+    this.defaultOption = this.answers.defaultPrompt;
+    this.skipInstall = this.answers.skipInstall;
 
     // Project
     this.projectUrl = this.answers.projectUrl;
@@ -198,6 +203,9 @@ var answersConfig = function answersConfig() {
     this.requireOption = hasFeature('require', scriptsOption);
     this.modernizrOption = hasFeature('modernizr', scriptsOption);
     this.angularOption = hasFeature('angular', scriptsOption);
+    this.reactOption = hasFeature('react', scriptsOption);
+    this.backboneOption = hasFeature('backbone', scriptsOption);
+    this.underscoreOption = hasFeature('underscore', scriptsOption);
 
 
     // h5bp
@@ -284,6 +292,9 @@ var answersConfig = function answersConfig() {
       requireOption: this.requireOption,
       modernizrOption: this.modernizrOption,
       angularOption: this.angularOption,
+      reactOption: this.reactOption,
+      backboneOption: this.backboneOption,
+      underscoreOption: this.underscoreOption,
 
       // Root Files
       htaccessOption: this.htaccessOption,

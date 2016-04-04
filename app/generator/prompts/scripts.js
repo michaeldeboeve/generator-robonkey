@@ -50,6 +50,18 @@ var scriptsPrompt = function scriptsPrompt() {
       name: 'Angular',
       value: 'angular',
       checked: false
+    }, {
+      name: 'React',
+      value: 'react',
+      checked: false
+    }, {
+      name: 'Backbone',
+      value: 'backbone',
+      checked: false
+    }, {
+      name: 'Underscore',
+      value: 'underscore',
+      checked: false
     }]
   }], function (answers) {
     this.scriptsPrompt = answers;

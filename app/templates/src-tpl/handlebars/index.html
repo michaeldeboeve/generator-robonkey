@@ -30,7 +30,11 @@
     <script src="<%= jsLibDirPath %>/signals.min.js"></script><% } %><% if(d3jsOption && !requireOption){ %>
     <script src="<%= jsLibDirPath %>/d3.min.js"></script><% } %><% if(enquireOption && !requireOption){ %>
     <script src="<%= jsLibDirPath %>/enquire.min.js"></script><% } %><% if(tweenmaxOption && !requireOption){ %>
-    <script src="<%= jsLibDirPath %>/TweenMax.min.js"></script><% } %><% if(requireOption){ %>
+    <script src="<%= jsLibDirPath %>/TweenMax.min.js"></script><% } %><% if(underscoreOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/underscore-min.js"></script><% } %><% if(backboneOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/backbone-min.js"></script><% } %><% if(reactOption && !requireOption){ %>
+    <script src="<%= jsLibDirPath %>/react-dom.min.js"></script>
+    <script src="<%= jsLibDirPath %>/react.min.js"></script><% } %><% if(requireOption){ %>
     <script src="<%= jsLibDirPath %>/require.js"></script><% } %>
     <!-- build:js -->
     <script src="<%= jsDirPath %>/script.js"></script>
