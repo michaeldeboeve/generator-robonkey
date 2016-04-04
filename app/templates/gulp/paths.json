@@ -1,7 +1,9 @@
 {
   "scripts": {
     "src": "./../src/js/**/*.js",
-    "build": "./..<%= templateDest %><%= jsDirPath %>"
+    "build": "./..<%= templateDest %><%= jsDirPath %>/",
+    "src_lib": "./..<%= templateDest %><%= jsLibDirPath %>/**/*.js",
+    "build_lib": "./..<%= templateDest %><%= jsLibDirPath %>/"
   },
   "modernizr": {
     "build": "./..<%= templateDest %><%= jsLibDirPath %>/"
@@ -22,7 +24,9 @@
     "src": "./../src/less/style.less",
     "src_files": "./../src/less/**/*.less",<% } %>
     "build_srcsmap": "./..<%= templateDest %><%= cssDirPath %>/",
-    "build": "./..<%= templateDest %><%= cssDirPath %>/"
+    "build": "./..<%= templateDest %><%= cssDirPath %>/",
+    "src_lib": "./..<%= templateDest %><%= cssLibDirPath %>/**/*.css",
+    "build_lib": "./..<%= templateDest %><%= cssLibDirPath %>/"
   },<% if(templateOption === 'jade'){ %>
   "jade": {
     "src": "./../src/jade/*.jade",
