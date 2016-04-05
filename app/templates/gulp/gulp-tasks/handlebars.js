@@ -1,6 +1,5 @@
 var fs              = require('fs');
 var cfg             = JSON.parse(fs.readFileSync('./config.json'));
-var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var handlebars      = require('handlebars');
@@ -17,15 +16,15 @@ var options = {
 
 // Compile haml files
 gulp.task('handlebars', function () {
-  return gulp.src(paths.handlebars.src)
+  return gulp.src(cfg.handlebars.src)
     .pipe(plumber(onHtmlError))
     .pipe(gulpHandlebars(templateData, options))
     .pipe(prettify({indent_size: 2}))
-    .pipe(gulp.dest(paths.handlebars.build));
+    .pipe(gulp.dest(cfg.handlebars.build));
 });
 
 gulp.task('handlebars-build', function () {
-  return gulp.src(paths.handlebars.src)
+  return gulp.src(cfg.handlebars.src)
     .pipe(plumber(onHtmlError))
     .pipe(gulpHandlebars(templateData, options))
     .pipe(htmlreplace({
@@ -33,7 +32,7 @@ gulp.task('handlebars-build', function () {
       css: '<%= cssDirPath %>/style.min.css'
     }))
     .pipe(prettify({indent_size: 2}))
-    .pipe(gulp.dest(paths.handlebars.build));
+    .pipe(gulp.dest(cfg.handlebars.build));
 });
 
 function onHtmlError(e) {

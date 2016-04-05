@@ -1,4 +1,4 @@
-<% if(requireOption || !jqueryOption) {%>document.addEventListener 'DOMContentLoaded', -><% } %><% if(!requireOption && jqueryOption) {%>$(document).ready -><% } %>
+<% if(requireOption || !jqueryOption) {%>document.addEventListener 'DOMContentLoaded', -><% } if(!requireOption && jqueryOption) {%>$(document).ready -><% } %>
 
   <% if(requireOption) {%>
   # the left side is the module ID,

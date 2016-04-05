@@ -1,16 +1,82 @@
 {
-  <% if(scopifyOption){ %>"scope": "#scope",<% } %><% if(classprefixOption){ %>
-  "prefix": "prfx-",<% } %><% if(modernizrOption){ %>
+  "projectURL": "<%= projectUrl %>",
+  <% if(scopifyOption){ %>"scope": "#scope",<% } if(classprefixOption){ %>
+  "prefix": "prfx-",<% } if(modernizrOption){ %>
   "modernizr": {
     "excludeTests": [],
     "tests": [],
     "output": "modernizr.custom.js",
-    "options": [ "setClasses", "addTest", "testProp", "fnBind" ]
-  },<% } %><% if(customIconfontOption) { %>"iconFont": {
+    "options": [ "setClasses", "addTest", "testProp", "fnBind" ],
+    "build": "./..<%= templateDest %><%= jsLibDirPath %>/"
+  },<% } if(customIconfontOption) { %>"iconFont": {
     "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
-  }, <% } %><% if(autoprefixerOption || cssnextOption){ %>
-  "browsers": "last 3 versions', > 1%", <% } %><% if(csssorterOption){ %>
+  }, <% } if(autoprefixerOption || cssnextOption){ %>
+  "browsers": "last 3 versions, > 1%", <% } if(csssorterOption){ %>
   "cssSortOrder": "smacss",<% } %>
-  "projectURL": "<%= projectUrl %>"
+  "scripts": {<% if(javascriptOption === 'vanilla'){ %>
+    "src": "./../src/js/**/*.js",<% } if(javascriptOption === 'coffee'){ %>
+    "src": "./../src/coffee/**/*.coffee",<% } %>
+    "build": "./..<%= templateDest %><%= jsDirPath %>/",
+    "src_lib": "./..<%= templateDest %><%= jsLibDirPath %>/**/*.js",
+    "build_lib": "./..<%= templateDest %><%= jsLibDirPath %>/"
+  },
+  "images": {
+    "src": "./../src/img/**/*",
+    "build": "./..<%= templateDest %><%= imgDirPath %>"
+  },
+  "styles": {<% if(preproOption === 'sass'){ %>
+    "src": "./../src/scss/style.scss",
+    "src_files": "./../src/scss/**/*.scss",<% } if(preproOption === 'stylus'){ %>
+    "src": "./../src/stylus/style.styl",
+    "src_files": "./../src/stylus/**/*.styl",<% } if(preproOption === 'less'){ %>
+    "src": "./../src/less/style.less",
+    "src_files": "./../src/less/**/*.less",<% } %>
+    "build_srcsmap": "./..<%= templateDest %><%= cssDirPath %>/",
+    "build": "./..<%= templateDest %><%= cssDirPath %>/",
+    "src_lib": "./..<%= templateDest %><%= cssLibDirPath %>/**/*.css",
+    "build_lib": "./..<%= templateDest %><%= cssLibDirPath %>/"
+  },<% if(environmentOption === 'static'){ %>
+  "html": {
+    "src": "./..<%= templateDest %>/**/*.html",
+    "build": "./..<%= templateDest %>/"
+  },<% } if(templateOption === 'jade'){ %>
+  "jade": {
+    "src": "./../src/jade/*.jade",
+    "watch": "./../src/jade/**/*.jade",
+    "build": "./..<%= templateDest %>/"
+  },<% } if(templateOption === 'haml'){ %>
+  "haml": {
+    "src": "./../src/haml/*.haml",
+    "watch": "./../src/haml/**/*.haml",
+    "build": "./..<%= templateDest %>/"
+  },<% } if(templateOption === 'handlebars'){ %>
+  "handlebars": {
+    "src": "./../src/handlebars/*.html",
+    "watch": "./../src/handlebars/**/*.html",
+    "watchdata": "./../src/handlebars/**/*.json",
+    "partials": "./../src/handlebars/partials",
+    "build": "./..<%= templateDest %>/"
+  },<% } if(templateOption === 'nunjucks'){ %>
+  "nunjucks": {
+    "src": "./../src/nunjucks/pages/**/*.html",
+    "watch": "./../src/nunjucks/**/*.html",
+    "templates": "./../src/nunjucks/",
+    "build": "./..<%= templateDest %>/"
+  },<% } %>
+  "postcss": {
+    "src": "./..<%= templateDest %><%= cssDirPath %>/style.css",
+    "build": "./..<%= templateDest %><%= cssDirPath %>/"
+  },
+  "font": {
+    "src": "./../src/iconfont/svg/*.svg",
+    "build": "./..<%= templateDest %><%= fontDirPath %>/",<% if(preproOption === 'sass'){ %>
+    "templateInput": "../src/iconfont/template/_icons.scss",
+    "templateOutput": "../../../../src/scss/modules/_icons.scss",<% } if(preproOption === 'stylus'){ %>
+    "templateInput": "../src/iconfont/template/icons.styl",
+    "templateOutput": "../../../../src/stylus/modules/icons.styl",<% } if(preproOption === 'less'){ %>
+    "templateInput": "../src/iconfont/template/icons.less",
+    "templateOutput": "../../../../src/less/modules/icons.less",<% } %>
+    "templateFontpath": "../fonts/"
+  }
 }

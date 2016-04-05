@@ -54,7 +54,7 @@ Two config files are present:
   - icon font settings<% } %><% if(classprefixOption) { %>
   - class perfix name<% } %><% if(scopifyOption) { %>
   - scope name<% } %>
-- paths.json - contains paths for:
+- cfg.json - contains paths for:
   - scripts - scr/build<% if(modernizrOption) { %>
   - modernizr - build<% } %>
   - html - scr
@@ -423,7 +423,7 @@ gulp
   bower.json
   config.json
   package.json
-  paths.json
+  cfg.json
   gulpfile.js
   ├── gulp-tasks
     bower.js
@@ -460,7 +460,7 @@ root
 bower.json
 config.json
 package.json
-paths.json
+cfg.json
 gulpfile.js
 .editorconfig
 .gitignore

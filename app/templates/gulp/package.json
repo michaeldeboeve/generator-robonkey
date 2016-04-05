@@ -16,7 +16,6 @@
   "license": "<%= projectLicense %>",
   "dependencies": {
     "browser-sync": "^2.11.1",
-    "gulp-nodemon": "^2.0.6",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0",
     "gulp-changed": "^1.3.0",
@@ -27,53 +26,53 @@
     "gulp-rename": "^1.2.2",
     "gulp-html-replace": "^1.5.5",
     "gulp-imagemin": "^2.4.0",
-    "gulp-sourcemaps": "^1.6.0",<% if(preproOption === 'sass'){ %>
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-prettify": "^0.4.0",
+    "require-dir": "^0.3.0",<% if(environmentOption === 'express'){ %>
+    "gulp-nodemon": "^2.0.6",<% } if(preproOption === 'sass'){ %>
     "gulp-sass": "^2.2.0",
-    "gulp-sass-glob": "^1.0.4",<% } %><% if(gridOption === 'gridle' || gridOption === 'gridleFlex'){ %>
-    "gridle": "^2.0.44",<% } %><% if(mqOption === 'breakpoint'){ %>
-    "breakpoint-sass": "^2.7.0",<% } %><% if(gridOption === 'susy'){ %>
-    "susy": "^2.2.12",<% } %><% if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
-    "node-bourbon": "^4.2.3",<% } %><% if(gridOption === 'neat'){ %>
-    "node-neat": "^1.7.2",<% } %><% if(gridOption === 'includemedia'){ %>
-    "include-media": "^1.4.2",<% } %><% if(mixinOption === 'compassmixins'){ %>
-    "compass-mixins": "^0.12.7",<% } %><% if(preproOption === 'less'){ %>
+    "gulp-sass-glob": "^1.0.4",<% } if(gridOption === 'gridle' || gridOption === 'gridleFlex'){ %>
+    "gridle": "^2.0.44",<% } if(mqOption === 'breakpoint'){ %>
+    "breakpoint-sass": "^2.7.0",<% } if(gridOption === 'susy'){ %>
+    "susy": "^2.2.12",<% } if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
+    "node-bourbon": "^4.2.3",<% } if(gridOption === 'neat'){ %>
+    "node-neat": "^1.7.2",<% } if(gridOption === 'includemedia'){ %>
+    "include-media": "^1.4.2",<% } if(mixinOption === 'compassmixins'){ %>
+    "compass-mixins": "^0.12.7",<% } if(preproOption === 'less'){ %>
     "gulp-less": "^3.0.5",
     "less-plugin-glob": "^1.1.1",
-    "less-plugin-clean-css": "^1.5.1",<% } %><% if(gridOption === 'gee'){ %>
-    "gee.less": "^3.0.0",<% } %><% if(preproOption === 'stylus'){ %>
-    "gulp-stylus": "^2.3.1",<% } %><% if(mixinOption === 'koutoswiss'){ %>
-    "kouto-swiss": "^0.11.14",<% } %><% if(mqOption === 'rupture'){ %>
-    "rupture": "^0.6.1",<% } %><% if(mixinOption === 'nib'){ %>
-    "nib": "^1.1.0",<% } %><% if(gridOption === 'sgrid'){ %>
-    "s-grid": "^1.1.2",<% } %><% if(templateOption === 'jade'){ %>
-    "gulp-jade": "^1.1.0",<% } %><% if(templateOption === 'haml'){ %>
-    "gulp-haml": "^0.1.6",
-    "gulp-prettify": "^0.4.0",<% } %><% if(templateOption === 'handlebars'){ %>
+    "less-plugin-clean-css": "^1.5.1",<% } if(gridOption === 'gee'){ %>
+    "gee.less": "^3.0.0",<% } if(preproOption === 'stylus'){ %>
+    "gulp-stylus": "^2.3.1",<% } if(mixinOption === 'koutoswiss'){ %>
+    "kouto-swiss": "^0.11.14",<% } if(mqOption === 'rupture'){ %>
+    "rupture": "^0.6.1",<% } if(mixinOption === 'nib'){ %>
+    "nib": "^1.1.0",<% } if(gridOption === 'sgrid'){ %>
+    "s-grid": "^1.1.2",<% } if(templateOption === 'jade'){ %>
+    "gulp-jade": "^1.1.0",<% } if(templateOption === 'haml'){ %>
+    "gulp-haml": "^0.1.6",<% } if(templateOption === 'handlebars'){ %>
     "gulp-handlebars-html": "0.0.2",
-    "handlebars": "^4.0.5",<% } %><% if(templateOption === 'nunjucks'){ %>
-    "gulp-nunjucks-render": "^2.0.0",<% } %><% if(customIconfontOption) { %>
+    "handlebars": "^4.0.5",<% } if(templateOption === 'nunjucks'){ %>
+    "gulp-nunjucks-render": "^2.0.0",<% } if(customIconfontOption) { %>
     "gulp-iconfont": "^6.0.0",
-    "gulp-iconfont-css": "^2.0.0",<% } %><% if(modernizrOption){ %>
-    "gulp-modernizr": "^1.0.0-alpha",<% } %><% if(postCssOption){ %>
-    "gulp-postcss": "^6.1.0",<% } %><% if(autoprefixerOption){ %>
-    "autoprefixer": "^6.3.3",<% } %><% if(mqpackerOption){ %>
-    "css-mqpacker": "^4.0.0",<% } %><% if(cssnanoOption){ %>
-    "cssnano": "^3.5.2",<% } %><% if(classprefixOption){ %>
-    "postcss-class-prefix": "^0.3.0",<% } %><% if(gradientfixOption){ %>
-    "postcss-gradient-transparency-fix": "^1.0.1",<% } %><% if(scopifyOption){ %>
-    "postcss-scopify": "^0.1.6",<% } %><% if(mqkeyframesOption){ %>
-    "postcss-mq-keyframes": "^0.2.5",<% } %><% if(csssorterOption){ %>
-    "css-declaration-sorter": "^1.2.1",<% } %><% if(cssgraceOption){ %>
-    "cssgrace": "^3.0.0",<% } %><% if(cssnextOption){ %>
-    "postcss-cssnext": "^2.5.1",<% } %><% if(rucksackOption){ %>
-    "rucksack-css": "^0.8.5",<% } %><% if(preproOption !== 'less' && mixinOption === 'default'){ %>
-    "superlatief-mixins": "*",<% } %><% if(mqOption === 'default'){ %>
-    "superlatief-mediaqueries": "*",<% } %><% if(javascriptOption === 'coffee'){ %>
+    "gulp-iconfont-css": "^2.0.0",<% } if(modernizrOption){ %>
+    "gulp-modernizr": "^1.0.0-alpha",<% } if(postCssOption){ %>
+    "gulp-postcss": "^6.1.0",<% } if(lostgridOption){ %>
+    "lost": "^6.7.2",<% } if(autoprefixerOption){ %>
+    "autoprefixer": "^6.3.3",<% } if(mqpackerOption){ %>
+    "css-mqpacker": "^4.0.0",<% } if(cssnanoOption){ %>
+    "cssnano": "^3.5.2",<% } if(classprefixOption){ %>
+    "postcss-class-prefix": "^0.3.0",<% } if(gradientfixOption){ %>
+    "postcss-gradient-transparency-fix": "^1.0.1",<% } if(scopifyOption){ %>
+    "postcss-scopify": "^0.1.6",<% } if(mqkeyframesOption){ %>
+    "postcss-mq-keyframes": "^0.2.5",<% } if(csssorterOption){ %>
+    "css-declaration-sorter": "^1.2.1",<% } if(cssgraceOption){ %>
+    "cssgrace": "^3.0.0",<% } if(cssnextOption){ %>
+    "postcss-cssnext": "^2.5.1",<% } if(rucksackOption){ %>
+    "rucksack-css": "^0.8.5",<% } if(preproOption !== 'less' && mixinOption === 'default'){ %>
+    "superlatief-mixins": "*",<% } if(mqOption === 'default'){ %>
+    "superlatief-mediaqueries": "*",<% } if(javascriptOption === 'coffee'){ %>
     "gulp-coffee": "^2.3.2",<% } %>
-    "superlatief-colors": "*",
-    "postcss-discard-comments": "^2.0.4",
-    "gulp-prettify": "^0.4.0",
-    "require-dir": "^0.3.0"
+    "superlatief-colors": "*"
   },
   "devDependencies": {
 

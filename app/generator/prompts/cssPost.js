@@ -10,6 +10,8 @@ var chalk       = require('chalk'),
 var cssPostPrompt = function cssPostPrompt() {
   this.log(printTitle('postCSS'))
   var done = this.async();
+  var self = this;
+  console.log(self.gridOption);
   this.prompt([{
     type: 'checkbox',
     name: 'postCssOption',
@@ -19,21 +21,25 @@ var cssPostPrompt = function cssPostPrompt() {
       value: 'autoprefixer',
       checked: true
     }, {
+      name: 'Lost Grid',
+      value: 'lostgrid',
+      checked: false
+    }, {
       name: 'CSS Nano (Css Optimalization)',
       value: 'cssnano',
       checked: true
     }, {
       name: 'Gradient Transparency Fix',
       value: 'gradientfix',
-      checked: true
+      checked: false
     }, {
       name: 'Css Declaration Sorter',
       value: 'csssorter',
-      checked: true
+      checked: false
     }, {
       name: 'MQ Packer',
       value: 'mqpacker',
-      checked: true
+      checked: false
     }, {
       name: 'MQ Keyframes',
       value: 'mqkeyframes',

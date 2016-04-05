@@ -1,6 +1,5 @@
 var fs              = require('fs');
 var cfg             = JSON.parse(fs.readFileSync('./config.json'));
-var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var browserSync     = require('browser-sync');<% if(environmentOption === 'express'){ %>
 var nodemon         = require('gulp-nodemon');<% } %>
@@ -39,17 +38,17 @@ gulp.task('nodemon', function (cb) {
 
 gulp.task('browser-sync', <% if(environmentOption === 'express'){ %>['nodemon'], <% } %>function() {
     browserSync({<% if(environmentOption !== 'express'){ %>
-      files: [paths.styles.build + '/**/*.css'],
+      files: [cfg.styles.build + '/**/*.css'],
       open: 'external',
       proxy: cfg.projectURL,
-      host: cfg.projectURL<% } %><% if(environmentOption === 'express'){ %>
+      host: cfg.projectURL<% } if(environmentOption === 'express'){ %>
       proxy: cfg.projectURL + ':3000',
       port: 4000<% } %>
     });
 });
 
 gulp.task('css', function () {
-  return gulp.src(paths.styles.build + '/**/*.css')
+  return gulp.src(cfg.styles.build + '/**/*.css')
     .pipe(browserSync.reload({ stream: true }));
 })
 

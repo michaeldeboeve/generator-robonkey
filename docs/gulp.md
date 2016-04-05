@@ -47,7 +47,7 @@ Two config files are present:
 	- icon font settings
 	- class perfix name
 	- scope name
-- paths.json - contains paths for:
+- cfg.json - contains paths for:
 	- scripts - scr/build
 	- modernizr - build
 	- html - scr

@@ -194,6 +194,8 @@ var answersConfig = function answersConfig() {
     this.scopifyOption = hasFeature('scopify', postCssOption);
     this.cssnanoOption = hasFeature('cssnano', postCssOption);
     this.csssorterOption = hasFeature('csssorter', postCssOption);
+    this.lostgridOption = hasFeature('lostgrid', postCssOption);
+
 
 
     // javascript
@@ -289,6 +291,7 @@ var answersConfig = function answersConfig() {
       scopifyOption: this.scopifyOption,
       cssnanoOption: this.cssnanoOption,
       csssorterOption: this.csssorterOption,
+      lostgridOption: this.lostgridOption,
 
 
 

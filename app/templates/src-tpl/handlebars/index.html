@@ -27,43 +27,32 @@
 
     <% if(zeptoOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/zepto.min.js"></script>
-    <% } %>
-    <% if(jqueryOption && !requireOption){ %>
+    <% } if(jqueryOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/jquery.min.js"></script>
-    <% } %>
-    <% if(waypointsOption && jqueryOption && !zeptoOption && !requireOption){ %>
+    <% } if(waypointsOption && jqueryOption && !zeptoOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/jquery.waypoints.min.js"></script>
     <% } else if(waypointsOption && !jqueryOption && !zeptoOption && !requireOption) { %>
       <script src="<%= jsLibDirPath %>/noframework.waypoints.min.js"></script>
     <% } else if(waypointsOption && !jqueryOption && zeptoOption && !requireOption) {%>
       <script src="<%= jsLibDirPath %>/zepto.waypoints.min.js"></script>
-    <% } %>
-    <% if(signalsOption && !requireOption){ %>
+    <% } if(signalsOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/signals.min.js"></script>
-    <% } %>
-    <% if(dthreejsOption && !requireOption){ %>
+    <% } if(dthreejsOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/d3.min.js"></script>
-    <% } %>
-    <% if(enquireOption && !requireOption){ %>
+    <% } if(enquireOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/enquire.min.js"></script>
-    <% } %>
-    <% if(tweenmaxOption && !requireOption){ %>
+    <% } if(tweenmaxOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/TweenMax.min.js"></script>
-    <% } %>
-    <% if(underscoreOption && !requireOption){ %>
+    <% } if(underscoreOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/underscore-min.js"></script>
-    <% } %>
-    <% if(backboneOption && !requireOption){ %>
+    <% } if(backboneOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/backbone-min.js"></script>
-    <% } %>
-    <% if(scrollrevealOption && !requireOption){ %>
+    <% } if(scrollrevealOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/scrollreveal.min.js"></script>
-    <% } %>
-    <% if(reactOption && !requireOption){ %>
+    <% } if(reactOption && !requireOption){ %>
       <script src="<%= jsLibDirPath %>/react-dom.min.js"></script>
       <script src="<%= jsLibDirPath %>/react.min.js"></script>
-    <% } %>
-    <% if(requireOption){ %>
+    <% } if(requireOption){ %>
       <script src="<%= jsLibDirPath %>/require.js"></script>
     <% } %>
     <!-- build:js -->

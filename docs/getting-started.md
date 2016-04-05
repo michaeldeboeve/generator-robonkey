@@ -81,7 +81,7 @@ gulp
 	bower.json
 	config.json
 	package.json
-	paths.json
+	cfg.json
 	gulpfile.js
 	├── gulp-tasks
 		bower.js

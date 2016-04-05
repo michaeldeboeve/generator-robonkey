@@ -12,8 +12,6 @@ var foldersPrompt = function foldersPrompt() {
   this.log(printTitle(this.environmentName + ' Folder Structure'))
   var done = this.async();
 
-  // this.log('is ' + this.environmentOption + '\n');
-
   var destRoot = this.destinationRoot();
   var self = this;
 

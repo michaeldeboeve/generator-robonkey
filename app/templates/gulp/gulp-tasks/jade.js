@@ -1,6 +1,5 @@
 var fs              = require('fs');
 var cfg             = JSON.parse(fs.readFileSync('./config.json'));
-var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var jade            = require('gulp-jade');
@@ -13,15 +12,15 @@ var jadeOptions = {
 
 // Compile jade files
 gulp.task('html', function() {
-  gulp.src(paths.jade.src)
+  gulp.src(cfg.jade.src)
     .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
     .pipe(prettify({indent_size: 2}))
-    .pipe(gulp.dest(paths.jade.build));
+    .pipe(gulp.dest(cfg.jade.build));
 });
 
 gulp.task('html-build', function() {
-  gulp.src(paths.jade.src)
+  gulp.src(cfg.jade.src)
     .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
     .pipe(htmlreplace({
@@ -29,7 +28,7 @@ gulp.task('html-build', function() {
       css: '<%= cssDirPath %>/style.min.css'
     }))
     .pipe(prettify({indent_size: 2}))
-    .pipe(gulp.dest(paths.jade.build));
+    .pipe(gulp.dest(cfg.jade.build));
 });
 
 function onHtmlError(e) {

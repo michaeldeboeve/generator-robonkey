@@ -66,6 +66,10 @@ var scriptsPrompt = function scriptsPrompt() {
       name: 'Underscore',
       value: 'underscore',
       checked: false
+    }, {
+      name: 'Scrollreveal',
+      value: 'scrollreveal',
+      checked: false
     }]
   }], function (answers) {
     this.scriptsPrompt = answers;
