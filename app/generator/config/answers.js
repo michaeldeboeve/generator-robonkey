@@ -25,6 +25,7 @@ var answersConfig = function answersConfig() {
         this.cssPrompt,
         this.cssBasePrompt,
         this.cssPostPrompt,
+        this.javascriptPrompt,
         this.scriptsPrompt,
         this.h5bpPrompt,
         this.fontPrompt,
@@ -138,15 +139,18 @@ var answersConfig = function answersConfig() {
 
     // Themes Location
     switch (this.environmentOption){
-       case 'wordpress': this.templateDest = '/' + this.mainDir + '/wp-content/themes/' + this.themeFolder;
-       break;
+      case 'wordpress':
+        this.templateDest = '/' + this.mainDir + '/wp-content/themes/' + this.themeFolder;
+      break;
 
-       case 'drupal': this.templateDest = '/' + this.mainDir + '/themes/' + this.themeFolder;
-       break;
+      case 'drupal':
+        this.templateDest = '/' + this.mainDir + '/themes/' + this.themeFolder;
+      break;
 
-       break;
+      break;
 
-       default: this.templateDest = '/' + this.mainDir;
+      default:
+        this.templateDest = '/' + this.mainDir;
     };
 
 
@@ -175,9 +179,6 @@ var answersConfig = function answersConfig() {
     this.baseStyleOption = this.answers.baseStyleOption;
 
 
-    // Coffee
-    this.coffeeOption = false;
-
 
     // Css Post
     var postCssOption = this.answers.postCssOption;
@@ -193,7 +194,10 @@ var answersConfig = function answersConfig() {
     this.scopifyOption = hasFeature('scopify', postCssOption);
     this.cssnanoOption = hasFeature('cssnano', postCssOption);
     this.csssorterOption = hasFeature('csssorter', postCssOption);
-    console.log(postCssOption);
+
+
+    // javascript
+    this.javascriptOption = this.answers.javascriptOption;
 
     // Scripts
     var scriptsOption = this.answers.scriptsOption;
@@ -210,6 +214,7 @@ var answersConfig = function answersConfig() {
     this.backboneOption = hasFeature('backbone', scriptsOption);
     this.underscoreOption = hasFeature('underscore', scriptsOption);
     this.zeptoOption = hasFeature('zepto', scriptsOption);
+    this.scrollrevealOption = hasFeature('scrollreveal', scriptsOption);
 
 
     // h5bp
@@ -270,7 +275,7 @@ var answersConfig = function answersConfig() {
       mqOption: this.mqOption,
       gridOption: this.gridOption,
       baseStyleOption: this.baseStyleOption,
-      coffeeOption: this.coffeeOption,
+      javascriptOption: this.javascriptOption,
 
       postCssOption: this.postCssOption,
       autoprefixerOption: this.autoprefixerOption,
@@ -301,6 +306,7 @@ var answersConfig = function answersConfig() {
       backboneOption: this.backboneOption,
       underscoreOption: this.underscoreOption,
       zeptoOption: this.zeptoOption,
+      scrollrevealOption: this.scrollrevealOption,
 
       // Root Files
       htaccessOption: this.htaccessOption,

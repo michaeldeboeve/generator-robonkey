@@ -23,12 +23,8 @@ var gulpFiles = function gulpFiles() {
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp-tasks/bower.js', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/clean.js', destRoot + '/gulp-tasks/clean.js', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/styles.js', destRoot + '/gulp-tasks/styles.js', this.templateContext);
-
-  if(this.coffeeOption) {
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/coffee.js', destRoot + '/gulp-tasks/scripts.js', this.templateContext);
-  } else {
-    this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp-tasks/scripts.js', this.templateContext);
-  }
+  this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/scripts.js', destRoot + '/gulp-tasks/scripts.js', this.templateContext);
+  console.log(this.javascriptOption);
 
   if(this.browsersyncOption) {
     this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync.js', destRoot + '/gulp-tasks/browsersync.js', this.templateContext);
@@ -39,19 +35,24 @@ var gulpFiles = function gulpFiles() {
   }
 
   switch (this.templateOption){
-    case 'html': this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
+    case 'html':
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
     break;
 
-    case 'jade': this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
+    case 'jade':
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
     break;
 
-    case 'nunjucks': this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
+    case 'nunjucks':
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
     break;
 
-    case 'haml': this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/haml.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
+    case 'haml':
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/haml.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
     break;
 
-    case 'handlebars': this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
+    case 'handlebars':
+      this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/handlebars.js', destRoot + '/gulp-tasks/html.js', this.templateContext);
     break;
   }
 

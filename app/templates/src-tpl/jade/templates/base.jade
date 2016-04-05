@@ -110,6 +110,9 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       script(src="/<%= jsLibDirPath %>/react-dom.min.js")
       script(src="/<%= jsLibDirPath %>/react.min.js")
     <% } %>
+    <% if(scrollrevealOption && !requireOption){ %>
+      script(src="/<%= jsLibDirPath %>/scrollreveal.min.js")
+    <% } %>
     <% if(requireOption){ %>
       script(src="/<%= jsLibDirPath %>/require.js")
     <% } %>

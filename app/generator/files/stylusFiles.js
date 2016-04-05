@@ -26,13 +26,16 @@ var stylusFiles = function stylusFiles() {
     this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/style.styl', destRoot + '/src/stylus/style.styl', this.templateContext);
 
     switch (this.gridOption){
-      case 'semantic': this.fs.copy(sourceRoot + '/src-tpl/stylus/base/_semantic-grid.styl', destRoot + '/src/stylus/base/_grid.styl');
+      case 'semantic':
+        this.fs.copy(sourceRoot + '/src-tpl/stylus/base/_semantic-grid.styl', destRoot + '/src/stylus/base/_grid.styl');
       break;
 
-      case 'jeet': this.fs.copy(sourceRoot + '/src-tpl/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
+      case 'jeet':
+        this.fs.copy(sourceRoot + '/src-tpl/stylus/base/jeet/', destRoot + '/src/stylus/base/jeet/');
       break;
 
-      default: this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', this.templateContext);
+      default:
+        this.fs.copyTpl(sourceRoot + '/src-tpl/stylus/base/grid.styl', destRoot + '/src/stylus/base/grid.styl', this.templateContext);
     }
 
 
@@ -42,13 +45,16 @@ var stylusFiles = function stylusFiles() {
     }
 
     switch (this.baseStyleOption){
-      case 'reset': this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/reset.styl', destRoot + '/src/stylus/base/reset.styl');
+      case 'reset':
+        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/reset.styl', destRoot + '/src/stylus/base/reset.styl');
       break;
 
-      case 'normalize': this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/normalize.styl', destRoot + '/src/stylus/base/normalize.styl');
+      case 'normalize':
+        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/normalize.styl', destRoot + '/src/stylus/base/normalize.styl');
       break;
 
-      case 'sanitize': this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/sanitize.styl', destRoot + '/src/stylus/base/sanitize.styl');
+      case 'sanitize':
+        this.fs.copy(sourceRoot + '/src-tpl/stylus/reset/sanitize.styl', destRoot + '/src/stylus/base/sanitize.styl');
       break;
     }
   }

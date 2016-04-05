@@ -30,7 +30,8 @@
     "angular": "^1.5.3",<% } %><% if(reactOption){ %>
     "react": "^0.14.8",<% } %><% if(backboneOption){ %>
     "backbone": "^1.3.2",<% } %><% if(underscoreOption){ %>
-    "underscore": "^1.8.3",<% } %>
+    "underscore": "^1.8.3",<% } %><% if(scrollrevealOption){ %>
+    "scrollreveal": "^3.1.4"<% } %>
     "html5shiv": "^3.7.3"
   }
 }

@@ -25,6 +25,7 @@ var order = [
   'css',
   'cssBase',
   'cssPost',
+  'javascript',
   'scripts',
   'h5bp',
   'font',

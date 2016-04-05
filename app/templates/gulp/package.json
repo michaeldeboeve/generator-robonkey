@@ -68,7 +68,7 @@
     "postcss-cssnext": "^2.5.1",<% } %><% if(rucksackOption){ %>
     "rucksack-css": "^0.8.5",<% } %><% if(preproOption !== 'less' && mixinOption === 'default'){ %>
     "superlatief-mixins": "*",<% } %><% if(mqOption === 'default'){ %>
-    "superlatief-mediaqueries": "*",<% } %><% if(coffeeOption){ %>
+    "superlatief-mediaqueries": "*",<% } %><% if(javascriptOption === 'coffee'){ %>
     "gulp-coffee": "^2.3.2",<% } %>
     "superlatief-colors": "*",
     "postcss-discard-comments": "^2.0.4",

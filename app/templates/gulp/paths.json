@@ -1,6 +1,6 @@
 {
-  "scripts": {<% if(!coffeeOption){ %>
-    "src": "./../src/js/**/*.js",<% } else { %>
+  "scripts": {<% if(javascriptOption === 'vanilla'){ %>
+    "src": "./../src/js/**/*.js",<% } %><% if(javascriptOption === 'coffee'){ %>
     "src": "./../src/coffee/**/*.coffee",<% } %>
     "build": "./..<%= templateDest %><%= jsDirPath %>/",
     "src_lib": "./..<%= templateDest %><%= jsLibDirPath %>/**/*.js",

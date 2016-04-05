@@ -19,11 +19,13 @@ moveFiles.push(bowerPath + 'jquery/dist/jquery.min.js');<% } %><% if(tweenmaxOpt
 moveFiles.push(bowerPath + 'gsap/src/minified/TweenMax.min.js');<% } %><% if(dthreejsOption){ %>
 moveFiles.push(bowerPath + 'd3/d3.min.js');<% } %><% if(enquireOption){ %>
 moveFiles.push(bowerPath + 'enquire/dist/enquire.min.js');<% } %><% if(signalsOption){ %>
-moveFiles.push(bowerPath + 'js-signals/dist/signals.min.js');<% } %><% if(waypointsOption && jqueryOption && !zeptoOption){ %>
+moveFiles.push(bowerPath + 'js-signals/dist/signals.min.js');<% } %><% if(scrollrevealOption){ %>
+moveFiles.push(bowerPath + 'scrollreveal/dist/scrollreveal.min.js');<% } %><% if(waypointsOption && jqueryOption && !zeptoOption){ %>
 moveFiles.push(bowerPath + 'waypoints/lib/jquery.waypoints.min.js');<% } %><% if(waypointsOption && !jqueryOption && !zeptoOption){ %>
 moveFiles.push(bowerPath + 'waypoints/lib/noframework.waypoints.min.js');<% } %><% if(waypointsOption && !jqueryOption && zeptoOption){ %>moveFiles.push(bowerPath + 'waypoints/lib/zepto.waypoints.min.js');<% } %>
 
 
+scrollreveal.min.js
 if(moveFiles.length > 0) {
   gulp.task('moveBower', function() {
     var src = moveFiles,
