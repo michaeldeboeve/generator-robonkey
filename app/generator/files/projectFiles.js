@@ -13,12 +13,12 @@ var projectFiles = function projectFiles() {
 
 
   mkdirp(destRoot + '/src');
-  mkdirp(destRoot + this.templateDest + '/' + this.jsDirPath);
-  mkdirp(destRoot + this.templateDest + '/' + this.jsLibDirPath);
-  mkdirp(destRoot + this.templateDest + '/' + this.imgDirPath);
-  mkdirp(destRoot + this.templateDest + '/' + this.cssDirPath);
-  mkdirp(destRoot + this.templateDest + '/' + this.cssLibDirPath);
-  mkdirp(destRoot + this.templateDest + '/' + this.fontDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.jsDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.jsLibDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.imgDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.cssDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.cssLibDirPath);
+  mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.fontDirPath);
 
 
   this.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');

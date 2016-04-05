@@ -138,20 +138,30 @@ var answersConfig = function answersConfig() {
 
     }
 
+    if(this.answers.gulpDirOption) {
+      this.rootFolder = '../';
+      this.fontStyleOutputBase = '../../../../';
+      this.nodeModules = '../../gulp/node_modules/';
+    } else {
+      this.rootFolder = './';
+      this.fontStyleOutputBase = '../../../../';
+      this.nodeModules = '../../node_modules/';
+    }
+
     // Themes Location
     switch (this.environmentOption){
       case 'wordpress':
-        this.templateDest = '/' + this.mainDir + '/wp-content/themes/' + this.themeFolder;
+        this.templateDest = this.mainDir + '/wp-content/themes/' + this.themeFolder;
       break;
 
       case 'drupal':
-        this.templateDest = '/' + this.mainDir + '/themes/' + this.themeFolder;
+        this.templateDest = this.mainDir + '/themes/' + this.themeFolder;
       break;
 
       break;
 
       default:
-        this.templateDest = '/' + this.mainDir;
+        this.templateDest = this.mainDir;
     };
 
 
@@ -261,6 +271,9 @@ var answersConfig = function answersConfig() {
       themeName: this.themeName,
       themeFolder: this.themeFolder,
       templateOption: this.templateOption,
+      rootFolder: this.rootFolder,
+      fontStyleOutputBase: this.fontStyleOutputBase,
+      nodeModules: this.nodeModules,
       mainDir: this.mainDir,
       assetsDir: this.assetsDir,
       templateDest: this.templateDest,

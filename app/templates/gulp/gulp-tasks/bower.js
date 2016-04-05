@@ -5,13 +5,13 @@ var changed         = require('gulp-changed');
 var uglify          = require('gulp-uglify');
 
 var moveFiles = [];
-var bowerPath = '../src/bower_components/';
+var bowerPath = '<%= rootFolder %>src/bower_components/';
 
 <% if(zeptoOption){ %>moveFiles.push(bowerPath + 'zepto/zepto.min.js');<% } if(underscoreOption){ %>
 moveFiles.push(bowerPath + 'underscore/underscore-min.js');<% } if(backboneOption){ %>
 moveFiles.push(bowerPath + 'backbone/backbone-min.js');<% } if(reactOption){ %>
 moveFiles.push(bowerPath + 'react/react-dom.min.js', bowerPath + 'react/react-with-addons.min.js', bowerPath + 'react/react-dom-server.js', bowerPath + 'react/react.min.js');<% } if(modernizrOption){ %>
-moveFiles.push('../src/modernizr/modernizr-custom.js');<% } if(angularOption){ %>
+moveFiles.push('<%= rootFolder %>src/modernizr/modernizr-custom.js');<% } if(angularOption){ %>
 moveFiles.push(bowerPath + 'angular/angular.min.js');<% } if(requireOption){ %>
 moveFiles.push(bowerPath + 'requirejs/require.js');<% } if(jqueryOption){ %>
 moveFiles.push(bowerPath + 'jquery/dist/jquery.min.js');<% } if(tweenmaxOption){ %>

@@ -2,17 +2,17 @@
 // IMPORTS
 // ==========================================================================
 <% if(mqOption === 'breakpoint'){ %>
-@import "../../gulp/node_modules/breakpoint-sass/stylesheets/breakpoint";<% } %><% if(gridOption === 'susy'){ %>
-@import "../../gulp/node_modules/susy/sass/susy";<% } %><% if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
-@import "../../gulp/node_modules/bourbon/app/assets/stylesheets/bourbon";<% } %><% if(gridOption === 'neat'){ %>
-@import "../../gulp/node_modules/bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(gridOption === 'includemedia'){ %>
-@import "../../gulp/node_modules/include-media/dist/include-media";<% } %><% if(gridOption === 'gridle'){ %>
-@import "./../gulp/node_modules/gridle/sass/gridle/gridle";<% } %><% if(gridOption === 'gridleFlex'){ %>
-@import "./../gulp/node_modules/gridle/sass/gridle/gridle-flex";<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
+@import "<%= nodeModules %>breakpoint-sass/stylesheets/breakpoint";<% } %><% if(gridOption === 'susy'){ %>
+@import "<%= nodeModules %>susy/sass/susy";<% } %><% if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
+@import "<%= nodeModules %>bourbon/app/assets/stylesheets/bourbon";<% } %><% if(gridOption === 'neat'){ %>
+@import "<%= nodeModules %>bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(gridOption === 'includemedia'){ %>
+@import "<%= nodeModules %>include-media/dist/include-media";<% } %><% if(gridOption === 'gridle'){ %>
+@import "<%= nodeModules %>gridle/sass/gridle/gridle";<% } %><% if(gridOption === 'gridleFlex'){ %>
+@import "<%= nodeModules %>gridle/sass/gridle/gridle-flex";<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
 @import "base/jeet/jeet";<% } %><% if(mixinOption === 'default') {%>
-@import "../../gulp/node_modules/superlatief-mixins/scss/superlatief";<% } %><% if(mqOption === 'default') {%>
-@import "../../gulp/node_modules/superlatief-mediaqueries/scss/mediaqueries";<% } %>
-@import "../../gulp/node_modules/superlatief-colors/scss/colors";
+@import "<%= nodeModules %>superlatief-mixins/scss/superlatief";<% } %><% if(mqOption === 'default') {%>
+@import "<%= nodeModules %>superlatief-mediaqueries/scss/mediaqueries";<% } %>
+@import "<%= nodeModules %>superlatief-colors/scss/colors";
 
 
 
