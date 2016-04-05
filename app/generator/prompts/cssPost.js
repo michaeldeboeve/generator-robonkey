@@ -27,7 +27,7 @@ var cssPostPrompt = function cssPostPrompt() {
     }, {
       name: 'CSS Nano (Css Optimalization)',
       value: 'cssnano',
-      checked: true
+      checked: false
     }, {
       name: 'Gradient Transparency Fix',
       value: 'gradientfix',
