@@ -4,10 +4,11 @@ var paths           = JSON.parse(fs.readFileSync('./paths.json'));
 var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var jade            = require('gulp-jade');
+var prettify        = require('gulp-prettify');
 var htmlreplace     = require("gulp-html-replace");
 
 var jadeOptions = {
-  pretty: true
+  // pretty: true
 };
 
 // Compile jade files
@@ -15,6 +16,7 @@ gulp.task('html', function() {
   gulp.src(paths.jade.src)
     .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
+    .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.jade.build));
 });
 
@@ -23,13 +25,10 @@ gulp.task('html-build', function() {
     .pipe(plumber(onHtmlError))
     .pipe(jade(jadeOptions))
     .pipe(htmlreplace({
-      <% if(environmentOption !== 'express'){ %>js: '<%= jsDirPath %>/script.min.js',
-      css: '<%= cssDirPath %>/style.min.css',
-      modernizr: '<%= jsLibDirPath %>/modernizr.custom.js'<% } %><% if(environmentOption === 'express'){ %>
-      js: '/javascripts/script.min.js',
-      css: '/stylesheets/style.min.css',
-      modernizr: '/javascripts/lib/modernizr.custom.js'<% } %>
+      js: '<%= jsDirPath %>/script.min.js',
+      css: '<%= cssDirPath %>/style.min.css'
     }))
+    .pipe(prettify({indent_size: 2}))
     .pipe(gulp.dest(paths.jade.build));
 });
 

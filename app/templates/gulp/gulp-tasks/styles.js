@@ -29,33 +29,31 @@ var rucksack        = require('rucksack-css');<% } %><% if(cssnextOption){ %>
 var next            = require('postcss-cssnext');<% } %><% if(cssgraceOption){ %>
 var grace           = require('cssgrace');<% } %>
 
-<% if(autoprefixerOption || cssnextOption){ %>var browserSupport  = ['last 3 versions', '> 1%'];<% } %><% if(csssorterOption){ %>
-var cssSortOrder    = 'smacss';<% } %>
 
 <% if(postCssOption){ %>var postCssConfigDev = [<% } %><% if(gradientfixOption){ %>
   gradientFix,<% } %><% if(rucksackOption){ %>
   rucksack,<% } %><% if(cssnextOption){ %>
-  next({browsers: browserSupport}),<% } %><% if(cssgraceOption){ %>
+  next({browsers: cfg.browsers}),<% } %><% if(cssgraceOption){ %>
   grace,<% } %><% if(classprefixOption){ %>
   classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
   scopify(cfg.scope),<% } %><% if(csssorterOption){ %>
-  cssdeclsort({order: cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
+  cssdeclsort({order: cfg.cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
   mqKeyframes,<% } %><% if(mqpackerOption){ %>
-  mqPacker,<% } %><% if(autoprefixerOption && !cssgraceOption){ %>
-  autoprefixer({browsers: browserSupport})<% } %><% if(postCssOption){ %>
+  mqPacker,<% } %><% if(autoprefixerOption && !cssnextOption){ %>
+  autoprefixer({browsers: cfg.browsers})<% } %><% if(postCssOption){ %>
 ];<% } %>
 
 <% if(postCssOption){ %>var postCssConfigBuild = [<% } %><% if(gradientfixOption){ %>
   gradientFix,<% } %><% if(rucksackOption){ %>
   rucksack,<% } %><% if(cssnextOption){ %>
-  next({browsers: browserSupport}),<% } %><% if(cssgraceOption){ %>
+  next({browsers: cfg.browsers}),<% } %><% if(cssgraceOption){ %>
   grace,<% } %><% if(classprefixOption){ %>
   classPrfx(cfg.prefix),<% } %><% if(scopifyOption){ %>
   scopify(cfg.scope),<% } %><% if(csssorterOption){ %>
-  cssdeclsort({order: cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
+  cssdeclsort({order: cfg.cssSortOrder}),<% } %><% if(mqkeyframesOption){ %>
   mqKeyframes,<% } %><% if(mqpackerOption){ %>
-  mqPacker,<% } %><% if(autoprefixerOption && !cssgraceOption){ %>
-  autoprefixer({browsers: browserSupport}),<% } %><% if(cssnanoOption){ %>
+  mqPacker,<% } %><% if(autoprefixerOption && !cssnextOption){ %>
+  autoprefixer({browsers: cfg.browsers}),<% } %><% if(cssnanoOption){ %>
   cssnano({autoprefixer: false})<% } %><% if(postCssOption){ %>
 ];<% } %>
 

@@ -23,6 +23,10 @@ var scriptsPrompt = function scriptsPrompt() {
       value: 'jquery',
       checked: true
     }, {
+      name: 'Zepto',
+      value: 'zepto',
+      checked: false
+    }, {
       name: 'Requirejs',
       value: 'require',
       checked: false
@@ -35,8 +39,8 @@ var scriptsPrompt = function scriptsPrompt() {
       value: 'signals',
       checked: false
     }, {
-      name: 'D3js',
-      value: 'd3js',
+      name: 'dthreejs',
+      value: 'dthreejs',
       checked: false
     }, {
       name: 'TweenMax',

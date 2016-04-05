@@ -60,7 +60,7 @@ var cssPostPrompt = function cssPostPrompt() {
       checked: false
     }]
   }], function (answers) {
-    this.cssPostPrompts = answers;
+    this.cssPostPrompt = answers;
 
     done();
   }.bind(this));

@@ -30,7 +30,7 @@ gulp.task('build', [
 
 // Default gulp task
 gulp.task('default', [
-                      'moveBower', <% if(environmentOption === 'static' && templateOption !== 'html'){ %>
+                      'moveBower', <% if(environmentOption === 'static'){ %>
                       'html', <% } %>
                       'images',
                       'scripts',

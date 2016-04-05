@@ -1,27 +1,16 @@
 {
-  "projectURL": "<%= projectUrl %>",<% if(scopifyOption){ %>
-  "scope": "#scope",<% } %><% if(classprefixOption){ %>
+  <% if(scopifyOption){ %>"scope": "#scope",<% } %><% if(classprefixOption){ %>
   "prefix": "prfx-",<% } %><% if(modernizrOption){ %>
   "modernizr": {
     "excludeTests": [],
     "tests": [],
     "output": "modernizr.custom.js",
-    "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
+    "options": [ "setClasses", "addTest", "testProp", "fnBind" ]
   },<% } %><% if(customIconfontOption) { %>"iconFont": {
     "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
-  }, <% } %>
-  "foo": "bar",
-  "src": "./../src/",
-  "dest": "./..<%= templateDest %>",
-  "resrc": {
-    "main": "./..<%= assetsDirPath %>/",
-    "js": "./..<%= templateDest %><%= jsDirPath %>/",
-    "jsvendor": "./..<%= templateDest %><%= jsLibDirPath %>/",
-    "img": "./..<%= templateDest %><%= imgDirPath %>/",
-    "css": "./..<%= templateDest %><%= cssDirPath %>/",
-    "cssvendor": "./..<%= templateDest %><%= cssLibDirPath %>/",
-    "fonts": "./..<%= templateDest %><%= fontDirPath %>/",
-    "jade": "./..<%= templateDest %>/"
-  }
+  }, <% } %><% if(autoprefixerOption || cssnextOption){ %>
+  "browsers": "last 3 versions', > 1%", <% } %><% if(csssorterOption){ %>
+  "cssSortOrder": "smacss",<% } %>
+  "projectURL": "<%= projectUrl %>"
 }

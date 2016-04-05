@@ -6,6 +6,7 @@ var plumber         = require('gulp-plumber');
 var concat          = require('gulp-concat');
 var uglify          = require('gulp-uglify');
 var sourcemaps      = require('gulp-sourcemaps');
+var coffee          = require('gulp-coffee');
 
 
 
@@ -14,6 +15,7 @@ var sourcemaps      = require('gulp-sourcemaps');
 gulp.task('scripts', function() {
   gulp.src(paths.scripts.src)
     .pipe(plumber(onScriptError))
+    .pipe(coffee({bare: true}))
     .pipe(concat('script.js'))
     .pipe(gulp.dest(paths.scripts.build));
 });
@@ -25,6 +27,7 @@ gulp.task('scripts', function() {
 gulp.task('scripts-build', function() {
   gulp.src(paths.scripts.src)
     .pipe(plumber(onScriptError))
+    .pipe(coffee({bare: true}))
     .pipe(concat('script.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.scripts.build));

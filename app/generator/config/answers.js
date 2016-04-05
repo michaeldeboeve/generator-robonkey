@@ -55,7 +55,6 @@ var answersConfig = function answersConfig() {
       this.environmentOption = this.answers.environmentOption;
     }
 
-    console.log(this.environmentOption);
 
     this.themeName = this.answers.themeName;
     if(this.themeName) {
@@ -176,6 +175,10 @@ var answersConfig = function answersConfig() {
     this.baseStyleOption = this.answers.baseStyleOption;
 
 
+    // Coffee
+    this.coffeeOption = true;
+
+
     // Css Post
     var postCssOption = this.answers.postCssOption;
     this.postCssOption = this.answers.postCssOption;
@@ -190,14 +193,14 @@ var answersConfig = function answersConfig() {
     this.scopifyOption = hasFeature('scopify', postCssOption);
     this.cssnanoOption = hasFeature('cssnano', postCssOption);
     this.csssorterOption = hasFeature('csssorter', postCssOption);
-
+    console.log(postCssOption);
 
     // Scripts
     var scriptsOption = this.answers.scriptsOption;
     this.jqueryOption = hasFeature('jquery', scriptsOption);
     this.waypointsOption = hasFeature('waypoints', scriptsOption);
     this.signalsOption = hasFeature('signals', scriptsOption);
-    this.d3jsOption = hasFeature('D3js', scriptsOption);
+    this.dthreejsOption = hasFeature('dthreejs', scriptsOption);
     this.tweenmaxOption = hasFeature('tweenmax', scriptsOption);
     this.enquireOption = hasFeature('enquire', scriptsOption);
     this.requireOption = hasFeature('require', scriptsOption);
@@ -206,6 +209,7 @@ var answersConfig = function answersConfig() {
     this.reactOption = hasFeature('react', scriptsOption);
     this.backboneOption = hasFeature('backbone', scriptsOption);
     this.underscoreOption = hasFeature('underscore', scriptsOption);
+    this.zeptoOption = hasFeature('zepto', scriptsOption);
 
 
     // h5bp
@@ -266,6 +270,7 @@ var answersConfig = function answersConfig() {
       mqOption: this.mqOption,
       gridOption: this.gridOption,
       baseStyleOption: this.baseStyleOption,
+      coffeeOption: this.coffeeOption,
 
       postCssOption: this.postCssOption,
       autoprefixerOption: this.autoprefixerOption,
@@ -286,7 +291,7 @@ var answersConfig = function answersConfig() {
       jqueryOption: this.jqueryOption,
       waypointsOption: this.waypointsOption,
       signalsOption: this.signalsOption,
-      d3jsOption: this.d3jsOption,
+      dthreejsOption: this.dthreejsOption,
       tweenmaxOption: this.tweenmaxOption,
       enquireOption: this.enquireOption,
       requireOption: this.requireOption,
@@ -295,6 +300,7 @@ var answersConfig = function answersConfig() {
       reactOption: this.reactOption,
       backboneOption: this.backboneOption,
       underscoreOption: this.underscoreOption,
+      zeptoOption: this.zeptoOption,
 
       // Root Files
       htaccessOption: this.htaccessOption,
