@@ -39,7 +39,7 @@ var scriptsPrompt = function scriptsPrompt() {
       value: 'signals',
       checked: false
     }, {
-      name: 'dthreejs',
+      name: 'D3js',
       value: 'dthreejs',
       checked: false
     }, {
