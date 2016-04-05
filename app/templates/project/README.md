@@ -7,11 +7,11 @@
 The gulpfile.js is split up in parts using [require-dir]().
 It gets it's tasks from the subdirectory `gulp-tasks`, which contains the followig files:
 
-- bower.js _(moving bower dependencies to the `website/assets` folder)_<% if(customIconfontOption) { %>
+- bower.js _(moving bower dependencies to the `website/assets` folder)_
+- browsersync.js<% if(customIconfontOption) { %>
 - iconfont.js _(creating the iconfont)_<% } %>
-- images.js _(imagemin)_<% if(templateOption === 'nunjucks') { %>
-- nunjucks.js _(nunjucks compile)_<% } %><% if(templateOption === 'jade') { %>
-- jade.js _(jade compile)_<% } %><% if(modernizrOption) { %>
+- images.js _(imagemin)_
+- html.js _(nunjucks or jade compile)_<% if(modernizrOption) { %>
 - modernizr.js _(creating modernizr file)_<% } %>
 - scripts.js _(concat and minify javascript)_
 - styles.js _(concat and minify SCSS, Stylus or Less)_
@@ -50,20 +50,20 @@ Two config files are present:
 
 - config.json - contains basic settings for:
   - url for browsersync<% if(modernizrOption) { %>
-  - modernizr settings<% } %><% if(customIconfontOption) { %>
-  - icon font settings<% } %><% if(classprefixOption) { %>
-  - class perfix name<% } %><% if(scopifyOption) { %>
+  - modernizr settings<% } if(customIconfontOption) { %>
+  - icon font settings<% } if(classprefixOption) { %>
+  - class perfix name<% } if(scopifyOption) { %>
   - scope name<% } %>
-- cfg.json - contains paths for:
-  - scripts - scr/build<% if(modernizrOption) { %>
-  - modernizr - build<% } %>
-  - html - scr
-  - images - src/build
-  - styles - src/build/scr_watch/build_soucemap<% if(templateOption === 'nunjucks') { %>
-  - nunjucks - src/watch/build<% } %><% if(templateOption === 'jade') { %>
-  - jade - src/watch/build<% } %><% if(postCssOption) { %>
-  - postcss - src/build<% } %><% if(customIconfontOption) { %>
-  - font - src/build/template/path<% } %>
+  - paths:
+    - scripts - scr/build<% if(modernizrOption) { %>
+    - modernizr - build<% } %>
+    - html - scr
+    - images - src/build
+    - styles - src/build/scr_watch/build_soucemap<% if(templateOption === 'nunjucks') { %>
+    - nunjucks - src/watch/build<% } if(templateOption === 'jade') { %>
+    - jade - src/watch/build<% } if(postCssOption) { %>
+    - postcss - src/build<% } if(customIconfontOption) { %>
+    - font - src/build/template/path<% } %>
 
 <% if(customIconfontOption) { %>
 Make a custom icon font:
@@ -130,7 +130,7 @@ website/assets/css
 ###### Mixin library:
 
 <% if(mixinOption === 'bourbon') { %>
-- [Bourbon](http://bourbon.io/)<% } %><% if(mixinOption === 'compassmixins') { %>
+- [Bourbon](http://bourbon.io/)<% } if(mixinOption === 'compassmixins') { %>
 - [Compass Mixins](https://github.com/Igosuki/compass-mixins)<% } %>
 
 <% } %>
@@ -139,9 +139,9 @@ website/assets/css
 ###### Grid library:
 
 <% if(preproOption === 'sass' && gridOption === 'jeet') { %>
-- [Jeet](http://jeet.gs/)<% } %><% if(gridOption === 'susy') { %>
-- [Susy](http://susydocs.oddbird.net/en/latest/)<% } %><% if(gridOption === 'neat') { %>
-- [Neat](http://bourbon.io/)<% } %><% if(preproOption === 'sass' && gridOption === 'semantic') { %>
+- [Jeet](http://jeet.gs/)<% } if(gridOption === 'susy') { %>
+- [Susy](http://susydocs.oddbird.net/en/latest/)<% } if(gridOption === 'neat') { %>
+- [Neat](http://bourbon.io/)<% } if(preproOption === 'sass' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
@@ -150,7 +150,7 @@ website/assets/css
 ###### Mediaqueries library:
 
 <% if(mqOption === 'breakpoint') { %>
-- [Breakpoint](http://breakpoint-sass.com/)<% } %><% if(gridOption === 'includemedia') { %>
+- [Breakpoint](http://breakpoint-sass.com/)<% } if(gridOption === 'includemedia') { %>
 - [Include Media](https://github.com/Igosuki/compass-mixins)<% } %>
 
 <% } %>
@@ -175,7 +175,7 @@ website/stylus/css
 <% if(preproOption === 'stylus' && gridOption !== 'none') { %>
 ###### Mixin library:
 <% if(mixinOption === 'nib') { %>
-- [Nib](https://tj.github.io/nib/)<% } %><% if(mixinOption === 'koutoswiss') { %>
+- [Nib](https://tj.github.io/nib/)<% } if(mixinOption === 'koutoswiss') { %>
 - [Kouto Swiss](http://kouto-swiss.io/)<% } %>
 <% } %>
 
@@ -183,8 +183,8 @@ website/stylus/css
 ###### Grid library:
 
 <% if(preproOption === 'stylus' && gridOption === 'jeet') { %>
-- [Jeet](http://jeet.gs/)<% } %><% if(gridOption === 'sgrid') { %>
-- [sGrid](http://stylusgrid.com/)<% } %><% if(preproOption === 'stylus' && gridOption === 'semantic') { %>
+- [Jeet](http://jeet.gs/)<% } if(gridOption === 'sgrid') { %>
+- [sGrid](http://stylusgrid.com/)<% } if(preproOption === 'stylus' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
@@ -226,7 +226,7 @@ website/less/css
 ###### Grid library:
 
 <% if(gridOption === 'gee') { %>
-- [Gee](http://sorgalla.com/gee/)<% } %><% if(preproOption === 'less' && gridOption === 'semantic') { %>
+- [Gee](http://sorgalla.com/gee/)<% } if(preproOption === 'less' && gridOption === 'semantic') { %>
 - [Semantic.gs](https://tylertate.github.io/semantic.gs/)<% } %>
 
 <% } %>
@@ -245,14 +245,14 @@ website/less/css
 ## Base Styles
 
 <% if(baseStyleOption === 'reset' && preproOption === 'sass') { %>
-- [Reset](https://github.com/shannonmoeller/reset-css)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'sass') { %>
-- [Normalize](https://github.com/JohnAlbin/normalize-scss)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'sass') { %>
-- [Sanitize](https://github.com/10up/sanitize.css)<% } %><% if(baseStyleOption === 'reset' && preproOption === 'stylus') { %>
-- [Reset](https://github.com/dtan/html5-reset-stylus)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'stylus') { %>
-- [Normalize](https://github.com/bymathias/normalize.styl)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'stylus') { %>
-- [Sanitize]()<% } %><% if(baseStyleOption === 'reset' && preproOption === 'less') { %>
-- [Reset](https://github.com/kuatsure/Eric-Meyer-Reset---less--)<% } %><% if(baseStyleOption === 'normalize' && preproOption === 'less') { %>
-- [Normalize](https://github.com/additiveinverse/normalize.less)<% } %><% if(baseStyleOption === 'sanitize' && preproOption === 'less') { %>
+- [Reset](https://github.com/shannonmoeller/reset-css)<% } if(baseStyleOption === 'normalize' && preproOption === 'sass') { %>
+- [Normalize](https://github.com/JohnAlbin/normalize-scss)<% } if(baseStyleOption === 'sanitize' && preproOption === 'sass') { %>
+- [Sanitize](https://github.com/10up/sanitize.css)<% } if(baseStyleOption === 'reset' && preproOption === 'stylus') { %>
+- [Reset](https://github.com/dtan/html5-reset-stylus)<% } if(baseStyleOption === 'normalize' && preproOption === 'stylus') { %>
+- [Normalize](https://github.com/bymathias/normalize.styl)<% } if(baseStyleOption === 'sanitize' && preproOption === 'stylus') { %>
+- [Sanitize]()<% } if(baseStyleOption === 'reset' && preproOption === 'less') { %>
+- [Reset](https://github.com/kuatsure/Eric-Meyer-Reset---less--)<% } if(baseStyleOption === 'normalize' && preproOption === 'less') { %>
+- [Normalize](https://github.com/additiveinverse/normalize.less)<% } if(baseStyleOption === 'sanitize' && preproOption === 'less') { %>
 - [Sanitize](https://github.com/luixxiul/sanitize.less/blob/master/sanitize.less)<% } %>
 
 <% } %>
@@ -263,12 +263,16 @@ website/less/css
 > More PostCSS plugins: http://postcss.parts/
 
 <% if(autoprefixerOption) {%>
-- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } %><% if(cssnanoOption) {%>
-- [Csso](https://github.com/lahmatiy/postcss-csso)<% } %><% if(gradientfixOption) {%>
-- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } %><% if(mqpackerOption) {%>
-- [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } %><% if(mqkeyframesOption) {%>
-- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } %><% if(classprefixOption) {%>
-- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)<% } %><% if(scopifyOption) {%>
+- [Autoprefixer](https://github.com/postcss/autoprefixer)<% } if(cssnanoOption) {%>
+- [Csso](https://github.com/lahmatiy/postcss-csso)<% } if(lostgridOption) {%>
+- [Lost Grid](https://github.com/peterramsing/lost)<% } if(gradientfixOption) {%>
+- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)<% } if(mqpackerOption) {%>
+- [MQPacker](https://github.com/hail2u/node-css-mqpacker)<% } if(mqkeyframesOption) {%>
+- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)<% } if(cssnextOption) {%>
+- [CSS Next](http://cssnext.io/)<% } if(cssgraceOption) {%>
+- [CSS Grace](https://github.com/cssdream/cssgrace)<% } if(rucksackOption) {%>
+- [Rucksack](https://simplaio.github.io/rucksack/)<% } if(classprefixOption) {%>
+- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)<% } if(scopifyOption) {%>
 - [Scopify](https://github.com/pazams/postcss-scopify)<% } %>
 
 <% } %>
@@ -276,7 +280,7 @@ website/less/css
 <% if(customIconfontOption) { %>
 ## Custom Icon Font
 
-The custom icon font generator uses svg images from a folder to build the font. Then it generates a <% if(preproOption === 'sass') { %>.scss<% } %><% if(preproOption === 'stylus') { %>.stylus<% } %><% if(preproOption === 'less') { %>.less<% } %> file with `@font-face` declaration, `.icn` and `.icn--name` classes.
+The custom icon font generator uses svg images from a folder to build the font. Then it generates a <% if(preproOption === 'sass') { %>.scss<% } if(preproOption === 'stylus') { %>.stylus<% } if(preproOption === 'less') { %>.less<% } %> file with `@font-face` declaration, `.icn` and `.icn--name` classes.
 
 ### Settings
 
@@ -336,8 +340,8 @@ website/assets/fonts
 The rendered icon file will be placed in:
 
 ```sh
-<% if(preproOption === 'sass') {%>src/scss/modules/_icons.scss<% } %><% if(preproOption === 'stylus') {%>
-src/stylus/modules/icons.styl<% } %><% if(preproOption === 'less') {%>
+<% if(preproOption === 'sass') {%>src/scss/modules/_icons.scss<% } if(preproOption === 'stylus') {%>
+src/stylus/modules/icons.styl<% } if(preproOption === 'less') {%>
 src/less/modules/icons.less<% } %>
 ```
 <% } %>
@@ -347,7 +351,7 @@ src/less/modules/icons.less<% } %>
 
 Modernizr gulp plugin is used for the creation of custom Modernizr tests.
 
-When initialized, the plugin will crawl your <% if(preproOption === 'sass') { %>.scss<% } %><% if(preproOption === 'stylus') { %>.stylus<% } %><% if(preproOption === 'less') { %>.less<% } %> and .js files for Modernizr references (ie: `.no-svg`) and builds the `modernizr-custom.js` file.
+When initialized, the plugin will crawl your <% if(preproOption === 'sass') { %>.scss<% } if(preproOption === 'stylus') { %>.stylus<% } if(preproOption === 'less') { %>.less<% } %> and .js files for Modernizr references (ie: `.no-svg`) and builds the `modernizr-custom.js` file.
 
 ### Settings
 
@@ -391,7 +395,7 @@ $ gulp build
 The output file will be:
 
 ```sh
-website/assets/js/libs/modernizr.custom.js
+website/assets/js/libs/modernizr-custom.js
 ```
 
 <% } %>
@@ -423,7 +427,6 @@ gulp
   bower.json
   config.json
   package.json
-  cfg.json
   gulpfile.js
   ├── gulp-tasks
     bower.js
@@ -460,7 +463,6 @@ root
 bower.json
 config.json
 package.json
-cfg.json
 gulpfile.js
 .editorconfig
 .gitignore
@@ -477,13 +479,13 @@ scc
     ...
   ├── images
     ...
-  ├── <% if(templateOption === 'jade') {%>jade<% } %><% if(templateOption === 'nunjucks') {%>nunjucks<% } %>
+  ├── <% if(templateOption === 'jade') {%>jade<% } if(templateOption === 'nunjucks') {%>nunjucks<% } %>
     ...
   ├── js
     ...
   ├── modernizr
     ...
-  ├── <% if(preproOption === 'sass') {%>scss<% } %><% if(preproOption === 'stylus') {%>stylus<% } %><% if(preproOption === 'less') {%>less<% } %>
+  ├── <% if(preproOption === 'sass') {%>scss<% } if(preproOption === 'stylus') {%>stylus<% } if(preproOption === 'less') {%>less<% } %>
     ...
 ```
 
@@ -500,9 +502,9 @@ website
     ├── libs
       ...
     ...
-  <% if(htaccessOption) {%>.htaccess<% } %><% if(browserconfigOption) {%>
-  browserconfig.xml<% } %><% if(crossdomainOption) {%>
-  crossdomain.xml<% } %><% if(robotsOption) {%>
+  <% if(htaccessOption) {%>.htaccess<% } if(browserconfigOption) {%>
+  browserconfig.xml<% } if(crossdomainOption) {%>
+  crossdomain.xml<% } if(robotsOption) {%>
   humans.txt
   robots.txt<% } %>
   index.html

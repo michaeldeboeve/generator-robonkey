@@ -68,7 +68,7 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       != '\n    <!-- endbuild -->'
 
     block headerScripts
-      <% if(modernizrOption){ %>script(src="<%= jsLibDirPath %>/modernizr.custom.js")<% } %>
+      <% if(modernizrOption){ %>script(src="<%= jsLibDirPath %>/modernizr-custom.js")<% } %>
       
   body(class="#{ bodyClass }")
     block contentMain

@@ -1,6 +1,6 @@
 {
   "name": "generator-robonkey",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Yeoman front-end application generator for Gulp, Jade/Nunjucks, Sass/Stylus/Less, Coffeescript, PostCSS, Modernizr, Custom Icon Font Generator, BrowserSync, and some JavaScript and Sass/Stylus/Less libraries to choose from",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "main": "index.js",

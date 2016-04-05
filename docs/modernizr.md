@@ -48,7 +48,7 @@ $ gulp build
 The output file will be:
 
 ```sh
-website/assets/js/libs/modernizr.custom.js
+website/assets/js/libs/modernizr-custom.js
 ```
 
 ## Docs
@@ -59,12 +59,8 @@ website/assets/js/libs/modernizr.custom.js
 - [Options](/docs/options.md)
 - [HTML templating](/docs/html.md)
 - [Images](/docs/images.md)
-- [Sass](/docs/sass/sass.md)
-	- [Functions](/docs/sass/functions.md)
-	- [Mixins](/docs/sass/mixins.md)
-- [Stylus](/docs/stylus/stylus.md)
-	- [Functions](/docs/stylus/functions.md)
-	- [Mixins](/docs/stylus/mixins.md)
-- [Less](/docs/less/less.md)
+- [Sass](/docs/sass.md)
+- [Stylus](/stylus/stylus.md)
+- [Less](/docs/less.md)
 - [Modernizr](/docs/modernizr.md)
 - [Custom Icon Font](/docs/custom-icon-font.md)

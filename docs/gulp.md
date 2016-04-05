@@ -47,16 +47,16 @@ Two config files are present:
 	- icon font settings
 	- class perfix name
 	- scope name
-- cfg.json - contains paths for:
-	- scripts - scr/build
-	- modernizr - build
-	- html - scr
-	- images - src/build
-	- styles - src/build/scr_watch/build_soucemap
-	- jade - src/watch/build
-	- nunjucks - src/watch/build
-	- postcss - src/build
-	- font - src/build/template/path
+	- paths:
+		- scripts - scr/build
+		- modernizr - build
+		- html - scr
+		- images - src/build
+		- styles - src/build/scr_watch/build_soucemap
+		- jade - src/watch/build
+		- nunjucks - src/watch/build
+		- postcss - src/build
+		- font - src/build/template/path
 
 
 ## Docs
@@ -67,12 +67,8 @@ Two config files are present:
 - [Options](/docs/options.md)
 - [HTML templating](/docs/html.md)
 - [Images](/docs/images.md)
-- [Sass](/docs/sass/sass.md)
-	- [Functions](/docs/sass/functions.md)
-	- [Mixins](/docs/sass/mixins.md)
-- [Stylus](/docs/stylus/stylus.md)
-	- [Functions](/docs/stylus/functions.md)
-	- [Mixins](/docs/stylus/mixins.md)
-- [Less](/docs/less/less.md)
+- [Sass](/docs/sass.md)
+- [Stylus](/stylus/stylus.md)
+- [Less](/docs/less.md)
 - [Modernizr](/docs/modernizr.md)
 - [Custom Icon Font](/docs/custom-icon-font.md)
