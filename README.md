@@ -23,8 +23,8 @@
 	- [Jade](http://jade-lang.com/)
 	- [Nunjucks](http://jade-lang.com/)
 - Preprocessors:
-	- [SASS](http://sass-lang.com/) with [some mixins](/docs/sass/mixins.md), [functions](/docs/sass/functions.md) or [optional libraries](/docs/features.md#sass-libraries)
-	- [Stylus](http://stylus-lang.com/) with [some mixins](/docs/stylus/mixins.md), [functions](/docs/stylus/functions.md) or  [optional libraries](/docs/features.md#stylus-libraries)
+	- [SASS](http://sass-lang.com/) with [optional libraries](/docs/features.md#sass-libraries)
+	- [Stylus](http://stylus-lang.com/) with [optional libraries](/docs/features.md#stylus-libraries)
 	- [Less](http://lesscss.org/) with [optional libraries](/docs/features.md#less-libraries)
 - [BrowserSync](https://www.browsersync.io/)
 - PostCSS:
@@ -33,8 +33,9 @@
 	- [Gradient Transparency Fixer](https://github.com/gilmoreorless/postcss-gradient-transparency-fix)
 	- [MQPacker](https://github.com/hail2u/node-css-mqpacker)
 	- [MQKeyframes](https://github.com/TCotton/postcss-mq-keyframes)
-	- [Selector Not](https://github.com/postcss/postcss-selector-not)
-	- [Selector Matches](https://github.com/postcss/postcss-selector-matches)
+	- CSS Next
+	- CSS Grace
+	- Rucksack
 	- [Class Prefix](https://github.com/thompsongl/postcss-class-prefix)
 	- [Scopify](https://github.com/pazams/postcss-scopify)
 - [Imagemin](https://github.com/sindresorhus/gulp-imagemin)
@@ -69,18 +70,10 @@ $ yo robonkey
 ## To Do
 
 - Priority:
-	- Mixin and Function documentation
-
-- maybe down the road
-	- more js libraries?
-	- coffeescript
-	- …
+	- Update docs
 
 - maybe further down the road
-	- express/angular
-	- wordpress
-	- drupal
-	- codeigniter
+	- subgenerators
 	- …
 
 

@@ -176,7 +176,7 @@ var answersConfig = function answersConfig() {
 
 
     // Coffee
-    this.coffeeOption = true;
+    this.coffeeOption = false;
 
 
     // Css Post
