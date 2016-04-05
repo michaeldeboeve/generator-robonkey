@@ -1,5 +1,5 @@
   {
-  "name": "<%= projectName %>",
+  "name": "<%= projectNameJson %>",
   "version": "<%= projectVersion %>",
   "description": "<%= projectDescription %>",
   "authors": [],

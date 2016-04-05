@@ -42,6 +42,7 @@ var answersConfig = function answersConfig() {
     // Project
     this.projectUrl = this.answers.projectUrl;
     this.projectName = this.answers.projectName;
+    this.projectNameJson = this.answers.projectName.replace(/\s/g,'');
     this.projectDescription = this.answers.projectDescription;
     this.projectVersion = this.answers.projectVersion;
     this.projectAuthor = this.answers.projectAuthor;
@@ -247,6 +248,7 @@ var answersConfig = function answersConfig() {
       // Project
       projectUrl: this.projectUrl,
       projectName: this.projectName,
+      projectNameJson: this.projectNameJson,
       projectDescription: this.projectDescription,
       projectAuthor: this.projectAuthor,
       authorEmail: this.authorEmail,
