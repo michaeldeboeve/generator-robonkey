@@ -7,7 +7,6 @@ var yeoman        = require('yeoman-generator'),
     path          = require('path'),
     _             = require('lodash'),
     grabFiles     = require('./helpers/grabFiles');
-    //wordpress   = require('../util/wordpress.js');
 
 'use strict';
 
@@ -20,6 +19,9 @@ var order = [
   'project',
   'environmentCheck',
   'environment',
+  'wordpressCheckLatest',
+  'wordpressPrompt',
+  'wordpressInstall',
   'folders',
   'html',
   'css',

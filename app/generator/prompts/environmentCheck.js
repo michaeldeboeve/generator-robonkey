@@ -46,7 +46,7 @@ var environmentCheckPrompt = function environmentCheckPrompt() {
 
         switch(framework){
           case 'wp-load.php':
-            cb('Wordpress');
+            cb('WordPress');
           break;
 
           case 'CodeIgniter.php':
@@ -80,9 +80,9 @@ var environmentCheckPrompt = function environmentCheckPrompt() {
 
     checkFrameworks( function(framework){
       switch(framework){
-        case 'Wordpress':
+        case 'WordPress':
           // console.log('Wordpress');
-          runFramework('Wordpress', 'wordpress');
+          runFramework('WorPpress', 'wordpress');
         break;
 
         case 'Drupal':

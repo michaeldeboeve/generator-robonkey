@@ -17,7 +17,7 @@ var foldersPrompt = function foldersPrompt() {
 
   this.prompt([{
     when: function (answers) {
-      return self.environmentOption === 'wordpress' || self.environmentOption === 'drupal';
+      return self.environmentOption === 'wordPress' || self.environmentOption === 'drupal';
     },
     type: 'input',
     name: 'themeName',
@@ -25,7 +25,7 @@ var foldersPrompt = function foldersPrompt() {
     default: 'My Theme'
   }, {
     when: function (answers) {
-      return self.environmentOption === 'wordpress';
+      return self.environmentOption === 'wordPress';
     },
     type: 'confirm',
     name: 'customStyle',

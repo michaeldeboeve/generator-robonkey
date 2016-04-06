@@ -59,7 +59,6 @@ var environmentPrompt = function environmentPrompt() {
           this.environmentName = 'Laravel';
         break;
       }
-
       done();
     }.bind(this));
   }

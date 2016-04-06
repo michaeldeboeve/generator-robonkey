@@ -11,7 +11,6 @@ var cssPostPrompt = function cssPostPrompt() {
   this.log(printTitle('postCSS'))
   var done = this.async();
   var self = this;
-  console.log(self.gridOption);
   this.prompt([{
     type: 'checkbox',
     name: 'postCssOption',

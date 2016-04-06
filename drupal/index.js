@@ -1,54 +1,151 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var git = require('simple-git');
 
-var DrupalGenerator = yeoman.generators.Base.extend({
-    init: function() {
-        this.on('end', function() {
-            if (!this.options['skip-install']) {
-                this.getDrupal(this.drupalVersion);
-            }
-        });
+var yeoman        = require('yeoman-generator'),
+    yosay         = require('yosay'),
+    fs            = require('fs'),
+    chalk         = require('chalk'),
+    path          = require('path'),
+    mkdirp        = require('mkdirp');
+
+module.exports = yeoman.Base.extend({
+
+  drupalPrompt: function(){
+    var done = this.async(),
+        self = this;
+
+    var drupal6 = '6.38',
+        drupal7 = '7.43',
+        drupal8 = '8.0.6';
+
+    this.prompt([{
+      name: 'mainDir',
+      message: 'Where to place Drupal?',
+      default: 'website'
+    }, {
+      name: 'themeName',
+      message: 'Name of the theme you want to use',
+      default: 'mytheme'
     },
+    // {
+    //   name: 'themeBoilerplate',
+    //   message: 'Starter theme (please provide an archive link)',
+    //   filter: function (input) {
+    //     return input.replace(/\ /g, '').toLowerCase()
+    //   }
+    // },
+    {
+      name: 'assetsDir',
+      message: 'Name your assets folder:',
+      default: 'assets'
+    }, {
+      name: 'jsDir',
+      message: 'Name your javascript directory:',
+      default: 'js'
+    }, {
+      name: 'cssDir',
+      message: 'Name your styles directory:',
+      default: 'css'
+    }, {
+      name: 'imgDir',
+      message: 'Name your images directory:',
+      default: 'img'
+    }, {
+      name: 'fontDir',
+      message: 'Name your fonts directory:',
+      default: 'fonts'
+    }, {
+      name: 'libDir',
+      message: 'Name your libraries directory (css/js)',
+      default: 'lib'
+    }, {
+      type: 'list',
+      name: 'drupalVersion',
+      message: 'Which version of Drupal do you want?',
+      choices: [drupal6, drupal7, drupal8, 'Specify a version'],
+      default: drupal7
+    }, {
+      when: function(answers){
+        return answers.drupalVersion === 'Specify a version'
+      },
+      name: 'drupalVersion',
+      message: 'Specify a Drupal version (0.0.0)',
+      default: '0.0.0'
+    }], function (answers) {
+      self.mainDir = answers.mainDir;
+      self.assetsDir = answers.assetsDir;
+      self.jsDir = answers.jsDir;
+      self.cssDir = answers.cssDir;
+      self.imgDir = answers.imgDir;
+      self.fontDir = answers.fontDir;
+      self.libDir = answers.libDir;
+      self.themeNameOriginal = answers.themeName;
+      self.themeName = answers.themeName;
+      self.themeOriginalURL = answers.themeBoilerplate;
+      self.themeBoilerplate = answers.themeBoilerplate;
+      self.drupalVersion = answers.drupalVersion;
 
-    askFor: function() {
-        var done = this.async();
+      // var tarballLink = (/[.]*archive\/[.]*.*.tar.gz/).test(answers.themeBoilerplate)
+      // if (!tarballLink) {
+      //   // if the user gave the repo url we add the end of the url. we assume he wants the master branch
+      //   var lastChar = answers.themeBoilerplate.substring(answers.themeBoilerplate.length - 1)
+      //   if (lastChar === '/') {
+      //     answers.themeBoilerplate = answers.themeBoilerplate+'archive/master.tar.gz'
+      //   }
+      //   else {
+      //     answers.themeBoilerplate = answers.themeBoilerplate+'/archive/master.tar.gz'
+      //   }
+      // }
 
-        this.log(this.yeoman);
-        this.log(chalk.magenta('You\'re using the Drupal generator'));
+      done();
+    }.bind(this));
+  },
 
-        var prompts = [{
-            type: 'list',
-            name: 'drupalVersion',
-            message: 'What version of Drupal would you like to install?',
-            choices: ['6', '7', '8'],
-            default: '7'
-        }];
+  drupalInstall: function(){
+    var done = this.async(),
+        self = this;
 
-        this.prompt(prompts, function(props) {
-            this.drupalVersion = props.drupalVersion;
+    this.log.writeln('Let\'s download the framework, shall we?');
+    this.log.writeln('Downloading Drupal version ' + self.drupalVersion);
+    this.extract('https://github.com/drupal/drupal/archive/' + self.drupalVersion + '.tar.gz', './', function(){
+      fs.rename('drupal-' + self.drupalVersion, self.mainDir);
+      done();
+    });
+  },
 
-            done();
-        }.bind(this));
-    },
+  drupalInstallTheme: function(){
+    var done = this.async(),
+        self = this;
 
-    getDrupal: function(drupalVersion) {
-        if (!drupalVersion) return false;
-        var drupal6Repo = 'https://github.com/drupal/drupal.git -b 6.x',
-            drupal7Repo = 'https://github.com/drupal/drupal.git -b 7.x',
-            drupal8Repo = 'https://github.com/drupal/drupal.git -b 8.x';
+    var drupalThemes = self.mainDir + '/themes/';
+    var themeLocation = drupalThemes + self.themeName;
+    mkdirp(themeLocation + '/' + self.assetsDir + '/' + self.jsDir + '/' + self.libDir);
+    mkdirp(themeLocation + '/' + self.assetsDir + '/' + self.cssDir + '/' + self.libDir);
+    mkdirp(themeLocation + '/' + self.assetsDir + '/' + self.imgDir);
+    mkdirp(themeLocation + '/' + self.assetsDir + '/' + self.fontDir);
+    // this.log.writeln('First let\'s remove the built-in themes we will not use')
+    // // remove the existing themes
+    // fs.readdir(drupalThemes, function(err, files) {
+    //   if (typeof files != 'undefined' && files.length !== 0) {
+    //     files.forEach(function(file) {
+    //       var pathFile = fs.realpathSync(drupalThemes + file),
+    //           isDirectory = fs.statSync(pathFile).isDirectory()
+    //
+    //       if (isDirectory) {
+    //           rimraf.sync(pathFile)
+    //           self.log.writeln('Removing ' + pathFile)
+    //       }
+    //     })
+    //   }
+    //
+    //   self.log.writeln('')
+    //   self.log.writeln('Now we download the theme')
+    //
+    //   // create the theme
+    //   self.extract(self.themeBoilerplate + '/archive/master.tar.gz', drupalThemes, function(){
+    //     fs.rename(drupalThemes + 'bones-master', drupalThemes + self.themeName);
+    //     done();
+    //   });
+    // })
+  }
 
-        console.log('Instaling Drupal ' + drupalVersion + '. Please wait...');
-        git().clone('https://github.com/drupal/drupal.git -b --single-branch ' + drupalVersion + '.x', 'hopla', function(error) {
-            if (error) console.log('There was a problem in the instalation. Please try again.');
-            else console.log('Installed Drupal succesfully, enjoy it!');
-        });
-
-        return false;
-    }
 });
-
-module.exports = DrupalGenerator;
