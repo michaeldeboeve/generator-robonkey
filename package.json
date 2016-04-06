@@ -34,6 +34,9 @@
     "yo": "^1.4.6",
     "yosay": "^1.0.3"
   },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  },
   "files": [
     "app"
   ]
