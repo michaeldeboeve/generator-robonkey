@@ -1,7 +1,7 @@
 {
   "name": "generator-robonkey",
-  "version": "0.2.4",
-  "description": "A Yeoman front-end application generator for Gulp, Jade/Nunjucks, Sass/Stylus/Less, Coffeescript, PostCSS, Modernizr, Custom Icon Font Generator, BrowserSync, and some JavaScript and Sass/Stylus/Less libraries to choose from",
+  "version": "0.2.5",
+  "description": "A Yeoman front-end application generator for Gulp, Jade/Nunjucks, Sass/Stylus/Less, Coffeescript, PostCSS, Modernizr, Custom Icon Font Generator, BrowserSync, and some JavaScript and Sass/Stylus/Less libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,12 @@
     "modernizr",
     "iconfont",
     "superlatief",
-    "robonkey"
+    "robonkey",
+    "drupal",
+    "wordpress",
+    "codeigniter",
+    "express",
+    "laravel"
   ],
   "author": "Michaël de Boevé",
   "contributors": [
@@ -28,11 +33,9 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.0.0",
-    "glob-fs": "^0.1.6",
     "rimraf": ">=2.1.4",
     "semver": ">=2.0.10",
     "simple-git": "^1.28.0",
-    "tar-fs": "^1.12.0",
     "yeoman-generator": "^0.19.2",
     "yo": "^1.4.6",
     "yosay": "^1.0.3"
@@ -45,7 +48,6 @@
     "codeigniter",
     "drupal",
     "express",
-    "helpers",
     "laravel",
     "wordpress"
   ]

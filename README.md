@@ -15,6 +15,7 @@
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Options](#options)
+- [Subgenerators](#subgenerators)
 - [To Do](#to-do)
 - [Docs](#docs)
 
@@ -48,6 +49,8 @@
 - [Modernizr Builder](https://github.com/doctyper/gulp-modernizr)
 
 
+
+
 ## Getting Started
 
 Install yo
@@ -70,13 +73,25 @@ $ cd yourapp
 $ yo robonkey
 ```
 
+## Subgenerators
+
+Subgenerators for Express, WordPress, Drupal, CodeIgniter and Laravel are available and should be run before the main generator.
+
+```sh
+$ yo robonkey:express
+$ yo robonkey:wordpress
+$ yo robonkey:drupal
+$ yo robonkey:codeigniter
+$ yo robonkey:laravel
+```
+
 ## To Do
 
 - Priority:
 	- Update docs
 
 - maybe further down the road
-	- subgenerators
+	- subgenerator for wordpress drupal theme
 	- …
 
 
