@@ -65,35 +65,15 @@ module.exports = yeoman.Base.extend({
         message: 'Where to place WordPress?',
         default: 'website'
       }, {
-        name: 'themeName',
-        message: 'Name of the theme you want to use',
-        default: 'mytheme'
-      }, {
-        name: 'themeBoilerplate',
-        message: 'Starter theme (please provide a github link)',
-        default: 'https://github.com/eddiemachado/bones',
-        filter: function (input) {
-          return input.replace(/\ /g, '').toLowerCase()
-        }
+        type: 'confirm',
+        name: 'removeDefaultThemes',
+        message: 'Remove default themes?',
+        default: false
       }], function (answers) {
         self.mainDir = answers.mainDir;
-        self.themeNameOriginal = answers.themeName;
-        self.themeName = answers.themeName;
-        self.themeOriginalURL = answers.themeBoilerplate;
-        self.themeBoilerplate = answers.themeBoilerplate;
         self.wordpressVersion = answers.wordpressVersion;
-
-        var tarballLink = (/[.]*archive\/[.]*.*.tar.gz/).test(answers.themeBoilerplate)
-        if (!tarballLink) {
-          // if the user gave the repo url we add the end of the url. we assume he wants the master branch
-          var lastChar = answers.themeBoilerplate.substring(answers.themeBoilerplate.length - 1)
-          if (lastChar === '/') {
-            answers.themeBoilerplate = answers.themeBoilerplate+'archive/master.tar.gz'
-          }
-          else {
-            answers.themeBoilerplate = answers.themeBoilerplate+'/archive/master.tar.gz'
-          }
-        }
+        self.installTheme = answers.installTheme;
+        self.removeDefaultThemes = answers.removeDefaultThemes;
 
         done();
       }.bind(this));
@@ -114,37 +94,29 @@ module.exports = yeoman.Base.extend({
       });
     },
 
-    wpInstallTheme: function(){
+    wpRemoveDefaultThemes: function(){
       var done = this.async(),
-          self = this
+          self = this;
 
       var wpThemes = self.mainDir + '/wp-content/themes/';
-      var themeLocation = wpThemes + self.themeName;
 
-      this.log('First let\'s remove the built-in themes we will not use')
-      // remove the existing themes
-      fs.readdir(wpThemes, function(err, files) {
-        if (typeof files != 'undefined' && files.length !== 0) {
-          files.forEach(function(file) {
-            var pathFile = fs.realpathSync(wpThemes + file),
+      if(self.removeDefaultThemes === true) {
+        this.log('First let\'s remove the built-in themes we will not use');
+        // remove the existing themes
+        fs.readdir(wpThemes, function(err, files) {
+          if (typeof files != 'undefined' && files.length !== 0) {
+            files.forEach(function(file) {
+              var pathFile = fs.realpathSync(wpThemes + file),
                 isDirectory = fs.statSync(pathFile).isDirectory()
 
-            if (isDirectory) {
-                rimraf.sync(pathFile)
-                self.log.writeln('Removing ' + pathFile)
-            }
-          })
-        }
-
-        self.log('Now we download the theme')
-
-        // create the theme
-        self.extract(self.themeBoilerplate + '/archive/master.tar.gz', wpThemes, function(){
-          fs.rename(wpThemes + '/bones-master', wpThemes + self.themeName, function(){
-          });
-          done();
+              if (isDirectory) {
+                rimraf.sync(pathFile);
+                self.log.writeln('Removing ' + pathFile);
+              }
+            });
+          }
         });
-      })
+      }
     }
   }
 });

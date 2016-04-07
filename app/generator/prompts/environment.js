@@ -21,15 +21,15 @@ var environmentPrompt = function environmentPrompt() {
     this.prompt([{
       type: 'confirm',
       name: 'continueSetup',
-      message: 'Continue',
+      message: 'Continue?',
       default: true
     }], function (answers) {
       self.environmentOption = 'static';
       self.environmentName = 'Static Website';
 
-      // if(answers.continueSetup === false) {
-      //   this.spawnCommand('');
-      // }
+      if(answers.continueSetup === false) {
+        // new Error(‘user cancelled');
+      }
       done();
     }.bind(this));
   }
