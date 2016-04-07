@@ -1,6 +1,6 @@
 {
   "name": "generator-robonkey",
-  "version": "0.2.9",
+  "version": "0.3.0-alpha",
   "description": "A front-end application generator for Gulp, Templating, CSS Preprocessors, Coffeescript, PostCSS, Modernizr, Icon Font Generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "main": "index.js",
