@@ -30,7 +30,19 @@ var wordpressFiles = function wordpressFiles() {
     this.fs.copyTpl(wpRoot + '/sidebar.php', wpDest + '/sidebar.php', this.templateContext);
     this.fs.copyTpl(wpRoot + '/single.php', wpDest + '/single.php', this.templateContext);
     this.fs.copyTpl(wpRoot + '/style.css', wpDest + '/style.css', this.templateContext);
-    
+
+    switch(this.preproOption) {
+      case 'sass':
+        this.fs.copy(wpRoot + '/wp-core.css', destRoot + '/src/scss/base/_wp-core.scss');
+      break;
+      case 'stylus':
+        this.fs.copy(wpRoot + '/wp-core.css', destRoot + '/src/stylus/base/wp-core.styl');
+      break;
+      case 'less':
+        this.fs.copy(wpRoot + '/wp-core.css', destRoot + '/src/less/base/wp-core.less');
+      break;
+    }
+
   }
 
 };

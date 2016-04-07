@@ -20,7 +20,8 @@
 @import "base/mixins/**/*";<% } %>
 
 @import "base/grid";
-@import "base/typography";
+@import "base/typography";<% if(wpBlankTheme) { %>
+@import "base/wp-core";<% } %>
 
 
 
