@@ -16,32 +16,8 @@ var foldersPrompt = function foldersPrompt() {
   var self = this;
 
   this.prompt([{
-    when: function (answers) {
-      return self.environmentOption === 'wordPress' || self.environmentOption === 'drupal';
-    },
-    type: 'input',
-    name: 'themeName',
-    message: 'What is the name of your theme?',
-    default: 'My Theme'
-  }, {
-    when: function (answers) {
-      return self.environmentOption === 'wordPress';
-    },
-    type: 'confirm',
-    name: 'customStyle',
-    message: 'Create a custom style.css in your theme directory?\n' + chalk.bgRed.white(' Warning: ') + chalk.red(' This will delete the existing file!'),
-    default: false
-  }, {
-    type: 'confirm',
-    name: 'defaultDirs',
-    message: 'Use default output directory?',
-    default: true
-  }, {
-    when: function (answers) {
-      return answers.defaultDirs === false;
-    },
     name: 'mainDir',
-    message: 'Name your output directory:',
+    message: 'Name your main directory:',
     default: function (answers) {
       switch (self.environmentOption){
          case 'express':
@@ -54,104 +30,45 @@ var foldersPrompt = function foldersPrompt() {
     }
   }, {
     when: function (answers) {
-      return answers.defaultDirs === false;
+      return self.environmentOption === 'wordpress' || self.environmentOption === 'drupal';
     },
-    name: 'assetsDir',
-    message: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'Name your public folder:'
-         break;
-
-         case 'codeigniter':
-          return 'Name your public folder:'
-         break;
-
-         default:
-          return 'Name your assets folder:'
-      };
-    },
-    default: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'public'
-         break;
-
-         case 'codeigniter':
-          return 'public'
-         break;
-
-         case 'laravel':
-          return 'public'
-         break;
-
-         default:
-          return 'assets'
-      };
-    }
+    type: 'input',
+    name: 'themeName',
+    message: 'What is the name of your theme?',
+    default: 'mytheme'
   }, {
     when: function (answers) {
-      return answers.defaultDirs === false;
+      return self.environmentOption === 'wordpress';
     },
+    type: 'confirm',
+    name: 'customStyle',
+    message: 'Create a custom style.css in your theme directory?\n' + chalk.bgRed.white(' Warning: ') + chalk.red(' This will delete the existing file!'),
+    default: false
+  }, {
+    name: 'assetsDir',
+    message: 'Name your assets folder:',
+    default: 'assets'
+  }, {
     type: 'input',
     name: 'jsDir',
     message: 'Name your javascript directory:',
-    default: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'javascripts'
-         break;
-
-         default:
-          return 'js'
-      };
-    }
+    default: 'js'
   }, {
-    when: function (answers) {
-      return answers.defaultDirs === false;
-    },
     type: 'input',
     name: 'cssDir',
     message: 'Name your styles directory:',
-    default: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'stylesheets'
-         break;
-
-         default:
-          return 'css'
-      };
-    }
+    default: 'css'
   }, {
-    when: function (answers) {
-      return answers.defaultDirs === false;
-    },
     type: 'input',
     name: 'imgDir',
     message: 'Name your images directory:',
-    default: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'images'
-         break;
-
-         default:
-          return 'img'
-      };
-    }
+    default: 'img'
   }, {
-    when: function (answers) {
-      return answers.defaultDirs === false;
-    },
     type: 'input',
     name: 'fontDir',
     message: 'Name your fonts directory:',
     default: 'fonts'
   }, {
-    when: function (answers) {
-      return answers.defaultDirs === false;
-    },
     type: 'input',
     name: 'libDir',
     message: 'Name your libraries directory (css/js):',

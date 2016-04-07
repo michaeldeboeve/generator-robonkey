@@ -1,5 +1,5 @@
-extends templates/base
-
+extends templates/layout
+<% if(environmentOption !== 'express') { %>
 
 //- Variables
 block append vars
@@ -13,11 +13,6 @@ block append vars
 //-   - var useTwitterMetaTags     = true
 //-   - var useFacebookMetaTags   = true
 //- 
-//- 
-//- block append favicons
-//-   - var useCustomFaviconPath   = false
-//-   - var useAppleIcons         = false
-
 
 //- Extra Styles
 //- block prepend headerStyles
@@ -38,8 +33,8 @@ block append vars
 
 
 
+<% } %>
 
-//- The Content
 block contentMain
   include templates/views/sections/header
   //- include tools/kitchensink

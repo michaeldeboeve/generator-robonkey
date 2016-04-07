@@ -17,17 +17,17 @@ var environmentCheckPrompt = function environmentCheckPrompt() {
   var self = this;
 
 
-  function runFramework(name, key) {
+  function runFramework(name, environment) {
     self.log(printTitle(' ' + name + ' '));
     self.prompt([{
       type: 'confirm',
       name: 'skipEnvironment',
-      message: chalk.bgGreen.white( ' ' + name + ' is detected. Skip environment prompt? '),
+      message: chalk.bgGreen.white( ' ' + name + ' is detected. Continue? '),
       default: true
     }], function (answers) {
       // console.log(answers.skipEnvironment);
       self.skipEnvironment = answers.skipEnvironment;
-      self.environmentOption = key;
+      self.environmentOption = environment;
       self.environmentName = name;
       self.environmentCheckPrompt = answers;
       done();
@@ -82,7 +82,7 @@ var environmentCheckPrompt = function environmentCheckPrompt() {
       switch(framework){
         case 'WordPress':
           // console.log('Wordpress');
-          runFramework('WorPpress', 'wordpress');
+          runFramework('WordPress', 'wordpress');
         break;
 
         case 'Drupal':

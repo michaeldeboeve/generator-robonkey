@@ -11,54 +11,25 @@ var chalk       = require('chalk'),
 var environmentPrompt = function environmentPrompt() {
   var self = this;
   if(!this.skipEnvironment) {
-    this.log(printTitle('Environment'))
+    this.log(printTitle('Environment'));
+
+    var environmentMessage =  "This will install a static website setup.\n" +
+                              "If you want a framework, exit and run yo robonkey:<framework> first.\n" +
+                              "The available options are express, wordpress, drupal, codeigniter, laravel.";
+    this.log(environmentMessage);
     var done = this.async();
-    self.prompt([{
-      type: 'list',
-      name: 'environmentOption',
-      message: 'Which environment are you using?\nThis will compile everything in the right directories.',
-      choices: ['None, just a static website', 'Node + Express', 'Wordpress', 'Drupal', 'CodeIgniter', 'Laravel'],
-      filter: function(val) {
-        var filterMap = {
-          'None, just a static website': 'static',
-          'Node + Express': 'express',
-          'Wordpress': 'wordpress',
-          'Drupal': 'drupal',
-          'CodeIgniter': 'codeigniter',
-          'Laravel': 'laravel'
-        };
-
-        return filterMap[val];
-      }
+    this.prompt([{
+      type: 'confirm',
+      name: 'continueSetup',
+      message: 'Continue',
+      default: true
     }], function (answers) {
-      this.environmentOption = answers.environmentOption;
-      this.environmentPrompt = answers;
+      self.environmentOption = 'static';
+      self.environmentName = 'Static Website';
 
-      switch (answers.environmentOption) {
-        case 'static':
-          this.environmentName = 'Static Website';
-        break;
-
-        case 'express':
-          this.environmentName = 'Express';
-        break;
-
-        case 'wordpress':
-          this.environmentName = 'Wordpress';
-        break;
-
-        case 'drupal':
-          this.environmentName = 'Drupal';
-        break;
-
-        case 'codeigniter':
-          this.environmentName = 'CodeIgniter';
-        break;
-
-        case 'laravel':
-          this.environmentName = 'Laravel';
-        break;
-      }
+      // if(answers.continueSetup === false) {
+      //   this.spawnCommand('');
+      // }
       done();
     }.bind(this));
   }

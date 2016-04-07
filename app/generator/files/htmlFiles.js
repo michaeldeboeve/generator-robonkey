@@ -10,26 +10,49 @@ var mkdirp = require('mkdirp'),
 var htmlFiles = function htmlFiles() {
   var destRoot = this.destinationRoot(),
       sourceRoot = this.sourceRoot();
-
-  if(this.environmentOption === 'static') {
+  if(this.environmentOption === 'static' || this.environmentOption === 'express') {
     switch (this.templateOption){
       case 'jade':
-      this.fs.copy(sourceRoot + '/src/jade', destRoot + '/src/jade');
-      this.fs.copyTpl(sourceRoot + '/src-tpl/jade/templates/base.jade', destRoot + '/src/jade/templates/base.jade', this.templateContext);
+      console.log(this.environmentOption);
+      console.log(this.templateOption);
+        if(this.environmentOption === 'express') {
+          destRoot = destRoot + '/' + this.mainDir + '/views';
+        } else {
+          destRoot = destRoot + '/src/jade';
+        }
+
+        this.fs.copy(sourceRoot + '/src/jade', destRoot);
+        this.fs.copyTpl(sourceRoot + '/src-tpl/jade/index.jade', destRoot + '/index.jade', this.templateContext);
+        this.fs.copyTpl(sourceRoot + '/src-tpl/jade/templates/layout.jade', destRoot + '/templates/layout.jade', this.templateContext);
       break;
 
       case 'nunjucks':
-        this.fs.copy(sourceRoot + '/src/nunjucks', destRoot + '/src/nunjucks');
-        this.fs.copyTpl(sourceRoot + '/src-tpl/nunjucks/base/base.html', destRoot + '/src/nunjucks/base/base.html', this.templateContext);
+      if(this.environmentOption === 'express') {
+        destRoot = destRoot + '/' + this.mainDir + '/views';
+      } else {
+        destRoot = destRoot + '/src/nunjucks';
+      }
+        this.fs.copy(sourceRoot + '/src/nunjucks', destRoot);
+        this.fs.copyTpl(sourceRoot + '/src-tpl/nunjucks/base/layout.html', destRoot + '/base/layout.html', this.templateContext);
       break;
 
       case 'handlebars':
-      this.fs.copy(sourceRoot + '/src/handlebars', destRoot + '/src/handlebars');
-      this.fs.copyTpl(sourceRoot + '/src-tpl/handlebars/index.html', destRoot + '/src/handlebars/index.html', this.templateContext);
+      if(this.environmentOption === 'express') {
+        destRoot = destRoot + '/' + this.mainDir + '/views';
+      } else {
+        destRoot = destRoot + '/src/handlebars';
+      }
+        this.fs.copy(sourceRoot + '/src/handlebars', destRoot);
+        this.fs.copyTpl(sourceRoot + '/src-tpl/handlebars/index.html', destRoot + '/index.html', this.templateContext);
       break;
 
       case 'haml':
-        this.fs.copyTpl(sourceRoot + '/src-tpl/haml/index.haml', destRoot + '/src/haml/index.haml', this.templateContext);
+      if(this.environmentOption === 'express') {
+        destRoot = destRoot + '/' + this.mainDir + '/views';
+      } else {
+        destRoot = destRoot + '/src/haml';
+      }
+        this.fs.copyTpl(sourceRoot + '/src-tpl/haml/index.haml', destRoot, this.templateContext);
       break;
 
       default:

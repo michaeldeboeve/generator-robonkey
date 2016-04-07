@@ -8,8 +8,6 @@ var yeoman        = require('yeoman-generator'),
     _             = require('lodash'),
     grabFiles     = require('./helpers/grabFiles');
 
-'use strict';
-
 // Order to load and run generator config files based on their name
 var order = [
   /* Prompts */
@@ -19,9 +17,6 @@ var order = [
   'project',
   'environmentCheck',
   'environment',
-  'wordpressCheckLatest',
-  'wordpressPrompt',
-  'wordpressInstall',
   'folders',
   'html',
   'css',

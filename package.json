@@ -42,6 +42,11 @@
   },
   "files": [
     "app",
+    "codeigniter",
+    "drupal",
+    "express",
+    "helpers",
+    "laravel",
     "wordpress"
   ]
 }

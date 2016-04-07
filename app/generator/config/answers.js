@@ -53,6 +53,8 @@ var answersConfig = function answersConfig() {
     //Environment
     if (this.environmentInstalled) {
       this.environmentOption = this.environmentInstalled;
+    } else if(!this.answers.environmentOption) {
+      this.environmentOption = 'static';
     } else {
       this.environmentOption = this.answers.environmentOption;
     }
@@ -66,59 +68,23 @@ var answersConfig = function answersConfig() {
     }
     this.customStyle = this.answers.customStyle;
 
+    this.mainDir = this.answers.mainDir;
+    this.cssDir = this.answers.cssDir;
+    this.jsDir = this.answers.jsDir;
+    this.imgDir = this.answers.imgDir;
+    this.libDir = this.answers.libDir;
+    this.fontDir = this.answers.fontDir;
+    this.browserConfigAssets = '/' + this.answers.assetsDir + '/' + this.imgDir;
 
-    // Folders
-    if(this.answers.defaultDirs) {
-      switch (this.environmentOption) {
+    switch (this.environmentOption) {
+      case 'express':
+      case 'codeigniter':
+      case 'laravel':
+        this.assetsDir = 'public/' + this.answers.assetsDir;
+      break;
 
-        case 'express':
-          this.mainDir = 'app';
-          this.assetsDir = 'public';
-          this.cssDir = 'stylesheets';
-          this.jsDir = 'javascripts';
-          this.imgDir = 'images';
-          this.libDir = 'lib';
-          this.fontDir = 'fonts';
-        break;
-
-        case 'codeigniter':
-          this.mainDir = 'website';
-          this.assetsDir = 'public';
-          this.cssDir = 'css';
-          this.jsDir = 'js';
-          this.imgDir = 'img';
-          this.libDir = 'lib';
-          this.fontDir = 'fonts';
-        break;
-
-        case 'laravel':
-          this.mainDir = 'website';
-          this.assetsDir = 'public';
-          this.cssDir = 'css';
-          this.jsDir = 'js';
-          this.imgDir = 'img';
-          this.libDir = 'lib';
-          this.fontDir = 'fonts';
-        break;
-
-        default:
-          this.mainDir = 'website';
-          this.assetsDir = 'assets';
-          this.cssDir = 'css';
-          this.jsDir = 'js';
-          this.imgDir = 'img';
-          this.libDir = 'lib';
-          this.fontDir = 'fonts';
-
-      }
-    } else {
-      this.mainDir = this.answers.mainDir;
-      this.assetsDir = this.answers.assetsDir;
-      this.cssDir = this.answers.cssDir;
-      this.jsDir = this.answers.jsDir;
-      this.imgDir = this.answers.imgDir;
-      this.libDir = this.answers.libDir;
-      this.fontDir = this.answers.fontDir;
+      default:
+        this.assetsDir = this.answers.assetsDir;
     }
 
 
@@ -126,9 +92,6 @@ var answersConfig = function answersConfig() {
     switch (this.environmentOption) {
 
       case 'express':
-        this.browsersyncOption = true;
-      break;
-
       case 'static':
         this.browsersyncOption = true;
       break;
@@ -177,6 +140,9 @@ var answersConfig = function answersConfig() {
 
     //Html
     this.templateOption = this.answers.templateOption;
+    if(this.environmentOption === 'express') {
+      this.templateOption = 'jade';
+    }
 
 
     // Css
@@ -285,6 +251,7 @@ var answersConfig = function answersConfig() {
       fontDirPath: this.fontDirPath,
       cssLibDirPath: this.cssLibDirPath,
       jsLibDirPath: this.jsLibDirPath,
+      browserConfigAssets: this.browserConfigAssets,
 
       // Styles
       preproOption: this.preproOption,
