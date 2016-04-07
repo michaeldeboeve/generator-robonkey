@@ -11,7 +11,6 @@ var projectFiles = function projectFiles() {
   var destRoot = this.destinationRoot(),
       sourceRoot = this.sourceRoot();
 
-
   mkdirp(destRoot + '/src');
   mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.jsDirPath);
   mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.jsLibDirPath);

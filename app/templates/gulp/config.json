@@ -7,7 +7,7 @@
     "tests": [],
     "output": "modernizr-custom.js",
     "options": [ "setClasses", "addTest", "testProp", "fnBind" ],
-    "build": "<%= rootFolder %><%= templateDest %><%= jsLibDirPath %>/"
+    "build": "<%= rootFolder %><%= templateDest %><%= jsLibDirPathGulp %>/"
   },<% } if(customIconfontOption) { %>"iconFont": {
     "name": "<%= customIconFontName %>",
     "types": ["ttf", "eot", "woff", "woff2", "svg"]
@@ -17,13 +17,13 @@
   "scripts": {<% if(javascriptOption === 'vanilla'){ %>
     "src": "<%= rootFolder %>src/js/**/*.js",<% } if(javascriptOption === 'coffee'){ %>
     "src": "<%= rootFolder %>src/coffee/**/*.coffee",<% } %>
-    "build": "<%= rootFolder %><%= templateDest %><%= jsDirPath %>/",
-    "src_lib": "<%= rootFolder %><%= templateDest %><%= jsLibDirPath %>/**/*.js",
-    "build_lib": "<%= rootFolder %><%= templateDest %><%= jsLibDirPath %>/"
+    "build": "<%= rootFolder %><%= templateDest %><%= jsDirPathGulp %>/",
+    "src_lib": "<%= rootFolder %><%= templateDest %><%= jsLibDirPathGulp %>/**/*.js",
+    "build_lib": "<%= rootFolder %><%= templateDest %><%= jsLibDirPathGulp %>/"
   },
   "images": {
     "src": "<%= rootFolder %>src/img/**/*",
-    "build": "<%= rootFolder %><%= templateDest %><%= imgDirPath %>"
+    "build": "<%= rootFolder %><%= templateDest %><%= imgDirPathGulp %>"
   },
   "styles": {<% if(preproOption === 'sass'){ %>
     "src": "<%= rootFolder %>src/scss/style.scss",
@@ -32,32 +32,32 @@
     "src_files": "<%= rootFolder %>src/stylus/**/*.styl",<% } if(preproOption === 'less'){ %>
     "src": "<%= rootFolder %>src/less/style.less",
     "src_files": "<%= rootFolder %>src/less/**/*.less",<% } %>
-    "build_srcsmap": "<%= rootFolder %><%= templateDest %><%= cssDirPath %>/",
-    "build": "<%= rootFolder %><%= templateDest %><%= cssDirPath %>/",
-    "src_lib": "<%= rootFolder %><%= templateDest %><%= cssLibDirPath %>/**/*.css",
-    "build_lib": "<%= rootFolder %><%= templateDest %><%= cssLibDirPath %>/"
+    "build_srcsmap": "<%= rootFolder %><%= templateDest %><%= cssDirPathGulp %>/",
+    "build": "<%= rootFolder %><%= templateDest %><%= cssDirPathGulp %>/",
+    "src_lib": "<%= rootFolder %><%= templateDest %><%= cssLibDirPathGulp %>/**/*.css",
+    "build_lib": "<%= rootFolder %><%= templateDest %><%= cssLibDirPathGulp %>/"
   },<% if(environmentOption === 'static'){ %>
   "html": {
     "src": "<%= rootFolder %><%= templateDest %>/**/*.html",
     "build": "<%= rootFolder %><%= templateDest %>/"
-  },<% } if(templateOption === 'jade'){ %>
+  },<% } if(templateOption === 'jade' && environmentOption === 'static'){ %>
   "jade": {
     "src": "<%= rootFolder %>src/jade/*.jade",
     "watch": "<%= rootFolder %>src/jade/**/*.jade",
     "build": "<%= rootFolder %><%= templateDest %>/"
-  },<% } if(templateOption === 'haml'){ %>
+  },<% } if(templateOption === 'haml' && environmentOption === 'static'){ %>
   "haml": {
     "src": "<%= rootFolder %>src/haml/*.haml",
     "watch": "<%= rootFolder %>src/haml/**/*.haml",
     "build": "<%= rootFolder %><%= templateDest %>/"
-  },<% } if(templateOption === 'handlebars'){ %>
+  },<% } if(templateOption === 'handlebars' && environmentOption === 'static'){ %>
   "handlebars": {
     "src": "<%= rootFolder %>src/handlebars/*.html",
     "watch": "<%= rootFolder %>src/handlebars/**/*.html",
     "watchdata": "<%= rootFolder %>src/handlebars/**/*.json",
     "partials": "<%=  rootFolder %>src/handlebars/partials",
     "build": "<%= rootFolder %><%= templateDest %>/"
-  },<% } if(templateOption === 'nunjucks'){ %>
+  },<% } if(templateOption === 'nunjucks' && environmentOption === 'static'){ %>
   "nunjucks": {
     "src": "<%= rootFolder %>src/nunjucks/pages/**/*.html",
     "watch": "<%= rootFolder %>src/nunjucks/**/*.html",
@@ -65,8 +65,8 @@
     "build": "<%= rootFolder %><%= templateDest %>/"
   },<% } %>
   "postcss": {
-    "src": "<%= rootFolder %><%= templateDest %><%= cssDirPath %>/style.css",
-    "build": "<%= rootFolder %><%= templateDest %><%= cssDirPath %>/"
+    "src": "<%= rootFolder %><%= templateDest %><%= cssDirPathGulp %>/style.css",
+    "build": "<%= rootFolder %><%= templateDest %><%= cssDirPathGulp %>/"
   },
   "font": {
     "src": "<%= rootFolder %>src/iconfont/svg/*.svg",

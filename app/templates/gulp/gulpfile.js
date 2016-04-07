@@ -50,13 +50,13 @@ gulp.task('default', [
   // watch for image changes
   gulp.watch(cfg.images.src, ['images']);
 
-  <% if(templateOption === 'jade'){ %>// watch for Jade changes, then reload
+  <% if(templateOption === 'jade' && environmentOption === 'static'){ %>// watch for Jade changes, then reload
   gulp.watch(cfg.jade.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
-  <% if(templateOption === 'haml'){ %>// watch for Haml changes, then reload
+  <% if(templateOption === 'haml' && environmentOption === 'static'){ %>// watch for Haml changes, then reload
   gulp.watch(cfg.haml.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
-  <% if(templateOption === 'nunjucks'){ %>// watch for Nunjucks changes, then reload
+  <% if(templateOption === 'nunjucks' && environmentOption === 'static'){ %>// watch for Nunjucks changes, then reload
   gulp.watch(cfg.nunjucks.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
-  <% if(templateOption === 'handlebars'){ %>// watch for Handlebars changes, then reload
+  <% if(templateOption === 'handlebars' && environmentOption === 'static'){ %>// watch for Handlebars changes, then reload
   gulp.watch(cfg.handlebars.watch, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;
   gulp.watch(cfg.handlebars.watchdata, ['html'])<% if(browsersyncOption){ %>.on('change', browserSync.reload)<% } %>;<% } %>
 });

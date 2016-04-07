@@ -1,6 +1,11 @@
-extends layout
+extends templates/layout
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+block contentMain
+  include templates/views/sections/header
+  
+  section.error
+    h1= message
+    h2= error.status
+    pre #{error.stack}
+    
+  include templates/views/sections/footer

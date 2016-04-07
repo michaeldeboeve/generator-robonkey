@@ -82,8 +82,11 @@ var answersConfig = function answersConfig() {
 
     switch (this.environmentOption) {
       case 'express':
-      case 'codeigniter':
+        this.assetsDir = 'public';
+      break;
+
       case 'laravel':
+      case 'codeigniter':
         this.assetsDir = 'public/' + this.answers.assetsDir;
       break;
 
@@ -131,15 +134,35 @@ var answersConfig = function answersConfig() {
         this.templateDest = this.mainDir;
     };
 
+    // Gulp Paths
+    this.cssDirPathGulp = '/' + this.assetsDir + '/' + this.cssDir;
+    this.jsDirPathGulp = '/' + this.assetsDir + '/' + this.jsDir;
+    this.imgDirPathGulp = '/' + this.assetsDir + '/' + this.imgDir;
+    this.fontDirPathGulp = '/' + this.assetsDir + '/' + this.fontDir;
+    this.cssLibDirPathGulp = this.cssDirPathGulp + '/' + this.libDir;
+    this.jsLibDirPathGulp = this.jsDirPathGulp + '/' + this.libDir;
 
     // Folders Locations
-    this.assetsDirPath = this.templateDest + '/' + this.assetsDir;
-    this.cssDirPath = '/' + this.assetsDir + '/' + this.cssDir;
-    this.jsDirPath = '/' + this.assetsDir + '/' + this.jsDir;
-    this.imgDirPath = '/' + this.assetsDir + '/' + this.imgDir;
-    this.fontDirPath = '/' + this.assetsDir + '/' + this.fontDir;
-    this.cssLibDirPath = this.cssDirPath + '/' + this.libDir;
-    this.jsLibDirPath = this.jsDirPath + '/' + this.libDir;
+    switch (this.environmentOption){
+      case 'express':
+        // No assets folder
+        this.cssDirPath = '/' + this.cssDir;
+        this.jsDirPath = '/' + this.jsDir;
+        this.imgDirPath = '/' + this.imgDir;
+        this.fontDirPath = '/' + this.fontDir;
+        this.cssLibDirPath = this.cssDirPath + '/' + this.libDir;
+        this.jsLibDirPath = this.jsDirPath + '/' + this.libDir;
+      break;
+
+      default:
+        this.cssDirPath = '/' + this.assetsDir + '/' + this.cssDir;
+        this.jsDirPath = '/' + this.assetsDir + '/' + this.jsDir;
+        this.imgDirPath = '/' + this.assetsDir + '/' + this.imgDir;
+        this.fontDirPath = '/' + this.assetsDir + '/' + this.fontDir;
+        this.cssLibDirPath = this.cssDirPath + '/' + this.libDir;
+        this.jsLibDirPath = this.jsDirPath + '/' + this.libDir;
+    }
+
 
 
     //Html
@@ -252,13 +275,18 @@ var answersConfig = function answersConfig() {
       assetsDir: this.assetsDir,
       templateDest: this.templateDest,
       assetsDir: this.assetsDir,
-      assetsDirPath: this.assetsDirPath,
       cssDirPath: this.cssDirPath,
       jsDirPath: this.jsDirPath,
       imgDirPath: this.imgDirPath,
       fontDirPath: this.fontDirPath,
       cssLibDirPath: this.cssLibDirPath,
       jsLibDirPath: this.jsLibDirPath,
+      cssDirPathGulp: this.cssDirPathGulp,
+      jsDirPathGulp: this.jsDirPathGulp,
+      imgDirPathGulp: this.imgDirPathGulp,
+      fontDirPathGulp: this.fontDirPathGulp,
+      cssLibDirPathGulp: this.cssLibDirPathGulp,
+      jsLibDirPathGulp: this.jsLibDirPathGulp,
       browserConfigAssets: this.browserConfigAssets,
 
       // Styles

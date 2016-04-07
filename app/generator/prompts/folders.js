@@ -68,9 +68,18 @@ var foldersPrompt = function foldersPrompt() {
     message: 'Theme Author URI',
     default: self.authorURI
   }, {
+    when: function (answers) {
+      return self.environmentOption !== 'express';
+    },
     name: 'assetsDir',
     message: 'Name your assets folder:',
-    default: 'assets'
+    default: function(answers) {
+      if (self.environmentOption === 'express') {
+        return 'public'
+      } else {
+        return 'assets'
+      }
+    }
   }, {
     type: 'input',
     name: 'jsDir',
