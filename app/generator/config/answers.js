@@ -46,7 +46,7 @@ var answersConfig = function answersConfig() {
     this.projectDescription = this.answers.projectDescription;
     this.projectVersion = this.answers.projectVersion;
     this.projectAuthor = this.answers.projectAuthor;
-    this.authorEmail = this.answers.authorEmail;
+    this.authorURI = this.answers.authorURI;
     this.projectLicense = 'MIT';
 
 
@@ -59,14 +59,18 @@ var answersConfig = function answersConfig() {
       this.environmentOption = this.answers.environmentOption;
     }
 
+    this.wpBlankTheme = this.answers.wpBlankTheme;
+    this.themeNameSpace =this.answers.themeNameSpace;
+    this.themeAuthor = this.answers.themeAuthor;
+    this.themeAuthorURI = this.answers.themeAuthorURI;
 
     this.themeName = this.answers.themeName;
-    if(this.themeName) {
+    if(this.answers.themeName) {
       this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
     } else {
       this.themeFolder = this.themeName;
     }
-    this.customStyle = this.answers.customStyle;
+
 
     this.mainDir = this.answers.mainDir;
     this.cssDir = this.answers.cssDir;
@@ -236,6 +240,10 @@ var answersConfig = function answersConfig() {
       environmentOption: this.environmentOption,
       themeName: this.themeName,
       themeFolder: this.themeFolder,
+      wpBlankTheme: this.wpBlankTheme,
+      themeNameSpace: this.themeNameSpace,
+      themeAuthor: this.themeAuthor,
+      themeAuthorURI: this.themeAuthorURI,
       templateOption: this.templateOption,
       rootFolder: this.rootFolder,
       fontStyleOutputBase: this.fontStyleOutputBase,

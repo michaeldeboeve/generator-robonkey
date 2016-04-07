@@ -35,15 +35,38 @@ var foldersPrompt = function foldersPrompt() {
     type: 'input',
     name: 'themeName',
     message: 'What is the name of your theme?',
-    default: 'mytheme'
+    default: 'My Theme'
   }, {
     when: function (answers) {
       return self.environmentOption === 'wordpress';
     },
     type: 'confirm',
-    name: 'customStyle',
-    message: 'Create a custom style.css in your theme directory?\n' + chalk.bgRed.white(' Warning: ') + chalk.red(' This will delete the existing file!'),
-    default: false
+    name: 'wpBlankTheme',
+    message: 'Would you like to create a blank theme?',
+    default: true
+  }, {
+    when: function (answers) {
+      return answers.wpBlankTheme === true;
+    },
+    name: 'themeNameSpace',
+    message: 'Unique name-space for the theme (alphanumeric)?',
+    default: function( answers ) {
+        return answers.themeName.replace(/\W/g, '').toLowerCase();
+    }
+  }, {
+    when: function (answers) {
+      return answers.wpBlankTheme === true;
+    },
+    name: 'themeAuthor',
+    message: 'Theme Author',
+    default: self.projectAuthor
+  }, {
+    when: function (answers) {
+      return answers.wpBlankTheme === true;
+    },
+    name: 'themeAuthorURI',
+    message: 'Theme Author URI',
+    default: self.authorURI
   }, {
     name: 'assetsDir',
     message: 'Name your assets folder:',

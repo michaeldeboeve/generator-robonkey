@@ -35,6 +35,7 @@ var order = [
   'projectFiles',
   'gulpFiles',
   'bowerFiles',
+  'wordpressFiles',
   'h5bpFiles',
   'htmlFiles',
   'sassFiles',
@@ -43,7 +44,6 @@ var order = [
   'scriptFiles',
   'imageFiles',
   'fontFiles',
-  'wordpressFiles',
   /* Config */
   'install',  // Handle generator options and run `bower install & npm install`
   'end' // End Message and Gulp Command

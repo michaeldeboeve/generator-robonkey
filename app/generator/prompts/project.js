@@ -29,13 +29,17 @@ var projectPrompt = function projectPrompt() {
   }, {
     name: 'projectAuthor',
     message: 'Author:',
-    default: ''
+    default: 'John Appleseed'
   }, {
-    name: 'authorEmail',
-    message: 'Author\'s Email Address:',
-    default: ''
+    name: 'authorURI',
+    message: 'Author URI:',
+    default: function( answers ) {
+      return 'http://'+answers.projectAuthor.replace(/\W/g, '').toLowerCase()+'.me';
+    }
   }], function (answers) {
     this.projectPrompt = answers
+    this.projectAuthor = answers.projectAuthor;
+    this.authorURI = answers.authorURI;
 
     done();
   }.bind(this));
