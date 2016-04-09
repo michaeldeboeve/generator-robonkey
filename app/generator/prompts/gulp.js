@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var gulpPrompt = function gulpPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('Gulp'))
   var done = this.async();
   this.prompt([{

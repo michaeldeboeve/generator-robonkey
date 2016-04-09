@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var cssPrompt = function cssPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('Preprocessors'))
   var done = this.async();
   this.prompt([{

@@ -6,7 +6,8 @@ var yeoman        = require('yeoman-generator'),
     chalk         = require('chalk'),
     path          = require('path'),
     mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+    printTitle    = require('../app/helpers/printTitle'),
+    createConfig  = require('../app/helpers/createConfig');
 
 module.exports = yeoman.Base.extend({
 
@@ -45,19 +46,28 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
   },
 
-  writing: {
-    drupalInstall: function(){
-      this.log(printTitle('Installing Drupal'));
+  configuring: function () {
+    var done = this.async(),
+        self = this,
+        fileName = '.yo-rc.json',
+        fileLocation = this.destinationRoot()+ '/' + fileName;
 
-      var done = this.async(),
-          self = this;
+    createConfig(fileName, fileLocation, self.mainDir, 'drupal');
 
-      this.log('Downloading Drupal version ' + self.drupalVersion);
-      this.extract('https://github.com/drupal/drupal/archive/' + self.drupalVersion + '.tar.gz', './', function(){
-        fs.rename('drupal-' + self.drupalVersion, self.mainDir);
-        done();
-      });
-    }
+    done();
+  },
+
+  writing: function(){
+    this.log(printTitle('Installing Drupal'));
+
+    var done = this.async(),
+        self = this;
+
+    this.log('Downloading Drupal version ' + self.drupalVersion);
+    this.extract('https://github.com/drupal/drupal/archive/' + self.drupalVersion + '.tar.gz', './', function(){
+      fs.rename('drupal-' + self.drupalVersion, self.mainDir);
+      done();
+    });
   }
 
 });

@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var projectPrompt = function projectPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('Project Details'))
   var done = this.async();
   this.prompt([{

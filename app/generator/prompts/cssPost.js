@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var cssPostPrompt = function cssPostPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('postCSS'))
   var done = this.async();
   var self = this;

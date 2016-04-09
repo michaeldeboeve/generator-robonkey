@@ -9,24 +9,32 @@ var chalk       = require('chalk'),
     walk        = require('./../../helpers/walk');
 
 var foldersPrompt = function foldersPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle(this.environmentName + ' Folder Structure'))
   var done = this.async();
 
   var destRoot = this.destinationRoot();
   var self = this;
-
+  var dirSet = self.config.get('mainDir');
   this.prompt([{
     name: 'mainDir',
     message: 'Name your main directory:',
     default: function (answers) {
-      switch (self.environmentOption){
-         case 'express':
-          return 'app'
-         break;
+      if(dirSet) {
+        return dirSet;
+      }
+      else {
+        switch (self.environmentOption){
+           case 'express':
+            return 'app'
+           break;
 
-         default:
-          return 'website'
-      };
+           default:
+            return 'website'
+        }
+      }
     }
   }, {
     when: function (answers) {

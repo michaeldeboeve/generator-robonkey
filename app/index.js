@@ -13,7 +13,6 @@ var order = [
   /* Prompts */
   'intro',
   'existing', // Check for existing .yo-rc.json file
-  'defaults',
   'project',
   'environmentCheck',
   'environment',
@@ -30,11 +29,13 @@ var order = [
   'gulp',
   /* Config */
   'answers',  // Handle answers and them up for use in templates
-  'save',  // Save answers to .yo-rc.json file
+  'saveYorc',  // Save answers to .yo-rc.json file
+  'saveBower',  // Save bower.json and .bowerrc
+  'savePackage',  // Save package.json
+  'saveConfig',  // Save config.json
   /* Files */
   'projectFiles',
   'gulpFiles',
-  'bowerFiles',
   'wordpressFiles',
   'h5bpFiles',
   'htmlFiles',

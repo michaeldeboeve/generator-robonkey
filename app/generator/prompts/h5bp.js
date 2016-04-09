@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var h5bpPrompt = function h5bpPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   if(this.environmentOption === 'static') {
     this.log(printTitle('h5bp Extra\'s'))
     var done = this.async();

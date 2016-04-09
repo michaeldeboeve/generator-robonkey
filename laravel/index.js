@@ -6,7 +6,8 @@ var yeoman        = require('yeoman-generator'),
     chalk         = require('chalk'),
     path          = require('path'),
     mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+    printTitle    = require('../app/helpers/printTitle'),
+    createConfig  = require('../app/helpers/createConfig');
 
 module.exports = yeoman.Base.extend({
 
@@ -33,69 +34,36 @@ module.exports = yeoman.Base.extend({
       name: 'mainDir',
       message: 'Where to place Laravel?',
       default: 'website'
-    }
-    // , {
-    //   name: 'assetsDir',
-    //   message: 'Name your public folder:',
-    //   default: 'public'
-    // }, {
-    //   name: 'jsDir',
-    //   message: 'Name your javascript directory:',
-    //   default: 'js'
-    // }, {
-    //   name: 'cssDir',
-    //   message: 'Name your styles directory:',
-    //   default: 'css'
-    // }, {
-    //   name: 'imgDir',
-    //   message: 'Name your images directory:',
-    //   default: 'img'
-    // }, {
-    //   name: 'fontDir',
-    //   message: 'Name your fonts directory:',
-    //   default: 'fonts'
-    // }, {
-    //   name: 'libDir',
-    //   message: 'Name your libraries directory (css/js)',
-    //   default: 'lib'
-    // }
-    ], function (answers) {
+    }], function (answers) {
       self.mainDir = answers.mainDir;
-      // self.assetsDir = answers.assetsDir;
-      // self.jsDir = answers.jsDir;
-      // self.cssDir = answers.cssDir;
-      // self.imgDir = answers.imgDir;
-      // self.fontDir = answers.fontDir;
-      // self.libDir = answers.libDir;
       self.laravelVersion = answers.laravelVersion;
 
       done();
     }.bind(this));
   },
-   writing: {
-    laravelInstall: function(){
-      this.log(printTitle('Installing Laravel'));
 
-      var done = this.async(),
-          self = this;
+  configuring: function () {
+    var done = this.async(),
+        self = this,
+        fileName = '.yo-rc.json',
+        fileLocation = this.destinationRoot()+ '/' + fileName;
 
-      this.log('Downloading Laravel version ' + self.laravelVersion);
-      this.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
-        fs.rename('laravel-' + self.laravelVersion, self.mainDir);
-        done();
-      });
-    },
+    createConfig(fileName, fileLocation, self.mainDir, 'laravel');
 
-    // codegniterWebsiteStructure: function(){
-    //   var done = this.async(),
-    //       self = this;
-    //
-    //   var folderLocation = self.mainDir + '/' + self.assetsDir;
-    //   mkdirp(folderLocation + '/' + self.jsDir + '/' + self.libDir);
-    //   mkdirp(folderLocation + '/' + self.cssDir + '/' + self.libDir);
-    //   mkdirp(folderLocation + '/' + self.imgDir);
-    //   mkdirp(folderLocation + '/' + self.fontDir);
-    // }
-  }
+    done();
+  },
+
+  writing: function(){
+    this.log(printTitle('Installing Laravel'));
+
+    var done = this.async(),
+        self = this;
+
+    this.log('Downloading Laravel version ' + self.laravelVersion);
+    this.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
+      fs.rename('laravel-' + self.laravelVersion, self.mainDir);
+      done();
+    });
+  },
 
 });

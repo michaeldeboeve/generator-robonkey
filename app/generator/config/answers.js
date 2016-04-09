@@ -13,31 +13,27 @@ var answersConfig = function answersConfig() {
 
     // If user chooses to use exsiting yo-rc file, then skip prompts
     if (this.existingConfig) {
-        this.answers = this.config.get('config');
+        this.answers = this.config.getAll();
     } else {
         this.answers = _.merge(
-        // this.defaultPrompt,
-        this.projectPrompt,
-        this.environmentPrompt,
-        this.environmentCheckPrompt,
-        this.foldersPrompt,
-        this.htmlPrompt,
-        this.cssPrompt,
-        this.cssBasePrompt,
-        this.cssPostPrompt,
-        this.javascriptPrompt,
-        this.scriptsPrompt,
-        this.h5bpPrompt,
-        this.fontPrompt,
-        this.gaPrompt,
-        this.gulpPrompt);
-    }
+          this.projectPrompt,
+          this.environmentPrompt,
+          this.environmentCheckPrompt,
+          this.foldersPrompt,
+          this.htmlPrompt,
+          this.cssPrompt,
+          this.cssBasePrompt,
+          this.cssPostPrompt,
+          this.javascriptPrompt,
+          this.scriptsPrompt,
+          this.h5bpPrompt,
+          this.fontPrompt,
+          this.gaPrompt,
+          this.gulpPrompt);
+      }
 
     // Assign each answer property to `this` context to give the generator access to it
-
-    // Defaults
-    this.defaultOption = this.answers.defaultPrompt;
-    this.skipInstall = this.answers.skipInstall;
+    this.skipEnvironment = this.answers.skipEnvironment;
 
     // Project
     this.projectUrl = this.answers.projectUrl;
@@ -52,12 +48,11 @@ var answersConfig = function answersConfig() {
 
     //Environment
     if (this.environmentInstalled) {
-      this.environmentOption = this.environmentInstalled;
+      this.answers.environmentOption = this.environmentInstalled;
     } else if(!this.answers.environmentOption) {
-      this.environmentOption = 'static';
-    } else {
-      this.environmentOption = this.answers.environmentOption;
+      this.answers.environmentOption = 'static';
     }
+    this.environmentOption = this.answers.environmentOption;
 
     this.wpBlankTheme = this.answers.wpBlankTheme;
     this.themeNameSpace =this.answers.themeNameSpace;
@@ -187,6 +182,145 @@ var answersConfig = function answersConfig() {
     // Css Post
     var postCssOption = this.answers.postCssOption;
     this.postCssOption = this.answers.postCssOption;
+
+    this.postCssPlugins = [];
+    for (var i = 0; i < this.postCssOption.length; i++) {
+      switch(this.postCssOption[i]) {
+        case 'lostgrid':
+          this.postCssPlugins.push({
+            key: 'lostGrid',
+            req: 'lost',
+            call: 'lostGrid',
+            sort: 1 });
+          // this.postCssConfigDev.push({ call: 'lostGrid', sort: 1 });
+          // this.postCssConfigBuild.push({ call: 'lostGrid', sort: 1 });
+        break;
+
+        case 'gradientfix':
+          this.postCssPlugins.push({
+              key: 'gradientFix',
+              req: 'postcss-gradient-transparency-fix',
+              call: 'gradientFix',
+              sort: 2
+            });
+          // this.postCssConfigDev.push({ call: 'gradientFix', sort: 2 });
+          // this.postCssConfigBuild.push({ call: 'gradientFix', sort: 2 });
+        break;
+
+        case 'rucksack':
+          this.postCssPlugins.push({
+              key: 'rucksack',
+              req: 'rucksack-css',
+              call: 'rucksack',
+              sort: 3
+            });
+          // this.postCssConfigDev.push({ call: 'rucksack', sort: 3 });
+          // this.postCssConfigBuild.push({ call: 'rucksack', sort: 3 });
+        break;
+
+        case 'cssnext':
+          this.postCssPlugins.push({
+            key: 'next',
+            req: 'postcss-cssnext',
+            call: 'next({browsers: cfg.browsers})',
+            sort: 4
+          });
+          // this.postCssConfigDev.push({ call: 'next({browsers: cfg.browsers})', sort: 4 });
+          // this.postCssConfigBuild.push({ call: 'next({browsers: cfg.browsers})', sort: 4 });
+        break;
+
+        case 'cssgrace':
+          this.postCssPlugins.push({
+              key: 'grace',
+              req: 'cssgrace',
+              call: 'grace',
+              sort: 5
+            });
+          // this.postCssConfigDev.push({ call: 'grace', sort: 5 });
+          // this.postCssConfigBuild.push({ call: 'grace', sort: 5 });
+        break;
+
+        case 'classprefix':
+          this.postCssPlugins.push({
+              key: 'classPrfx',
+              req: 'postcss-class-prefix',
+              call: 'classPrfx(cfg.prefix)',
+              sort: 6
+            });
+          // this.postCssConfigDev.push({ call: 'classPrfx(cfg.prefix)', sort: 6 });
+          // this.postCssConfigBuild.push({ call: 'classPrfx(cfg.prefix)', sort: 6 });
+        break;
+
+        case 'scopify':
+          this.postCssPlugins.push({
+              key: 'scopify',
+              req: 'postcss-scopify',
+              call: 'scopify(cfg.scope)',
+              sort: 7
+            });
+          // this.postCssConfigDev.push({ call: 'scopify(cfg.scope)', sort: 7 });
+          // this.postCssConfigBuild.push({ call: 'scopify(cfg.scope)', sort: 7 });
+        break;
+
+        case 'csssorter':
+          this.postCssPlugins.push({
+              key: 'cssdeclsort',
+              req: 'css-declaration-sorter',
+              call: 'cssdeclsort({order: cfg.cssSortOrder})',
+              sort: 8
+            });
+          // this.postCssConfigDev.push({ call: 'cssdeclsort({order: cfg.cssSortOrder})', sort: 8 });
+          // this.postCssConfigBuild.push({ call: 'cssdeclsort({order: cfg.cssSortOrder})', sort: 8 });
+        break;
+
+        case 'mqkeyframes':
+          this.postCssPlugins.push({
+              key: 'mqKeyframes',
+              req: 'postcss-mq-keyframes',
+              call: 'mqKeyframes',
+              sort: 9
+            });
+          // this.postCssConfigDev.push({ call: 'mqKeyframes', sort: 9 });
+          // this.postCssConfigBuild.push({ call: 'mqKeyframes', sort: 9 });
+        break;
+
+        case 'mqpacker':
+          this.postCssPlugins.push({
+              key: 'mqPacker',
+              req: 'css-mqpacker',
+              call: 'mqPacker',
+              sort: 10
+            });
+          // this.postCssConfigDev.push({ call: 'mqPacker', sort: 10 });
+          // this.postCssConfigBuild.push({ call: 'mqPacker', sort: 10 });
+        break;
+
+        case 'autoprefixer':
+          this.postCssPlugins.push({
+              key: 'autoprefixer',
+              req: 'autoprefixer',
+              call: 'autoprefixer({browsers: cfg.browsers})',
+              sort: 98
+            });
+          // this.postCssConfigDev.push({call: 'autoprefixer({browsers: cfg.browsers})', sort: 98 });
+          // this.postCssConfigBuild.push({call: 'autoprefixer({browsers: cfg.browsers})', sort: 98 });
+        break;
+
+        case 'cssnano':
+          this.postCssPlugins.push({
+              key: 'cssnano',
+              req: 'cssnano',
+              call: 'cssnano({autoprefixer: false})',
+              sort: 99,
+              excludeDev: true
+            });
+          // this.postCssConfigBuild.push({ call: 'cssnano({autoprefixer: false})', sort: 99 });
+        break;
+      }
+    }
+    this.postCssPlugins = this.postCssPlugins.sort(function(a,b){return a.sort-b.sort});
+
+
     this.autoprefixerOption = hasFeature('autoprefixer', postCssOption);
     this.cssnextOption = hasFeature('cssnext', postCssOption);
     this.cssgraceOption = hasFeature('cssgrace', postCssOption);
@@ -297,6 +431,7 @@ var answersConfig = function answersConfig() {
       baseStyleOption: this.baseStyleOption,
       javascriptOption: this.javascriptOption,
 
+      postCssPlugins: this.postCssPlugins,
       postCssOption: this.postCssOption,
       autoprefixerOption: this.autoprefixerOption,
       cssnextOption: this.cssnextOption,

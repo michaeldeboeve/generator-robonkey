@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var fontPrompt = function fontPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('Custom Icon Font'))
   var done = this.async();
   this.prompt([{

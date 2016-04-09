@@ -11,6 +11,9 @@ var chalk       = require('chalk'),
     path        = require('path');
 
 var environmentCheckPrompt = function environmentCheckPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   var done = this.async();
 
   var destRoot = this.destinationRoot();
@@ -25,11 +28,17 @@ var environmentCheckPrompt = function environmentCheckPrompt() {
       message: chalk.bgGreen.white( ' ' + name + ' is detected. Continue? '),
       default: true
     }], function (answers) {
-      // console.log(answers.skipEnvironment);
-      self.skipEnvironment = answers.skipEnvironment;
-      self.environmentOption = environment;
-      self.environmentName = name;
-      self.environmentCheckPrompt = answers;
+      if(!answers.skipEnvironment) {
+        throw new Error('user cancelled');
+      } else {
+        // console.log(answers.skipEnvironment);
+        self.skipEnvironment = answers.skipEnvironment;
+        answers.environmentOption = environment;
+        self.environmentOption = answers.environmentOption;
+        self.environmentName = name;
+        self.environmentCheckPrompt = answers;
+      }
+
       done();
     }.bind(this));
   }

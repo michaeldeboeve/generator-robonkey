@@ -3,18 +3,18 @@
 var yeoman        = require('yeoman-generator'),
     yosay         = require('yosay'),
     fs            = require('fs'),
+    util          = require('util'),
+    jsonfile      = require('jsonfile'),
     chalk         = require('chalk'),
     path          = require('path'),
     rimraf        = require('rimraf'),
     exec          = require('child_process').exec,
     semver        = require('semver'),
     mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+    printTitle    = require('../app/helpers/printTitle'),
+    createConfig  = require('../app/helpers/createConfig');
 
 module.exports = yeoman.Base.extend({
-  configuring: function() {
-    this.config.forceSave();
-  },
   prompting: {
     wpCheck: function(){
       this.log(printTitle('Configuring WordPress'));
@@ -54,7 +54,7 @@ module.exports = yeoman.Base.extend({
 
     wpPrompt: function(){
       var done = this.async(),
-          self = this
+          self = this;
 
       this.prompt([{
           name: 'wordpressVersion',
@@ -78,6 +78,17 @@ module.exports = yeoman.Base.extend({
         done();
       }.bind(this));
     },
+  },
+
+  configuring: function () {
+    var done = this.async(),
+        self = this,
+        fileName = '.yo-rc.json',
+        fileLocation = this.destinationRoot()+ '/' + fileName;
+
+    createConfig(fileName, fileLocation, self.mainDir, 'wordpress');
+
+    done();
   },
 
   writing: {
@@ -117,6 +128,6 @@ module.exports = yeoman.Base.extend({
           }
         });
       }
-    }
-  }
+    },
+  },
 });

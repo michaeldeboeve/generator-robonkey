@@ -15,8 +15,6 @@ var gulpFiles = function gulpFiles() {
     destRoot = destRoot + '/gulp';
   }
   // Dynamic
-  this.fs.copyTpl(sourceRoot + '/gulp/package.json', destRoot + '/package.json', this.templateContext);
-  this.fs.copyTpl(sourceRoot + '/gulp/config.json', destRoot + '/config.json', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', destRoot + '/gulpfile.js', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/images.js', destRoot + '/gulp-tasks/images.js', this.templateContext);
   this.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/bower.js', destRoot + '/gulp-tasks/bower.js', this.templateContext);

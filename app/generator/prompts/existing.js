@@ -6,10 +6,11 @@
 
 var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
-    
+
 var existingConfigPrompt = function existingConfigPrompt() {
   var done = this.async();
-  if (this.config.get('config')) {
+
+  if (this.config.get('installedMain')) {
     this.prompt([{
       type: 'confirm',
       name: 'existingConfig',

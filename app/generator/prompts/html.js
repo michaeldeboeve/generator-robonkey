@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var htmlPrompt = function htmlPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   if(this.environmentOption === 'static'){
     this.log(printTitle('HTML Templating'))
     var done = this.async();

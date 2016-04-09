@@ -9,6 +9,9 @@ var chalk       = require('chalk'),
     walk        = require('./../../helpers/walk');
 
 var environmentPrompt = function environmentPrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   var self = this;
   if(!this.skipEnvironment) {
     this.log(printTitle('Environment'));
@@ -24,12 +27,14 @@ var environmentPrompt = function environmentPrompt() {
       message: 'Continue?',
       default: true
     }], function (answers) {
-      self.environmentOption = 'static';
-      self.environmentName = 'Static Website';
 
-      if(answers.continueSetup === false) {
-        // new Error(‘user cancelled');
+      if(!answers.continueSetup) {
+        throw new Error('user cancelled');
+      } else {
+        self.environmentOption = 'static';
+        self.environmentName = 'Static Website';
       }
+
       done();
     }.bind(this));
   }

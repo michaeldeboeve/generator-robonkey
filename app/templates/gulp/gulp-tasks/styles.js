@@ -15,47 +15,24 @@ var LessClean       = require('less-plugin-clean-css');
 var cleancss        = new LessClean({ advanced: true });<% } %>
 
 <% if(postCssOption){ %>
-var postcss         = require('gulp-postcss');<% if(autoprefixerOption && !cssnextOption){ %>
-var autoprefixer    = require('autoprefixer');<% } if(mqpackerOption){ %>
-var mqPacker        = require('css-mqpacker');<% } if(scopifyOption){ %>
-var scopify         = require('postcss-scopify');<% } if(classprefixOption){ %>
-var classPrfx       = require('postcss-class-prefix');<% } if(gradientfixOption){ %>
-var gradientFix     = require('postcss-gradient-transparency-fix');<% } if(mqkeyframesOption){ %>
-var mqKeyframes     = require('postcss-mq-keyframes');<% } if(cssnanoOption){ %>
-var cssnano         = require('cssnano');<% } if(csssorterOption){ %>
-var cssdeclsort     = require('css-declaration-sorter');<% } if(rucksackOption){ %>
-var rucksack        = require('rucksack-css');<% } if(cssnextOption){ %>
-var next            = require('postcss-cssnext');<% } if(cssgraceOption){ %>
-var grace           = require('cssgrace');<% } if(lostgridOption){ %>
-var lostGrid        = require('lost');<% } %>
+var postcss = require('gulp-postcss');<%
+for (var i = 0; i < postCssPlugins.length; i++) { %>
+var <%= postCssPlugins[i]['key'] %> = require('<%= postCssPlugins[i]['req'] %>');<%
+} %>
 
-var postCssConfigDev = [<% if(lostgridOption){ %>
-  lostGrid,<% } if(gradientfixOption){ %>
-  gradientFix,<% } if(rucksackOption){ %>
-  rucksack,<% } if(cssnextOption){ %>
-  next({browsers: cfg.browsers}),<% } if(cssgraceOption){ %>
-  grace,<% } if(classprefixOption){ %>
-  classPrfx(cfg.prefix),<% } if(scopifyOption){ %>
-  scopify(cfg.scope),<% } if(csssorterOption){ %>
-  cssdeclsort({order: cfg.cssSortOrder}),<% } if(mqkeyframesOption){ %>
-  mqKeyframes,<% } if(mqpackerOption){ %>
-  mqPacker,<% } if(autoprefixerOption && !cssnextOption){ %>
-  autoprefixer({browsers: cfg.browsers})<% } %>
+
+var postCssConfigDev = [<%
+for (var i = 0; i < postCssPlugins.length; i++) {
+  if(!postCssPlugins[i]['excludeDev']) { %>
+  <%= postCssPlugins[i]['call'] %>,<%
+  }
+} %>
 ];
 
-var postCssConfigBuild = [<% if(lostgridOption){ %>
-  lostGrid,<% } if(gradientfixOption){ %>
-  gradientFix,<% } if(rucksackOption){ %>
-  rucksack,<% } if(cssnextOption){ %>
-  next({browsers: cfg.browsers}),<% } if(cssgraceOption){ %>
-  grace,<% } if(classprefixOption){ %>
-  classPrfx(cfg.prefix),<% } if(scopifyOption){ %>
-  scopify(cfg.scope),<% } if(csssorterOption){ %>
-  cssdeclsort({order: cfg.cssSortOrder}),<% } if(mqkeyframesOption){ %>
-  mqKeyframes,<% } if(mqpackerOption){ %>
-  mqPacker,<% } if(autoprefixerOption && !cssnextOption){ %>
-  autoprefixer({browsers: cfg.browsers}),<% } if(cssnanoOption){ %>
-  cssnano({autoprefixer: false})<% } %>
+var postCssConfigBuild = [ <%
+for (var i = 0; i < postCssPlugins.length; i++) { %>
+  <%= postCssPlugins[i]['call'] %>,<%
+} %>
 ];<% } %>
 
 

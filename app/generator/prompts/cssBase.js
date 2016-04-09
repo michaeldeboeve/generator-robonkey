@@ -8,6 +8,9 @@ var chalk       = require('chalk'),
     printTitle  = require('./../../helpers/printTitle');
 
 var cssbasePrompt = function cssbasePrompt() {
+  if (this.existingConfig) {
+    return;
+  }
   this.log(printTitle('CSS Base Styles'))
   var done = this.async();
   this.prompt([{

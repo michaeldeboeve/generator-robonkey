@@ -5,7 +5,8 @@ var yeoman        = require('yeoman-generator'),
     fs            = require('fs'),
     chalk         = require('chalk'),
     mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+    printTitle    = require('../app/helpers/printTitle'),
+    createConfig  = require('../app/helpers/createConfig');
 
 module.exports = yeoman.Base.extend({
 
@@ -28,6 +29,17 @@ module.exports = yeoman.Base.extend({
 
       done();
     }.bind(this));
+  },
+
+  configuring: function () {
+    var done = this.async(),
+        self = this,
+        fileName = '.yo-rc.json',
+        fileLocation = this.destinationRoot()+ '/' + fileName;
+
+    createConfig(fileName, fileLocation, self.mainDir, 'express');
+
+    done();
   },
 
   writing: function(){

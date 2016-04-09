@@ -13,7 +13,17 @@
 // Extra Bold (Ultra Bold): 800
 // Black (Heavy): 900
 
-<% if(customIconfontOption){ %>@include load-font('<%= customIconFontName %>', '<%= customIconFontName %>', '<%= customIconFontName %>');<% } %>
+<% if(customIconfontOption){ %>@font-face {
+  font-family: "<%= customIconFontName %>";
+  src: url('<%= customIconFontName %>.eot');
+  src: url('<%= customIconFontName %>.eot?#iefix') format('eot'),
+    url('<%= customIconFontName %>.woff2') format('woff2'),
+    url('<%= customIconFontName %>.woff') format('woff'),
+    url('<%= customIconFontName %>.ttf') format('truetype'),
+    url('<%= customIconFontName %>.svg#<%= customIconFontName %>') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}<% } %>
 
 
 

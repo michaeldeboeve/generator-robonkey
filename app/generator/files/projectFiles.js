@@ -20,9 +20,9 @@ var projectFiles = function projectFiles() {
   mkdirp(destRoot  + '/' +  this.templateDest + '/' + this.fontDirPath);
 
 
-  this.fs.copy(sourceRoot + '/project/editorconfig.txt', destRoot + '/.editorconfig');
-  this.fs.copy(sourceRoot + '/project/gitignore.txt', destRoot + '/.gitignore');
-  this.fs.copy(sourceRoot + '/project/gitattributes.txt', destRoot + '/.gitattributes');
+  this.fs.copy(sourceRoot + '/project/_editorconfig', destRoot + '/.editorconfig');
+  this.fs.copy(sourceRoot + '/project/_gitignore', destRoot + '/.gitignore');
+  this.fs.copy(sourceRoot + '/project/_gitattributes', destRoot + '/.gitattributes');
   this.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', this.templateContext);
 
 };
