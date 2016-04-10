@@ -81,40 +81,6 @@ var answersConfig = function answersConfig() {
 
 
 
-// Wordpress Theme
-    this.wpBlankTheme = this.answers.wpBlankTheme;
-    this.themeNameSpace =this.answers.themeNameSpace;
-    this.themeAuthor = this.answers.themeAuthor;
-    this.themeAuthorURI = this.answers.themeAuthorURI;
-
-    this.themeName = this.answers.themeName;
-    if(this.answers.themeName) {
-      this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
-    } else {
-      this.themeFolder = this.themeName;
-    }
-
-
-
-
-// Theme Location
-    switch (this.environmentOption){
-      case 'wordpress':
-        this.templateDest = this.mainDir + '/wp-content/themes/' + this.themeFolder;
-      break;
-
-      case 'drupal':
-        this.templateDest = this.mainDir + '/themes/' + this.themeFolder;
-      break;
-
-      break;
-
-      default:
-        this.templateDest = this.mainDir;
-    };
-
-
-
 // Folders
     this.mainDir = this.answers.mainDir;
     this.cssDir = this.answers.cssDir;
@@ -141,6 +107,40 @@ var answersConfig = function answersConfig() {
 
 
 
+// Wordpress Theme
+    this.wpBlankTheme = this.answers.wpBlankTheme;
+    this.themeNameSpace =this.answers.themeNameSpace;
+    this.themeAuthor = this.answers.themeAuthor;
+    this.themeAuthorURI = this.answers.themeAuthorURI;
+
+    this.themeName = this.answers.themeName;
+    if(this.answers.themeName) {
+      this.themeFolder = this.themeName.replace(/\s/g,'').toLowerCase();
+    } else {
+      this.themeFolder = this.themeName;
+    }
+
+
+
+// Theme Location
+    switch (this.environmentOption){
+      case 'wordpress':
+        this.templateDest = this.mainDir + '/wp-content/themes/' + this.themeFolder;
+      break;
+
+      case 'drupal':
+        this.templateDest = this.mainDir + '/themes/' + this.themeFolder;
+      break;
+
+      break;
+
+      default:
+        this.templateDest = this.mainDir;
+    };
+
+
+
+  
 // Gulp
     this.gulpDirOption = this.answers.gulpDirOption;
     this.gulpCmdOption = this.answers.gulpCmdOption;

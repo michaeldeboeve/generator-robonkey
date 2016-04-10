@@ -22,10 +22,7 @@ var foldersPrompt = function foldersPrompt() {
     name: 'mainDir',
     message: 'Name your main directory:',
     default: function (answers) {
-      if(dirSet) {
-        return dirSet;
-      }
-      else {
+      if(dirSet === 'undefined' || !dirSet) {
         switch (self.environmentOption){
            case 'express':
             return 'app'
@@ -34,6 +31,8 @@ var foldersPrompt = function foldersPrompt() {
            default:
             return 'website'
         }
+      } else {
+        return dirSet;
       }
     }
   }, {
