@@ -1,12 +1,8 @@
 {
   "name": "generator-robonkey",
-  "version": "0.3.1-alpha",
+  "version": "0.3.2-alpha",
   "description": "A front-end application generator for Gulp, Templating, CSS Preprocessors, Coffeescript, PostCSS, Modernizr, Icon Font Generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
-  "main": "index.js",
-  "scripts": {
-    "test": ""
-  },
   "keywords": [
     "yeoman-generator",
     "sass",
@@ -26,7 +22,11 @@
     "express",
     "laravel"
   ],
-  "author": "Michaël de Boevé",
+  "author": {
+    "name": "Michaël de Boevé",
+    "email": "michaeldeboeve@gmail.com",
+    "url": "http://superlatief.be"
+  },
   "contributors": [
     "Dietlev Maertens"
   ],
@@ -38,18 +38,37 @@
     "semver": ">=2.0.10",
     "simple-git": "^1.28.0",
     "yeoman-generator": "^0.19.2",
-    "yo": "^1.4.6",
     "yosay": "^1.0.3"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
   },
+  "devDependencies": {
+    "yeoman-assert": "^2.0.0",
+    "eslint": "^2.1.0",
+    "eslint-config-xo-space": "^0.10.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^2.0.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-line-ending-corrector": "^1.0.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.0.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-nsp": "^2.1.0",
+    "gulp-coveralls": "^0.1.0"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "env": {
+      "mocha": true
+    }
+  },
+  "main": "generators/index.js",
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
   "files": [
-    "app",
-    "codeigniter",
-    "drupal",
-    "express",
-    "laravel",
-    "wordpress"
+    "generators"
   ]
 }
