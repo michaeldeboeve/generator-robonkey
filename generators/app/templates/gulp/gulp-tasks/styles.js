@@ -1,6 +1,7 @@
 var fs              = require('fs');
 var cfg             = JSON.parse(fs.readFileSync('./config.json'));
 var gulp            = require('gulp');
+var notify          = require("gulp-notify");
 var plumber         = require('gulp-plumber');
 var concat          = require('gulp-concat');
 var sourcemaps      = require('gulp-sourcemaps');
@@ -40,7 +41,7 @@ for (var i = 0; i < postcssPlugins.length; i++) { %>
 gulp.task('styles', function() {
   gulp.src(cfg.styles.src)<% if(preproOption === 'sass'){ %>
     .pipe(sassGlob())<% } %>
-    .pipe(plumber(onStyleError))
+    .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(sourcemaps.init())<% if(preproOption === 'sass'){ %>
     .pipe(sass())<% } if(preproOption === 'stylus'){ %>
     .pipe(stylus())<% } if(preproOption === 'less'){ %>
@@ -54,7 +55,7 @@ gulp.task('styles', function() {
 gulp.task('styles-build', function() {
   gulp.src(cfg.styles.src)<% if(preproOption === 'sass'){ %>
     .pipe(sassGlob())<% } %>
-    .pipe(plumber(onStyleError))<% if(preproOption === 'sass'){ %>
+    .pipe(plumber({errorHandler: notify.onError(cfg.error)}))<% if(preproOption === 'sass'){ %>
     .pipe(sass(<% if(!postcssCssNanoOption){ %>{outputStyle: 'compressed'}<% } %>))<% } if(preproOption === 'stylus'){ %>
     .pipe(stylus(<% if(!postcssOption){ %>{ compress: true }<% } %>))<% } if(preproOption === 'less'){ %>
     .pipe(less({ plugins: [lessGlob<% if(!postcssCssNanoOption){ %>, cleancss<% } %>] }))<% } if(postcssOption){ %>
@@ -62,10 +63,3 @@ gulp.task('styles-build', function() {
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(cfg.styles.build));
 });
-
-
-
-
-function onStyleError(e) {
-  console.log('CSS Error:', e.message, 'lineNumber:', e.lineNumber);
-}

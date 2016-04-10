@@ -23,7 +23,6 @@ var saveConfig = function saveConfig() {
 
 
     var configJson = {}
-
     configJson['projectURL'] = this.projectUrl;
 
     if(this.postcssScopifyOption) {
@@ -176,7 +175,11 @@ var saveConfig = function saveConfig() {
           configJson['font']['templateOutput'] = this.fontStyleOutputBase + 'src/less/modules/icons.less';
         break;
       }
+
     }
+
+    configJson['error'] = 'Error: <%= error.message %>';
+
 
     fs.stat(configFile, function(err, stat) {
       if(err == null) {

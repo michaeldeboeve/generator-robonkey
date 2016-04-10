@@ -17,12 +17,11 @@ var cssPrompt = function cssPrompt() {
     type: 'list',
     name: 'preproOption',
     message: 'What preprocessor would you like to use?',
-    choices: ['None! (Maybe I\'ll try me some Postcss)', 'Scss', 'Stylus', 'Less'],
+    // choices: ['None! (Maybe I\'ll try me some Postcss)', 'Scss', 'Stylus', 'Less'],
     choices: ['Sass', 'Stylus', 'Less'],
     filter: function(val) {
       var filterMap = {
-        'None': 'none',
-        'Scss': 'scss',
+        'Sass': 'sass',
         'Stylus': 'stylus',
         'Less': 'less'
       };

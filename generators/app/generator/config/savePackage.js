@@ -54,11 +54,12 @@ var savePackage = function savePackage() {
     packageJson.dependencies['gulp-imagemin'] = '^2.4.0';
     packageJson.dependencies['gulp-sourcemaps'] = '^1.6.0';
     packageJson.dependencies['gulp-prettify'] = '^0.4.0';
+    packageJson.dependencies['gulp-notify'] = '^2.0.0';
     packageJson.dependencies['require-dir'] = '^0.3.0';
 
 
 // Superlatief
-    if(this.preproOption === 'sass' && this.preproOption === 'stylus' && this.preproOption === 'less') {
+    if(this.preproOption === 'sass' || this.preproOption === 'stylus' || this.preproOption === 'less') {
       packageJson.dependencies['superlatief-colors'] = '*';
     }
 

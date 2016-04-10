@@ -140,7 +140,7 @@ var answersConfig = function answersConfig() {
 
 
 
-  
+
 // Gulp
     this.gulpDirOption = this.answers.gulpDirOption;
     this.gulpCmdOption = this.answers.gulpCmdOption;
