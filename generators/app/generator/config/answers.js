@@ -406,45 +406,60 @@ var answersConfig = function answersConfig() {
       switch(this.scriptsOption[i]) {
         case 'jquery':
           this.jsScripts.push({
+            key: 'jquery',
             file: 'jquery.min.js',
-            src: 'jquery/dist/',
+            main: 'dist/jquery.min.js',
             sort: 0
           });
         break;
 
         case 'zepto':
           this.jsScripts.push({
+            key: 'zepto',
             file: 'zepto.min.js',
-            src: 'zepto/',
+            main: 'zepto.min.js',
             sort: 0
           });
         break;
 
         case 'underscore':
           this.jsScripts.push({
+            key: 'underscore',
             file: 'underscore-min.js',
-            src: 'underscore/',
+            main: 'underscore-min.js',
             sort: 1
+          });
+        break;
+
+        case 'angular':
+          this.jsScripts.push({
+            key: 'angular',
+            file: 'angular.min.js',
+            main: 'angular.min.js',
+            sort: 2
           });
         break;
 
         case 'waypoints':
           if(hasFeature('jquery', scriptsOption)){
             this.jsScripts.push({
+              key: 'waypoints',
               file: 'jquery.waypoints.min.js',
-              src: 'waypoints/lib/',
+              main: 'lib/jquery.waypoints.min.js',
               sort: 2
             });
           } else if(!hasFeature('jquery', scriptsOption) && hasFeature('zepto', scriptsOption)){
             this.jsScripts.push({
+              key: 'waypoints',
               file: 'zepto.waypoints.min.js',
-              src: 'waypoints/lib/',
+              main: 'lib/zepto.waypoints.min.js',
               sort: 2
             });
           } else {
             this.jsScripts.push({
+              key: 'waypoints',
               file: 'noframework.waypoints.min.js',
-              src: 'waypoints/lib/',
+              main: 'lib/noframework.waypoints.min.js',
               sort: 2
             });
           }
@@ -452,32 +467,36 @@ var answersConfig = function answersConfig() {
 
         case 'signals':
           this.jsScripts.push({
+            key: 'js-signals',
             file: 'signals.min.js',
-            src: 'js-signals/dist/',
+            main: 'dist/signals.min.js',
             sort: 3
           });
         break;
 
         case 'dthreejs':
           this.jsScripts.push({
+            key: 'd3',
             file: 'd3.min.js',
-            src: 'd3/',
+            main: 'd3.min.js',
             sort: 4
           });
         break;
 
         case 'enquire':
           this.jsScripts.push({
+            key: 'enquire',
             file: 'enquire.min.js',
-            src: 'enquire/dist/',
+            main: 'dist/enquire.min.js',
             sort: 5
           });
         break;
 
         case 'tweenmax':
           this.jsScripts.push({
+            key: 'gsap',
             file: 'TweenMax.min.js',
-            src: 'gsap/src/minified/',
+            main: 'src/minified/TweenMax.min.js',
             sort: 6
           });
         break;
@@ -485,15 +504,18 @@ var answersConfig = function answersConfig() {
 
         case 'backbone':
           this.jsScripts.push({
+            key: 'backbone',
             file: 'backbone-min.js',
-            src: 'backbone/',
+            main: 'backbone-min.js',
             sort: 7
           });
         break;
 
         case 'react':
           this.jsScripts.push({
+            key: 'react',
             file: 'react-dom.min.js',
+            main: "'react-with-addons.min.js', 'react-dom.min.js', 'react.min.js'",
             src: 'react/',
             sort: 8
           });
@@ -506,7 +528,9 @@ var answersConfig = function answersConfig() {
 
         case 'scrollreveal':
           this.jsScripts.push({
+            key: 'scrollreveal',
             file: 'scrollreveal.min.js',
+            main: 'dist/scrollreveal.min.js',
             src:  'scrollreveal/dist/',
             sort: 10
           });
@@ -519,24 +543,25 @@ var answersConfig = function answersConfig() {
     // Push extra scripts to bower list
     if(hasFeature('require', scriptsOption)) {
       this.jsScriptsBower.push({
+        key: 'require',
         file: 'require.js',
-        src: 'requirejs/',
+        main: 'require.js',
         sort: 0
       });
     }
 
-    if(hasFeature('modernizr', scriptsOption)) {
-      this.jsScriptsBower.push({
-        file: 'modernizr-custom.js',
-        src: this.rootFolder + 'src/modernizr/',
-        sort: 8
-      });
-    }
+    // if(hasFeature('modernizr', scriptsOption)) {
+    //   this.jsScriptsBower.push({
+    //     file: 'modernizr-custom.js',
+    //     src: this.rootFolder + 'src/modernizr/',
+    //     main: this.rootFolder + 'src/modernizr/',
+    //     sort: 8
+    //   });
+    // }
 
     if(hasFeature('react', scriptsOption)) {
       this.jsScriptsBower.push({
         file: 'react-with-addons.min.js',
-        src: 'react/',
         sort: 0
       });
     }

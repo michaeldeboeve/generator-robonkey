@@ -4,7 +4,6 @@ var gulp            = require('gulp');
 var clean           = require('gulp-clean');
 var htmlreplace     = require("gulp-html-replace");
 
-// console.log(moveRepo);
 gulp.task('removeDevFiles', function() {
   return gulp.src([
     // cfg.scripts.build + 'script.js',
