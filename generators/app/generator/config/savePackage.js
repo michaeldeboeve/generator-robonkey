@@ -324,7 +324,6 @@ var savePackage = function savePackage() {
 
 // Write File
     createJson(packageFile, packageJson);
-    console.log('writing ' + packageFile);
 
 };
 

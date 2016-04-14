@@ -9,7 +9,6 @@ var saveConfig = function saveConfig() {
 
     this.config.set('installedMain', true);
     this.config.set(this.answers);
-    console.log('writing .yo-rc.json');
 
 
 };

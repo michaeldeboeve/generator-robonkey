@@ -112,8 +112,6 @@ var saveBower = function saveBower() {
 
     createJson(bowerFile, bowerJson);
     createJson(bowerrcFile, bowerrcJson);
-    console.log('writing ' + bowerFile);
-    console.log('writing ' + bowerrcFile);
 
 };
 

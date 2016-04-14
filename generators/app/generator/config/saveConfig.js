@@ -183,7 +183,6 @@ var saveConfig = function saveConfig() {
     }
 
     createJson(configFile, configJson);
-    console.log('writing ' + configFile);
 
 
 
