@@ -15,16 +15,6 @@ var saveBower = function saveBower() {
         sourceRoot = this.sourceRoot(),
         self = this;
 
-    if (this.gulpDirOption) {
-      var bowerFile = './gulp/bower.json';
-      var bowerrcFile = './gulp/.bowerrc';
-      var bowerrcPath = '../src/bower_components';
-    } else {
-      var bowerFile = './bower.json';
-      var bowerrcFile = './.bowerrc';
-      var bowerrcPath = 'src/bower_components';
-    }
-
     var bowerrcJson = {
         directory: bowerrcPath
       }
@@ -108,21 +98,22 @@ var saveBower = function saveBower() {
       bowerJson.dependencies['scrollreveal'] = '^3.1.4'
     }
 
-    fs.stat(bowerFile, function(err, stat) {
-      if(err == null) {
-        createJson(bowerFile, bowerJson);
-        createJson(bowerrcFile, bowerrcJson);
-      } else {
-        if (self.gulpDirOption) {
-          mkdirp(destRoot + '/gulp');
-        }
-        createJson(bowerFile, bowerJson);
-        createJson(bowerrcFile, bowerrcJson);
-      }
-    });
 
+    if (this.gulpDirOption) {
+      mkdirp(destRoot + '/gulp');
+      var bowerFile = './gulp/bower.json';
+      var bowerrcFile = './gulp/.bowerrc';
+      var bowerrcPath = '../src/bower_components';
+    } else {
+      var bowerFile = './bower.json';
+      var bowerrcFile = './.bowerrc';
+      var bowerrcPath = 'src/bower_components';
+    }
 
-
+    createJson(bowerFile, bowerJson);
+    createJson(bowerrcFile, bowerrcJson);
+    console.log('writing ' + bowerFile);
+    console.log('writing ' + bowerrcFile);
 
 };
 

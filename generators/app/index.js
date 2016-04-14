@@ -30,10 +30,10 @@ var order = [
   'gulp',
   /* Config */
   'answers',  // Handle answers and them up for use in templates
-  'saveYorc',  // Save answers to .yo-rc.json file
-  'saveBower',  // Save bower.json and .bowerrc
   'savePackage',  // Save package.json
   'saveConfig',  // Save config.json
+  'saveBower',  // Save bower.json and .bowerrc
+  'saveYorc',  // Save answers to .yo-rc.json file
   /* Files */
   'projectFiles',
   'gulpFiles',

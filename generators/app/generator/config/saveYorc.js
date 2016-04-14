@@ -7,16 +7,10 @@
 var saveConfig = function saveConfig() {
     var self = this;
 
+    this.config.set('installedMain', true);
+    this.config.set(this.answers);
+    console.log('writing .yo-rc.json');
 
-    // If user chooses to use exsiting yo-rc file, then skip prompts
-    if (!this.existingConfig) {
-      // Create .yo-rc.json file
-      this.config.set('installedMain', true);
-      this.config.set(this.answers);
-    } else {
-      this.config.set('installedMain', true);
-      this.config.set(this.answers);
-    }
 
 };
 

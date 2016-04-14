@@ -15,12 +15,6 @@ var saveConfig = function saveConfig() {
         sourceRoot = this.sourceRoot(),
         self = this;
 
-    if (this.gulpDirOption) {
-      var configFile = './gulp/config.json';
-    } else {
-      var configFile = './config.json';
-    }
-
 
     var configJson = {}
     configJson['projectURL'] = this.projectUrl;
@@ -181,16 +175,16 @@ var saveConfig = function saveConfig() {
     configJson['error'] = 'Error: <%= error.message %>';
 
 
-    fs.stat(configFile, function(err, stat) {
-      if(err == null) {
-        createJson(configFile, configJson);
-      } else {
-        if (self.gulpDirOption) {
-          mkdirp(destRoot + '/gulp');
-        }
-        createJson(configFile, configJson);
-      }
-    });
+    if (this.gulpDirOption) {
+      mkdirp(destRoot + '/gulp');
+      var configFile = './gulp/config.json';
+    } else {
+      var configFile = './config.json';
+    }
+
+    createJson(configFile, configJson);
+    console.log('writing ' + configFile);
+
 
 
 };

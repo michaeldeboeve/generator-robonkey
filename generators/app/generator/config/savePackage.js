@@ -15,12 +15,6 @@ var savePackage = function savePackage() {
       sourceRoot = this.sourceRoot(),
       self = this;
 
-    if (this.gulpDirOption) {
-      var packageFile = './gulp/package.json';
-    } else {
-      var packageFile = './package.json';
-    }
-
     var packageJson = {
       name: this.projectNameJson,
       version: this.projectVersion,
@@ -321,19 +315,16 @@ var savePackage = function savePackage() {
     }
 
 
-
+    if (this.gulpDirOption) {
+      mkdirp(destRoot + '/gulp');
+      var packageFile = './gulp/package.json';
+    } else {
+      var packageFile = './package.json';
+    }
 
 // Write File
-    fs.stat(packageFile, function(err, stat) {
-      if(err == null) {
-        createJson(packageFile, packageJson);
-      } else {
-        if (self.gulpDirOption) {
-          mkdirp(destRoot + '/gulp');
-        }
-        createJson(packageFile, packageJson);
-      }
-    });
+    createJson(packageFile, packageJson);
+    console.log('writing ' + packageFile);
 
 };
 
