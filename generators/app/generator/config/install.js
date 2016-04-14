@@ -12,16 +12,16 @@ var installConfig = function installConfig() {
     process.chdir(npmdir);
   }
 
-  // this.installDependencies({
-  //   bower: true,
-  //   npm: true,
-  //   skipInstall: this.options['skip-install'],
-  //   callback: function() {
-  //     // self.log('\nEverything looks ready!' +
-  //     //   ' Get started by running "gulp serve".\n'
-  //     // );
-  //   }
-  // });
+  this.installDependencies({
+    bower: true,
+    npm: true,
+    skipInstall: this.options['skip-install'],
+    callback: function() {
+      // self.log('\nEverything looks ready!' +
+      //   ' Get started by running "gulp serve".\n'
+      // );
+    }
+  });
 };
 
 module.exports = installConfig;
