@@ -10,7 +10,8 @@ var yeoman        = require('yeoman-generator'),
     exec          = require('child_process').exec,
     semver        = require('semver'),
     mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+    printTitle    = require('../app/helpers/printTitle'),
+    download      = require('../app/helpers/download');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function(){
@@ -87,16 +88,25 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     downloading: function(){
+
       this.log(printTitle('Installing WordPress'));
 
       var done = this.async(),
           self = this;
 
       this.log('Downloading Wordpress version ' + this.wordpressVersion);
-      this.extract('https://github.com/WordPress/WordPress/archive/' + this.wordpressVersion + '.tar.gz', './', function(){
-        fs.rename('WordPress-' + self.wordpressVersion, self.mainDir);
-        done();
-      });
+
+      try {
+        fs.accessSync(self.mainDir, fs.F_OK);
+        console.log('Folder ' + self.mainDir + ' exists');
+        rimraf(self.mainDir, function(){
+          download('wordpress', self);
+        });
+      } catch (e) {
+        console.log('Folder ' + self.mainDir + ' doesn\'t exist');
+        download('wordpress', self);
+      }
+
       done();
     },
 

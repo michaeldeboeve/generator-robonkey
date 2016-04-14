@@ -41,7 +41,7 @@ module.exports = yeoman.Base.extend({
     var done = this.async(),
         destRoot = this.mainDir,
         sourceRoot = this.sourceRoot();
-
+        
     this.fs.copy(sourceRoot+ '/bin', destRoot + '/bin');
     this.fs.copy(sourceRoot+ '/routes', destRoot + '/routes');
     this.fs.copy(sourceRoot+ '/views', destRoot + '/views');
