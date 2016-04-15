@@ -474,6 +474,15 @@ var answersConfig = function answersConfig() {
           });
         break;
 
+        case 'snap':
+          this.jsScripts.push({
+            key: 'snap',
+            file: 'snap.svg-min.js',
+            main: 'dist/snap.svg-min.js',
+            sort: 3
+          });
+        break;
+
         case 'dthreejs':
           this.jsScripts.push({
             key: 'd3',
@@ -581,6 +590,7 @@ var answersConfig = function answersConfig() {
 
 
     this.jqueryOption = hasFeature('jquery', scriptsOption);
+    this.snapOption = hasFeature('snap', scriptsOption);
     this.waypointsOption = hasFeature('waypoints', scriptsOption);
     this.signalsOption = hasFeature('signals', scriptsOption);
     this.dthreejsOption = hasFeature('dthreejs', scriptsOption);

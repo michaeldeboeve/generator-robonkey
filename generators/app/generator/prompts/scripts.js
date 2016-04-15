@@ -30,6 +30,10 @@ var scriptsPrompt = function scriptsPrompt() {
       value: 'zepto',
       checked: false
     }, {
+      name: 'Snap.svg',
+      value: 'snap',
+      checked: false
+    }, {
       name: 'Requirejs',
       value: 'require',
       checked: false

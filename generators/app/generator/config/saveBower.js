@@ -98,6 +98,10 @@ var saveBower = function saveBower() {
       bowerJson.dependencies['scrollreveal'] = '^3.1.4'
     }
 
+    if(this.snapOption) {
+      bowerJson.dependencies['Snap.svg'] = 'snap.svg#^0.4.1'
+    }
+
 
     if (this.gulpDirOption) {
       mkdirp(destRoot + '/gulp');
