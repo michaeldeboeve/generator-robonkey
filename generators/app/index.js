@@ -26,6 +26,7 @@ var init            = require('../app/config/init'),
 
 var structureExists = require('../app/prompts/structureExists'),
     isFramework     = require('../app/prompts/isFramework'),
+    gulpPrompt      = require('../app/prompts/gulpPrompt'),
     isStatic        = require('../app/prompts/isStatic');
 
 
@@ -54,50 +55,11 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     gulp: function(){
-      if(!this.cfg.gulpDirOption) {
-        var done = this.async(),
-            self = this;
-
-        console.log(printTitle('Gulp'));
-
-        this.prompt([{
-          type: 'confirm',
-          name: 'gulpDirOption',
-          message: 'Place Gulp files in a subfolder?',
-          default: function(answers) {
-            if(self.cfg.gulpDirOption) {
-              return self.cfg.gulpDirOption
-            } else {
-              return true
-            }
-          }
-        }
-        // , {
-        //   type: 'confirm',
-        //   name: 'gulpCmdOption',
-        //   message: 'Run gulp command after install?',
-        //   default: function(answers) {
-        //     if(self.cfg.gulpCmdOption) {
-        //       return self.cfg.gulpCmdOption
-        //     } else {
-        //       return false
-        //     }
-        //   }
-        // }
-      ], function (answers) {
-          if(!this.cfg.gulpDirOption){
-            this.cfg.gulpDirOption = answers.gulpDirOption;
-            this.gulpDirOption = this.cfg.gulpDirOption;
-            this.cfg.gulpCmdOption = answers.gulpCmdOption;
-            this.gulpCmdOption = this.cfg.gulpCmdOption;
-          }
-
-          done();
-        }.bind(this));
-      }
+      gulpPrompt(this, function(){})
     },
 
     static: function(){
+      console.log(this.cfg.gulpDirOption);
       this.composeWith('robonkey:static',{
         options: {
           calledFrom: generatorName,
@@ -105,6 +67,12 @@ module.exports = yeoman.generators.Base.extend({
         }
       });
     },
+  },
+
+
+  configuring: function(){
+    this.gulpDirOption = this.cfg.gulpDirOption;
+    this.gulpCmdOption = this.cfg.gulpCmdOption;
   },
 
   install: function(){

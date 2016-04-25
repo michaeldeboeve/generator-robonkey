@@ -22,6 +22,7 @@ var init            = require('../app/config/init'),
 
 var structureExists = require('../app/prompts/structureExists'),
     isFramework     = require('../app/prompts/isFramework'),
+    gulpPrompt      = require('../app/prompts/gulpPrompt'),
     isStatic        = require('../app/prompts/isStatic');
 
 
@@ -53,55 +54,16 @@ module.exports = yeoman.Base.extend({
     },
 
     gulp: function(){
-      if (this.exit) return;
-      if(!this.cfg.gulpDirOption) {
-        var done = this.async(),
-            self = this;
-
-        console.log(printTitle('Gulp'));
-
-        this.prompt([{
-          type: 'confirm',
-          name: 'gulpDirOption',
-          message: 'Place Gulp files in a subfolder?',
-          default: function(answers) {
-            if(self.cfg.gulpDirOption) {
-              return self.cfg.gulpDirOption
-            } else {
-              return true
-            }
-          }
-        }
-        // , {
-        //   type: 'confirm',
-        //   name: 'gulpCmdOption',
-        //   message: 'Run gulp command after install?',
-        //   default: function(answers) {
-        //     if(self.cfg.gulpCmdOption) {
-        //       return self.cfg.gulpCmdOption
-        //     } else {
-        //       return false
-        //     }
-        //   }
-        // }
-      ], function (answers) {
-          if(!this.cfg.gulpDirOption){
-            this.cfg.gulpDirOption = answers.gulpDirOption;
-            this.cfg.gulpCmdOption = answers.gulpCmdOption;
-          }
-
-          done();
-        }.bind(this));
-      }
+      gulpPrompt(this, function(){})
     },
 
     environment: function(){
-      if (this.exit) return;
+      if(this.exit) return;
       isStatic(this, function(){});
     },
 
     project: function(){
-      if (this.exit) return;
+      if(this.exit) return;
       console.log(printTitle('Project Details'))
       var done = this.async(),
           self = this;
@@ -183,12 +145,12 @@ module.exports = yeoman.Base.extend({
     },
 
     existingStructure: function(){
-      if (this.exit) return;
+      if(this.exit) return;
       structureExists(this, ['mainDir', 'assetsDir', 'cssDir', 'jsDir', 'libDir', 'fontDir', 'gulpDirOption'], function(){});
     },
 
     structure: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       console.log(printTitle('Folder structure'));
       var done = this.async(),
@@ -303,7 +265,7 @@ module.exports = yeoman.Base.extend({
     },
 
     html: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       if(this.cfg.environmentOption === 'static'){
         var done = this.async(),
@@ -326,7 +288,7 @@ module.exports = yeoman.Base.extend({
           }],
           default: function(){
             if(self.cfg.templateOption) return self.cfg.templateOption
-            else return 'none'
+            else return 'html'
           }
         }], function (answers) {
 
@@ -340,7 +302,7 @@ module.exports = yeoman.Base.extend({
 
 
     stylesOptions: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       var done = this.async(),
           self = this;
@@ -356,7 +318,7 @@ module.exports = yeoman.Base.extend({
     },
 
     scripts: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       var done = this.async(),
           self = this;
@@ -371,7 +333,7 @@ module.exports = yeoman.Base.extend({
     },
 
     font: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       var done = this.async(),
           self = this;
@@ -394,7 +356,7 @@ module.exports = yeoman.Base.extend({
   configuring: {
 
     answers: function() {
-      if (this.exit) return;
+      if(this.exit) return;
 
       var done = this.async();
 
@@ -408,7 +370,7 @@ module.exports = yeoman.Base.extend({
 
 
     config: function(){
-      if (this.exit) return;
+      if(this.exit) return;
 
       var done = this.async();
       setConfigFiles(this, function(){
@@ -423,7 +385,7 @@ module.exports = yeoman.Base.extend({
 
 
   writing: function(){
-    if (this.exit) return;
+    if(this.exit) return;
 
     var done       = this.async(),
         destRoot   = this.destinationRoot(),
@@ -460,7 +422,7 @@ module.exports = yeoman.Base.extend({
 
 
   install: function(){
-    if (this.exit) return;
+    if(this.exit) return;
 
     var done = this.async();
     installDep(this, function(){});

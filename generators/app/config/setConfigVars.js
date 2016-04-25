@@ -33,7 +33,6 @@ var setConfigVars = function (self, cb) {
 
 
   self.gulpDirOption = self.cfg.gulpDirOption;
-  self.cfg.gulpTypeOption = 'vanilla'; // 'vanilla', 'coffee'
   self.gulpTypeOption = self.cfg.gulpTypeOption;
 
   if(self.cfg.gulpDirOption) {

@@ -19,7 +19,8 @@ var init            = require('../app/config/init'),
     copyFiles       = require('../app/config/copyFiles'),
     installDep      = require('../app/config/installDep');
 
-var structureExists = require('../app/prompts/structureExists');
+var structureExists = require('../app/prompts/structureExists'),
+    gulpPrompt      = require('../app/prompts/gulpPrompt');
 
 module.exports = yeoman.Base.extend({
   initializing: function(){
@@ -35,50 +36,11 @@ module.exports = yeoman.Base.extend({
 
   prompting: {
     gulp: function(){
-      if (this.exit) return;
-      if(!this.cfg.gulpDirOption) {
-        var done = this.async(),
-            self = this;
-
-        console.log(printTitle('Gulp'));
-
-        this.prompt([{
-          type: 'confirm',
-          name: 'gulpDirOption',
-          message: 'Place Gulp files in a subfolder?',
-          default: function(answers) {
-            if(self.cfg.gulpDirOption) {
-              return self.cfg.gulpDirOption
-            } else {
-              return true
-            }
-          }
-        }
-        // , {
-        //   type: 'confirm',
-        //   name: 'gulpCmdOption',
-        //   message: 'Run gulp command after install?',
-        //   default: function(answers) {
-        //     if(self.cfg.gulpCmdOption) {
-        //       return self.cfg.gulpCmdOption
-        //     } else {
-        //       return false
-        //     }
-        //   }
-        // }
-      ], function (answers) {
-          if(!this.cfg.gulpDirOption){
-            this.cfg.gulpDirOption = answers.gulpDirOption;
-            this.cfg.gulpCmdOption = answers.gulpCmdOption;
-          }
-
-          done();
-        }.bind(this));
-      }
+      gulpPrompt(this, function(){})
     },
 
     existingStructure: function(){
-      if (this.exit) return;
+      if(this.exit) return;
       structureExists(this, ['mainDir', 'assetsDir', 'jsDir', 'gulpDirOption'], function(){});
     },
 
@@ -499,7 +461,7 @@ module.exports = yeoman.Base.extend({
 
 
   install: function(){
-    if (this.exit) return;
+    if(this.exit) return;
 
     var done = this.async();
     installDep(this, function(){});
