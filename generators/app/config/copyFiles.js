@@ -155,6 +155,18 @@ function copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
         self.fs.copyTpl(sourceRoot + '/tpl/jade/templates/layout.jade', destRoot + '/templates/layout.jade', templateContext);
       break;
 
+      case 'pug':
+        if(self.environmentOption === 'express') {
+          destRoot = destRoot + '/' + self.mainDir + '/views';
+        } else {
+          destRoot = destRoot + '/src/pug';
+        }
+
+        self.fs.copy(sourceRoot + '/pug', destRoot);
+        self.fs.copyTpl(sourceRoot + '/tpl/pug/index.pug', destRoot + '/index.pug', templateContext);
+        self.fs.copyTpl(sourceRoot + '/tpl/pug/templates/layout.pug', destRoot + '/templates/layout.pug', templateContext);
+      break;
+
       case 'nunjucks':
       if(self.environmentOption === 'express') {
         destRoot = destRoot + '/' + self.mainDir + '/views';
@@ -254,6 +266,10 @@ function copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
         self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
       break;
 
+      case 'pug':
+        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/pug.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
+      break;
+
       case 'nunjucks':
         self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
       break;
@@ -273,6 +289,10 @@ function copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
 
       case 'jade':
         self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
+      break;
+
+      case 'pug':
+        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/pug.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
       break;
 
       case 'nunjucks':

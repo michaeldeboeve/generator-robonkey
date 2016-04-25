@@ -170,6 +170,10 @@ var writePackage = function (packageFile, self) {
       packageJson['dependencies']['gulp-jade'] = '^1.1.0';
     }
 
+    if(self.templateOption === 'pug') {
+      packageJson['dependencies']['gulp-pug'] = '^2.0.0';
+    }
+
     if(self.templateOption === 'haml') {
       packageJson['dependencies']['gulp-haml'] = '^0.1.6';
     }

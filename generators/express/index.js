@@ -52,7 +52,7 @@ module.exports = yeoman.generators.Base.extend({
 
         isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
           self.cfg.environmentOption = environmentOption;
-          self.cfg.templateOption = 'jade';
+          self.cfg.templateOption = 'pug';
         });
       }
     },
@@ -99,7 +99,7 @@ module.exports = yeoman.generators.Base.extend({
 
   configuring: function () {
     if(this.exit) return;
-  
+
 
     this.gulpDirOption = this.cfg.gulpDirOption;
     this.gulpCmdOption = this.cfg.gulpCmdOption;

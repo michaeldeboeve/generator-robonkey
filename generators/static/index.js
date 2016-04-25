@@ -280,11 +280,14 @@ module.exports = yeoman.Base.extend({
             name: 'None, just use plain old html',
             value: 'html'
           }, {
-            name: 'Jade',
-            value: 'jade'
+            name: 'Pug (was Jade)',
+            value: 'pug'
           }, {
             name: 'Nunjucks',
             value: 'nunjucks'
+          }, {
+            name: 'Jade (Will be deprecated)',
+            value: 'jade'
           }],
           default: function(){
             if(self.cfg.templateOption) return self.cfg.templateOption
