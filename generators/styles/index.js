@@ -185,13 +185,16 @@ module.exports = yeoman.Base.extend({
         type: 'list',
         name: 'preproOption',
         message: 'How would you like to write css?',
-        choices: [{
-          name: 'None, or I\'ll build my own with postcss',
-          value: 'none'
-        },  {
-          name: 'PreCss',
-          value: 'precss'
-        }, {
+        choices: [
+        //   {
+        //   name: 'None, or I\'ll build my own with postcss',
+        //   value: 'none'
+        // },
+        //   {
+        //   name: 'PreCss',
+        //   value: 'precss'
+        // },
+         {
           name: 'Sass',
           value: 'scss'
         }, {
@@ -203,7 +206,7 @@ module.exports = yeoman.Base.extend({
         }],
         default: function(){
           if(self.cfg.preproOption) return self.cfg.preproOption
-          else return 'none'
+          else return 'sass'
         }
       }], function (answers) {
         this.cfg.preproOption = answers.preproOption;
