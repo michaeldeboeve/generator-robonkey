@@ -87,10 +87,10 @@ module.exports = yeoman.generators.Base.extend({
 
     static: function(){
       var self = this;
-      self.composeWith('robonkey:static',{
+      this.composeWith('robonkey:static',{
         options: {
           calledFrom: generatorName,
-          cfg: self.cfg
+          cfg: this.cfg
         }
       });
 
@@ -99,6 +99,7 @@ module.exports = yeoman.generators.Base.extend({
 
   configuring: function () {
     if(this.exit) return;
+  
 
     this.gulpDirOption = this.cfg.gulpDirOption;
     this.gulpCmdOption = this.cfg.gulpCmdOption;

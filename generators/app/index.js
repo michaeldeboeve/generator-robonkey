@@ -73,6 +73,7 @@ module.exports = yeoman.generators.Base.extend({
   configuring: function(){
     this.gulpDirOption = this.cfg.gulpDirOption;
     this.gulpCmdOption = this.cfg.gulpCmdOption;
+    this.gulpTypeOption = his.cfg.gulpTypeOption;
   },
 
   install: function(){

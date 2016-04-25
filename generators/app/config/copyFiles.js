@@ -232,7 +232,8 @@ function copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
     environmentOption: self.environmentOption,
     templateOption: self.templateOption,
     jsDirPath: self.jsDirPath,
-    cssDirPath: self.cssDirPath
+    cssDirPath: self.cssDirPath,
+    mainDir: self.mainDir
   }
 
   if(self.gulpTypeOption === 'coffee') {
