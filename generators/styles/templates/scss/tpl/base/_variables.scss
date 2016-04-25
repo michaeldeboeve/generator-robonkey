@@ -1,0 +1,114 @@
+// ==========================================================================
+// Breakpoints
+// ==========================================================================
+
+
+$tiny:                       480px;
+$xsmall:                     640px;
+$small:                      768px;
+$medium:                     960px;
+$regular:                    1024px;
+$large:                      1280px;
+$xlarge:                     1440px;
+$xxlarge:                    1550px;
+$huge:                       1650px;
+
+
+
+
+// ==========================================================================
+// Paths
+// ==========================================================================
+
+$asset-base-path: '../<%= assetsDir %>';
+$asset-images-path: '<%= imgDir %>';
+$asset-fonts-path: '<%= fontDir %>';
+
+
+
+
+
+// ==========================================================================
+// Colors
+// ==========================================================================
+
+$black:                      $md-grey-900;
+$white:                      #fff;
+$red:                        $md-red-a700;
+$error-color:                $red;
+
+
+
+
+// ==========================================================================
+// Fonts
+// ==========================================================================
+
+$default-font-family:        'lato', sans-serif;
+$title-font-family:          $default-font-family;
+$serif-font-family:          serif;
+$monospace-font-family:      monospace;
+$fontSmooth:                 true;
+
+
+$default-font-color:         $md-grey-700;
+$anchor-text-color:          $md-blue-a700;
+$anchor-text-hover-color:    darken($anchor-text-color, 10);
+$anchor-text-decoration:     none;
+
+
+$default-font-size:          16px;
+$default-line-height:        1.2;
+$small-font-siz:             75%;
+
+$nav-list-style:             none;
+
+
+// ==========================================================================
+// Root
+// ==========================================================================
+
+$root-background-color:      #fff;
+$root-color:                 $default-font-color;
+$root-box-sizing:            border-box;
+$root-cursor:                default;
+$root-font-size:             100%;
+$root-line-height:           1.5;
+$root-font-family:           $default-font-family;
+
+
+
+
+// ==========================================================================
+// Animations
+// ==========================================================================
+
+$base-transition:            all .3s ease-out;
+
+
+
+// ==========================================================================
+// Forms
+// ==========================================================================
+
+$form-element-background-color: transparent;
+$form-element-min-height: 1.5em;
+
+// ==========================================================================
+// Tables
+// ==========================================================================
+
+$table-border-collapse: collapse;
+$table-border-spacing: 0;
+$textarea-resize: vertical;
+
+// ==========================================================================
+// Selection
+// ==========================================================================
+$selection-background-color: $md-blue-300;
+$selection-color: #fff;
+$selection-text-shadow: none;
+
+
+
+$media-element-vertical-align: middle;

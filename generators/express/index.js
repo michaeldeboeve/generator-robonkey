@@ -1,65 +1,159 @@
 'use strict';
 
-var yeoman        = require('yeoman-generator'),
-    yosay         = require('yosay'),
-    fs            = require('fs'),
-    chalk         = require('chalk'),
-    mkdirp        = require('mkdirp'),
-    printTitle    = require('../app/helpers/printTitle');
+var yeoman          = require('yeoman-generator'),
+    yosay           = require('yosay'),
+    fs              = require('fs'),
+    path            = require('path'),
+    util            = require('util'),
+    chalk           = require('chalk'),
+    rimraf          = require('rimraf'),
+    exec            = require('child_process').exec,
+    semver          = require('semver'),
+    mkdirp          = require('mkdirp'),
+    generatorName   = path.basename(__dirname);
 
-module.exports = yeoman.Base.extend({
+var greeting        = require('../app/helpers/greeting'),
+    walk            = require('../app/helpers/walk'),
+    printTitle      = require('../app/helpers/printTitle'),
+    hasFeature      = require('../app/helpers/hasFeature'),
+    createJson      = require('../app/helpers/createJson');
 
-  prompting: function(){
-    this.log(printTitle('Configuring Express'));
+var init            = require('../app/config/init'),
+    setConfigVars   = require('../app/config/setConfigVars'),
+    setConfigFiles  = require('../app/config/setConfigFiles'),
+    copyFiles       = require('../app/config/copyFiles'),
+    installDep      = require('../app/config/installDep');
 
+var structureExists = require('../app/prompts/structureExists'),
+    isFramework     = require('../app/prompts/isFramework'),
+    isStatic        = require('../app/prompts/isStatic');
+
+
+module.exports = yeoman.generators.Base.extend({
+
+  initializing: function(){
     var done = this.async(),
         self = this;
-
-    this.prompt([{
-      name: 'mainDir',
-      message: 'Where to place the Express app?',
-      default: 'app'
-    }], function (answers) {
-      this.mainDir = answers.mainDir;
-      answers.environmentOption = 'express';
-      this.expressPrompt = answers;
-
-      done();
-    }.bind(this));
-  },
-
-  configuring: function () {
-    var done = this.async();
-    this.config.set(this.expressPrompt);
-
+    init(this, function(){
+      greeting(self);
+    });
     done();
   },
 
-  writing: function(){
-    this.log(printTitle('Installing Express'));
+  prompting: {
+    existingEnvironment: function(){
+      this.cfg.environmentOption ='express';
+      if(this.calledFrom === 'app' || !this.calledFrom){
+        var done = this.async(),
+            self = this,
+            destRoot = this.destinationRoot(),
+            frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
-    var done = this.async(),
-        destRoot = this.mainDir,
-        sourceRoot = this.sourceRoot();
-        
-    this.fs.copy(sourceRoot+ '/bin', destRoot + '/bin');
-    this.fs.copy(sourceRoot+ '/routes', destRoot + '/routes');
-    this.fs.copy(sourceRoot+ '/views', destRoot + '/views');
-    this.fs.copy(sourceRoot+ '/app.js', destRoot + '/app.js');
-    this.fs.copy(sourceRoot+ '/package.json', destRoot + '/package.json');
+        isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
+          self.cfg.environmentOption = environmentOption;
+          self.cfg.templateOption = 'jade';
+        });
+      }
+    },
+
+    gulp: function(){
+      if (this.exit) return;
+      if(!this.cfg.gulpDirOption) {
+        var done = this.async(),
+            self = this;
+
+        console.log(printTitle('Gulp'));
+
+        this.prompt([{
+          type: 'confirm',
+          name: 'gulpDirOption',
+          message: 'Place Gulp files in a subfolder?',
+          default: function(answers) {
+            if(self.cfg.gulpDirOption) {
+              return self.cfg.gulpDirOption
+            } else {
+              return true
+            }
+          }
+        }
+        // , {
+        //   type: 'confirm',
+        //   name: 'gulpCmdOption',
+        //   message: 'Run gulp command after install?',
+        //   default: function(answers) {
+        //     if(self.cfg.gulpCmdOption) {
+        //       return self.cfg.gulpCmdOption
+        //     } else {
+        //       return false
+        //     }
+        //   }
+        // }
+      ], function (answers) {
+          if(!this.cfg.gulpDirOption){
+            this.cfg.gulpDirOption = answers.gulpDirOption;
+            this.cfg.gulpCmdOption = answers.gulpCmdOption;
+          }
+
+          done();
+        }.bind(this));
+      }
+    },
+
+    express: function(){
+      if (this.exit) return;
+
+      var done = this.async(),
+          self = this;
+
+      this.prompt([{
+        name: 'mainDir',
+        message: 'Where to place Express?',
+        default: function(answers) {
+          if(self.cfg.mainDir) {
+            return self.cfg.mainDir
+          } else {
+            return 'website'
+          }
+        }
+      }], function (answers) {
+        this.cfg.environmentOption = 'express';
+        this.cfg.mainDir = answers.mainDir;
+
+        done();
+      }.bind(this));
+    },
+
+    static: function(){
+      var self = this;
+      self.composeWith('robonkey:static',{
+        options: {
+          calledFrom: generatorName,
+          cfg: self.cfg
+        }
+      });
+
+    },
+  },
+
+  configuring: function () {
+    if (this.exit) return;
+
+    this.gulpDirOption = this.cfg.gulpDirOption;
+    this.gulpCmdOption = this.cfg.gulpCmdOption;
+    this.environmentOption = this.cfg.environmentOption;
+    this.mainDir = this.cfg.mainDir;
+
+
+    var done = this.async();
+    this.config.set(this.cfg);
+
     done();
   },
 
   install: function(){
-    var done = this.async(),
-        npmdir = process.cwd() + '/' + this.mainDir;
-
-    process.chdir(npmdir);
-    this.npmInstall();
-
+    var done = this.async();
+    installDep(this, function(){});
     done();
   }
-
-
 
 });

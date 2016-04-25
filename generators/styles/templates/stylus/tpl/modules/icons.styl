@@ -1,0 +1,146 @@
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+
+$icn-desktop = '\E001';
+$icn-envelope = '\E002';
+$icn-facebook = '\E003';
+$icn-globe = '\E004';
+$icn-google-plus = '\E005';
+$icn-instagram = '\E006';
+$icn-laptop = '\E007';
+$icn-linkedin = '\E008';
+$icn-map-marker = '\E009';
+$icn-mobile = '\E00A';
+$icn-phone = '\E00B';
+$icn-pinterest-p = '\E00C';
+$icn-pinterest = '\E00D';
+$icn-sparky = '\E00E';
+$icn-tablet = '\E00F';
+$icn-twitter = '\E010';
+$icn-vimeo = '\E011';
+$icn-vine = '\E012';
+$icn-whatsapp = '\E013';
+$icn-youtube-play = '\E014';
+$icn-youtube = '\E015';
+
+
+
+
+
+// ==========================================================================
+// Map
+// ==========================================================================
+
+$icons = {
+  'desktop': '\E001'
+  'envelope': '\E002'
+  'facebook': '\E003'
+  'globe': '\E004'
+  'google-plus': '\E005'
+  'instagram': '\E006'
+  'laptop': '\E007'
+  'linkedin': '\E008'
+  'map-marker': '\E009'
+  'mobile': '\E00A'
+  'phone': '\E00B'
+  'pinterest-p': '\E00C'
+  'pinterest': '\E00D'
+  'sparky': '\E00E'
+  'tablet': '\E00F'
+  'twitter': '\E010'
+  'vimeo': '\E011'
+  'vine': '\E012'
+  'whatsapp': '\E013'
+  'youtube-play': '\E014'
+  'youtube': '\E015'
+}
+
+
+
+
+// ==========================================================================
+// Extends
+// ==========================================================================
+
+$icn-base
+  @extend $iconfont;
+  font-size: $icn-font-size;
+  line-height: $icn-line-height;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  display: inline-block;
+  text-rendering: auto;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+icn-char($filename)
+  for ent, key in $icons
+    if $filename is ent
+      return key
+  return $filename
+
+.icn
+  display: inline-block;
+  &:before
+    @extend $icn-base;
+
+
+.icn--fw
+  width: $icn-fixed-width-size;
+  text-align: center;
+
+
+icn($filename, $insert = before)
+  &:{$insert}
+    content: icn-char($filename);
+
+
+.icn--desktop
+  icn('desktop');
+.icn--envelope
+  icn('envelope');
+.icn--facebook
+  icn('facebook');
+.icn--globe
+  icn('globe');
+.icn--google-plus
+  icn('google-plus');
+.icn--instagram
+  icn('instagram');
+.icn--laptop
+  icn('laptop');
+.icn--linkedin
+  icn('linkedin');
+.icn--map-marker
+  icn('map-marker');
+.icn--mobile
+  icn('mobile');
+.icn--phone
+  icn('phone');
+.icn--pinterest-p
+  icn('pinterest-p');
+.icn--pinterest
+  icn('pinterest');
+.icn--sparky
+  icn('sparky');
+.icn--tablet
+  icn('tablet');
+.icn--twitter
+  icn('twitter');
+.icn--vimeo
+  icn('vimeo');
+.icn--vine
+  icn('vine');
+.icn--whatsapp
+  icn('whatsapp');
+.icn--youtube-play
+  icn('youtube-play');
+.icn--youtube
+  icn('youtube');

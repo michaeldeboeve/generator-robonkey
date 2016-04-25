@@ -1,0 +1,29 @@
+// ==========================================================================
+// Fonts
+// ==========================================================================
+
+// Font-weights
+// Thin (Hairline): 100
+// Extra Light (Ultra Light): 200
+// Light: 300
+// Normal: 400
+// Medium: 500
+// Semi Bold (Demi Bold): 600
+// Bold: 700
+// Extra Bold (Ultra Bold): 800
+// Black (Heavy): 900
+
+
+
+
+
+
+
+
+// Extends
+%basefont { font-family: if(variable-exists(default-font-family), $default-font-family, sans-serif); }
+%monofont { font-family: if(variable-exists(monospace-font-family), $monospace-font-family, monospace); }
+%titlefont {
+  font-family: if(variable-exists(title-font-family), $title-font-family, sans-serif);
+  text-transform: uppercase;
+}

@@ -1,0 +1,80 @@
+// ==========================================================================
+// IMPORTS
+// ==========================================================================
+<% if(mqOption === 'breakpoint'){ %>
+@import "<%= nodeModules %>breakpoint-sass/stylesheets/breakpoint";<% } %><% if(gridOption === 'susy'){ %>
+@import "<%= nodeModules %>susy/sass/susy";<% } %><% if(mixinOption === 'bourbon' || gridOption === 'neat'){ %>
+@import "<%= nodeModules %>bourbon/app/assets/stylesheets/bourbon";<% } %><% if(gridOption === 'neat'){ %>
+@import "<%= nodeModules %>bourbon-neat/app/assets/stylesheets/neat";<% } %><% if(gridOption === 'includemedia'){ %>
+@import "<%= nodeModules %>include-media/dist/include-media";<% } %><% if(gridOption === 'gridle'){ %>
+@import "<%= nodeModules %>gridle/sass/gridle/gridle";<% } %><% if(gridOption === 'gridleFlex'){ %>
+@import "<%= nodeModules %>gridle/sass/gridle/gridle-flex";<% } %><% if(preproOption === 'sass' && gridOption === 'jeet'){ %>
+@import "base/jeet/jeet";<% } %><% if(mixinOption === 'default') {%>
+@import "<%= nodeModules %>superlatief-mixins/scss/superlatief";<% } %><% if(mqOption === 'default') {%>
+@import "<%= nodeModules %>superlatief-mediaqueries/scss/mediaqueries";<% } %>
+@import "<%= nodeModules %>superlatief-colors/scss/colors";
+
+
+
+
+
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+@import "base/variables";
+
+@import "base/fonts/**/*";<% if(baseStyleOption === 'reset'){ %>
+@import "base/reset";<% } %><% if(baseStyleOption === 'normalize'){ %>
+@import "base/normalize";<% } %><% if(baseStyleOption === 'sanitize'){ %>
+@import "base/sanitize";<% } %>
+@import "base/placeholders";
+@import "base/grid";
+@import "base/typography";<% if(wpBlankTheme) { %>
+@import "base/wp-core";<% } %>
+
+
+
+
+
+
+// ==========================================================================
+// Modules
+// ==========================================================================
+@import "modules/**/*";
+
+
+
+
+
+// ==========================================================================
+// Views
+// ==========================================================================
+@import "views/**/*";
+
+
+
+
+// ==========================================================================
+// Pages
+// ==========================================================================
+@import "pages/**/*";
+
+
+
+
+// ==========================================================================
+// Themes
+// ==========================================================================
+@import "themes/**/*";
+
+
+
+
+
+
+// ==========================================================================
+// Playground - To Be Deleted
+// ==========================================================================
+@import "playground/**/*";
