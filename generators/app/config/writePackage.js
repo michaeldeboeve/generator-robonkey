@@ -203,6 +203,11 @@ var writePackage = function (packageFile, self) {
       packageJson['dependencies']['gulp-postcss'] = '^6.1.0';
     }
 
+    if(self.postcssSplit) {
+      packageJson['dependencies']['postcss-split'] = '^0.0.4';
+    }
+
+
     if(self.postcssStylelint) {
       packageJson['devDependencies']['stylelint'] = '^6.1.1';
     }

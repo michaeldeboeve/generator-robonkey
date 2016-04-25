@@ -18,7 +18,6 @@ var setConfigFiles = function(self, cb){
 
 // saving yo-rc file
 function setyorc(self, cb){
-  console.log(self.environmentOption)
   if(self.environmentOption !== 'wordpress'){
     // Delete all worpress references
     self.config.delete('wpBlankTheme');

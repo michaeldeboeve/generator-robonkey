@@ -631,7 +631,13 @@ module.exports = yeoman.Base.extend({
           name: 'Gradient Transparency Fix',
           value: 'gradientfix',
           checked: hasFeature('gradientfix', self.cfg.postcssOption)
-        }, {
+        }
+        // ,{
+        //   name: 'Split',
+        //   value: 'split',
+        //   checked: hasFeature('split', self.cfg.postcssOption)
+        // }
+        , {
           name: 'Css Declaration Sorter',
           value: 'csssorter',
           checked: hasFeature('csssorter', self.cfg.postcssOption)
@@ -1004,7 +1010,7 @@ module.exports = yeoman.Base.extend({
                 link: 'https://github.com/cssdream/cssgrace',
                 req: 'cssgrace',
                 call: 'grace',
-                sort: 92
+                sort: 91
               });
           break;
 
@@ -1015,7 +1021,7 @@ module.exports = yeoman.Base.extend({
                 link: 'https://github.com/thompsongl/postcss-class-prefix',
                 req: 'postcss-class-prefix',
                 call: 'classPrfx(cfg.prefix)',
-                sort: 93
+                sort: 92
               });
           break;
 
@@ -1026,6 +1032,17 @@ module.exports = yeoman.Base.extend({
                 link: 'https://github.com/pazams/postcss-scopify',
                 req: 'postcss-scopify',
                 call: 'scopify(cfg.scope)',
+                sort: 93
+              });
+          break;
+
+          case 'split':
+            this.postcssPlugins.push({
+                key: 'split',
+                name: 'Split',
+                link: 'https://github.com/wladston/postcss-split',
+                req: 'postcss-split',
+                call: 'split',
                 sort: 94
               });
           break;

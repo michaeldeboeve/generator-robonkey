@@ -59,7 +59,6 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     static: function(){
-      console.log(this.cfg.gulpDirOption);
       this.composeWith('robonkey:static',{
         options: {
           calledFrom: generatorName,

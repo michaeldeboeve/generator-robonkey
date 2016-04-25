@@ -134,8 +134,8 @@ module.exports = yeoman.generators.Base.extend({
           self = this;
 
       var downloadLaravel = function (self) {
-        self.extract('https://github.com/laravel/laravel/archive/' + self.cfg.laravelVersion + '.tar.gz', './', function(){
-          fs.rename('laravel-' + self.cfg.laravelVersion, self.cfg.mainDir);
+        self.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
+          fs.rename('laravel-' + self.laravelVersion, self.cfg.mainDir);
           done();
         });
       }
@@ -148,15 +148,15 @@ module.exports = yeoman.generators.Base.extend({
         fs.accessSync(self.mainDir, fs.F_OK);
         console.log('Folder ' + self.mainDir + ' exists');
         rimraf(self.mainDir, function(){
-          self.extract('https://github.com/laravel/laravel/archive/' + self.cfg.laravelVersion + '.tar.gz', './', function(){
-            // fs.rename('laravel-' + self.cfg.laravelVersion, self.cfg.mainDir);
+          self.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
+            fs.rename('laravel-' + self.laravelVersion, self.mainDir);
             done();
           });
         });
       } catch (e) {
         console.log('Folder ' + self.mainDir + ' doesn\'t exist');
-        self.extract('https://github.com/laravel/laravel/archive/' + self.cfg.laravelVersion + '.tar.gz', './', function(){
-          // fs.rename('laravel-' + self.cfg.laravelVersion, self.cfg.mainDir);
+        self.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
+          fs.rename('laravel-' + self.laravelVersion, self.mainDir);
           done();
         });
       }
