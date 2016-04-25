@@ -9,6 +9,7 @@
     "stylus",
     "less",
     "jade",
+    "pug",
     "nunjucks",
     "gulp",
     "postcss",

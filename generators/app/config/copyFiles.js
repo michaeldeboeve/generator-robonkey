@@ -29,7 +29,7 @@ function copyFiles (self, destRoot, gulpRoot, sourceRoot, cb) {
 
 function copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, cb){
   // console.log(destRoot  + '/' +  self.templateDest + self.jsDirPath)
-  mkdirp(destRoot + '/src');
+  mkdirp(destRoot + '/src/bower_components');
 
   mkdirp(destRoot  + '/' +  self.templateDest + self.jsDirPath);
   mkdirp(destRoot  + '/' +  self.templateDest + self.jsLibDirPath);
@@ -195,7 +195,9 @@ function copyJsFiles(self, destRoot, gulpRoot, sourceRoot, cb){
         jsLibDirPath: self.jsLibDirPath,
         jsScriptsBower: self.jsScriptsBower,
         rootFolder: self.rootFolder,
-        javascriptOption: self.javascriptOption
+        javascriptOption: self.javascriptOption,
+        modernizrOption: self.modernizrOption,
+        scriptsOption: self.scriptsOption
       }
   if(self.gulpDirOption) gulpRoot = destRoot + '/gulp';
 

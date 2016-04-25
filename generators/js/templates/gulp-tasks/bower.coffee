@@ -8,8 +8,8 @@ uglify = require('gulp-uglify')
 
 gulp.task 'moveBower', ->
   files = mainBowerFiles(
-    base: '../bower_components'
-    overrides:<%
+    base: '../bower_components'<% if(jsScriptsBower.length > 0){ %>
+    overrides:<% }
 for (var i = 0; i < jsScriptsBower.length; i++) {
   switch(jsScriptsBower[i]['key']) {
     case null:
@@ -25,7 +25,9 @@ for (var i = 0; i < jsScriptsBower.length; i++) {
       '<%= jsScriptsBower[i]["key"] %>': main: '<%= jsScriptsBower[i]["main"] %>'<%
   }
 } %>)
-  files.push '../src/modernizr/*.js'
+
+  <% if(modernizrOption){ %>files.push '<%= rootFolder %>src/modernizr/*.js'<% } %>
+
   gulp.src(files)
     .pipe(flatten())
     .pipe gulp.dest(cfg.scripts.build_lib)
