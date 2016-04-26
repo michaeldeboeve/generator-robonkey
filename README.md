@@ -1,4 +1,4 @@
-<img src="docs/robonkey-logo.svg" alt="Drawing" style="max-width: 400px;margin-bottom: 20px"/>
+<img src="docs/robonkey-logo.png" alt="Robonkey" style="max-width: 400px;margin-bottom: 20px"/>
 
 > A [Yeoman](http://yeoman.io) generator for Gulp, Templating, CSS Preprocessors, CoffeeScript, PostCSS, Modernizr, Icon Font Generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter and Laravel subgenerators are available.
 
