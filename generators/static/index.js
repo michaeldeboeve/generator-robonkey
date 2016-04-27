@@ -112,20 +112,24 @@ module.exports = yeoman.Base.extend({
         name: 'projectAuthor',
         message: 'Author:',
         default: function(answers) {
-          if(self.cfg.projectAuthor) {
+          if(self.user.git.name()){
+            return  self.user.git.name()
+          } if(self.cfg.projectAuthor) {
             return self.cfg.projectAuthor
           } else {
-            return 'John Appleseed'
+            return 'Your name'
           }
         }
       }, {
-        name: 'authorURI',
-        message: 'Author URI:',
+        name: 'authorEmail',
+        message: 'Author Email:',
         default: function(answers) {
-          if(self.cfg.authorURI) {
-            return self.cfg.authorURI
+          if(self.user.git.email()){
+            return  self.user.git.email()
+          } else if(self.cfg.authorEmail) {
+            return self.cfg.authorEmail
           } else {
-            return 'http://' + answers.projectAuthor.replace(/\W/g, '').toLowerCase() + '.me';
+            return 'Your email'
           }
         }
 

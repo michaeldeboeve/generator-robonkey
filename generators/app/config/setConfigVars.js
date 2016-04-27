@@ -11,14 +11,14 @@ var setConfigVars = function (self, cb) {
   self.projectDescription = self.cfg.projectDescription;
   self.projectVersion = self.cfg.projectVersion;
   self.projectAuthor = self.cfg.projectAuthor;
-  self.authorURI = self.cfg.authorURI;
+  self.authorEmail = self.cfg.authorEmail;
   self.projectLicense = 'MIT';
 
   self.themeNameSpace = self.cfg.themeNameSpace;
   self.themeName = self.cfg.themeName;
   self.wpBlankTheme = self.cfg.wpBlankTheme;
   self.themeAuthor = self.cfg.projectAuthor;
-  self.themeAuthorURI = self.cfg.authorURI;
+  self.themeauthorEmail = self.cfg.authorEmail;
 
   self.mainDir = self.cfg.mainDir;
   self.themeDir = self.cfg.themeDir;

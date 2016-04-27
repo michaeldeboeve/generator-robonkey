@@ -36,7 +36,7 @@ var writeBower = function (self) {
       'globals'
     ],
     license: self.projectLicense,
-    homepage: self.authorURI,
+    homepage: self.authorEmail,
     ignore: [
       '**/.*',
       'node_modules',

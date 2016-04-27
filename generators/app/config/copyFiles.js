@@ -69,7 +69,7 @@ function copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
       wpDest  = destRoot + '/' + self.templateDest,
       templateContext = {
         themeAuthor: self.themeAuthor,
-        themeAuthorURI: self.themeAuthorURI,
+        themeauthorEmail: self.themeauthorEmail,
         themeName: self.themeName,
         themeNameSpace: self.themeNameSpace,
         jsDirPath: self.jsDirPath,
