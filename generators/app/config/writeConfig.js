@@ -81,21 +81,6 @@ var writeConfig = function (configFile, self) {
       configJson['pug']['build'] = self.rootFolder + self.templateDest + '/';
     }
 
-    // if(self.templateOption === 'haml' && self.environmentOption === 'static') {
-    //   configJson['haml'] = {};
-    //   configJson['haml']['src'] = self.rootFolder + 'src/haml/*.haml';
-    //   configJson['haml']['watch'] = self.rootFolder + 'src/haml/**/*.haml';
-    //   configJson['haml']['build'] = self.rootFolder + self.templateDest + '/';
-    // }
-    //
-    // if(self.templateOption === 'handlebars' && self.environmentOption === 'static') {
-    //   configJson['handlebars'] = {};
-    //   configJson['handlebars']['src'] = self.rootFolder + 'src/handlebars/*.html';
-    //   configJson['handlebars']['watch'] = self.rootFolder + 'src/handlebars/**/*.html';
-    //   configJson['handlebars']['watchdata'] = self.rootFolder + 'src/handlebars/**/*.json';
-    //   configJson['handlebars']['partials'] = self.rootFolder + 'src/handlebars/partials';
-    //   configJson['handlebars']['build'] = self.rootFolder + self.templateDest + '/';
-    // }
 
     if(self.templateOption === 'nunjucks' && self.environmentOption === 'static') {
       configJson['nunjucks'] = {};
