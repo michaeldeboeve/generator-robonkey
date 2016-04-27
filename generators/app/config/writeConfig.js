@@ -26,6 +26,16 @@ var writeConfig = function (configFile, self) {
 
   function createConfig(self, configJson, cb){
 
+    configJson['projectURL'] = self.projectUrl;
+
+    if(self.postcssScopifyOption) {
+      configJson['scope'] = '#scope';
+    }
+
+    if(self.postcssClassprefixOption) {
+      configJson['prefix'] = 'prfx-';
+    }
+
     configJson['styles'] = {}
     switch(self.preproOption){
       case 'scss':
