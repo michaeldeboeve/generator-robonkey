@@ -3,16 +3,19 @@ var fs        = require('fs'),
     jsonfile  = require('jsonfile'),
     printTitle = require('../helpers/printTitle');
 
+const exec          = require('child_process').exec;
+const spawn         = require('child_process').spawnSync;
+
 var installDep = function (self, cb) {
   if(!self.calledFrom) {
     console.log(printTitle('Installing Dependencies'));
 
     if(self.gulpDirOption) {
       // Change working directory to 'gulp' for dependency install
-      var npmdir = process.cwd() + '/gulp';
-      process.chdir(npmdir);
+      var gulpDir = process.cwd() + '/gulp';
+      process.chdir(gulpDir);
     }
-
+    //var expressInstall = spawn('npm', ['install'], { cwd: '/website' });
     self.installDependencies({
       bower: true,
       npm: true,

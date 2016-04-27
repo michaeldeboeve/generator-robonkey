@@ -7,10 +7,12 @@ var yeoman          = require('yeoman-generator'),
     util            = require('util'),
     chalk           = require('chalk'),
     rimraf          = require('rimraf'),
-    exec            = require('child_process').exec,
     semver          = require('semver'),
     mkdirp          = require('mkdirp'),
     generatorName   = path.basename(__dirname);
+
+var exec            = require('child_process').exec;
+var spawn           = require('child_process').spawn;
 
 var greeting        = require('../app/helpers/greeting'),
     walk            = require('../app/helpers/walk'),
@@ -114,8 +116,11 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function(){
-    var done = this.async();
+    var done = this.async(),
+        self = this;
+
     installDep(this, function(){});
+
     done();
   }
 

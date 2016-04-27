@@ -143,7 +143,6 @@ var writeConfig = function (configFile, self) {
 
 
     if(self.modernizrOption) {
-
       configJson['modernizr'] = {};
       configJson['modernizr']['output'] = 'modernizr-custom.js';
       configJson['modernizr']['build'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp;
@@ -152,13 +151,14 @@ var writeConfig = function (configFile, self) {
       configJson['modernizr']['options'] = ['setClasses', 'addTest', 'testProp', 'fnBind'];
     }
 
+
     configJson['scripts'] = {}
-    configJson['scripts']['src'] = ''
+    configJson['scripts']['src'] = self.rootFolder + 'src/js/**/*.js'
     configJson['scripts']['build'] = self.rootFolder + self.templateDest + self.jsDirPathGulp;
     configJson['scripts']['src_lib'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp + '/**/*.js';
     configJson['scripts']['build_lib'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp + '/';
 
-    switch(self.javascriptOption) {
+    switch(self.cfg.javascriptOption) {
       case 'vanilla':
         configJson['scripts']['src'] = self.rootFolder + 'src/js/**/*.js';
       break;

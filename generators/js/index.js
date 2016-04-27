@@ -220,7 +220,6 @@ module.exports = yeoman.Base.extend({
           self = this;
 
       setConfigVars(this, function(result){});
-
       this.gulpDirOption = this.cfg.gulpDirOption;
       this.gulpCmdOption = this.cfg.gulpCmdOption;
       var scriptsOption = this.cfg.scriptsOption;

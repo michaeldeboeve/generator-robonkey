@@ -12,7 +12,7 @@ function copyFiles (self, destRoot, gulpRoot, sourceRoot, cb) {
 
   copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
   copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
+  copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, function(self){});
   copyH5bpFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
   copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
   copyImageFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
@@ -58,7 +58,7 @@ function copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, cb){
     self.fs.copy(sourceRoot + '/express/package.json', destRoot + '/' + self.templateDest + '/package.json');
   }
 
-  cb();
+  cb(self);
 }
 
 

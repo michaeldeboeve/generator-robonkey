@@ -36,7 +36,7 @@ gulp.task('watch', function() {
   gulp.watch(cfg.images.src, ['images']);
 
   // watch for SASS changes
-  // gulp.watch(cfg.styles.src_files, ['styles']);
+  gulp.watch(cfg.styles.src_files, ['styles']);
   <% if(environmentOption === 'static'){ %>// Watch for css changes, then inject css
   gulp.watch(cfg.styles.build + '/**/*.css',  ['css']);<% } %>
   <% if(templateOption === 'jade' && environmentOption === 'static'){ %>// watch for Jade changes, then reload

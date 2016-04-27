@@ -24,7 +24,7 @@ gulp.task 'watch', ->
   # watch for image changes
   gulp.watch cfg.images.src, [ 'images' ]
   # watch for SASS changes
-  # gulp.watch(cfg.styles.src_files, ['styles']);
+  gulp.watch(cfg.styles.src_files, ['styles']);
   # Watch for css changes, then inject css
   gulp.watch cfg.styles.build + '/**/*.css', [ 'css' ]
   # watch for Jade changes, then reload
