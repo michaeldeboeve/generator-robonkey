@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 		evt.preventDefault();
 		
 		// Editor Height (needs improvement)
-		$('.wp-editor-wrap').each(function() {
+		$('.wp-editor-wrap').each(function(){
 			var editor_iframe = $(this).find('iframe');
 			if ( editor_iframe.height() < 30 ) {
 				editor_iframe.css({'height':'auto'});

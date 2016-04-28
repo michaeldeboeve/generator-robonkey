@@ -22,12 +22,14 @@ var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
     copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep');
+    installDep      = require('../app/config/installDep'),
+    setBaseConfigVars  = require('../app/config/setBaseConfigVars'),
+    getFramework    = require('../app/config/getFramework');
 
-var structureExists = require('../app/prompts/structureExists'),
-    isFramework     = require('../app/prompts/isFramework'),
-    gulpPrompt      = require('../app/prompts/gulpPrompt'),
-    isStatic        = require('../app/prompts/isStatic');
+var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
+    frameworkPrompt       = require('../app/prompts/frameworkPrompt'),
+    gulpPrompt            = require('../app/prompts/gulpPrompt'),
+    staticPrompt          = require('../app/prompts/staticPrompt');
 
 
 module.exports = yeoman.generators.Base.extend({
@@ -50,14 +52,14 @@ module.exports = yeoman.generators.Base.extend({
             destRoot = this.destinationRoot(),
             frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
-        isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
+        frameworkPrompt(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
           self.cfg.environmentOption = environmentOption;
         });
       }
     },
 
     gulp: function(){
-      gulpPrompt(this, function(){})
+      gulpPrompt(this)
     },
 
     codeigniter: function(){
@@ -101,45 +103,37 @@ module.exports = yeoman.generators.Base.extend({
       }.bind(this));
     },
 
-    static: function(){
-      this.composeWith('robonkey:static',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-    },
+    // static: function(){
+    //   this.composeWith('robonkey:static',{
+    //     options: {
+    //       calledFrom: generatorName,
+    //       cfg: this.cfg
+    //     }
+    //   });
+    // },
   },
 
 
-  configuring: function () {
-    if(this.exit) return;
+  configuring: {
+    answers: function () {
+      if(this.exit) return;
+      var done = this.async();
 
-    this.gulpDirOption = this.cfg.gulpDirOption;
-    this.gulpCmdOption = this.cfg.gulpCmdOption;
-    this.environmentOption = this.cfg.environmentOption;
-    this.mainDir = this.cfg.mainDir;
-    this.codeigniterVersion = this.cfg.codeigniterVersion;
+      setBaseConfigVars(this);
 
+      this.codeigniterVersion = this.cfg.codeigniterVersion;
 
-    var done = this.async();
-    this.config.set(this.cfg);
+      this.config.set(this.cfg);
 
-    done();
+      done();
+    }
   },
 
   writing: {
-    downloading: function() {
+    downloading: function(){
       if(this.exit) return;
       var done = this.async(),
           self = this;
-
-      var downloadCodeIgniter = function () {
-        self.extract('https://github.com/bcit-ci/CodeIgniter/archive/' + self.codeigniterVersion + '.tar.gz', './', function(){
-          fs.rename('Codeigniter-' + self.codeigniterVersion, self.mainDir);
-          done();
-        });
-      }
 
       console.log(printTitle('Installing CodeIgniter'));
 
@@ -149,25 +143,23 @@ module.exports = yeoman.generators.Base.extend({
         fs.accessSync(self.mainDir, fs.F_OK);
         console.log('Folder ' + self.mainDir + ' exists');
         rimraf(self.mainDir, function(){
-          self.extract('https://github.com/bcit-ci/CodeIgniter/archive/' + self.cfg.codeigniterVersion + '.tar.gz', './', function(){
-            fs.rename('Codeigniter-' + self.cfg.codeigniterVersion, self.cfg.mainDir);
+          getFramework.Codeigniter(self, function(){
             done();
-          });
+          })
         });
       } catch (e) {
         console.log('Folder ' + self.mainDir + ' doesn\'t exist');
-        self.extract('https://github.com/bcit-ci/CodeIgniter/archive/' + self.cfg.codeigniterVersion + '.tar.gz', './', function(){
-          fs.rename('Codeigniter-' + self.cfg.codeigniterVersion, self.cfg.mainDir);
+        getFramework.codeigniter(self, function(){
           done();
-        });
+        })
       }
     }
   },
 
-  install: function(){
-    var done = this.async();
-    installDep(this, function(){});
-    done();
-  }
+  // install: function(){
+  //   var done = this.async();
+  //   installDep(this);
+  //   done();
+  // }
 
 });

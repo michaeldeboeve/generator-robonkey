@@ -1,4 +1,4 @@
-<% if(requireOption || !jqueryOption) {%>document.addEventListener("DOMContentLoaded", function() {<% } if(!requireOption && jqueryOption) {%>$(document).ready(function() {<% } %>
+<% if(requireOption || !jqueryOption) {%>document.addEventListener("DOMContentLoaded", function(){<% } if(!requireOption && jqueryOption) {%>$(document).ready(function(){<% } %>
   <% if(requireOption) {%>requirejs.config({
     baseUrl: '<%= jsLibDirPath %>',
     paths: {
@@ -14,7 +14,7 @@
   function init(){<% if(requireOption) { if(jqueryOption) {%>
     define('jQuery', ['jquery'], function () {});<% } %>
 
-    <% if(jqueryOption) {%>require(['jQuery'], function() {
+    <% if(jqueryOption) {%>require(['jQuery'], function(){
       if (window.jQuery != 'undefined') {
         console.log('is jQuery');
       }

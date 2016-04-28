@@ -33,6 +33,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "chalk": "^1.0.0",
     "jsonfile": "^2.2.3",
     "rimraf": ">=2.1.4",
@@ -41,11 +42,7 @@
     "yeoman-generator": "^0.19.2",
     "yosay": "^1.0.3"
   },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
-  },
-  "devDependencies": {
-  },
+  
   "main": "generators/index.js",
   "files": [
     "generators"

@@ -4,7 +4,7 @@ var chalk       = require('chalk'),
     walk        = require('../helpers/walk.js'),
     printTitle  = require('../helpers/printTitle.js');
 
-function isFramework(fwToCheck, destRoot, calledFrom, self, cb){
+function frameworkPrompt(fwToCheck, destRoot, calledFrom, self, cb){
   var done = self.async();
   var filesToCheck = [];
 
@@ -143,4 +143,4 @@ function isFramework(fwToCheck, destRoot, calledFrom, self, cb){
   cb(self.cfg.environmentOption);
 }
 
-module.exports = isFramework;
+module.exports = frameworkPrompt;

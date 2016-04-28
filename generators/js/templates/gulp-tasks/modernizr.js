@@ -6,7 +6,7 @@ var modernizr       = require('gulp-modernizr');
 
 
 
-gulp.task('modernizr', function() {
+gulp.task('modernizr', function(){
   gulp.src([cfg.styles.src_files, cfg.scripts.src])
     .pipe(modernizr(cfg.modernizr.output, {
       cache: true,

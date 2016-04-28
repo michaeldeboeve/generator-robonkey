@@ -24,12 +24,13 @@ var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
     copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep');
+    installDep      = require('../app/config/installDep'),
+    setBaseConfigVars  = require('../app/config/setBaseConfigVars');
 
-var structureExists = require('../app/prompts/structureExists'),
-    isFramework     = require('../app/prompts/isFramework'),
-    gulpPrompt      = require('../app/prompts/gulpPrompt'),
-    isStatic        = require('../app/prompts/isStatic');
+var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
+    frameworkPrompt       = require('../app/prompts/frameworkPrompt'),
+    gulpPrompt            = require('../app/prompts/gulpPrompt'),
+    staticPrompt          = require('../app/prompts/staticPrompt');
 
 
 module.exports = yeoman.generators.Base.extend({
@@ -52,7 +53,7 @@ module.exports = yeoman.generators.Base.extend({
             destRoot = this.destinationRoot(),
             frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
-        isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
+        frameworkPrompt(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
           self.cfg.environmentOption = environmentOption;
           self.cfg.templateOption = 'pug';
         });
@@ -60,7 +61,7 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     gulp: function(){
-      gulpPrompt(this, function(){})
+      gulpPrompt(this)
     },
 
     express: function(){
@@ -87,39 +88,54 @@ module.exports = yeoman.generators.Base.extend({
       }.bind(this));
     },
 
-    static: function(){
-      var self = this;
-      this.composeWith('robonkey:static',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-
-    },
+    // static: function(){
+    //   var self = this;
+    //   this.composeWith('robonkey:static',{
+    //     options: {
+    //       calledFrom: generatorName,
+    //       cfg: this.cfg
+    //     }
+    //   });
+    //
+    // },
   },
 
   configuring: function () {
     if(this.exit) return;
 
+    var done = this.async();
 
-    this.gulpDirOption = this.cfg.gulpDirOption;
-    this.gulpCmdOption = this.cfg.gulpCmdOption;
-    this.environmentOption = this.cfg.environmentOption;
+    setBaseConfigVars(this);
+
     this.mainDir = this.cfg.mainDir;
 
-
-    var done = this.async();
     this.config.set(this.cfg);
 
     done();
   },
 
-  install: function(){
-    var done = this.async(),
-        self = this;
+  writing: function(){
+    var done       = this.async(),
+        self       = this,
+        destRoot   = this.destinationRoot(),
+        gulpRoot   = destRoot,
+        sourceRoot = this.sourceRoot();
+    console.log(sourceRoot)
+    copyFiles.copyExpressFiles(this, destRoot, gulpRoot, sourceRoot, function(){
+      // copyFiles.copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+      //   // console.log('Html files copied.');
+      // });
+    });
 
-    installDep(this, function(){});
+  },
+
+  install: function(){
+    var done = this.async();
+
+    var appDir = process.cwd() + '/' + this.mainDir;
+    process.chdir(appDir);
+
+    this.npmInstall();
 
     done();
   }

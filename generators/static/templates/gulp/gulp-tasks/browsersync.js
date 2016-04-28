@@ -36,7 +36,7 @@ gulp.task('nodemon', function (cb) {
 });<% } %>
 
 
-gulp.task('browser-sync', <% if(environmentOption === 'express'){ %>['nodemon'], <% } %>function() {
+gulp.task('browser-sync', <% if(environmentOption === 'express'){ %>['nodemon'], <% } %>function(){
     browserSync({<% if(environmentOption !== 'express'){ %>
       files: [cfg.styles.build + '/**/*.css'],
       open: 'external',

@@ -6,7 +6,7 @@ var flatten         = require('gulp-flatten');
 var changed         = require('gulp-changed');
 var uglify          = require('gulp-uglify');
 
-gulp.task('moveBower', function() {
+gulp.task('moveBower', function(){
   var files = mainBowerFiles({
     base: '../bower_components',
     overrides: { <%

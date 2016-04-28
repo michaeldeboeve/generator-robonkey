@@ -4,7 +4,7 @@ var gulp            = require('gulp');
 var clean           = require('gulp-clean');
 var htmlreplace     = require("gulp-html-replace");
 
-gulp.task('removeDevFiles', function() {
+gulp.task('removeDevFiles', function(){
   return gulp.src([
     // cfg.scripts.build + 'script.js',
     // cfg.styles.build + 'style.css',

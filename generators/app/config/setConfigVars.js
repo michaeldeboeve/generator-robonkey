@@ -1,9 +1,26 @@
 'use strict';
 
-var setConfigVars = function (self, cb) {
-  self.environmentOption = self.cfg.environmentOption;
-  self.rootFolder = self.cfg.rootFolder;
-  self.nodeModules = self.cfg.nodeModules;
+var setBaseConfigVars = require('./setBaseConfigVars');
+
+var setConfigVars = function (self) {
+
+  setBaseConfigVars(self);
+
+  // self.gulpDirOption = self.cfg.gulpDirOption;
+  // self.gulpTypeOption = self.cfg.gulpTypeOption;
+  //
+  // if(self.cfg.gulpDirOption) {
+  //   self.cfg.rootFolder = '../';
+  //   self.cfg.nodeModules = '../../gulp/node_modules/';
+  // } else {
+  //   self.cfg.rootFolder = './';
+  //   self.cfg.nodeModules = '../../node_modules/';
+  // }
+
+  // self.environmentOption = self.cfg.environmentOption;
+  // self.rootFolder = self.cfg.rootFolder;
+  // self.nodeModules = self.cfg.nodeModules;
+  // self.mainDir = self.cfg.mainDir;
 
   self.projectUrl = self.cfg.projectUrl;
   self.projectName = self.cfg.projectName;
@@ -18,9 +35,8 @@ var setConfigVars = function (self, cb) {
   self.themeName = self.cfg.themeName;
   self.wpBlankTheme = self.cfg.wpBlankTheme;
   self.themeAuthor = self.cfg.projectAuthor;
-  self.themeauthorEmail = self.cfg.authorEmail;
+  self.themeAuthorEmail = self.cfg.authorEmail;
 
-  self.mainDir = self.cfg.mainDir;
   self.themeDir = self.cfg.themeDir;
   self.assetsDir = self.cfg.assetsDir;
   self.cssDir = self.cfg.cssDir;
@@ -30,19 +46,6 @@ var setConfigVars = function (self, cb) {
   self.fontDir = self.cfg.fontDir;
 
   self.iconfontOption = self.cfg.iconfontOption;
-
-
-  self.gulpDirOption = self.cfg.gulpDirOption;
-  self.gulpTypeOption = self.cfg.gulpTypeOption;
-
-  if(self.cfg.gulpDirOption) {
-    self.cfg.rootFolder = '../';
-    self.cfg.nodeModules = '../../gulp/node_modules/';
-  } else {
-    self.cfg.rootFolder = './';
-    self.cfg.nodeModules = '../../node_modules/';
-  }
-
   self.cfg.fontStyleOutputBase = '../../../../';
 
   self.templateOption = self.cfg.templateOption;
@@ -87,7 +90,7 @@ var setConfigVars = function (self, cb) {
   self.cssLibDirPath = self.cssDirPath + '/' + self.libDir;
   self.jsLibDirPath = self.jsDirPath + '/' + self.libDir;
 
-  cb(self);
+  // cb(self);
 }
 
 module.exports = setConfigVars;

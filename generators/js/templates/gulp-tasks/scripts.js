@@ -11,7 +11,7 @@ var coffee          = require('gulp-coffee');<% } %>
 
 
 // JS Dev Task
-gulp.task('scripts', function() {
+gulp.task('scripts', function(){
   gulp.src(cfg.scripts.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))<% if(javascriptOption === 'coffee') { %>
     .pipe(coffee({bare: true}))<% } %>
@@ -23,7 +23,7 @@ gulp.task('scripts', function() {
 
 
 // JS Build Task
-gulp.task('scripts-build', function() {
+gulp.task('scripts-build', function(){
   gulp.src(cfg.scripts.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))<% if(javascriptOption === 'coffee') { %>
     .pipe(coffee({bare: true}))<% } %>

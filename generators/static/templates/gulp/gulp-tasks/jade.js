@@ -12,7 +12,7 @@ var jadeOptions = {
 };
 
 // Compile jade files
-gulp.task('html', function() {
+gulp.task('html', function(){
   gulp.src(cfg.jade.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(jade(jadeOptions))
@@ -20,7 +20,7 @@ gulp.task('html', function() {
     .pipe(gulp.dest(cfg.jade.build));
 });
 
-gulp.task('html-build', function() {
+gulp.task('html-build', function(){
   gulp.src(cfg.jade.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(jade(jadeOptions))

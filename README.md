@@ -41,30 +41,30 @@ gulpfile.js
 - gulp-tasks
 - node_modules
 - src
-	- bower_components 
-	- preprocessors
-	- js
-	- …
+  - bower_components
+  - preprocessors
+  - js
+  - …
 - app
-	- index.html  
+  - index.html
 ```
 
 ###### Clean stucture
 ```sh
 .yo-rc.json
 -gulp
-	bower.json
-	package.json
-	gulpfile.js
-	- gulp-tasks
-	- node_modules
+  bower.json
+  package.json
+  gulpfile.js
+  - gulp-tasks
+  - node_modules
 - src
-	- bower_components
-	- preprocessors
-	- js
-	- …
+  - bower_components
+  - preprocessors
+  - js
+  - …
 - app
-	- index.html  
+  - index.html
 ```
 
 ## Generators
@@ -122,7 +122,7 @@ $ yo robonkey:iconfont
 
 #### robonkey:[framework] generators
 
-Installs a framework, then runs the static generator
+Installs a framework. `$ yo robonkey` should be run aftwerwards.
 
 ```sh
 $ yo robonkey:express
@@ -147,10 +147,10 @@ In `config.json` you can set the modernizr options.
 
 ```sh
 "modernizr": {
-	"excludeTests": [],
-	"tests": [],
-	"output": "modernizr-custom.js",
-	"options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
+  "excludeTests": [],
+  "tests": [],
+  "output": "modernizr-custom.js",
+  "options": [ "setClasses", "addTest", "html5printshiv", "testProp", "fnBind" ]
 }
 ```
 
@@ -255,5 +255,5 @@ src/less/modules/icons.less
 ## To Do
 
 - Priority:
-	- Testing 
-	- Update docs
+  - Testing
+  - Update docs

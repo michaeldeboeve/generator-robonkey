@@ -22,12 +22,14 @@ var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
     copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep');
+    installDep      = require('../app/config/installDep'),
+    setBaseConfigVars  = require('../app/config/setBaseConfigVars'),
+    getFramework    = require('../app/config/getFramework');
 
-var structureExists = require('../app/prompts/structureExists'),
-    isFramework     = require('../app/prompts/isFramework'),
-    gulpPrompt      = require('../app/prompts/gulpPrompt'),
-    isStatic        = require('../app/prompts/isStatic');
+var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
+    frameworkPrompt       = require('../app/prompts/frameworkPrompt'),
+    gulpPrompt            = require('../app/prompts/gulpPrompt'),
+    staticPrompt          = require('../app/prompts/staticPrompt');
 
 
 module.exports = yeoman.generators.Base.extend({
@@ -51,14 +53,14 @@ module.exports = yeoman.generators.Base.extend({
             destRoot = this.destinationRoot(),
             frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
-        isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
+        frameworkPrompt(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
           self.cfg.environmentOption = environmentOption;
         });
       }
     },
 
     gulp: function(){
-      gulpPrompt(this, function(){})
+      gulpPrompt(this)
     },
 
     wordpressVersion: function(){
@@ -175,24 +177,24 @@ module.exports = yeoman.generators.Base.extend({
       }.bind(this));
     },
 
-    static: function(){
-      this.composeWith('robonkey:static',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-    },
+    // static: function(){
+    //   this.composeWith('robonkey:static',{
+    //     options: {
+    //       calledFrom: generatorName,
+    //       cfg: this.cfg
+    //     }
+    //   });
+    // },
   },
 
 
   configuring: function () {
     if(this.exit) return;
 
-    this.gulpDirOption = this.cfg.gulpDirOption;
-    this.gulpCmdOption = this.cfg.gulpCmdOption;
-    this.environmentOption = this.cfg.environmentOption;
-    this.mainDir = this.cfg.mainDir;
+    var done = this.async();
+
+    setBaseConfigVars(this);
+
     this.themeName = this.cfg.themeName;
     this.wpBlankTheme = this.cfg.wpBlankTheme;
     this.themeDir = this.cfg.themeDir;
@@ -200,8 +202,6 @@ module.exports = yeoman.generators.Base.extend({
     this.wordpressVersion = this.cfg.wordpressVersion;
     this.removeDefaultThemes = this.cfg.removeDefaultThemes;
 
-
-    var done = this.async();
     this.config.set(this.cfg);
 
     done();
@@ -222,17 +222,15 @@ module.exports = yeoman.generators.Base.extend({
         fs.accessSync(self.mainDir, fs.F_OK);
         console.log('Folder ' + self.mainDir + ' exists');
         rimraf(self.mainDir, function(){
-          self.extract('https://github.com/WordPress/WordPress/archive/' + self.wordpressVersion + '.tar.gz', './', function(){
-            fs.rename('WordPress-' + self.wordpressVersion, self.mainDir);
+          getFramework.wordpress(self, function(){
             done();
-          });
+          })
         });
       } catch (e) {
         console.log('Folder ' + self.mainDir + ' doesn\'t exist');
-        self.extract('https://github.com/WordPress/WordPress/archive/' + self.wordpressVersion + '.tar.gz', './', function(){
-          fs.rename('WordPress-' + self.wordpressVersion, self.mainDir);
+        getFramework.wordpress(self, function(){
           done();
-        });
+        })
       }
 
 
@@ -267,10 +265,10 @@ module.exports = yeoman.generators.Base.extend({
     },
   },
 
-  install: function(){
-    var done = this.async();
-    installDep(this, function(){});
-    done();
-  }
+  // install: function(){
+  //   var done = this.async();
+  //   installDep(this);
+  //   done();
+  // }
 
 });

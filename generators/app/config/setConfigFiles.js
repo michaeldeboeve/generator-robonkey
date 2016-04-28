@@ -5,7 +5,6 @@ var writePackage = require('./writePackage'),
 'use strict';
 
 var setConfigFiles = function(self, cb){
-
   setyorc(self, function(){
     setconfig(self, function(){
       setpackage(self, function(){

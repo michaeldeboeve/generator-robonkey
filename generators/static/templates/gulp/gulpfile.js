@@ -15,20 +15,20 @@ requireDir('./gulp-tasks');
 
 
 // Dev gulp task
-gulp.task('serve', ['default'], function() {});
-gulp.task('dev', ['default'], function() {});
+gulp.task('serve', ['default'], function(){});
+gulp.task('dev', ['default'], function(){});
 
-gulp.task('default', cfg.tasks.default.map(String), function() {});
+gulp.task('default', cfg.tasks.default.map(String), function(){});
 
 // Build gulp task
-gulp.task('build', cfg.tasks.build.map(String), function() {});
+gulp.task('build', cfg.tasks.build.map(String), function(){});
 
 // Main gulp task
 gulp.task('main', cfg.tasks.main.map(String));
 
 
 // Watch gulp task
-gulp.task('watch', function() {
+gulp.task('watch', function(){
   // watch for JS changes, then reload
   gulp.watch(cfg.scripts.src, ['scripts'])<% if(environmentOption === 'static'){ %>.on('change', browserSync.reload)<% } %>;
 

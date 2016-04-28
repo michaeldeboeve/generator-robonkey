@@ -2,7 +2,7 @@
 var chalk = require('chalk');
 var hasFeature = require('./hasFeature');
 
-function structureExists(self, options) {
+function structureExistsPrompt(self, options) {
   if(self.cfg.mainDir && hasFeature('mainDir', options)) console.log('Main directory ' + chalk.bold.yellow(self.cfg.mainDir) + ' detected.');
 
   if(self.cfg.assetsDir && hasFeature('assetsDir', options)) console.log('Assets directory ' + chalk.bold.yellow(self.cfg.assetsDir) + ' detected.');
@@ -22,4 +22,4 @@ function structureExists(self, options) {
   if(self.cfg.gulpDirOption && hasFeature('gulpDirOption', options)) console.log(chalk.bold.yellow('Gulp') + ' will be installed in ' + chalk.bold.yellow('subfolder') + '.');
 }
 
-module.exports = structureExists;
+module.exports = structureExistsPrompt;

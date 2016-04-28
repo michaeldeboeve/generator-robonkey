@@ -1,5 +1,5 @@
 (function($) {
-	$(document).ready(function() {
+	$(document).ready(function(){
 
 		function optionsframework_add_file(event, selector) {
 		
@@ -30,7 +30,7 @@
 			});
 
 			// When an image is selected, run a callback.
-			frame.on( 'select', function() {
+			frame.on( 'select', function(){
 				// Grab the selected attachment.
 				var attachment = frame.state().get('selection').first();
 				frame.close();
@@ -62,7 +62,7 @@
 		}
 		
 		function optionsframework_file_bindings() {
-			$('.remove-image, .remove-file').on('click', function() {
+			$('.remove-image, .remove-file').on('click', function(){
 				optionsframework_remove_file( $(this).parents('.section') );
 	        });
 	        

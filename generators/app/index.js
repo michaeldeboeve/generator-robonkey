@@ -22,12 +22,13 @@ var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
     copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep');
+    installDep      = require('../app/config/installDep'),
+    setBaseConfigVars  = require('../app/config/setBaseConfigVars');
 
-var structureExists = require('../app/prompts/structureExists'),
-    isFramework     = require('../app/prompts/isFramework'),
-    gulpPrompt      = require('../app/prompts/gulpPrompt'),
-    isStatic        = require('../app/prompts/isStatic');
+var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
+    frameworkPrompt       = require('../app/prompts/frameworkPrompt'),
+    gulpPrompt            = require('../app/prompts/gulpPrompt'),
+    staticPrompt          = require('../app/prompts/staticPrompt');
 
 
 module.exports = yeoman.generators.Base.extend({
@@ -49,13 +50,13 @@ module.exports = yeoman.generators.Base.extend({
           destRoot = this.destinationRoot(),
           frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
-      isFramework(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
+      frameworkPrompt(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
         self.cfg.environmentOption = environmentOption;
       });
     },
 
     gulp: function(){
-      gulpPrompt(this, function(){})
+      gulpPrompt(this)
     },
 
     static: function(){
@@ -68,16 +69,15 @@ module.exports = yeoman.generators.Base.extend({
     },
   },
 
-
-  configuring: function(){
-    this.gulpDirOption = this.cfg.gulpDirOption;
-    this.gulpCmdOption = this.cfg.gulpCmdOption;
-    this.gulpTypeOption = this.cfg.gulpTypeOption;
+  configuring: {
+    answers: function(){
+      setBaseConfigVars(this);
+    }
   },
 
   install: function(){
     var done = this.async();
-    installDep(this, function(){});
+    installDep(this);
     done();
   }
 

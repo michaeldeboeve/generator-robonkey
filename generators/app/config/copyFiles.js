@@ -51,11 +51,11 @@ function copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, cb){
 
 function copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, cb){
   if(self.environmentOption === 'express'){
-    self.fs.copy(sourceRoot + '/express/bin', destRoot + '/' + self.templateDest + '/bin');
-    self.fs.copy(sourceRoot + '/express/routes', destRoot + '/' + self.templateDest + '/routes');
-    self.fs.copy(sourceRoot + '/express/views', destRoot + '/' + self.templateDest + '/views');
-    self.fs.copy(sourceRoot + '/express/app.js', destRoot + '/' + self.templateDest + '/app.js');
-    self.fs.copy(sourceRoot + '/express/package.json', destRoot + '/' + self.templateDest + '/package.json');
+    self.fs.copy(sourceRoot + '/bin', destRoot + '/' + self.mainDir + '/bin');
+    self.fs.copy(sourceRoot + '/routes', destRoot + '/' + self.mainDir + '/routes');
+    self.fs.copy(sourceRoot + '/views', destRoot + '/' + self.mainDir + '/views');
+    self.fs.copy(sourceRoot + '/app.js', destRoot + '/' + self.mainDir + '/app.js');
+    self.fs.copy(sourceRoot + '/package.json', destRoot + '/' + self.mainDir + '/package.json');
   }
 
   cb(self);
@@ -69,7 +69,7 @@ function copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
       wpDest  = destRoot + '/' + self.templateDest,
       templateContext = {
         themeAuthor: self.themeAuthor,
-        themeauthorEmail: self.themeauthorEmail,
+        themeAuthorEmail: self.themeAuthorEmail,
         themeName: self.themeName,
         themeNameSpace: self.themeNameSpace,
         jsDirPath: self.jsDirPath,

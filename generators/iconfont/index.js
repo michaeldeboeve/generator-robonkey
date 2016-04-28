@@ -11,15 +11,19 @@ var yeoman          = require('yeoman-generator'),
 var greeting        = require('../app/helpers/greeting'),
     printTitle      = require('../app/helpers/printTitle');
 
-var init            = require('../app/config/init'),
-    setConfigVars   = require('../app/config/setConfigVars'),
-    setConfigFiles  = require('../app/config/setConfigFiles'),
-    copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep');
+var init                = require('../app/config/init'),
+    setConfigVars       = require('../app/config/setConfigVars'),
+    setConfigFiles      = require('../app/config/setConfigFiles'),
+    copyFiles           = require('../app/config/copyFiles'),
+    installDep          = require('../app/config/installDep'),
+    setIconFontAnswers  = require('../app/config/setIconFontAnswers');
 
-var structureExists = require('../app/prompts/structureExists'),
-    gulpPrompt      = require('../app/prompts/gulpPrompt');
+var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
+    gulpPrompt            = require('../app/prompts/gulpPrompt'),
+    structurePrompt       = require('../app/prompts/structurePrompt'),
+    iconFontPrompt        = require('../app/prompts/iconFontPrompt');
 
+var dirsToCheck = ['mainDir', 'assetsDir', 'fontDir'];
 
 module.exports = yeoman.Base.extend({
 
@@ -36,122 +40,29 @@ module.exports = yeoman.Base.extend({
 
   prompting: {
     gulp: function(){
-      gulpPrompt(this, function(){})
+      gulpPrompt(this)
     },
 
-    existingStructure: function(){
-      if(this.exit) return;
-      structureExists(this, ['mainDir', 'assetsDir', 'cssDir', 'gulpDirOption'], function(){});
-    },
+    // existingStructure: function(){
+    //   structureExistsPrompt(this, dirsToCheck);
+    // },
 
     structure: function(){
       if(!this.calledFrom && !this.continueStructure) {
-        var done = this.async(),
-            self = this;
-
-        console.log(printTitle('Folder Structure'));
-
-        this.prompt([{
-          name: 'mainDir',
-          message: 'What is your main directory?',
-          default: function(answers) {
-            if(self.cfg.mainDir) {
-              return self.cfg.mainDir
-            } else {
-              return 'website'
-            }
-          }
-        }, {
-          name: 'assetsDir',
-          message: 'Name your assets folder:',
-          default: function(answers) {
-            if(self.cfg.assetsDir) {
-              return self.cfg.assetsDir
-            } else {
-              return 'assets'
-            }
-          }
-        }, {
-          type: 'input',
-          name: 'cssDir',
-          message: 'Name your css directory:',
-          default: function(answers) {
-            if(self.cfg.cssDir) {
-              return self.cfg.cssDir
-            } else {
-              return 'css'
-            }
-          }
-        }], function (answers) {
-          this.cfg.mainDir = answers.mainDir;
-          this.cfg.assetsDir = answers.assetsDir;
-          this.cfg.cssDir = answers.cssDir;
-          this.cfg.fontDir = answers.fontDir;
-
-
-
-          done();
-        }.bind(this));
+        structurePrompt(this, dirsToCheck);
       }
     },
 
-
-    preprocessor: function(){
+    preprocessors: function(){
       if(!this.calledFrom){
-        var done = this.async(),
-            self = this;
-
-        console.log(printTitle('Styles'));
-
-        this.prompt([{
-          type: 'list',
-          name: 'preproOption',
-          message: 'What preprocessor would you like to use?',
-          choices: [{
-            name: 'Sass',
-            value: 'scss'
-          }, {
-            name: 'Stylus',
-            value: 'stylus'
-          }, {
-            name: 'Less',
-            value: 'less'
-          }],
-          default: this.cfg.preproOption
-        }], function (answers) {
-          this.cfg.preproOption = answers.preproOption;
-
-
-          done();
-        }.bind(this));
+        preprocessorsPrompt(this);
       }
     },
 
-    font: function(){
-      var done = this.async(),
-          self = this;
+    iconFont: function(){
+      iconFontPrompt(this);
+    }
 
-      console.log(printTitle('Icon Font'));
-
-      this.prompt([{
-          type: 'confirm',
-          name: 'customIconfontOption',
-          message: 'Would you like to include a custom icon font?',
-          default: false
-      }, {
-        when: function (answers) {
-          return answers.customIconfontOption === true;
-        },
-        name: 'customIconFontName',
-        message: 'Name your custom icon font',
-        default: 'robonky-glyphs'
-      }], function (answers) {
-        this.cfg.customIconfontOption = answers.customIconfontOption;
-        this.cfg.customIconFontName = answers.customIconFontName;
-
-        done();
-      }.bind(this));
-    },
   },
 
 
@@ -160,25 +71,16 @@ module.exports = yeoman.Base.extend({
   configuring: {
 
     answers: function(){
-      var done = this.async();
-
-      setConfigVars(this, function(result){})
-
-      this.gulpDirOption = this.cfg.gulpDirOption;
-      this.gulpCmdOption = this.cfg.gulpCmdOption;
-      this.preproOption = this.cfg.preproOption;
-      this.customIconfontOption = this.cfg.customIconfontOption;
-      this.customIconFontName = this.cfg.customIconFontName;
-
-      done();
+      setIconFontAnswers(this);
     },
 
     config: function(){
       var done = this.async();
+      
       setConfigFiles(this, function(){
-        // console.log('Config Files written...')
+        done();
       });
-      done();
+
     },
 
   },
@@ -207,7 +109,7 @@ module.exports = yeoman.Base.extend({
     if(this.exit) return;
 
     var done = this.async();
-    installDep(this, function(){});
+    installDep(this);
     done();
   }
 

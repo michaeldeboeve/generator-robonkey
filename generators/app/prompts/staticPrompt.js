@@ -5,8 +5,8 @@ var chalk           = require('chalk'),
 'use strict';
 
 // It does what it says
-var isStatic = function(self, cb){
-
+var staticPrompt = function(self){
+  if(self.exit) return;
   if(self.cfg.environmentOption === 'static' && (self.calledFrom === 'app' || !self.calledFrom)){
     var done = self.async();
 
@@ -31,8 +31,6 @@ var isStatic = function(self, cb){
       done();
     }.bind(self));
   }
-
-  cb();
 }
 
-module.exports = isStatic;
+module.exports = staticPrompt;

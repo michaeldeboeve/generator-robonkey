@@ -37,7 +37,7 @@ for (var i = 0; i < postcssPlugins.length; i++) { %>
 
 
 // Styles Dev
-gulp.task('styles', function() {
+gulp.task('styles', function(){
   gulp.src(cfg.styles.src)<% if(preproOption === 'scss'){ %>
     .pipe(sassGlob())<% } %>
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
@@ -51,7 +51,7 @@ gulp.task('styles', function() {
 });
 
 // Styles Build
-gulp.task('styles-build', function() {
+gulp.task('styles-build', function(){
   gulp.src(cfg.styles.src)<% if(preproOption === 'scss'){ %>
     .pipe(sassGlob())<% } %>
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))<% if(preproOption === 'scss'){ %>
