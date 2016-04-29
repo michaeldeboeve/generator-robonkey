@@ -28,7 +28,7 @@ var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
     structurePrompt       = require('../app/prompts/structurePrompt'),
     htmlPrompt            = require('../app/prompts/htmlPrompt');
 
-var dirsToCheck       = ['mainDir', 'assetsDir', 'cssDir', 'jsDir', 'libDir', 'fontDir'],
+var dirsToCheck       = ['mainDir', 'assetsDir', 'cssDir', 'imgDir', 'jsDir', 'libDir', 'fontDir'],
     frameworksToCheck = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
 
 
@@ -197,5 +197,5 @@ module.exports = yeoman.Base.extend({
       done();
     }
   }
-  
+
 });

@@ -66,8 +66,9 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       link(rel="stylesheet", href="<%= cssDirPath %>/style.css")<% if(environmentOption !== 'express') { %>
       != '\n    <!-- endbuild -->'<% } %>
 
-    block headerScripts
-      script(src="<%= jsLibDirPath %>/modernizr-custom.js")
+    block headerScripts<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
+      != '\n    <!-- endinject -->'<% } %>
 
   body
     block contentMain
@@ -75,7 +76,9 @@ html(lang="#{ lang }" class="no-js #{ lang }")
 
 
     <% if(environmentOption !== 'express') { %>!= '\n'<% } %>
-    block footerScripts
-      <% if(environmentOption !== 'express') { %>!= '\n\n    <!-- build:js -->'<% } %>
-      script(src="<%= jsDirPath %>/script.js")
-      <% if(environmentOption !== 'express') { %>!= '\n    <!-- endbuild -->\n'<% } %>
+    block footerScripts<% if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- endinject -->'<% } if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- build:js -->'<% } %>
+      script(src="<%= jsDirPath %>/script.js")<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- endbuild -->\n'<% } %>

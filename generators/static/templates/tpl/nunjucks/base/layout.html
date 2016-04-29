@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="<%= cssDirPath %>/style.css">
     <!-- endbuild -->
 
+    <!-- inject:head:js -->
+    <!-- endinject -->
+
   </head>
   <body>
 
@@ -23,6 +26,8 @@
     {% endblock %}
 
 
+    <!-- inject:js -->
+    <!-- endinject -->
 
     <!-- build:js -->
     <script src="<%= jsDirPath %>/script.js"></script>

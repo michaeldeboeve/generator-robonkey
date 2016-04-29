@@ -69,6 +69,7 @@ var writePackage = function (packageFile, self) {
     packageJson['devDependencies']['gulp-flatten'] = '^0.2.0';
     packageJson['devDependencies']['require-dir'] = '^0.3.0';
     packageJson['devDependencies']['main-bower-files'] = '^2.11.1';
+    packageJson['devDependencies']['gulp-inject'] = '^4.0.0';
 
     cb(packageJson);
   }

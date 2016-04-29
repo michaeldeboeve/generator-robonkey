@@ -59,17 +59,10 @@ var setConfigVars = function (self, cb) {
         self.templateDest = self.mainDir;
     };
 
-    self.cssDirPathGulp = '/' + self.assetsDir + '/' + self.cssDir;
-    self.jsDirPathGulp = '/' + self.assetsDir + '/' + self.jsDir;
-    self.imgDirPathGulp = '/' + self.assetsDir + '/' + self.imgDir;
-    self.fontDirPathGulp = '/' + self.assetsDir + '/' + self.fontDir;
-    self.cssLibDirPathGulp = self.cssDirPathGulp + '/' + self.libDir;
-    self.jsLibDirPathGulp = self.jsDirPathGulp + '/' + self.libDir;
-
-    self.cssDirPath = '/' + self.assetsDir + '/' + self.cssDir;
-    self.jsDirPath = '/' + self.assetsDir + '/' + self.jsDir;
-    self.imgDirPath = '/' + self.assetsDir + '/' + self.imgDir;
-    self.fontDirPath = '/' + self.assetsDir + '/' + self.fontDir;
+    self.cssDirPath = self.assetsDir + '/' + self.cssDir;
+    self.jsDirPath = self.assetsDir + '/' + self.jsDir;
+    self.imgDirPath = self.assetsDir + '/' + self.imgDir;
+    self.fontDirPath = self.assetsDir + '/' + self.fontDir;
     self.cssLibDirPath = self.cssDirPath + '/' + self.libDir;
     self.jsLibDirPath = self.jsDirPath + '/' + self.libDir;
 

@@ -78,23 +78,23 @@ var writeConfig = function (configFile, self) {
         configJson['styles']['src_files'] = self.rootFolder + 'src/less/**/*.less';
       break;
     }
-    configJson['styles']['build_srcsmap'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/';
-    configJson['styles']['build'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/';
-    configJson['styles']['src_lib'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/**/*.css';
-    configJson['styles']['build_lib'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/';
+    configJson['styles']['build_srcsmap'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/';
+    configJson['styles']['build'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/';
+    configJson['styles']['src_lib'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/**/*.css';
+    configJson['styles']['build_lib'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/';
 
     if(self.postcssScopifyOption) configJson['scope'] = '#scope';
     if(self.postcssClassprefixOption) configJson['prefix'] = 'prfx-';
     if(self.postcssAutoprefixerOption || self.postcssCssNextOption) configJson['browsers'] = 'last 3 versions, > 1%';
     if(self.postcssCssSorterOption) configJson['cssSortOrder'] = 'smacss';
     configJson['postcss'] = {};
-    configJson['postcss']['src'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/style.css';
-    configJson['postcss']['build'] = self.rootFolder + self.templateDest + self.cssDirPathGulp + '/';
+    configJson['postcss']['src'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/style.css';
+    configJson['postcss']['build'] = self.rootFolder + self.templateDest + '/' + self.cssDirPath + '/';
 
 
     configJson['images'] = {};
     configJson['images']['src'] = self.rootFolder + 'src/img/**/*';
-    configJson['images']['build'] = self.rootFolder + self.templateDest + self.imgDirPathGulp;
+    configJson['images']['build'] = self.rootFolder + self.templateDest + '/' + self.imgDirPath + '/';
 
     if(self.environmentOption === 'static') {
       configJson['html'] = {};
@@ -139,7 +139,7 @@ var writeConfig = function (configFile, self) {
     }
 
     configJson['tasks']['main'] = ['images', 'scripts', 'styles'];
-    configJson['tasks']['default'] = ['main', 'moveBower', 'watch'];
+    configJson['tasks']['default'] = ['main', 'watch'];
     configJson['tasks']['build'] = ['main', 'scripts-build', 'styles-build', 'removeDevFiles'];
 
 
@@ -168,7 +168,7 @@ var writeConfig = function (configFile, self) {
     if(self.modernizrOption) {
       configJson['modernizr'] = {};
       configJson['modernizr']['output'] = 'modernizr-custom.js';
-      configJson['modernizr']['build'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp;
+      configJson['modernizr']['build'] = self.rootFolder + self.templateDest + '/' + self.jsLibDirPath;
       configJson['modernizr']['excludeTests'] = [];
       configJson['modernizr']['tests'] = [];
       configJson['modernizr']['options'] = ['setClasses', 'addTest', 'testProp', 'fnBind'];
@@ -177,9 +177,9 @@ var writeConfig = function (configFile, self) {
 
     configJson['scripts'] = {}
     configJson['scripts']['src'] = self.rootFolder + 'src/js/**/*.js'
-    configJson['scripts']['build'] = self.rootFolder + self.templateDest + self.jsDirPathGulp;
-    configJson['scripts']['src_lib'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp + '/**/*.js';
-    configJson['scripts']['build_lib'] = self.rootFolder + self.templateDest + self.jsLibDirPathGulp + '/';
+    configJson['scripts']['build'] = self.rootFolder + self.templateDest + '/' + self.jsDirPath;
+    configJson['scripts']['src_lib'] = self.rootFolder + self.templateDest + '/' + self.jsLibDirPath + '/**/*.js';
+    configJson['scripts']['build_lib'] = self.rootFolder + self.templateDest + '/' + self.jsLibDirPath + '/';
 
     switch(self.cfg.javascriptOption) {
       case 'vanilla':
@@ -198,7 +198,7 @@ var writeConfig = function (configFile, self) {
 
     configJson['font'] = {};
     configJson['font']['src'] = self.rootFolder + 'src/iconfont/svg/*.svg';
-    configJson['font']['build'] = self.rootFolder + self.templateDest + self.fontDirPath + '/';
+    configJson['font']['build'] = self.rootFolder + self.templateDest  + '/' + self.fontDirPath + '/';
     configJson['font']['templateInput'] = '';
     configJson['font']['templateOutput'] = '';
     configJson['font']['templateFontpath'] = '../fonts/';
