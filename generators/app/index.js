@@ -42,6 +42,9 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+
+
+
   prompting: {
     static: function(){
       this.composeWith('robonkey:static',{
@@ -53,6 +56,9 @@ module.exports = yeoman.generators.Base.extend({
     },
   },
 
+
+
+
   configuring: {
     answers: function(){
       var done = this.async();
@@ -61,6 +67,9 @@ module.exports = yeoman.generators.Base.extend({
       });
     }
   },
+
+
+
 
   install: function(){
     var done = this.async();

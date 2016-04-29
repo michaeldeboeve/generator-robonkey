@@ -38,6 +38,7 @@ module.exports = yeoman.Base.extend({
 
 
 
+
   prompting: {
     gulp: function(){
       var done = this.async();
@@ -82,14 +83,12 @@ module.exports = yeoman.Base.extend({
         done();
       })
     }
-
   },
 
 
 
 
   configuring: {
-
     answers: function(){
       if(this.exit) return;
       var done = this.async();
@@ -105,7 +104,6 @@ module.exports = yeoman.Base.extend({
         done();
       });
     },
-
   },
 
 

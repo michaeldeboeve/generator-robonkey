@@ -40,6 +40,7 @@ module.exports = yeoman.Base.extend({
 
 
 
+
   prompting: {
     gulp: function(){
       if(this.exit) return;
@@ -84,13 +85,12 @@ module.exports = yeoman.Base.extend({
         done();
       })
     },
-
   },
 
 
 
-  configuring: {
 
+  configuring: {
     answers: function(){
       if(this.exit) return;
       var done = this.async();
@@ -101,7 +101,7 @@ module.exports = yeoman.Base.extend({
 
     config: function(){
       if(this.exit) return;
-        var done = this.async();
+      var done = this.async();
       setConfigFiles(this, function(){
         done();
       });
@@ -110,12 +110,11 @@ module.exports = yeoman.Base.extend({
 
     setbower: function(){
       if(this.exit) return;
-        var done = this.async();
+      var done = this.async();
       writeBower(this, function(){
         done();
       });
     }
-
   },
 
 

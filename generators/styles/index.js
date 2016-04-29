@@ -48,10 +48,9 @@ module.exports = yeoman.Base.extend({
 
 
 
-  prompting: {
 
+  prompting: {
     gulp: function(){
-      console.log(this.cfg.gulpDirOption);
       if(this.exit) return;
       var done = this.async();
       var self = this;
@@ -165,7 +164,6 @@ module.exports = yeoman.Base.extend({
 
 
   configuring: {
-
     answers: function(){
       if(this.exit) return;
       var done = this.async();
@@ -201,6 +199,8 @@ module.exports = yeoman.Base.extend({
   },
 
 
+
+
   install: function(){
     if(this.exit) return;
     if(!this.calledFrom) {
@@ -209,7 +209,5 @@ module.exports = yeoman.Base.extend({
       done();
     }
   }
-
-
 
 });

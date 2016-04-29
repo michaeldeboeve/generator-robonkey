@@ -41,8 +41,10 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
-  prompting: {
 
+
+
+  prompting: {
     existingEnvironment: function(){
       this.cfg.environmentOption ='wordpress';
       if(this.calledFrom === 'app' || !this.calledFrom){
@@ -101,7 +103,6 @@ module.exports = yeoman.generators.Base.extend({
         done()
       }
     },
-
 
     wordpress: function(){
       if(this.exit) return;
@@ -180,23 +181,30 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+
+
+
   configuring: {
     answers: function () {
       if(this.exit) return;
-      var done = this.async();
+      var done = this.async(),
+          self = this;
       setBaseConfigVars(this, function(){
-        this.themeName = this.cfg.themeName;
-        this.wpBlankTheme = this.cfg.wpBlankTheme;
-        this.themeDir = this.cfg.themeDir;
-        this.themeNameSpace = this.cfg.themeNameSpace;
-        this.wordpressVersion = this.cfg.wordpressVersion;
-        this.removeDefaultThemes = this.cfg.removeDefaultThemes;
+        self.themeName = self.cfg.themeName;
+        self.wpBlankTheme = self.cfg.wpBlankTheme;
+        self.themeDir = self.cfg.themeDir;
+        self.themeNameSpace = self.cfg.themeNameSpace;
+        self.wordpressVersion = self.cfg.wordpressVersion;
+        self.removeDefaultThemes = self.cfg.removeDefaultThemes;
 
-        this.config.set(this.cfg);
+        self.config.set(self.cfg);
         done();
       });
     }
   },
+
+
+
 
   writing: {
     downloading: function(){

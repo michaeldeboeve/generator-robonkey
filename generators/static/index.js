@@ -33,6 +33,7 @@ var dirsToCheck       = ['mainDir', 'assetsDir', 'cssDir', 'jsDir', 'libDir', 'f
 
 
 module.exports = yeoman.Base.extend({
+
   initializing: function(){
     var done = this.async(),
         self = this;
@@ -44,8 +45,9 @@ module.exports = yeoman.Base.extend({
   },
 
 
-  prompting: {
 
+
+  prompting: {
     existingEnvironment: function(){
       this.cfg.environmentOption ='static';
       var done = this.async(),
@@ -132,14 +134,12 @@ module.exports = yeoman.Base.extend({
         }
       });
     }
-
   },
 
 
 
 
   configuring: {
-
     answers: function(){
       if(this.exit) return;
       var done = this.async();
@@ -148,7 +148,6 @@ module.exports = yeoman.Base.extend({
       });
     },
 
-
     config: function(){
       if(this.exit) return;
       var done = this.async();
@@ -156,7 +155,6 @@ module.exports = yeoman.Base.extend({
         done();
       });
     },
-
   },
 
 
@@ -199,4 +197,5 @@ module.exports = yeoman.Base.extend({
       done();
     }
   }
+  
 });

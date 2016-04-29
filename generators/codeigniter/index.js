@@ -41,6 +41,9 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+
+
+
   prompting: {
     existingEnvironment: function(){
       this.cfg.environmentOption ='codeigniter';
@@ -106,18 +109,24 @@ module.exports = yeoman.generators.Base.extend({
   },
 
 
+
+
   configuring: {
     answers: function () {
       if(this.exit) return;
-      var done = this.async();
+      var done = this.async(),
+          self = this;
       setBaseConfigVars(this, function(){
-        this.codeigniterVersion = this.cfg.codeigniterVersion;
+        self.codeigniterVersion = self.cfg.codeigniterVersion;
 
-        this.config.set(this.cfg);
+        self.config.set(self.cfg);
         done();
       });
     }
   },
+
+
+
 
   writing: {
     downloading: function(){

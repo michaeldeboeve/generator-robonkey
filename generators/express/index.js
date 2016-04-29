@@ -42,6 +42,9 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+
+
+
   prompting: {
     existingEnvironment: function(){
       this.cfg.environmentOption ='express';
@@ -90,15 +93,22 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+
+
+
   configuring: function () {
     if(this.exit) return;
-    var done = this.async();
+    var done = this.async(),
+        self = this;
     setBaseConfigVars(this, function(){
-      this.mainDir = this.cfg.mainDir;
-      this.config.set(this.cfg);
+      self.mainDir = self.cfg.mainDir;
+      self.config.set(self.cfg);
       done();
     });
   },
+
+
+
 
   writing: function(){
     var done       = this.async(),
@@ -108,14 +118,16 @@ module.exports = yeoman.generators.Base.extend({
         sourceRoot = this.sourceRoot();
 
     if(this.environmentOption === 'express'){
-        this.fs.copy(sourceRoot + '/bin', destRoot + '/' + this.mainDir + '/bin');
-        this.fs.copy(sourceRoot + '/routes', destRoot + '/' + this.mainDir + '/routes');
-        this.fs.copy(sourceRoot + '/views', destRoot + '/' + this.mainDir + '/views');
-        this.fs.copy(sourceRoot + '/app.js', destRoot + '/' + this.mainDir + '/app.js');
-        this.fs.copy(sourceRoot + '/package.json', destRoot + '/' + this.mainDir + '/package.json');
-      }
-
+      this.fs.copy(sourceRoot + '/bin', destRoot + '/' + this.mainDir + '/bin');
+      this.fs.copy(sourceRoot + '/routes', destRoot + '/' + this.mainDir + '/routes');
+      this.fs.copy(sourceRoot + '/views', destRoot + '/' + this.mainDir + '/views');
+      this.fs.copy(sourceRoot + '/app.js', destRoot + '/' + this.mainDir + '/app.js');
+      this.fs.copy(sourceRoot + '/package.json', destRoot + '/' + this.mainDir + '/package.json');
+    }
   },
+
+
+
 
   install: function(){
     var done = this.async(),

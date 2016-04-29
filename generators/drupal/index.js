@@ -41,6 +41,9 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+
+
+
   prompting: {
     existingEnvironment: function(){
       this.cfg.environmentOption ='drupal';
@@ -121,21 +124,28 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+
+
+
   configuring: {
     answers: function () {
       if(this.exit) return;
-      var done = this.async();
+      var done = this.async(),
+          self = this;
       setBaseConfigVars(this, function(){
-        this.themeName = this.cfg.themeName;
-        this.themeDir = this.cfg.themeDir;
-        this.themeNameSpace = this.cfg.themeNameSpace;
-        this.drupalVersion = this.cfg.drupalVersion;
+        self.themeName = self.cfg.themeName;
+        self.themeDir = self.cfg.themeDir;
+        self.themeNameSpace = self.cfg.themeNameSpace;
+        self.drupalVersion = self.cfg.drupalVersion;
 
-        this.config.set(this.cfg);
+        self.config.set(self.cfg);
         done();
       });
     }
   },
+
+
+
 
   writing: {
     downloading: function(){
