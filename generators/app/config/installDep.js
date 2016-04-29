@@ -1,14 +1,15 @@
 'use strict';
-var fs        = require('fs'),
-    jsonfile  = require('jsonfile'),
-    printTitle = require('../helpers/printTitle');
+var fs          = require('fs'),
+    path        = require('path'),
+    jsonfile    = require('jsonfile'),
+    printTitle  = require('../helpers/printTitle');
 
 var installDep = function (self) {
   console.log(printTitle('Installing Dependencies'));
 
   if(self.gulpDirOption) {
     // Change working directory to 'gulp' for dependency install
-    var gulpDir = process.cwd() + '/gulp';
+    var gulpDir = path.join(process.cwd(), 'gulp');
     process.chdir(gulpDir);
   }
 

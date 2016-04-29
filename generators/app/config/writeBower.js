@@ -1,5 +1,6 @@
 'use strict';
 var fs              = require('fs'),
+    path            = require('path'),
     jsonfile        = require('jsonfile'),
     mkdirp          = require('mkdirp'),
     createJson      = require('../helpers/createJson'),
@@ -14,7 +15,7 @@ var writeBower = function (self, cb) {
       destRoot = self.destinationRoot();
 
   if (self.gulpDirOption) {
-    mkdirp(destRoot + '/gulp');
+    mkdirp(path.join(destRoot,'gulp'));
     var bowerFile = './gulp/bower.json';
     var bowerrcFile = './gulp/.bowerrc';
     var bowerrcPath = '../src/bower_components';

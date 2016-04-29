@@ -75,6 +75,8 @@ module.exports = yeoman.generators.Base.extend({
       var codeigniter2 = '2.2.6',
           codeigniter3 = '3.0.6';
 
+      console.log(printTitle('Configuring CodeIgniter'));
+
       this.prompt([{
         type: 'list',
         name: 'codeigniterVersion',
@@ -142,7 +144,7 @@ module.exports = yeoman.generators.Base.extend({
         fs.accessSync(self.mainDir, fs.F_OK);
         console.log('Folder ' + self.mainDir + ' exists');
         rimraf(self.mainDir, function(){
-          getFramework.Codeigniter(self, function(){
+          getFramework.codeigniter(self, function(){
             done();
           })
         });
@@ -153,6 +155,11 @@ module.exports = yeoman.generators.Base.extend({
         })
       }
     }
+  },
+
+  end: function(){
+    console.log(printTitle('CodeIgniter is installed'));
+    console.log('You can now run ' + chalk.yellow.bold('yo robonkey') + ' to continue installing your project.\n\n')
   }
 
 });

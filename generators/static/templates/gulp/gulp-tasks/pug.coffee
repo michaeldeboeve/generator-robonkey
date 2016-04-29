@@ -10,7 +10,7 @@ htmlreplace = require('gulp-html-replace')
 pugOptions = {}
 
 # Compile pug files
-gulp.task 'html', [ 'moveBower' ], ->
+gulp.task 'html', ['moveBower'], ->
   gulp.src(cfg.pug.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(pug(pugOptions))
@@ -25,7 +25,7 @@ gulp.task 'html', [ 'moveBower' ], ->
     .pipe gulp.dest(cfg.pug.build)
   return
 
-gulp.task 'html-build', [ 'moveBower' ], ->
+gulp.task 'html-build', ['moveBower'], ->
   gulp.src(cfg.pug.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(pug(pugOptions))

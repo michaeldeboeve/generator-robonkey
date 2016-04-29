@@ -7,7 +7,7 @@ prettify = require('gulp-prettify')
 htmlreplace = require('gulp-html-replace')
 
 # Compile jade files
-gulp.task 'html', [ 'moveBower' ], ->
+gulp.task 'html', ['moveBower'], ->
   gulp.src(cfg.html.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(inject(gulp.src(cfg.scripts.build_lib + 'modernizr-custom.js', read: false),
@@ -21,7 +21,7 @@ gulp.task 'html', [ 'moveBower' ], ->
     .pipe gulp.dest(cfg.html.build)
   return
 
-gulp.task 'html-build', [ 'moveBower' ], ->
+gulp.task 'html-build', ['moveBower'], ->
   gulp.src(cfg.html.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(inject(gulp.src(cfg.scripts.build_lib + 'modernizr-custom.js', read: false),

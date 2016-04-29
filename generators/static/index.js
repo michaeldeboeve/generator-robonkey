@@ -168,14 +168,14 @@ module.exports = yeoman.Base.extend({
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
 
-    if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
+    if(this.cfg.gulpDirOption) gulpRoot = path.join(destRoot,'gulp')
 
     copyFiles.copyGulpFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      copyFiles.copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, function(){
-        copyFiles.copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, function(){
-          copyFiles.copyH5bpFiles(self, destRoot, gulpRoot, sourceRoot, function(){
-            copyFiles.copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){
-              copyFiles.copyImageFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+      copyFiles.copyProjectFiles(self, destRoot, sourceRoot, function(){
+        copyFiles.copyWordpressFiles(self, destRoot, sourceRoot, function(){
+          copyFiles.copyH5bpFiles(self, destRoot, sourceRoot, function(){
+            copyFiles.copyHtmlFiles(self, destRoot, sourceRoot, function(){
+              copyFiles.copyImageFiles(self, destRoot, sourceRoot, function(){
                 done();
               });
             });

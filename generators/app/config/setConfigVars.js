@@ -1,6 +1,7 @@
 'use strict';
 
-var setBaseConfigVars = require('./setBaseConfigVars');
+var path              = require('path'),
+    setBaseConfigVars = require('./setBaseConfigVars');
 
 var setConfigVars = function (self, cb) {
 
@@ -40,17 +41,17 @@ var setConfigVars = function (self, cb) {
 
       case 'laravel':
       case 'codeigniter':
-        self.assetsDir = 'public/' + self.assetsDir;
+        self.assetsDir = path.join('public', self.assetsDir);
       break;
     }
 
     switch (self.environmentOption){
       case 'wordpress':
-        self.templateDest = self.mainDir + '/wp-content/themes/' + self.themeDir;
+        self.templateDest = path.join(self.mainDir, 'wp-content/themes', self.themeDir);
       break;
 
       case 'drupal':
-        self.templateDest = self.mainDir + '/themes/' + self.themeDir;
+        self.templateDest = path.join(self.mainDir, 'themes', self.themeDir);
       break;
 
       break;
@@ -59,12 +60,12 @@ var setConfigVars = function (self, cb) {
         self.templateDest = self.mainDir;
     };
 
-    self.cssDirPath = self.assetsDir + '/' + self.cssDir;
-    self.jsDirPath = self.assetsDir + '/' + self.jsDir;
-    self.imgDirPath = self.assetsDir + '/' + self.imgDir;
-    self.fontDirPath = self.assetsDir + '/' + self.fontDir;
-    self.cssLibDirPath = self.cssDirPath + '/' + self.libDir;
-    self.jsLibDirPath = self.jsDirPath + '/' + self.libDir;
+    self.cssDirPath = path.join(self.assetsDir, self.cssDir);
+    self.jsDirPath = path.join(self.assetsDir, self.jsDir);
+    self.imgDirPath = path.join(self.assetsDir, self.imgDir);
+    self.fontDirPath = path.join(self.assetsDir, self.fontDir);
+    self.cssLibDirPath = path.join(self.cssDirPath, self.libDir);
+    self.jsLibDirPath = path.join(self.jsDirPath, self.libDir);
 
     cb();
   })

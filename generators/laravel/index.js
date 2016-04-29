@@ -70,6 +70,8 @@ module.exports = yeoman.generators.Base.extend({
     laravel: function(){
       if(this.exit) return;
 
+      console.log(printTitle('Configuring Laravel'));
+      
       var done = this.async(),
           self = this;
 
@@ -152,6 +154,11 @@ module.exports = yeoman.generators.Base.extend({
           done();
         })
       }
+    },
+
+    end: function(){
+      console.log(printTitle('Laravel is installed'));
+      console.log('You can now run ' + chalk.yellow.bold('yo robonkey') + ' to continue installing your project.\n\n');
     }
   }
 

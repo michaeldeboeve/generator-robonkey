@@ -8,7 +8,7 @@ prettify = require('gulp-prettify')
 htmlreplace = require('gulp-html-replace')
 
 # Compile Nunjucks files
-gulp.task 'html', [ 'moveBower' ], ->
+gulp.task 'html', ['moveBower'], ->
   gulp.src(cfg.nunjucks.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(nunjucks(path: [ cfg.nunjucks.templates ]))
@@ -22,7 +22,7 @@ gulp.task 'html', [ 'moveBower' ], ->
     .pipe(prettify(indent_size: 2))
     .pipe gulp.dest(cfg.nunjucks.build)
 
-gulp.task 'html-build', [ 'moveBower' ], ->
+gulp.task 'html-build', ['moveBower'], ->
   gulp.src(cfg.nunjucks.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(nunjucks(path: [ cfg.nunjucks.templates ]))

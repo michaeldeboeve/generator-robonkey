@@ -13,7 +13,7 @@ var jadeOptions = {
 };
 
 // Compile jade files
-gulp.task('html', [ 'moveBower' ], function(){
+gulp.task('html', ['moveBower'], function(){
   gulp.src(cfg.jade.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(jade(jadeOptions))
@@ -23,7 +23,7 @@ gulp.task('html', [ 'moveBower' ], function(){
     .pipe(gulp.dest(cfg.jade.build));
 });
 
-gulp.task('html-build', [ 'moveBower' ], function(){
+gulp.task('html-build', ['moveBower'], function(){
   gulp.src(cfg.jade.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(jade(jadeOptions))

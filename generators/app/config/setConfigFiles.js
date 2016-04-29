@@ -1,6 +1,7 @@
 var writePackage = require('./writePackage'),
     writeConfig  = require('./writeConfig'),
-    mkdirp       = require('mkdirp');
+    mkdirp       = require('mkdirp'),
+    path         = require('path');
 
 'use strict';
 
@@ -80,7 +81,7 @@ function setconfig(self, cb){
   var configFile  = './config.json',
       destRoot    = self.destinationRoot()
   if(self.gulpDirOption) {
-    mkdirp(destRoot + '/gulp');
+    mkdirp(path.join(destRoot, 'gulp'));
     configFile  = './gulp/config.json'
   };
   writeConfig(configFile, self);
@@ -93,7 +94,7 @@ function setpackage(self, cb){
   var packageFile   = './package.json',
       destRoot      = self.destinationRoot()
   if(self.gulpDirOption) {
-    mkdirp(destRoot + '/gulp');
+    mkdirp(path.join(destRoot, 'gulp'));
     packageFile = './gulp/package.json'
   };
   writePackage(packageFile, self);

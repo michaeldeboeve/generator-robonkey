@@ -1,40 +1,46 @@
 'use strict';
-var fs              = require('fs'),
-    path            = require('path');
+var fs        = require('fs'),
+    path      = require('path'),
+    mkdirp    = require('mkdirp'),
+    github    = 'https://github.com',
+    ext       = '.tar.gz';
 
 
 function wordpress(self, cb) {
-  self.extract('https://github.com/WordPress/WordPress/archive/' + self.wordpressVersion + '.tar.gz', './', function(){
-    fs.rename('WordPress-' + self.wordpressVersion, self.mainDir);
+  var link = github + '/WordPress/WordPress/archive/' + self.wordpressVersion + ext;
+  self.extract(link, './', function(){
+    fs.rename('WordPress-' + self.wordpressVersion, self.mainDir, function(){
+      cb();
+    });
   });
-
-  cb();
 };
 
 function drupal(self, cb) {
-  self.extract('https://github.com/drupal/drupal/archive/' + self.drupalVersion + '.tar.gz', './', function(){
-    fs.rename('drupal-' + self.drupalVersion, self.mainDir);
+  var link = github + '/drupal/drupal/archive/' + self.drupalVersion + ext;
+  self.extract(link, './', function(){
+    fs.rename('drupal-' + self.drupalVersion, self.mainDir, function(){
+      cb();
+    });
   });
-
-  cb();
 };
 
 function codeigniter(self, cb){
-  console.log(self.mainDir)
-  self.extract('https://github.com/bcit-ci/CodeIgniter/archive/' + self.codeigniterVersion + '.tar.gz', './', function(){
-    fs.rename('Codeigniter-' + self.codeigniterVersion, self.mainDir);
-
-    cb();
+  var link = github + '/bcit-ci/CodeIgniter/archive/' + self.codeigniterVersion + ext;
+  self.extract(link, './', function(){
+    fs.rename('Codeigniter-' + self.codeigniterVersion, self.mainDir, function(){
+      cb();
+    });
   });
 
 };
 
 function laravel(self, cb) {
-  self.extract('https://github.com/laravel/laravel/archive/' + self.laravelVersion + '.tar.gz', './', function(){
-    fs.rename('laravel-' + self.laravelVersion, self.cfg.mainDir);
+  var link = github + '/laravel/laravel/archive/' + self.laravelVersion + ext;
+  self.extract(link, './', function(){
+    fs.rename('laravel-' + self.laravelVersion, self.cfg.mainDir, function(){
+      cb();
+    });
   });
-
-  cb();
 };
 
 module.exports = {

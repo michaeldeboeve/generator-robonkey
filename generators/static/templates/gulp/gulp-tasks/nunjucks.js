@@ -10,7 +10,7 @@ var inject          = require('gulp-inject');
 
 
 // Compile Nunjucks files
-gulp.task('html', [ 'moveBower' ], function () {
+gulp.task('html', ['moveBower'], function () {
   gulp.src(cfg.nunjucks.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(nunjucks({
@@ -22,7 +22,7 @@ gulp.task('html', [ 'moveBower' ], function () {
     .pipe(gulp.dest(cfg.nunjucks.build));
 });
 
-gulp.task('html-build', [ 'moveBower' ], function () {
+gulp.task('html-build', ['moveBower'], function () {
   gulp.src(cfg.nunjucks.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(nunjucks({

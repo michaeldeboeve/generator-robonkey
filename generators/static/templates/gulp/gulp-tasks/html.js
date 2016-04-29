@@ -7,7 +7,7 @@ var prettify        = require('gulp-prettify');
 var htmlreplace     = require('gulp-html-replace');
 var inject          = require('gulp-inject');
 
-gulp.task('html', [ 'moveBower' ], function () {
+gulp.task('html', ['moveBower'], function () {
   gulp.src(cfg.html.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(inject(gulp.src(cfg.scripts.build_lib + 'modernizr-custom.js', {read: false}), {starttag: '<!-- inject:head:{{ext}} -->', relative: true}))
@@ -16,7 +16,7 @@ gulp.task('html', [ 'moveBower' ], function () {
     .pipe(gulp.dest(cfg.html.build));
 });
 
-gulp.task('html-build', [ 'moveBower' ], function () {
+gulp.task('html-build', ['moveBower'], function () {
   gulp.src(cfg.html.src)
     .pipe(plumber({errorHandler: notify.onError(cfg.error)}))
     .pipe(inject(gulp.src(cfg.scripts.build_lib + 'modernizr-custom.js', {read: false}), {starttag: '<!-- inject:head:{{ext}} -->', relative: true}))

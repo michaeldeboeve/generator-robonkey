@@ -76,6 +76,8 @@ module.exports = yeoman.generators.Base.extend({
           drupal7 = '7.43',
           drupal8 = '8.0.6';
 
+      console.log(printTitle('Configuring Drupal'));
+
       this.prompt([{
         type: 'list',
         name: 'drupalVersion',
@@ -110,6 +112,17 @@ module.exports = yeoman.generators.Base.extend({
             return 'My Theme'
           }
         }
+      }, {
+        type: 'confirm',
+        name: 'removeDefaultThemes',
+        message: 'Remove built-in themes?',
+        default: function(answers) {
+          if(self.cfg.removeDefaultThemes) {
+            return self.cfg.removeDefaultThemes
+          } else {
+            return true
+          }
+        }
       }], function (answers) {
         this.cfg.environmentOption = 'drupal';
         this.cfg.mainDir = answers.mainDir;
@@ -117,7 +130,7 @@ module.exports = yeoman.generators.Base.extend({
         this.cfg.themeDir = answers.themeName.replace(/\W/g, '').toLowerCase();
         this.cfg.themeNameSpace = answers.themeNameSpace;
         this.cfg.drupalVersion = answers.drupalVersion;
-        // this.cfg.removeDefaultThemes = answers.removeDefaultThemes;
+        this.cfg.removeDefaultThemes = answers.removeDefaultThemes;
 
         done();
       }.bind(this));
@@ -137,6 +150,7 @@ module.exports = yeoman.generators.Base.extend({
         self.themeDir = self.cfg.themeDir;
         self.themeNameSpace = self.cfg.themeNameSpace;
         self.drupalVersion = self.cfg.drupalVersion;
+        self.removeDefaultThemes = self.cfg.removeDefaultThemes;
 
         self.config.set(self.cfg);
         done();
@@ -172,7 +186,47 @@ module.exports = yeoman.generators.Base.extend({
           done();
         })
       }
-    }
+    },
+
+    themes: function(){
+      if(this.exit) return;
+
+      var done = this.async(),
+          self = this;
+
+      var drupalThemes = path.join(this.mainDir, 'themes/');
+
+      // Remove redundant themes
+      if(this.removeDefaultThemes === true) {
+
+        console.log(printTitle('Remove built-in themes'));
+
+        // remove the existing themes
+        fs.readdir(drupalThemes, function(err, files) {
+          if (typeof files != 'undefined' && files.length !== 0) {
+            files.forEach(function(file) {
+              var pathFile = fs.realpathSync(drupalThemes + file),
+                isDirectory = fs.statSync(pathFile).isDirectory()
+
+              if (isDirectory) {
+                rimraf.sync(pathFile);
+                console.log('Removing ' + pathFile);
+              }
+            });
+          }
+        });
+      }
+
+      // Create the theme directory
+      mkdirp(path.join(drupalThemes, self.themeDir));
+
+      done();
+    },
+  },
+
+  end: function(){
+    console.log(printTitle('Drupal is installed'));
+    console.log('You can now run ' + chalk.yellow.bold('yo robonkey') + ' to continue installing your project.\n\n')
   }
 
 });

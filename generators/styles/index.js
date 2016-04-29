@@ -191,7 +191,7 @@ module.exports = yeoman.Base.extend({
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
 
-    if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
+    if(this.cfg.gulpDirOption) gulpRoot = path.join(destRoot,'gulp')
 
     copyFiles.copyStyleFiles(this, destRoot, gulpRoot, sourceRoot, function(){
       done();

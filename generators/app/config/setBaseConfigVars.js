@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 
 function setBaseConfigVars(self, cb){
 
@@ -9,10 +10,10 @@ function setBaseConfigVars(self, cb){
   self.gulpTypeOption = self.cfg.gulpTypeOption;
 
   if(self.gulpDirOption) {
-    self.cfg.rootFolder = '../';
+    self.cfg.rootFolder = '..';
     self.cfg.nodeModules = '../../gulp/node_modules/';
   } else {
-    self.cfg.rootFolder = './';
+    self.cfg.rootFolder = '.';
     self.cfg.nodeModules = '../../node_modules/';
   }
 

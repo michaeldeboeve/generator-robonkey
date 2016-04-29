@@ -20,10 +20,11 @@ var greeting        = require('../app/helpers/greeting'),
     hasFeature      = require('../app/helpers/hasFeature'),
     createJson      = require('../app/helpers/createJson');
 
-var init            = require('../app/config/init'),
-    setConfigVars   = require('../app/config/setConfigVars'),
-    setConfigFiles  = require('../app/config/setConfigFiles'),
-    setBaseConfigVars  = require('../app/config/setBaseConfigVars');
+var init              = require('../app/config/init'),
+    setConfigVars     = require('../app/config/setConfigVars'),
+    setConfigFiles    = require('../app/config/setConfigFiles'),
+    copyFiles         = require('../app/config/copyFiles'),
+    setBaseConfigVars = require('../app/config/setBaseConfigVars');
 
 var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
     frameworkPrompt       = require('../app/prompts/frameworkPrompt'),
@@ -74,6 +75,8 @@ module.exports = yeoman.generators.Base.extend({
       var done = this.async(),
           self = this;
 
+      console.log(printTitle('Configuring Express'));
+
       this.prompt([{
         name: 'mainDir',
         message: 'Where to place Express?',
@@ -111,19 +114,17 @@ module.exports = yeoman.generators.Base.extend({
 
 
   writing: function(){
+    if(this.exit) return;
+
+    console.log(printTitle('Installing Express'));
+
     var done       = this.async(),
-        self       = this,
         destRoot   = this.destinationRoot(),
-        gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
 
-    if(this.environmentOption === 'express'){
-      this.fs.copy(sourceRoot + '/bin', destRoot + '/' + this.mainDir + '/bin');
-      this.fs.copy(sourceRoot + '/routes', destRoot + '/' + this.mainDir + '/routes');
-      this.fs.copy(sourceRoot + '/views', destRoot + '/' + this.mainDir + '/views');
-      this.fs.copy(sourceRoot + '/app.js', destRoot + '/' + this.mainDir + '/app.js');
-      this.fs.copy(sourceRoot + '/package.json', destRoot + '/' + this.mainDir + '/package.json');
-    }
+    copyFiles.copyExpressFiles(this, destRoot, sourceRoot, function(){
+      done();
+    });
   },
 
 
@@ -135,6 +136,11 @@ module.exports = yeoman.generators.Base.extend({
     process.chdir(appDir);
     this.npmInstall();
     done();
+  },
+
+  end: function(){
+    console.log(printTitle('Express is installed'));
+    console.log('You can now run ' + chalk.yellow.bold('yo robonkey') + ' to continue installing your project.\n\n')
   }
 
 });

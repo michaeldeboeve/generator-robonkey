@@ -158,7 +158,7 @@ module.exports = yeoman.generators.Base.extend({
       }, {
         type: 'confirm',
         name: 'removeDefaultThemes',
-        message: 'Remove default themes?',
+        message: 'Remove built-in themes?',
         default: function(answers) {
           if(self.cfg.removeDefaultThemes) {
             return self.cfg.removeDefaultThemes
@@ -205,9 +205,8 @@ module.exports = yeoman.generators.Base.extend({
 
 
 
-
   writing: {
-    downloading: function(){
+    download: function(){
       if(this.exit) return;
 
       console.log(printTitle('Installing WordPress'));
@@ -231,20 +230,21 @@ module.exports = yeoman.generators.Base.extend({
           done();
         })
       }
-
-
     },
 
-    removing: function(){
+    themes: function(){
       if(this.exit) return;
 
       var done = this.async(),
           self = this;
 
-      var wpThemes = this.mainDir + '/wp-content/themes/';
+      var wpThemes = path.join(this.mainDir, 'wp-content/themes/');
 
+      // Remove redundant themes
       if(this.removeDefaultThemes === true) {
-        console.log('First let\'s remove the built-in themes we will not use');
+
+        console.log(printTitle('Remove built-in themes'));
+
         // remove the existing themes
         fs.readdir(wpThemes, function(err, files) {
           if (typeof files != 'undefined' && files.length !== 0) {
@@ -260,8 +260,17 @@ module.exports = yeoman.generators.Base.extend({
           }
         });
       }
+
+      // Create the theme directory
+      mkdirp(path.join(wpThemes, self.themeDir));
+
       done();
     },
+  },
+
+  end: function(){
+    console.log(printTitle('Wordpress is installed'));
+    console.log('You can now run ' + chalk.yellow.bold('yo robonkey') + ' to continue installing your project.\n\n')
   }
 
 });

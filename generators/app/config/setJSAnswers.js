@@ -155,8 +155,8 @@ function setJSAnswers(self, cb) {
     // if(hasFeature('modernizr', self.scriptsOption)) {
     //   self.jsScriptsBower.push({
     //     file: 'modernizr-custom.js',
-    //     src: self.rootFolder + 'src/modernizr/',
-    //     main: self.rootFolder + 'src/modernizr/',
+    //     src: path.join(destRoot,'gulp')(self.rootFolder, 'src/modernizr/'),
+    //     main: path.join(destRoot,'gulp')(self.rootFolder, 'src/modernizr/)',
     //     sort: 8
     //   });
     // }

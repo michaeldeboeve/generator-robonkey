@@ -9,7 +9,7 @@ htmlreplace = require('gulp-html-replace')
 jadeOptions = {}
 
 # Compile jade files
-gulp.task 'html', [ 'moveBower' ], ->
+gulp.task 'html', ['moveBower'], ->
   gulp.src(cfg.jade.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(jade(jadeOptions))
@@ -24,7 +24,7 @@ gulp.task 'html', [ 'moveBower' ], ->
     .pipe gulp.dest(cfg.jade.build)
   return
 
-gulp.task 'html-build', [ 'moveBower' ], ->
+gulp.task 'html-build', ['moveBower'], ->
   gulp.src(cfg.jade.src)
     .pipe(plumber(errorHandler: notify.onError(cfg.error)))
     .pipe(jade(jadeOptions))
