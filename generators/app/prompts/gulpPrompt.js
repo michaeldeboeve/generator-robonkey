@@ -44,15 +44,13 @@ function gulpPrompt(self, cb){
     //   }
     // }
   ], function (answers) {
-      if(!self.cfg.gulpDirOption){
-        self.cfg.gulpDirOption = answers.gulpDirOption;
-        self.cfg.gulpCmdOption = answers.gulpCmdOption;
-        self.cfg.gulpTypeOption = answers.gulpTypeOption;
-        if(answers.gulpTypeOption) {
-          self.cfg.gulpTypeOption = 'coffee';
-        }
-
+      self.cfg.gulpDirOption = answers.gulpDirOption;
+      self.cfg.gulpCmdOption = false;
+      self.cfg.gulpTypeOption = answers.gulpTypeOption;
+      if(answers.gulpTypeOption) {
+        self.cfg.gulpTypeOption = 'coffee';
       }
+
 
       cb();
     }.bind(self));

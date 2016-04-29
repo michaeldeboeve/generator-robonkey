@@ -51,8 +51,10 @@ module.exports = yeoman.Base.extend({
   prompting: {
 
     gulp: function(){
+      console.log(this.cfg.gulpDirOption);
       if(this.exit) return;
       var done = this.async();
+      var self = this;
       gulpPrompt(this, function(){
         done();
       })

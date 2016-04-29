@@ -37,25 +37,6 @@ module.exports = yeoman.Base.extend({
     var done = this.async(),
         self = this;
 
-    this.composeWith('robonkey:styles',{
-      options: {
-        calledFrom: generatorName,
-        cfg: this.cfg
-      }
-    });
-    this.composeWith('robonkey:js',{
-      options: {
-        calledFrom: generatorName,
-        cfg: this.cfg
-      }
-    });
-    this.composeWith('robonkey:iconfont',{
-      options: {
-        calledFrom: generatorName,
-        cfg: this.cfg
-      }
-    });
-
     init(this, function(){
       greeting(self);
       done();
@@ -78,7 +59,8 @@ module.exports = yeoman.Base.extend({
 
     gulp: function(){
       if(this.exit) return;
-      var done = this.async();
+      var done = this.async(),
+      self = this;
       gulpPrompt(this, function(){
         done();
       })
@@ -123,6 +105,33 @@ module.exports = yeoman.Base.extend({
         done();
       })
     },
+
+    styles: function(){
+      this.composeWith('robonkey:styles',{
+        options: {
+          calledFrom: generatorName,
+          cfg: this.cfg
+        }
+      });
+    },
+
+    js: function(){
+      this.composeWith('robonkey:js',{
+        options: {
+          calledFrom: generatorName,
+          cfg: this.cfg
+        }
+      });
+    },
+
+    font: function(){
+      this.composeWith('robonkey:iconfont',{
+        options: {
+          calledFrom: generatorName,
+          cfg: this.cfg
+        }
+      });
+    }
 
   },
 
