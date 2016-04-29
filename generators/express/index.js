@@ -23,8 +23,6 @@ var greeting        = require('../app/helpers/greeting'),
 var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
-    copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep'),
     setBaseConfigVars  = require('../app/config/setBaseConfigVars');
 
 var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
@@ -40,8 +38,8 @@ module.exports = yeoman.generators.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
   prompting: {
@@ -61,7 +59,10 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     gulp: function(){
-      gulpPrompt(this)
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     express: function(){
@@ -86,32 +87,17 @@ module.exports = yeoman.generators.Base.extend({
 
         done();
       }.bind(this));
-    },
-
-    // static: function(){
-    //   var self = this;
-    //   this.composeWith('robonkey:static',{
-    //     options: {
-    //       calledFrom: generatorName,
-    //       cfg: this.cfg
-    //     }
-    //   });
-    //
-    // },
+    }
   },
 
   configuring: function () {
     if(this.exit) return;
-
     var done = this.async();
-
-    setBaseConfigVars(this);
-
-    this.mainDir = this.cfg.mainDir;
-
-    this.config.set(this.cfg);
-
-    done();
+    setBaseConfigVars(this, function(){
+      this.mainDir = this.cfg.mainDir;
+      this.config.set(this.cfg);
+      done();
+    });
   },
 
   writing: function(){
@@ -120,23 +106,22 @@ module.exports = yeoman.generators.Base.extend({
         destRoot   = this.destinationRoot(),
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
-    console.log(sourceRoot)
-    copyFiles.copyExpressFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // copyFiles.copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){
-      //   // console.log('Html files copied.');
-      // });
-    });
+
+    if(this.environmentOption === 'express'){
+        this.fs.copy(sourceRoot + '/bin', destRoot + '/' + this.mainDir + '/bin');
+        this.fs.copy(sourceRoot + '/routes', destRoot + '/' + this.mainDir + '/routes');
+        this.fs.copy(sourceRoot + '/views', destRoot + '/' + this.mainDir + '/views');
+        this.fs.copy(sourceRoot + '/app.js', destRoot + '/' + this.mainDir + '/app.js');
+        this.fs.copy(sourceRoot + '/package.json', destRoot + '/' + this.mainDir + '/package.json');
+      }
 
   },
 
   install: function(){
-    var done = this.async();
-
-    var appDir = process.cwd() + '/' + this.mainDir;
+    var done = this.async(),
+        appDir = process.cwd() + '/' + this.mainDir;
     process.chdir(appDir);
-
     this.npmInstall();
-
     done();
   }
 

@@ -2,16 +2,14 @@
 var hasFeature    = require('../helpers/hasFeature'),
     setConfigVars = require('./setConfigVars');
 
-function setIconFontAnswers (self) {
-  var done = self.async();
+function setIconFontAnswers (self, cb) {
+  setConfigVars(self, function(){
+    self.preproOption = self.cfg.preproOption;
+    self.customIconfontOption = self.cfg.customIconfontOption;
+    self.customIconFontName = self.cfg.customIconFontName;
 
-  setConfigVars(self);
-
-  self.preproOption = self.cfg.preproOption;
-  self.customIconfontOption = self.cfg.customIconfontOption;
-  self.customIconFontName = self.cfg.customIconFontName;
-
-  done();
+    cb();
+  })
 }
 
 module.exports = setIconFontAnswers;

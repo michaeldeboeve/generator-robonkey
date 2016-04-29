@@ -8,7 +8,7 @@ var setConfigFiles = function(self, cb){
   setyorc(self, function(){
     setconfig(self, function(){
       setpackage(self, function(){
-        cb(self);
+        cb();
       });
     });
   });
@@ -69,6 +69,7 @@ function setyorc(self, cb){
     delete self.cfg['codeigniterVersion'];
   }
 
+  // console.log(self.cfg)
   self.config.set(self.cfg);
 
   cb();

@@ -3,12 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function iconFontPrompt(self){
-  if(self.exit) return;
+function iconFontPrompt(self, cb){
 
   console.log(printTitle('Icon Font'));
-
-  var done = self.async();
 
   self.prompt([{
       type: 'confirm',
@@ -26,7 +23,7 @@ function iconFontPrompt(self){
     self.cfg.customIconfontOption = answers.customIconfontOption;
     self.cfg.customIconFontName = answers.customIconFontName;
 
-    done();
+    cb();
   }.bind(self));
 }
 

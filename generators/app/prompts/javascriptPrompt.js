@@ -3,12 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function javascriptsPrompt(self){
-  if(self.exit) return;
+function javascriptsPrompt(self, cb){
 
   console.log(printTitle('Javascript'));
-
-  var done = self.async();
 
   self.prompt([{
     type: 'list',
@@ -29,7 +26,7 @@ function javascriptsPrompt(self){
 
     self.cfg.javascriptOption = answers.javascriptOption;
 
-    done();
+    cb();
   }.bind(self));
 }
 

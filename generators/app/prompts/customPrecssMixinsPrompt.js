@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function customPrecssMixinsPrompt(self){
-  if(self.exit) return;
+function customPrecssMixinsPrompt(self, cb){
 
   if(self.cfg.preproOption === 'none'){
-    var done = self.async();
 
     self.prompt([{
       type: 'list',
@@ -29,8 +27,10 @@ function customPrecssMixinsPrompt(self){
     }], function(answers){
       self.cfg.customPreCssMixins = answers.customPreCssMixins
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

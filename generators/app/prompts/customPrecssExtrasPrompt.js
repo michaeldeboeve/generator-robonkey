@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function customPrecssExtrasPrompt(self){
-  if(self.exit) return;
+function customPrecssExtrasPrompt(self, cb){
 
   if(self.cfg.preproOption === 'none'){
-    var done = self.async();
 
     self.prompt([{
       type: 'checkbox',
@@ -33,8 +31,10 @@ function customPrecssExtrasPrompt(self){
     }], function(answers){
       self.cfg.customPreCssExtras = answers.customPreCssExtras
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

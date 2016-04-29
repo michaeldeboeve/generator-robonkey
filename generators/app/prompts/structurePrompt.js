@@ -4,11 +4,9 @@ var chalk           = require('chalk'),
 
 'use strict';
 
-var structurePrompt = function(self, dirs){
-  if(self.exit) return;
+var structurePrompt = function(self, dirs, cb){
 
   console.log(printTitle('Folder structure'));
-  var done = self.async();
 
   self.prompt([{
     when: function(){
@@ -132,7 +130,7 @@ var structurePrompt = function(self, dirs){
     self.cfg.libDir = answers.libDir;
     self.cfg.fontDir = answers.fontDir;
 
-    done();
+    cb();
   }.bind(self));
 }
 

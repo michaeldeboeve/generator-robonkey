@@ -3,10 +3,9 @@ var chalk           = require('chalk'),
 
 'use strict';
 
-var projectPrompt = function(self){
-  if(self.exit) return;
+var projectPrompt = function(self, cb){
+
   console.log(printTitle('Project Details'))
-  var done = self.async();
 
   self.prompt([{
     name: 'projectUrl',
@@ -84,7 +83,7 @@ var projectPrompt = function(self){
     self.cfg.projectLicense = 'MIT';
 
 
-    done();
+    cb();
   }.bind(self));
 }
 

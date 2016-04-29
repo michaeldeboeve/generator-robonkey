@@ -15,10 +15,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    script: './../<%= mainDir %>/bin/www',
+    script: cfg.browsersync.nodemon.script,
 
     // watch core server file(s) that require server restart on change
-    watch: ['./../<%= mainDir %>/app.js']
+    watch: cfg.browsersync.nodemon.watch
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -37,13 +37,13 @@ gulp.task('nodemon', function (cb) {
 
 
 gulp.task('browser-sync', <% if(environmentOption === 'express'){ %>['nodemon'], <% } %>function(){
-    browserSync({<% if(environmentOption !== 'express'){ %>
+    browserSync({<% if(environmentOption === 'static'){ %>
       files: [cfg.styles.build + '/**/*.css'],
-      open: 'external',
-      proxy: cfg.projectURL,
-      host: cfg.projectURL<% } if(environmentOption === 'express'){ %>
-      proxy: cfg.projectURL + ':3000',
-      port: 4000<% } %>
+      server: {
+        baseDir: cfg.browsersync.server
+      }<% } if(environmentOption === 'express'){ %>
+      proxy: cfg.browsersync.proxy,
+      port: cfg.browsersync.port<% } %>
     });
 });
 

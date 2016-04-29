@@ -36,99 +36,92 @@ module.exports = yeoman.Base.extend({
   initializing: function(){
     var done = this.async(),
         self = this;
+
+    this.composeWith('robonkey:styles',{
+      options: {
+        calledFrom: generatorName,
+        cfg: this.cfg
+      }
+    });
+    this.composeWith('robonkey:js',{
+      options: {
+        calledFrom: generatorName,
+        cfg: this.cfg
+      }
+    });
+    this.composeWith('robonkey:iconfont',{
+      options: {
+        calledFrom: generatorName,
+        cfg: this.cfg
+      }
+    });
+
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
 
   prompting: {
 
     existingEnvironment: function(){
-      if(this.calledFrom === 'app' || !this.calledFrom){
-        this.cfg.environmentOption ='static';
-        var done = this.async(),
-            self = this,
-            destRoot = this.destinationRoot();
+      this.cfg.environmentOption ='static';
+      var done = this.async(),
+          self = this,
+          destRoot = this.destinationRoot();
 
-        frameworkPrompt(frameworksToCheck, destRoot, this.calledFrom, this, function(environmentOption){
-          self.cfg.environmentOption = environmentOption;
-        });
-      }
+      frameworkPrompt(frameworksToCheck, destRoot, this.calledFrom, this, function(environmentOption){
+        self.cfg.environmentOption = environmentOption;
+      });
     },
 
     gulp: function(){
-      gulpPrompt(this)
+      if(this.exit) return;
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     environment: function(){
-      staticPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      staticPrompt(this, function(){
+        done();
+      })
     },
 
     project: function(){
-      projectPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      projectPrompt(this, function(){
+        done();
+      })
     },
 
     // existingStructure: function(){
-    //   structureExistsPrompt(this, dirsToCheck);
+    //   if(this.exit) return;
+    //   var done = this.async();
+    //   structureExistsPrompt(this, dirsToCheck, function(){
+    //     done();
+    //   })
     // },
 
     structure: function(){
-      structurePrompt(this, dirsToCheck);
+      if(this.exit) return;
+      var done = this.async();
+      structurePrompt(this, dirsToCheck, function(){
+        done();
+      })
     },
 
     html: function(){
-      htmlPrompt(this);
-    },
-
-
-    stylesOptions: function(){
       if(this.exit) return;
-
-      var done = this.async(),
-          self = this;
-
-      this.composeWith('robonkey:styles',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-
-      done();
-    },
-
-    scripts: function(){
-      if(this.exit) return;
-
-      var done = this.async(),
-          self = this;
-
-      this.composeWith('robonkey:js',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-
-      done();
-    },
-
-    font: function(){
-      if(this.exit) return;
-
-      var done = this.async(),
-          self = this;
-
-      this.composeWith('robonkey:iconfont',{
-        options: {
-          calledFrom: generatorName,
-          cfg: this.cfg
-        }
-      });
-
-      done();
+      var done = this.async();
+      htmlPrompt(this, function(){
+        done();
+      })
     },
 
   },
@@ -140,25 +133,19 @@ module.exports = yeoman.Base.extend({
 
     answers: function(){
       if(this.exit) return;
-
       var done = this.async();
-
-      setConfigVars(this);
-
-      done();
+      setConfigVars(this, function(){
+        done();
+      });
     },
 
 
     config: function(){
       if(this.exit) return;
-
       var done = this.async();
-
       setConfigFiles(this, function(){
-        // console.log('Config Files written...')
+        done();
       });
-
-      done();
     },
 
   },
@@ -168,8 +155,8 @@ module.exports = yeoman.Base.extend({
 
   writing: function(){
     if(this.exit) return;
-
     var done       = this.async(),
+        self       = this,
         destRoot   = this.destinationRoot(),
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
@@ -177,28 +164,19 @@ module.exports = yeoman.Base.extend({
     if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
 
     copyFiles.copyGulpFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Main Gulp files copied.');
-    });
-    copyFiles.copyProjectFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Project files copied.');
-    });
-    copyFiles.copyWordpressFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('WordPress theme files copied.');
-    });
-    // copyFiles.copyExpressFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-    //   // console.log('Express files copied.');
-    // });
-    copyFiles.copyH5bpFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('hp5b files copied.');
-    });
-    copyFiles.copyHtmlFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Html files copied.');
-    });
-    copyFiles.copyImageFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Image files copied.');
+      copyFiles.copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+        copyFiles.copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+          copyFiles.copyH5bpFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+            copyFiles.copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+              copyFiles.copyImageFiles(self, destRoot, gulpRoot, sourceRoot, function(){
+                done();
+              });
+            });
+          });
+        });
+      });
     });
 
-    done();
   },
 
 
@@ -206,10 +184,10 @@ module.exports = yeoman.Base.extend({
 
   install: function(){
     if(this.exit) return;
-
-    var done = this.async();
-    installDep(this);
-    done();
+    if(!this.calledFrom){
+      var done = this.async();
+      installDep(this);
+      done();
+    }
   }
-
 });

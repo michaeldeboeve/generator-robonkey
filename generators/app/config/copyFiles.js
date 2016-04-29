@@ -7,25 +7,6 @@ var fs          = require('fs'),
 
 
 
-function copyFiles (self, destRoot, gulpRoot, sourceRoot, cb) {
-  if(!self.calledFrom) console.log(printTitle('Copying Files'));
-
-  copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, function(self){});
-  copyH5bpFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyHtmlFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyImageFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyIconFontFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyJsFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyStyleFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-  copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, function(){});
-
-  cb()
-}
-
-
-
 
 function copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, cb){
   // console.log(destRoot  + '/' +  self.templateDest + self.jsDirPath)
@@ -43,7 +24,7 @@ function copyProjectFiles(self, destRoot, gulpRoot, sourceRoot, cb){
   self.fs.copy(sourceRoot + '/project/_gitattributes', destRoot + '/.gitattributes');
   // self.fs.copyTpl(sourceRoot + '/project/README.md', destRoot + '/README.md', templateContext);
 
-  cb()
+  cb();
 }
 
 
@@ -58,7 +39,7 @@ function copyExpressFiles(self, destRoot, gulpRoot, sourceRoot, cb){
     self.fs.copy(sourceRoot + '/package.json', destRoot + '/' + self.mainDir + '/package.json');
   }
 
-  cb(self);
+  cb();
 }
 
 
@@ -99,9 +80,7 @@ function copyWordpressFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
     self.fs.copyTpl(wpRoot + '/style.css', wpDest + '/style.css', templateContext);
   }
 
-
-
-  cb()
+  cb();
 }
 
 
@@ -201,13 +180,13 @@ function copyJsFiles(self, destRoot, gulpRoot, sourceRoot, cb){
       }
   if(self.gulpDirOption) gulpRoot = destRoot + '/gulp';
 
+  var ext = '.js';
   if(self.gulpTypeOption === 'coffee') {
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/bower.coffee', gulpRoot + '/gulp-tasks/bower.coffee', templateContext);
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/scripts.coffee', gulpRoot + '/gulp-tasks/scripts.coffee', templateContext);
-  } else {
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/bower.js', gulpRoot + '/gulp-tasks/bower.js', templateContext);
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/scripts.js', gulpRoot + '/gulp-tasks/scripts.js', templateContext);
+    ext = '.coffee';
   }
+
+  self.fs.copyTpl(sourceRoot + '/gulp-tasks/bower' + ext, gulpRoot + '/gulp-tasks/bower' + ext, templateContext);
+  self.fs.copyTpl(sourceRoot + '/gulp-tasks/scripts' + ext, gulpRoot + '/gulp-tasks/scripts' + ext, templateContext);
 
   switch (self.javascriptOption){
     case 'coffee':
@@ -221,12 +200,14 @@ function copyJsFiles(self, destRoot, gulpRoot, sourceRoot, cb){
   if(self.modernizrOption) {
     self.fs.copy(sourceRoot + '/modernizr', destRoot + '/src/modernizr');
 
+    var ext = '.js';
     if(self.gulpTypeOption === 'coffee') {
-      self.fs.copy(sourceRoot + '/gulp-tasks/modernizr.coffee', gulpRoot + '/gulp-tasks/modernizr.coffee', templateContext);
-    } else {
-      self.fs.copy(sourceRoot + '/gulp-tasks/modernizr.js', gulpRoot + '/gulp-tasks/modernizr.js', templateContext);
+      ext = '.coffee';
     }
+    self.fs.copy(sourceRoot + '/gulp-tasks/modernizr' + ext, gulpRoot + '/gulp-tasks/modernizr' + ext, templateContext);
   }
+
+  cb();
 }
 
 
@@ -250,57 +231,34 @@ function copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
     mainDir: self.mainDir
   }
 
+  var ext = '.js';
   if(self.gulpTypeOption === 'coffee') {
-    self.fs.copy(sourceRoot + '/gulp/gulp-tasks/clean.coffee', gulpRoot + '/gulp-tasks/clean.coffee');
-    self.fs.copy(sourceRoot + '/gulp/gulp-tasks/images.coffee', gulpRoot + '/gulp-tasks/images.coffee');
+    ext = '.coffee';
 
     self.fs.copyTpl(sourceRoot + '/gulp/coffee_gulpfile.js', gulpRoot + '/gulpfile.js', templateContext);
-    self.fs.copyTpl(sourceRoot + '/gulp/gulpfile.coffee', gulpRoot + '/gulpfile.coffee', templateContext);
-    self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync.coffee', gulpRoot + '/gulp-tasks/browsersync.coffee', templateContext);
+  }
+  self.fs.copy(sourceRoot + '/gulp/gulp-tasks/clean' + ext, gulpRoot + '/gulp-tasks/clean' + ext);
+  self.fs.copy(sourceRoot + '/gulp/gulp-tasks/images' + ext, gulpRoot + '/gulp-tasks/images' + ext);
+  self.fs.copyTpl(sourceRoot + '/gulp/gulpfile' + ext, gulpRoot + '/gulpfile' + ext, templateContext);
+  self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync' + ext, gulpRoot + '/gulp-tasks/browsersync' + ext, templateContext);
 
 
-    switch (self.templateOption){
-      case 'html':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
-      break;
+  switch (self.templateOption){
+    case 'html':
+      self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html' + ext, gulpRoot + '/gulp-tasks/html' + ext, templateContext);
+    break;
 
-      case 'jade':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
-      break;
+    case 'jade':
+      self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade' + ext, gulpRoot + '/gulp-tasks/html' + ext, templateContext);
+    break;
 
-      case 'pug':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/pug.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
-      break;
+    case 'pug':
+      self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/pug' + ext, gulpRoot + '/gulp-tasks/html' + ext, templateContext);
+    break;
 
-      case 'nunjucks':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.coffee', gulpRoot + '/gulp-tasks/html.coffee', templateContext);
-      break;
-    }
-  } else {
-    self.fs.copy(sourceRoot + '/gulp/gulp-tasks/clean.js', gulpRoot + '/gulp-tasks/clean.js');
-    self.fs.copy(sourceRoot + '/gulp/gulp-tasks/images.js', gulpRoot + '/gulp-tasks/images.js');
-
-    self.fs.copyTpl(sourceRoot + '/gulp/gulpfile.js', gulpRoot + '/gulpfile.js', templateContext);
-    self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/browsersync.js', gulpRoot + '/gulp-tasks/browsersync.js', templateContext);
-
-
-    switch (self.templateOption){
-      case 'html':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/html.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
-      break;
-
-      case 'jade':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/jade.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
-      break;
-
-      case 'pug':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/pug.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
-      break;
-
-      case 'nunjucks':
-        self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks.js', gulpRoot + '/gulp-tasks/html.js', templateContext);
-      break;
-    }
+    case 'nunjucks':
+      self.fs.copyTpl(sourceRoot + '/gulp/gulp-tasks/nunjucks' + ext, gulpRoot + '/gulp-tasks/html' + ext, templateContext);
+    break;
   }
 
   cb();
@@ -313,7 +271,7 @@ function copyIconFontFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
   var templateContext = {
         customIconFontName: self.customIconFontName
       }
-  if(this.iconfontOption){
+  if(self.iconfontOption){
     self.fs.copy(sourceRoot + '/illustrator', destRoot + '/src/iconfont/illustrator');
     self.fs.copy(sourceRoot + '/svg', destRoot + '/src/iconfont/svg');
 
@@ -338,14 +296,14 @@ function copyIconFontFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
       break;
     }
 
+    var ext = '.js';
     if(self.gulpTypeOption === 'coffee') {
-      self.fs.copy(sourceRoot + '/gulp-tasks/iconfont.coffee', gulpRoot + '/gulp-tasks/iconfont.coffee');
-    } else {
-      self.fs.copy(sourceRoot + '/gulp-tasks/iconfont.js', gulpRoot + '/gulp-tasks/iconfont.js');
+      ext = '.coffee';
     }
+    self.fs.copy(sourceRoot + '/gulp-tasks/iconfont' + ext, gulpRoot + '/gulp-tasks/iconfont' + ext);
   }
 
-  cb()
+  cb();
 }
 
 
@@ -369,11 +327,12 @@ function copyStyleFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
         postcssCssNanoOption: self.postcssCssNanoOption
       }
 
+  var ext = '.js';
   if(self.gulpTypeOption === 'coffee') {
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/styles.coffee', gulpRoot + '/gulp-tasks/styles.coffee', templateContext);
-  } else {
-    self.fs.copyTpl(sourceRoot + '/gulp-tasks/styles.js', gulpRoot + '/gulp-tasks/styles.js', templateContext);
+    ext = '.coffee';
   }
+  self.fs.copyTpl(sourceRoot + '/gulp-tasks/styles' + ext, gulpRoot + '/gulp-tasks/styles' + ext, templateContext);
+
 
   if(self.preproOption === 'scss') {
 
@@ -526,7 +485,7 @@ function copyStyleFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
     }
   }
 
-  cb()
+  cb();
 }
 
 
@@ -534,7 +493,6 @@ function copyStyleFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
 
 
 module.exports = {
-  copyFiles: copyFiles,
   copyProjectFiles: copyProjectFiles,
   copyWordpressFiles: copyWordpressFiles,
   copyExpressFiles: copyExpressFiles,

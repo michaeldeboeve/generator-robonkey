@@ -16,8 +16,8 @@ var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
     writeBower      = require('../app/config/writeBower'),
-    copyFiles       = require('../app/config/copyFiles'),
     installDep      = require('../app/config/installDep'),
+    copyFiles       = require('../app/config/copyFiles'),
     setJSAnswers    = require('../app/config/setJSAnswers');
 
 var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
@@ -34,33 +34,55 @@ module.exports = yeoman.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
 
 
   prompting: {
     gulp: function(){
-      gulpPrompt(this)
+      if(this.exit) return;
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     // existingStructure: function(){
-    //   structureExistsPrompt(this, dirsToCheck);
+    //   if(this.exit) return;
+    //   var done = this.async();
+    //   structureExistsPrompt(this, dirsToCheck, function(){
+    //     done();
+    //   })
     // },
 
     structure: function(){
+      if(this.exit) return;
+      var done = this.async();
       if(!this.calledFrom && !this.continueStructure) {
-        structurePrompt(this, dirsToCheck);
+        structurePrompt(this, dirsToCheck, function(){
+          done();
+        })
+      } else {
+        done();
       }
     },
 
     javascript: function(){
-      javascriptPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      javascriptPrompt(this, function(){
+        done();
+      })
     },
 
     javascriptLibs: function(){
-      javascriptLibsPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      javascriptLibsPrompt(this, function(){
+        done();
+      })
     },
 
   },
@@ -70,28 +92,29 @@ module.exports = yeoman.Base.extend({
   configuring: {
 
     answers: function(){
+      if(this.exit) return;
       var done = this.async();
-      setJSAnswers(this);
-      done();
+      setJSAnswers(this, function(){
+        done();
+      });
     },
 
     config: function(){
-      var done = this.async();
+      if(this.exit) return;
+        var done = this.async();
       setConfigFiles(this, function(){
-        // console.log('Config Files written...')
+        done();
       });
-      done();
     },
 
 
     setbower: function(){
-      var done = this.async();
-
-      writeBower(this);
-
-      done();
+      if(this.exit) return;
+        var done = this.async();
+      writeBower(this, function(){
+        done();
+      });
     }
-
 
   },
 
@@ -99,17 +122,17 @@ module.exports = yeoman.Base.extend({
 
 
   writing: function(){
+    if(this.exit) return;
     var done       = this.async(),
         destRoot   = this.destinationRoot(),
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
+
     if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
 
     copyFiles.copyJsFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      console.log('Javascript files copied.');
+      done();
     });
-
-    done();
   },
 
 
@@ -117,12 +140,12 @@ module.exports = yeoman.Base.extend({
 
   install: function(){
     if(this.exit) return;
-
-    var done = this.async();
-    installDep(this);
-    done();
+    if(!this.calledFrom) {
+      var done = this.async();
+      installDep(this);
+      done();
+    }
   }
-
 
 
 });

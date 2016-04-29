@@ -21,8 +21,6 @@ var greeting        = require('../app/helpers/greeting'),
 var init            = require('../app/config/init'),
     setConfigVars   = require('../app/config/setConfigVars'),
     setConfigFiles  = require('../app/config/setConfigFiles'),
-    copyFiles       = require('../app/config/copyFiles'),
-    installDep      = require('../app/config/installDep'),
     setBaseConfigVars  = require('../app/config/setBaseConfigVars'),
     getFramework    = require('../app/config/getFramework');
 
@@ -39,8 +37,8 @@ module.exports = yeoman.generators.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
   prompting: {
@@ -59,7 +57,10 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     gulp: function(){
-      gulpPrompt(this)
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     codeigniter: function(){
@@ -102,15 +103,6 @@ module.exports = yeoman.generators.Base.extend({
         done();
       }.bind(this));
     },
-
-    // static: function(){
-    //   this.composeWith('robonkey:static',{
-    //     options: {
-    //       calledFrom: generatorName,
-    //       cfg: this.cfg
-    //     }
-    //   });
-    // },
   },
 
 
@@ -118,14 +110,12 @@ module.exports = yeoman.generators.Base.extend({
     answers: function () {
       if(this.exit) return;
       var done = this.async();
+      setBaseConfigVars(this, function(){
+        this.codeigniterVersion = this.cfg.codeigniterVersion;
 
-      setBaseConfigVars(this);
-
-      this.codeigniterVersion = this.cfg.codeigniterVersion;
-
-      this.config.set(this.cfg);
-
-      done();
+        this.config.set(this.cfg);
+        done();
+      });
     }
   },
 
@@ -154,12 +144,6 @@ module.exports = yeoman.generators.Base.extend({
         })
       }
     }
-  },
-
-  // install: function(){
-  //   var done = this.async();
-  //   installDep(this);
-  //   done();
-  // }
+  }
 
 });

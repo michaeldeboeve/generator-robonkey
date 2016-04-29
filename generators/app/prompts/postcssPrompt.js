@@ -4,12 +4,9 @@ var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js'),
     hasFeature  = require('../helpers/hasFeature.js');
 
-function postcssPrompt(self){
-  if(self.exit) return;
+function postcssPrompt(self, cb){
 
   console.log(printTitle('postCSS'))
-
-  var done = self.async();
 
   self.prompt([{
     type: 'checkbox',
@@ -70,28 +67,30 @@ function postcssPrompt(self){
         checked: hasFeature('scopify', self.cfg.postcssOption)
       }];
 
-      var prefixer = {
-        name: 'Autoprefixer',
-        value: 'autoprefixer',
-        checked: function(){
-          if(self.cfg.precssOption)  {
-            return false
-          } else {
-            return hasFeature('autoprefixer', self.cfg.postcssOption)
-          }
-        }
-      };
-
-      if(!self.cfg.preproOption === 'precss'){
-        postCss.unshift(prefixer);
-      }
+      // var prefixer = {
+      //   name: 'Autoprefixer',
+      //   value: 'autoprefixer',
+      //   checked: function(){
+      //     if(self.cfg.precssOption)  {
+      //       return false
+      //     } else {
+      //       return hasFeature('autoprefixer', self.cfg.postcssOption)
+      //     }
+      //   }
+      // };
+      //
+      // if(!self.cfg.preproOption === 'precss'){
+      //   postCss.unshift(prefixer);
+      // }
 
       return postCss;
     }
   }], function (answers) {
+    answers.postcssOption.push('autoprefixer');
     self.cfg.postcssOption = answers.postcssOption;
 
-    done();
+
+    cb();
   }.bind(self));
 }
 

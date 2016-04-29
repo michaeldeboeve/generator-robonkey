@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function scssPrompt(self){
-  if(self.exit) return;
+function scssPrompt(self, cb){
 
   if(self.cfg.preproOption === 'scss'){
-    var done = self.async();
 
     console.log(printTitle('Sass Libraries'));
 
@@ -90,8 +88,10 @@ function scssPrompt(self){
       self.cfg.mqOption = answers.mqOption;
       self.cfg.gridOption = answers.gridOption;
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

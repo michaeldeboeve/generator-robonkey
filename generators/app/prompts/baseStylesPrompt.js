@@ -3,13 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function baseStylesPrompt(self){
-  if(self.exit) return;
-
+function baseStylesPrompt(self, cb){
   console.log(printTitle('Base Styles'));
 
-  var done = self.async();
-  
   self.prompt([{
     type: 'list',
     name: 'baseStyleOption',
@@ -34,7 +30,7 @@ function baseStylesPrompt(self){
   }], function (answers) {
     self.cfg.baseStyleOption = answers.baseStyleOption;
 
-    done();
+    cb();
   }.bind(self));
 }
 

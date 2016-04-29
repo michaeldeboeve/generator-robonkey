@@ -6,7 +6,6 @@ var fs              = require('fs'),
     fileExists      = require('../helpers/fileExists');
 
 var writeConfig = function (configFile, self) {
-
   var configJson;
 
   if(fileExists(configFile, function(result){
@@ -27,6 +26,32 @@ var writeConfig = function (configFile, self) {
   function createConfig(self, configJson, cb){
 
     configJson['projectURL'] = self.projectUrl;
+
+    configJson['browsersync'] = {};
+
+    if(self.environmentOption === 'static') {
+      if(self.gulpDirOption){
+        configJson['browsersync']['server'] = '../' + self.mainDir;
+      } else {
+        configJson['browsersync']['server'] = './' + self.mainDir;
+      }
+    }
+
+    if(self.environmentOption === 'express') {
+      configJson['browsersync']['proxy'] = 'http://localhost:3000';
+      configJson['browsersync']['port'] = 4000;
+
+      configJson['browsersync']['nodemon'] = {}
+
+      if(self.gulpDirOption){
+        configJson['browsersync']['nodemon']['script'] =  '../' + self.mainDir + '/bin/www';
+        configJson['browsersync']['nodemon']['watch'] = ['../' + self.mainDir + '/app.js'];
+      } else {
+        configJson['browsersync']['nodemon']['script'] =  './' + self.mainDir + '/bin/www';
+        configJson['browsersync']['nodemon']['watch'] = ['./' + self.mainDir + '/app.js'];
+      }
+
+    }
 
     if(self.postcssScopifyOption) {
       configJson['scope'] = '#scope';
@@ -127,6 +152,9 @@ var writeConfig = function (configFile, self) {
         configJson['tasks']['build'].splice(1, 0, 'html-build');
       }
 
+    }
+
+    if(self.environmentOption === 'static' || self.environmentOption === 'express') {
       if (!hasFeature('browser-sync', configJson['tasks']['default'])){
         configJson['tasks']['default'].splice(2, 0, 'browser-sync');
       }

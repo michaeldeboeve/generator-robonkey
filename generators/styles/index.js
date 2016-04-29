@@ -15,8 +15,8 @@ var greeting        = require('../app/helpers/greeting'),
 var init              = require('../app/config/init'),
     setConfigVars     = require('../app/config/setConfigVars'),
     setConfigFiles    = require('../app/config/setConfigFiles'),
-    copyFiles         = require('../app/config/copyFiles'),
     installDep        = require('../app/config/installDep'),
+    copyFiles         = require('../app/config/copyFiles'),
     setStylesAnswers  = require('../app/config/setStylesAnswers');
 
 var structureExistsPrompt     = require('../app/prompts/structureExistsPrompt'),
@@ -42,8 +42,8 @@ module.exports = yeoman.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
 
@@ -51,57 +51,111 @@ module.exports = yeoman.Base.extend({
   prompting: {
 
     gulp: function(){
-      gulpPrompt(this)
+      if(this.exit) return;
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     // existingStructure: function(){
-    //   structureExistsPrompt(this, dirsToCheck);
+    //   if(this.exit) return;
+    //   var done = this.async();
+    //   structureExistsPrompt(this, dirsToCheck, function(){
+    //     done();
+    //   })
     // },
 
     structure: function(){
+      if(this.exit) return;
+      var done = this.async();
       if(!this.calledFrom && !this.continueStructure) {
-        structurePrompt(this, dirsToCheck);
+        structurePrompt(this, dirsToCheck, function(){
+          done();
+        })
+      } else {
+        done();
       }
     },
 
     baseStyles: function(){
-      baseStylesPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      baseStylesPrompt(this, function(){
+        done();
+      })
     },
 
     preprocessors: function(){
-      preprocessorsPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      preprocessorsPrompt(this, function(){
+        done();
+      })
     },
 
     scss: function(){
-      scssPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      scssPrompt(this, function(){
+        done();
+      })
     },
 
     stylus: function(){
-      stylusPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      stylusPrompt(this, function(){
+        done();
+      })
     },
 
     less: function(){
-      lessPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      lessPrompt(this, function(){
+        done();
+      })
     },
 
     customPrecss: function(){
-      customPrecssPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      customPrecssPrompt(this, function(){
+        done();
+      })
     },
 
     customPrecssExtras: function(){
-      customPrecssExtrasPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      customPrecssExtrasPrompt(this, function(){
+        done();
+      })
     },
 
     customPrecssMixins: function(){
-      customPrecssMixinsPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      customPrecssMixinsPrompt(this, function(){
+        done();
+      })
     },
 
     customPrecssGrids: function(){
-      customPrecssGridsPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      customPrecssGridsPrompt(this, function(){
+        done();
+      })
     },
 
     postcss: function(){
-      postcssPrompt(this);
+      if(this.exit) return;
+      var done = this.async();
+      postcssPrompt(this, function(){
+        done();
+      })
     }
   },
 
@@ -111,17 +165,19 @@ module.exports = yeoman.Base.extend({
   configuring: {
 
     answers: function(){
+      if(this.exit) return;
       var done = this.async();
-      setStylesAnswers(this);
-      done();
+      setStylesAnswers(this, function(){
+        done();
+      });
     },
 
     config: function(){
+      if(this.exit) return;
       var done = this.async();
       setConfigFiles(this, function(){
-        // console.log('Config Files written...')
+        done();
       });
-      done();
     },
   },
 
@@ -129,26 +185,27 @@ module.exports = yeoman.Base.extend({
 
 
   writing: function(){
+    if(this.exit) return;
     var done       = this.async(),
         destRoot   = this.destinationRoot(),
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
+
     if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
 
     copyFiles.copyStyleFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Scss files copied.');
+      done();
     });
-
-    done();
   },
 
 
   install: function(){
     if(this.exit) return;
-
-    var done = this.async();
-    installDep(this);
-    done();
+    if(!this.calledFrom) {
+      var done = this.async();
+      installDep(this);
+      done();
+    }
   }
 
 

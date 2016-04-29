@@ -5,10 +5,8 @@ var chalk           = require('chalk'),
 'use strict';
 
 // It does what it says
-var staticPrompt = function(self){
-  if(self.exit) return;
+var staticPrompt = function(self, cb){
   if(self.cfg.environmentOption === 'static' && (self.calledFrom === 'app' || !self.calledFrom)){
-    var done = self.async();
 
     console.log(printTitle('Static Website'));
 
@@ -28,8 +26,10 @@ var staticPrompt = function(self){
         self.exit = true;
       }
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

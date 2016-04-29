@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function customPrecssGridsPrompt(self){
-  if(self.exit) return;
+function customPrecssGridsPrompt(self, cb){
 
   if(self.cfg.preproOption === 'none' || self.cfg.preproOption === 'precss'){
-    var done = self.async();
 
     self.prompt([{
       type: 'list',
@@ -33,8 +31,10 @@ function customPrecssGridsPrompt(self){
     }], function(answers){
       self.cfg.customPreCssGrids = answers.customPreCssGrids
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

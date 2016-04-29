@@ -6,7 +6,7 @@ var fs              = require('fs'),
     hasFeature      = require('../helpers/hasFeature'),
     fileExists      = require('../helpers/fileExists');
 
-var writeBower = function (self) {
+var writeBower = function (self, cb) {
 
   var bowerFile = './bower.json',
       bowerrcFile = './.bowerrc',
@@ -66,6 +66,7 @@ var writeBower = function (self) {
   createJson(bowerFile, bowerJson);
   createJson(bowerrcFile, bowerrcJson);
 
+  cb();
 }
 
 module.exports = writeBower;

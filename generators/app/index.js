@@ -38,22 +38,11 @@ module.exports = yeoman.generators.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
   prompting: {
-    existingEnvironment: function(){
-    this.cfg.environmentOption ='static';
-      var done = this.async(),
-          self = this,
-          destRoot = this.destinationRoot(),
-          frameworks = ['wordpress', 'codeigniter', 'drupal', 'express', 'laravel'];
-
-      frameworkPrompt(frameworks, destRoot, this.calledFrom, this, function(environmentOption){
-        self.cfg.environmentOption = environmentOption;
-      });
-    },
 
     gulp: function(){
       gulpPrompt(this)
@@ -71,7 +60,10 @@ module.exports = yeoman.generators.Base.extend({
 
   configuring: {
     answers: function(){
-      setBaseConfigVars(this);
+      var done = this.async();
+      setBaseConfigVars(this, function(){
+        done();
+      });
     }
   },
 

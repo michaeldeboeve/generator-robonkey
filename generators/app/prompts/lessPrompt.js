@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function lessPrompt(self){
-  if(self.exit) return;
+function lessPrompt(self, cb){
 
   if(self.cfg.preproOption === 'less'){
-    var done = self.async();
 
     console.log(printTitle('Less Libraries'));
 
@@ -72,8 +70,10 @@ function lessPrompt(self){
       self.cfg.mqOption = answers.mqOption;
       self.cfg.gridOption = answers.gridOption;
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

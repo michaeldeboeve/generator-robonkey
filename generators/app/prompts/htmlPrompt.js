@@ -3,11 +3,9 @@ var chalk           = require('chalk'),
 
 'use strict';
 
-var htmlPrompt = function(self){
-  if(self.exit) return;
+var htmlPrompt = function(self, cb){
 
   if(self.cfg.environmentOption === 'static'){
-    var done = self.async();
 
     console.log(printTitle('HTML Templating'))
 
@@ -37,8 +35,10 @@ var htmlPrompt = function(self){
       if(self.cfg.environmentOption === 'express') self.cfg.templateOption = 'jade';
       self.cfg.templateOption = answers.templateOption;
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

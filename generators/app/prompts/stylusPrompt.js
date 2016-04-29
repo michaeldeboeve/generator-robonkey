@@ -3,11 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function stylusPrompt(self){
-  if(self.exit) return;
+function stylusPrompt(self, cb){
 
   if(self.cfg.preproOption === 'stylus'){
-    var done = self.async();
 
     console.log(printTitle('Stylus Libraries'));
 
@@ -78,8 +76,10 @@ function stylusPrompt(self){
       self.cfg.mqOption = answers.mqOption;
       self.cfg.gridOption = answers.gridOption;
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

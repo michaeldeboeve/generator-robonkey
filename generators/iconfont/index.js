@@ -14,8 +14,8 @@ var greeting        = require('../app/helpers/greeting'),
 var init                = require('../app/config/init'),
     setConfigVars       = require('../app/config/setConfigVars'),
     setConfigFiles      = require('../app/config/setConfigFiles'),
-    copyFiles           = require('../app/config/copyFiles'),
     installDep          = require('../app/config/installDep'),
+    copyFiles           = require('../app/config/copyFiles'),
     setIconFontAnswers  = require('../app/config/setIconFontAnswers');
 
 var structureExistsPrompt = require('../app/prompts/structureExistsPrompt'),
@@ -32,35 +32,55 @@ module.exports = yeoman.Base.extend({
         self = this;
     init(this, function(){
       greeting(self);
+      done();
     });
-    done();
   },
 
 
 
   prompting: {
     gulp: function(){
-      gulpPrompt(this)
+      var done = this.async();
+      gulpPrompt(this, function(){
+        done();
+      })
     },
 
     // existingStructure: function(){
-    //   structureExistsPrompt(this, dirsToCheck);
+    //   if(this.exit) return;
+    //   var done = this.async();
+    //   structureExistsPrompt(this, dirsToCheck, function(){
+    //     done();
+    //   })
     // },
 
     structure: function(){
+      var done = this.async();
       if(!this.calledFrom && !this.continueStructure) {
-        structurePrompt(this, dirsToCheck);
+        structurePrompt(this, dirsToCheck, function(){
+          done();
+        })
+      } else {
+        done();
       }
     },
 
     preprocessors: function(){
+      var done = this.async();
       if(!this.calledFrom){
-        preprocessorsPrompt(this);
+        preprocessorsPrompt(this, function(){
+          done();
+        })
+      } else {
+        done();
       }
     },
 
     iconFont: function(){
-      iconFontPrompt(this);
+      var done = this.async();
+      iconFontPrompt(this, function(){
+        done();
+      })
     }
 
   },
@@ -71,16 +91,19 @@ module.exports = yeoman.Base.extend({
   configuring: {
 
     answers: function(){
-      setIconFontAnswers(this);
+      if(this.exit) return;
+      var done = this.async();
+      setIconFontAnswers(this, function(){
+        done();
+      });
     },
 
     config: function(){
+      if(this.exit) return;
       var done = this.async();
-      
       setConfigFiles(this, function(){
         done();
       });
-
     },
 
   },
@@ -89,17 +112,17 @@ module.exports = yeoman.Base.extend({
 
 
   writing: function(){
+    if(this.exit) return;
     var done       = this.async(),
         destRoot   = this.destinationRoot(),
         gulpRoot   = destRoot,
         sourceRoot = this.sourceRoot();
+
     if(this.cfg.gulpDirOption) gulpRoot = destRoot + '/gulp';
 
     copyFiles.copyIconFontFiles(this, destRoot, gulpRoot, sourceRoot, function(){
-      // console.log('Icon font files copied.');
+      done();
     });
-
-    done();
   },
 
 
@@ -107,12 +130,11 @@ module.exports = yeoman.Base.extend({
 
   install: function(){
     if(this.exit) return;
-
-    var done = this.async();
-    installDep(this);
-    done();
+    if(!this.calledFrom) {
+      var done = this.async();
+      installDep(this);
+      done();
+    }
   }
-
-
 
 });

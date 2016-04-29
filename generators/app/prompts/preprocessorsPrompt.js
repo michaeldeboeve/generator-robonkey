@@ -3,12 +3,9 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function preprocessorsPrompt(self){
-  if(self.exit) return;
+function preprocessorsPrompt(self, cb){
 
   console.log(printTitle('CSS Preprocessor'));
-
-  var done = self.async();
 
   self.prompt([{
     type: 'list',
@@ -40,7 +37,7 @@ function preprocessorsPrompt(self){
   }], function (answers) {
     self.cfg.preproOption = answers.preproOption;
 
-    done();
+    cb();
   }.bind(self));
 }
 

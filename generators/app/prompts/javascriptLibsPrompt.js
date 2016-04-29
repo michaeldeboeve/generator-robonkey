@@ -4,12 +4,9 @@ var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js'),
     hasFeature  = require('../helpers/hasFeature');
 
-function javascriptsLibsPrompt(self){
-  if(self.exit) return;
+function javascriptsLibsPrompt(self, cb){
 
   console.log(printTitle('Javascript Libraries'));
-
-  var done = self.async();
 
   self.prompt([{
     type: 'checkbox',
@@ -75,7 +72,7 @@ function javascriptsLibsPrompt(self){
   }], function (answers) {
     self.cfg.scriptsOption = answers.scriptsOption;
 
-    done();
+    cb();
   }.bind(self));
 }
 

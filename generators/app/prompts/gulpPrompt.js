@@ -3,10 +3,8 @@
 var chalk       = require('chalk'),
     printTitle  = require('../helpers/printTitle.js');
 
-function gulpPrompt(self){
-  if(self.exit) return;
+function gulpPrompt(self, cb){
   if(self.cfg.gulpDirOption === undefined) {
-    var done = self.async();
 
     console.log(printTitle('Gulp'));
 
@@ -56,8 +54,10 @@ function gulpPrompt(self){
 
       }
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 

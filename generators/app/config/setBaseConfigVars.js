@@ -1,10 +1,9 @@
 'use strict';
 
-function setBaseConfigVars(self){
-  var done = self.async();
+function setBaseConfigVars(self, cb){
 
   self.environmentOption = self.cfg.environmentOption;
-  
+
   self.gulpDirOption = self.cfg.gulpDirOption;
   self.gulpCmdOption = self.cfg.gulpCmdOption;
   self.gulpTypeOption = self.cfg.gulpTypeOption;
@@ -22,7 +21,7 @@ function setBaseConfigVars(self){
   self.rootFolder = self.cfg.rootFolder;
   self.mainDir = self.cfg.mainDir;
 
-  done();
+  cb();
 }
 
 module.exports = setBaseConfigVars;

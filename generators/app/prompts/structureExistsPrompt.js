@@ -5,10 +5,8 @@ var chalk           = require('chalk'),
 'use strict';
 
 // It does what it says
-var structureExistsPrompt = function(self, options){
-  if(this.exit) return;
+var structureExistsPrompt = function(self, options, cb){
   if(!self.calledFrom) {
-    var done = self.async();
 
     console.log('Checking ' + chalk.bold.yellow('.yo-rc.json') + ' for configurations\n');
 
@@ -25,8 +23,10 @@ var structureExistsPrompt = function(self, options){
     }], function (answers) {
       self.continueStructure = answers.continueStructure;
 
-      done();
+      cb();
     }.bind(self));
+  } else {
+    cb();
   }
 }
 
