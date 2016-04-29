@@ -43,11 +43,6 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: {
-
-    gulp: function(){
-      gulpPrompt(this)
-    },
-
     static: function(){
       this.composeWith('robonkey:static',{
         options: {
