@@ -5,6 +5,7 @@ var hasFeature      = require('../helpers/hasFeature'),
 
 function setStylesAnswers (self, cb) {
   setConfigVars(self, function(){
+    self.preproOption = self.cfg.preproOption;
     self.mixinOption = self.cfg.mixinOption;
     self.mqOption = self.cfg.mqOption;
     self.gridOption = self.cfg.gridOption;

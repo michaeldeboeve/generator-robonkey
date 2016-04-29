@@ -38,7 +38,6 @@ gulp.task('nodemon', function (cb) {
 
 gulp.task('browser-sync', <% if(environmentOption === 'express'){ %>['nodemon'], <% } %>function(){
     browserSync({<% if(environmentOption === 'static'){ %>
-      files: [cfg.styles.build + '/**/*.css'],
       server: {
         baseDir: cfg.browsersync.server
       }<% } if(environmentOption === 'express'){ %>

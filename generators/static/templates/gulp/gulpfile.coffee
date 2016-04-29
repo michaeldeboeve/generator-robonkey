@@ -20,13 +20,19 @@ gulp.task 'main', cfg.tasks.main.map(String)
 # Watch gulp task
 gulp.task 'watch', ->
   # watch for JS changes, then reload
-  gulp.watch(cfg.scripts.src, [ 'scripts' ]).on 'change', browserSync.reload
+  gulp.watch(cfg.scripts.src, [ 'scripts' ])<% if(environmentOption === 'static'){ %>.on 'change', browserSync.reload<% } %>
   # watch for image changes
   gulp.watch cfg.images.src, [ 'images' ]
   # watch for SASS changes
   gulp.watch(cfg.styles.src_files, ['styles']);
-  # Watch for css changes, then inject css
+  <% if(environmentOption === 'static'){ %># Watch for css changes, then inject css
   gulp.watch cfg.styles.build + '/**/*.css', [ 'css' ]
-  # watch for Jade changes, then reload
-  gulp.watch(cfg.jade.watch, [ 'html' ]).on 'change', browserSync.reload
+  # Watch for html changes, then reload page
+  gulp.watch(cfg.html.build + '/**/*.html').on 'change', browserSync.reload<% } %>
+  <% if(templateOption === 'pug' && environmentOption === 'static'){ %># watch for Pug changes, then reload
+  gulp.watch(cfg.pug.watch, [ 'html' ]).on 'change', browserSync.reload<% }
+  if(templateOption === 'jade' && environmentOption === 'static'){ %># watch for Jade changes, then reload
+  gulp.watch(cfg.jade.watch, [ 'html' ]).on 'change', browserSync.reload<% }
+  if(templateOption === 'nunjucks' && environmentOption === 'static'){ %>#watch for Nunjucks changes, then reload
+  gulp.watch(cfg.nunjucks.watch, [ 'html' ]).on 'change', browserSync.reload<% } %>
   return

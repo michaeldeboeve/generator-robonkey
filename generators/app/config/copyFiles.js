@@ -333,7 +333,7 @@ function copyStyleFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
   }
   self.fs.copyTpl(sourceRoot + '/gulp-tasks/styles' + ext, gulpRoot + '/gulp-tasks/styles' + ext, templateContext);
 
-
+  console.log(self.preproOption);
   if(self.preproOption === 'scss') {
 
     self.fs.copy(sourceRoot + '/scss/base', destRoot + '/src/scss/base');
