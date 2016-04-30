@@ -33,7 +33,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "adm-zip": "^0.4.7",
     "chalk": "^1.0.0",
     "jsonfile": "^2.2.3",
     "rimraf": ">=2.1.4",
