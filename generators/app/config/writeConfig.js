@@ -6,7 +6,7 @@ var fs              = require('fs'),
     hasFeature      = require('../helpers/hasFeature'),
     fileExists      = require('../helpers/fileExists');
 
-var writeConfig = function (configFile, self) {
+var writeConfig = function (configFile, self){
   var configJson;
 
   if(fileExists(configFile, function(result){
@@ -31,11 +31,11 @@ var writeConfig = function (configFile, self) {
     configJson['browsersync'] = {};
 
 
-    if(self.environmentOption === 'static') {
+    if(self.environmentOption === 'static'){
       configJson['browsersync']['server'] = path.join(self.rootFolder, self.mainDir);
     }
 
-    if(self.environmentOption === 'express') {
+    if(self.environmentOption === 'express'){
       configJson['browsersync']['proxy'] = 'http://localhost:3000';
       configJson['browsersync']['port'] = 4000;
 
@@ -45,11 +45,11 @@ var writeConfig = function (configFile, self) {
 
     }
 
-    if(self.postcssScopifyOption) {
+    if(self.postcssScopifyOption){
       configJson['scope'] = '#scope';
     }
 
-    if(self.postcssClassprefixOption) {
+    if(self.postcssClassprefixOption){
       configJson['prefix'] = 'prfx-';
     }
 
@@ -88,20 +88,20 @@ var writeConfig = function (configFile, self) {
     configJson['images']['src'] = path.join(self.rootFolder, 'src/img/**/*');
     configJson['images']['build'] = path.join(self.rootFolder, self.templateDest, self.imgDirPath + '/');
 
-    if(self.environmentOption === 'static') {
+    if(self.environmentOption === 'static'){
       configJson['html'] = {};
       configJson['html']['src'] = path.join(self.rootFolder, self.templateDest, '**/*.html');
       configJson['html']['build'] = path.join(self.rootFolder, self.templateDest + '/');
     }
 
-    if(self.templateOption === 'jade' && self.environmentOption === 'static') {
+    if(self.templateOption === 'jade' && self.environmentOption === 'static'){
       configJson['jade'] = {};
       configJson['jade']['src'] = path.join(self.rootFolder, 'src/jade/*.jade');
       configJson['jade']['watch'] = path.join(self.rootFolder, 'src/jade/**/*.jade');
       configJson['jade']['build'] = path.join(self.rootFolder, self.templateDest + '/');
     }
 
-    if(self.templateOption === 'pug' && self.environmentOption === 'static') {
+    if(self.templateOption === 'pug' && self.environmentOption === 'static'){
       configJson['pug'] = {};
       configJson['pug']['src'] = path.join(self.rootFolder, 'src/pug/*.pug');
       configJson['pug']['watch'] = path.join(self.rootFolder, 'src/pug/**/*.pug');
@@ -109,7 +109,7 @@ var writeConfig = function (configFile, self) {
     }
 
 
-    if(self.templateOption === 'nunjucks' && self.environmentOption === 'static') {
+    if(self.templateOption === 'nunjucks' && self.environmentOption === 'static'){
       configJson['nunjucks'] = {};
       configJson['nunjucks']['src'] = path.join(self.rootFolder, 'src/nunjucks/pages/**/*.html');
       configJson['nunjucks']['watch'] = path.join(self.rootFolder, 'src/nunjucks/**/*.html');
@@ -117,16 +117,16 @@ var writeConfig = function (configFile, self) {
       configJson['nunjucks']['build'] = path.join(self.rootFolder, self.templateDest + '/');
     }
 
-    if(!configJson['tasks']) {
+    if(!configJson['tasks']){
       configJson['tasks'] = {}
     }
-    if(!configJson['tasks']['main']) {
+    if(!configJson['tasks']['main']){
       configJson['tasks']['main'] = []
     }
-    if(!configJson['tasks']['default']) {
+    if(!configJson['tasks']['default']){
       configJson['tasks']['default'] = []
     }
-    if(!configJson['tasks']['build']) {
+    if(!configJson['tasks']['build']){
       configJson['tasks']['build'] = []
     }
 
@@ -134,13 +134,13 @@ var writeConfig = function (configFile, self) {
     configJson['tasks']['default'] = ['main', 'watch'];
     configJson['tasks']['build'] = ['main', 'scripts-build', 'styles-build', 'removeDevFiles'];
 
-    if(self.environmentOption !== 'static') {
+    if(self.environmentOption !== 'static'){
       if (!hasFeature('moveBower', configJson['tasks']['main'])){
         configJson['tasks']['main'].splice(0, 0, 'moveBower');
       }
     }
-    
-    if(self.environmentOption === 'static') {
+
+    if(self.environmentOption === 'static'){
       if (!hasFeature('html', configJson['tasks']['main'])){
         configJson['tasks']['main'].splice(0, 0, 'html');
       }
@@ -151,7 +151,7 @@ var writeConfig = function (configFile, self) {
 
     }
 
-    if(self.environmentOption === 'static' || self.environmentOption === 'express') {
+    if(self.environmentOption === 'static' || self.environmentOption === 'express'){
       if (!hasFeature('browser-sync', configJson['tasks']['default'])){
         configJson['tasks']['default'].splice(2, 0, 'browser-sync');
       }
@@ -161,8 +161,16 @@ var writeConfig = function (configFile, self) {
       configJson['tasks']['build'].splice(1, 0, 'modernizr');
     }
 
+    if (self.customIconfontOption && !hasFeature('iconfont', configJson['tasks']['build'])){
+      configJson['tasks']['build'].push('iconfont');
+    }
 
-    if(self.modernizrOption) {
+    if (self.svgiconsOption && !hasFeature('svg', configJson['tasks']['build'])){
+      configJson['tasks']['build'].push('svg');
+    }
+
+
+    if(self.modernizrOption){
       configJson['modernizr'] = {};
       configJson['modernizr']['output'] = 'modernizr-custom.js';
       configJson['modernizr']['build'] = path.join(self.rootFolder,self.templateDest, self.jsLibDirPath + '/');
@@ -178,7 +186,7 @@ var writeConfig = function (configFile, self) {
     configJson['scripts']['src_lib'] = path.join( self.rootFolder, self.templateDest, self.jsLibDirPath, '**/*.js');
     configJson['scripts']['build_lib'] = path.join(self.rootFolder, self.templateDest, self.jsLibDirPath + '/');
 
-    switch(self.cfg.javascriptOption) {
+    switch(self.cfg.javascriptOption){
       case 'vanilla':
         configJson['scripts']['src'] = path.join(self.rootFolder, 'src/js/**/*.js');
       break;
@@ -188,32 +196,38 @@ var writeConfig = function (configFile, self) {
       break;
     }
 
+    if(self.customIconfontOption){
+      configJson['iconFont'] = {};
+      configJson['iconFont']['name'] = self.customIconfontName;
+      configJson['iconFont']['types'] = ['ttf', 'eot', 'woff', 'woff2', 'svg'];
+      configJson['iconFont']['src'] = path.join(self.rootFolder,'src/iconfont/svg/**/*.svg');
+      configJson['iconFont']['build'] = path.join(self.rootFolder, self.templateDest, self.fontDirPath + '/');
+      configJson['iconFont']['templateInput'] = '';
+      configJson['iconFont']['templateOutput'] = '';
+      configJson['iconFont']['templateFontpath'] = '../fonts/';
+    }
 
-    configJson['iconFont'] = {};
-    configJson['iconFont']['name'] = self.customIconFontName;
-    configJson['iconFont']['types'] = ['ttf', 'eot', 'woff', 'woff2', 'svg'];
+    if(self.svgiconsOption){
+      configJson['svgicons'] = {};
+      configJson['svgicons']['spriteName'] = self.svgIconSpriteName;
+      configJson['svgicons']['src'] = path.join(self.rootFolder,'src/icons', self.svgIconSpriteName, '**/*.svg');
+      configJson['svgicons']['build'] = path.join(self.rootFolder, self.templateDest, self.imgDirPath + '/svg/');
+    }
 
-    configJson['font'] = {};
-    configJson['font']['src'] = path.join(self.rootFolder,'src/iconfont/svg/*.svg');
-    configJson['font']['build'] = path.join(self.rootFolder, self.templateDest, self.fontDirPath + '/');
-    configJson['font']['templateInput'] = '';
-    configJson['font']['templateOutput'] = '';
-    configJson['font']['templateFontpath'] = '../fonts/';
-
-    switch(self.preproOption) {
-      case 'sass':
-        configJson['font']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/_icons.scss');
-        configJson['font']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/scss/modules/_icons.scss');
+    switch(self.preproOption){
+      case 'scss':
+        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/_icons.scss');
+        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/scss/modules/_icons.scss');
       break;
 
       case 'stylus':
-        configJson['font']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.styl');
-        configJson['font']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/stylus/modules/icons.styl');
+        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.styl');
+        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/stylus/modules/icons.styl');
       break;
 
       case 'less':
-        configJson['font']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.less');
-        configJson['font']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/less/modules/icons.less');
+        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.less');
+        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/less/modules/icons.less');
       break;
     }
 

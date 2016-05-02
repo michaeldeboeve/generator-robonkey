@@ -29,8 +29,8 @@ var setConfigVars = function (self, cb) {
     self.libDir = self.cfg.libDir;
     self.fontDir = self.cfg.fontDir;
 
-    self.iconfontOption = self.cfg.iconfontOption;
-    self.cfg.fontStyleOutputBase = '../../../../';
+    self.customIconfontOption = self.cfg.customIconfontOption;
+    self.fontStyleOutputBase = '../../../../';
 
     self.templateOption = self.cfg.templateOption;
 

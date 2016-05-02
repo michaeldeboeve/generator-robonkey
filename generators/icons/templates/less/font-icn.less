@@ -1,0 +1,21 @@
+@icon-font-family: '<%= customIconfontName %>';
+@icn-font-size: 1em;
+@icn-line-height: 1;
+@icn-fixed-width-size: (18em / 14);
+
+@font-face {
+  font-family: "<%= customIconfontName %>";
+  src: url('<%= customIconfontName %>.eot');
+  src: url('<%= customIconfontName %>.eot?#iefix') format('eot'),
+    url('<%= customIconfontName %>.woff2') format('woff2'),
+    url('<%= customIconfontName %>.woff') format('woff'),
+    url('<%= customIconfontName %>.ttf') format('truetype'),
+    url('<%= customIconfontName %>.svg#<%= customIconfontName %>') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+// Extend
+.iconfont { font-family: @icon-font-family; }

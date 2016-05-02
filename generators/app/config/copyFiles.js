@@ -460,11 +460,39 @@ function copyGulpFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
 
 
 
+function copySvgIconsFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
+
+  if(self.svgiconsOption){
+    self.fs.copy(
+      path.join(sourceRoot, 'illustrator'),
+      path.join(destRoot, 'src/icons/illustrator')
+    );
+    self.fs.copy(
+      path.join(sourceRoot, 'svg'),
+      path.join(destRoot, 'src/icons', self.svgIconSpriteName)
+    );
+
+    var ext = '.js';
+    if(self.gulpTypeOption === 'coffee') {
+      ext = '.coffee';
+    }
+    self.fs.copy(
+      path.join(sourceRoot, 'gulp-tasks/svg' + ext),
+      path.join(gulpRoot, 'gulp-tasks/svg' + ext)
+    );
+  }
+
+  cb();
+}
+
+
+
+
 function copyIconFontFiles(self, destRoot, gulpRoot, sourceRoot, cb) {
   var templateContext = {
-        customIconFontName: self.customIconFontName
+        customIconfontName: self.customIconfontName
       }
-  if(self.iconfontOption){
+  if(self.customIconfontOption){
     self.fs.copy(
       path.join(sourceRoot, 'illustrator'),
       path.join(destRoot, 'src/iconfont/illustrator')
@@ -888,6 +916,7 @@ module.exports = {
   copyH5bpFiles: copyH5bpFiles,
   copyHtmlFiles: copyHtmlFiles,
   copyImageFiles: copyImageFiles,
+  copySvgIconsFiles: copySvgIconsFiles,
   copyIconFontFiles: copyIconFontFiles,
   copyJsFiles: copyJsFiles,
   copyStyleFiles: copyStyleFiles,

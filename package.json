@@ -1,7 +1,7 @@
 {
   "name": "generator-robonkey",
   "version": "0.3.6",
-  "description": "A Yeoman generator for Gulp, Templating, CSS Preprocessors, Coffeescript, PostCSS, Modernizr, Icon Font Generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
+  "description": "A Yeoman generator for Gulp, Templating, CSS Preprocessors, Coffeescript, PostCSS, Modernizr, svg icons/icon font generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "keywords": [
     "yeoman-generator",
@@ -34,14 +34,15 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.0.0",
+    "fs-extra": "^0.30.0",
     "jsonfile": "^2.2.3",
     "rimraf": ">=2.1.4",
     "semver": ">=2.0.10",
     "simple-git": "^1.28.0",
+    "through2": "^2.0.1",
     "yeoman-generator": "^0.19.2",
     "yosay": "^1.0.3"
   },
-
   "main": "generators/index.js",
   "files": [
     "generators"

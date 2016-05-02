@@ -127,7 +127,7 @@ module.exports = yeoman.Base.extend({
     },
 
     font: function(){
-      this.composeWith('robonkey:iconfont',{
+      this.composeWith('robonkey:icons',{
         options: {
           calledFrom: generatorName,
           cfg: this.cfg

@@ -8,7 +8,7 @@ var fs              = require('fs'),
     createJson      = require('../helpers/createJson'),
     fileExists      = require('../helpers/fileExists');
 
-var writePackage = function (packageFile, self) {
+var writePackage = function (packageFile, self){
 
   var packageJson;
 
@@ -32,7 +32,7 @@ var writePackage = function (packageFile, self) {
   }));
 
 
-  function packageDefaults(self, packageJson, cb) {
+  function packageDefaults(self, packageJson, cb){
     packageJson = {};
     packageJson['name'] = self.projectName;
     packageJson['version'] = self.projectVersion;
@@ -49,7 +49,7 @@ var writePackage = function (packageFile, self) {
   }
 
 
-  function packageDependencies(self, packageJson, cb) {
+  function packageDependencies(self, packageJson, cb){
     packageJson['devDependencies']['browser-sync'] = '^2.11.1';
     if(self.gulpTypeOption === 'coffee') packageJson['devDependencies']['coffee-script'] = '^1.10.0';
     packageJson['devDependencies']['gulp'] = '^3.9.1';
@@ -78,297 +78,303 @@ var writePackage = function (packageFile, self) {
   function createDependencies(self, packageJson, cb){
 
 // Superlatief
-    if(self.preproOption === 'scss' || self.preproOption === 'stylus' || self.preproOption === 'less') {
+    if(self.preproOption === 'scss' || self.preproOption === 'stylus' || self.preproOption === 'less'){
       packageJson['dependencies']['superlatief-colors'] = '*';
     }
 
-    if(self.preproOption !== 'less' && self.mixinOption === 'default') {
+    if(self.preproOption !== 'less' && self.mixinOption === 'default'){
       packageJson['dependencies']['superlatief-mixins'] = '*';
     }
 
-    if(self.mqOption === 'default') {
+    if(self.mqOption === 'default'){
       packageJson['dependencies']['superlatief-mediaqueries'] = '*';
     }
 
 
 // Express
-    if(self.environmentOption === 'express') {
+    if(self.environmentOption === 'express'){
       packageJson['dependencies']['gulp-nodemon'] = '^2.0.6';
     }
 
 
 // Sass
-    if(self.preproOption === 'scss') {
+    if(self.preproOption === 'scss'){
       packageJson['dependencies']['gulp-sass'] = '^2.2.0';
       packageJson['dependencies']['gulp-sass-glob'] = '^1.0.4';
     }
 
-    if(self.gridOption === 'gridle' || self.gridOption === 'gridleFlex') {
+    if(self.gridOption === 'gridle' || self.gridOption === 'gridleFlex'){
       packageJson['dependencies']['gridle'] = '^2.0.44';
     }
 
-    if(self.mqOption === 'breakpoint') {
+    if(self.mqOption === 'breakpoint'){
       packageJson['dependencies']['breakpoint-sass'] = '^2.7.0';
     }
 
-    if(self.gridOption === 'susy') {
+    if(self.gridOption === 'susy'){
       packageJson['dependencies']['susy'] = '^2.2.12';
     }
 
-    if(self.mixinOption === 'bourbon' || self.gridOption === 'neat') {
+    if(self.mixinOption === 'bourbon' || self.gridOption === 'neat'){
       packageJson['dependencies']['node-bourbon'] = '^4.2.3';
     }
 
-    if(self.gridOption === 'neat') {
+    if(self.gridOption === 'neat'){
       packageJson['dependencies']['node-neat'] = '^1.7.2';
     }
 
-    if(self.gridOption === 'includemedia') {
+    if(self.gridOption === 'includemedia'){
       packageJson['dependencies']['include-media'] = '^1.4.2';
     }
 
-    if(self.mixinOption === 'compassmixins') {
+    if(self.mixinOption === 'compassmixins'){
       packageJson['dependencies']['compass-mixins'] = '^0.12.7';
     }
 
 
 // Less
-    if(self.preproOption === 'less') {
+    if(self.preproOption === 'less'){
       packageJson['dependencies']['gulp-less'] = '^3.0.5';
       packageJson['dependencies']['less-plugin-glob'] = '^1.1.1';
       packageJson['dependencies']['less-plugin-clean-css'] = '^1.5.1';
     }
 
-    if(self.gridOption === 'gee') {
+    if(self.gridOption === 'gee'){
       packageJson['dependencies']['gee.less'] = '^3.0.0';
     }
 
 
 // Stylus
-    if(self.preproOption === 'stylus') {
+    if(self.preproOption === 'stylus'){
       packageJson['dependencies']['gulp-stylus'] = '^2.3.1';
     }
 
-    if(self.mixinOption === 'koutoswiss') {
+    if(self.mixinOption === 'koutoswiss'){
       packageJson['dependencies']['kouto-swiss'] = '^0.11.14';
     }
 
-    if(self.mqOption === 'rupture') {
+    if(self.mqOption === 'rupture'){
       packageJson['dependencies']['rupture'] = '^0.6.1';
     }
 
-    if(self.mixinOption === 'nib') {
+    if(self.mixinOption === 'nib'){
       packageJson['dependencies']['nib'] = '^1.1.0';
     }
 
-    if(self.gridOption === 'sgrid') {
+    if(self.gridOption === 'sgrid'){
       packageJson['dependencies']['s-grid'] = '^1.1.2';
     }
 
 
 // Html
-    if(self.templateOption === 'jade') {
+    if(self.templateOption === 'jade'){
       packageJson['dependencies']['gulp-jade'] = '^1.1.0';
     }
 
-    if(self.templateOption === 'pug') {
+    if(self.templateOption === 'pug'){
       packageJson['dependencies']['gulp-pug'] = '^2.0.0';
     }
 
-    if(self.templateOption === 'haml') {
+    if(self.templateOption === 'haml'){
       packageJson['dependencies']['gulp-haml'] = '^0.1.6';
     }
 
-    if(self.templateOption === 'handlebars') {
+    if(self.templateOption === 'handlebars'){
       packageJson['dependencies']['gulp-handlebars-html'] = '0.0.2';
       packageJson['dependencies']['handlebars'] = '^4.0.5';
     }
 
-    if(self.templateOption === 'nunjucks') {
+    if(self.templateOption === 'nunjucks'){
       packageJson['dependencies']['gulp-nunjucks-render'] = '^2.0.0';
     }
 
-    if(self.customIconfontOption) {
+    if(self.customIconfontOption){
       packageJson['dependencies']['gulp-iconfont'] = '^6.0.0';
       packageJson['dependencies']['gulp-iconfont-css'] = '^2.0.0';
     }
 
-    if(self.modernizrOption) {
+    if(self.svgiconsOption){
+      packageJson['dependencies']['gulp-svgstore'] = '^6.0.0';
+    }
+
+
+
+    if(self.modernizrOption){
       packageJson['dependencies']['gulp-modernizr'] = '^1.0.0-alpha';
     }
 
-    if(self.javascriptOption === 'coffee') {
+    if(self.javascriptOption === 'coffee'){
       packageJson['dependencies']['gulp-coffee'] = '^2.3.2';
     }
 
 
 
 // Post Css
-    if(self.postcssOption) {
+    if(self.postcssOption){
       packageJson['dependencies']['gulp-postcss'] = '^6.1.0';
     }
 
-    if(self.postcssSplit) {
+    if(self.postcssSplit){
       packageJson['dependencies']['postcss-split'] = '^0.0.4';
     }
 
 
-    if(self.postcssStylelint) {
+    if(self.postcssStylelint){
       packageJson['devDependencies']['stylelint'] = '^6.1.1';
     }
 
-    if(self.postcssAutoprefixerOption) {
+    if(self.postcssAutoprefixerOption){
       packageJson['dependencies']['autoprefixer'] = '^6.3.3';
     }
 
-    if(self.postcssMqpackerOption) {
+    if(self.postcssMqpackerOption){
       packageJson['dependencies']['css-mqpacker'] = '^4.0.0';
     }
 
-    if(self.postcssCssNanoOption) {
+    if(self.postcssCssNanoOption){
       packageJson['dependencies']['cssnano'] = '^3.5.2';
     }
 
-    if(self.postcssClassprefixOption) {
+    if(self.postcssClassprefixOption){
       packageJson['dependencies']['postcss-class-prefix'] = '^0.3.0';
     }
 
-    if(self.postcssGradientfixOption) {
+    if(self.postcssGradientfixOption){
       packageJson['dependencies']['postcss-gradient-transparency-fix'] = '^1.0.1';
     }
 
-    if(self.postcssScopifyOption) {
+    if(self.postcssScopifyOption){
       packageJson['dependencies']['postcss-scopify'] = '^0.1.6';
     }
 
-    if(self.postcssMqkeyframesOption) {
+    if(self.postcssMqkeyframesOption){
       packageJson['dependencies']['postcss-mq-keyframes'] = '^0.2.5';
     }
 
-    if(self.postcssCssSorterOption) {
+    if(self.postcssCssSorterOption){
       packageJson['dependencies']['css-declaration-sorter'] = '^1.2.1';
     }
 
-    if(self.postcssCssGraceOption) {
+    if(self.postcssCssGraceOption){
       packageJson['dependencies']['cssgrace'] = '^3.0.0';
     }
 
-    if(self.postcssCssNextOption) {
+    if(self.postcssCssNextOption){
       packageJson['dependencies']['postcss-cssnext'] = '^2.5.1';
     }
 
-    if(self.postcssRucksackOption) {
+    if(self.postcssRucksackOption){
       packageJson['dependencies']['rucksack-css'] = '^0.8.5';
     }
 
 
 
 // Pre Css
-    if(self.precssOption === 'precss') {
+    if(self.precssOption === 'precss'){
       packageJson['dependencies']['precss'] = '^1.4.0';
     }
 
 
 
 // Custom Pre Css
-    if(self.postcssSugarssOption) {
+    if(self.postcssSugarssOption){
       packageJson['dependencies']['sugarss'] = '^0.1.3';
     }
 
-    if(self.postcssAdvancedVarsOption) {
+    if(self.postcssAdvancedVarsOption){
       packageJson['dependencies']['postcss-advanced-variables'] = '^1.2.2';
     }
 
-    if(self.postcssExtendOption) {
+    if(self.postcssExtendOption){
       packageJson['dependencies']['postcss-extend'] = '^1.0.1';
     }
 
-    if(self.postcssNestedOption) {
+    if(self.postcssNestedOption){
       packageJson['dependencies']['postcss-nested'] = '^1.0.0';
       packageJson['dependencies']['postcss-nesting'] = '^2.0.6';
     }
 
-    if(self.postcssDefinePropertyOption) {
+    if(self.postcssDefinePropertyOption){
       packageJson['dependencies']['postcss-define-property'] = '^0.3.1';
     }
 
-    if(self.postcssColorOption) {
+    if(self.postcssColorOption){
       packageJson['dependencies']['postcss-color-function'] = '^2.0.1';
     }
 
-    if(self.postcssImportOption) {
+    if(self.postcssImportOption){
       packageJson['dependencies']['postcss-partial-import'] = '^1.3.0';
     }
 
-    if(self.postcssModulesOption) {
+    if(self.postcssModulesOption){
       packageJson['dependencies']['postcss-modules-values'] = '^8.1.0';
     }
 
-    if(self.postcssCustommediaOption) {
+    if(self.postcssCustommediaOption){
       packageJson['dependencies']['postcss-custom-media'] = '^5.0.0';
     }
 
-    if(self.postcssCustompropertiesOption) {
+    if(self.postcssCustompropertiesOption){
       packageJson['dependencies']['postcss-custom-properties'] = '^5.0.0';
     }
 
-    if(self.postcssCustomselectorsOption) {
+    if(self.postcssCustomselectorsOption){
       packageJson['dependencies']['postcss-custom-selectors'] = '^3.0.0';
     }
 
-    if(self.postcssAtrootOption) {
+    if(self.postcssAtrootOption){
       packageJson['dependencies']['postcss-atroot'] = '^0.1.2';
     }
 
-    if(self.postcssSelectormatchesOption) {
+    if(self.postcssSelectormatchesOption){
       packageJson['dependencies']['postcss-selector-matches'] = '^2.0.0';
     }
 
-    if(self.postcssSelectornotOption) {
+    if(self.postcssSelectornotOption){
       packageJson['dependencies']['postcss-selector-not'] = '^2.0.0';
     }
 
 
 // Custom Pre Css Mixins
-    if(self.postcssMixinsOption) {
+    if(self.postcssMixinsOption){
       packageJson['dependencies']['postcss-mixins'] = '^4.0.1';
     }
 
-    if(self.postcssSassyMixinsOption) {
+    if(self.postcssSassyMixinsOption){
       packageJson['dependencies']['postcss-sassy-mixins'] = '^2.0.0';
     }
 
 // Custom Pre Css Grid
-    if(self.postcssLostGridOption) {
+    if(self.postcssLostGridOption){
       packageJson['dependencies']['lost'] = '^6.7.2';
     }
 
-    if(self.postcssGridOption) {
+    if(self.postcssGridOption){
       packageJson['dependencies']['postcss-grid'] = '^2.0.0';
     }
 
-    if(self.postcssNeatOption) {
+    if(self.postcssNeatOption){
       packageJson['dependencies']['postcss-neat'] = '^2.5.2';
     }
 
 // Custom Pre Css Extras
-    if(self.postcssShortOption) {
+    if(self.postcssShortOption){
       packageJson['dependencies']['postcss-short'] = '^1.4.0';
     }
 
-    if(self.postcssPropertylookupOption) {
+    if(self.postcssPropertylookupOption){
       packageJson['dependencies']['postcss-property-lookup'] = '^1.1.3';
     }
 
-    if(self.postcssQuantityQueriesOption) {
+    if(self.postcssQuantityQueriesOption){
       packageJson['dependencies']['postcss-quantity-queries'] = '^0.4.0';
     }
 
-    if(self.postcssMediaMinmaxOption) {
+    if(self.postcssMediaMinmaxOption){
       packageJson['dependencies']['postcss-media-minmax'] = '^2.1.2';
     }
 
-    // if(self.postcssModernizrOption) {
+    // if(self.postcssModernizrOption){
     //   packageJson['dependencies']['css2modernizr'] = '^0.1.0';
     // }
 

@@ -8,12 +8,12 @@ var runTimestamp    = Math.round(Date.now()/1000);
 
 // Create icon font
 gulp.task('iconfont', function(){
-  return gulp.src(cfg.font.src)
+  gulp.src(cfg.iconFont.src)
     .pipe(iconfontCss({
       fontName: cfg.iconFont.name,
-      path: cfg.font.templateInput,
-      targetPath: cfg.font.templateOutput,
-      fontPath: cfg.font.templateFontpath + cfg.iconFont.name,
+      path: cfg.iconFont.templateInput,
+      targetPath: cfg.iconFont.templateOutput,
+      fontPath: cfg.iconFont.templateFontpath + cfg.iconFont.name,
       cssClass: 'icn'
     }))
     .pipe(iconfont({
@@ -25,5 +25,5 @@ gulp.task('iconfont', function(){
       fontHeight: 512,
       descent: 50,
     }))
-    .pipe(gulp.dest(cfg.font.build + cfg.iconFont.name));
+    .pipe(gulp.dest(cfg.iconFont.build + cfg.iconFont.name));
 });
