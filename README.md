@@ -83,7 +83,7 @@ Choices include
 
 - Templating (Jade/Pug, Nunjucks)
 
-The static generator calls the styles-, js- and iconfont subgenerators
+The static generator calls the styles-, js- and icons subgenerators
 
 ```sh
 $ yo robonkey:static
@@ -92,7 +92,7 @@ $ yo robonkey:static
 #### robonkey:styles generator
 Choices include
 
-- Preprocessing (Scss, Stylus, Less, precss (on the way))
+- Preprocessing (Scss, Stylus, Less)
 - Postprocessing (postcss)
 
 ```sh
@@ -106,18 +106,21 @@ Choices include
 - A handfull of js libraries to choose from
 
 ```sh
-$ yo robonkey:styles
+$ yo robonkey:js
 ```
 
-#### robonkey:iconfont generator
+#### robonkey:icons
 
 Choices include
 
-- Preprocessors
-- Font Name
+- SVG Spritesheet
+	- Spritesheet Name
+- Icon font
+	- Preprocessors
+	- Font Name
 
 ```sh
-$ yo robonkey:iconfont
+$ yo robonkey:icons
 ```
 
 #### robonkey:[framework] generators
@@ -177,6 +180,45 @@ The output file will be:
 website/assets/js/libs/modernizr-custom.js
 ```
 
+## SVG spritesheet
+
+Uses [gulp-svgstore](https://github.com/w0rm/gulp-svgstore)<br>
+Combine svg files into one with <symbol> elements.
+Read more about this in [CSS Tricks article](https://css-tricks.com/svg-symbol-good-choice-icons/).
+
+
+### Settings
+
+More on configuring on the [gulp-svgstore page](https://github.com/w0rm/gulp-svgstore)
+
+
+### Build
+
+Drop your svg files in: 
+
+```sh
+src/icons/<spritesheet name>/
+```
+
+Run
+
+```sh
+$ gulp svg
+```
+The build task will also run the svg task
+
+```sh
+$ gulp build
+
+```
+#### Output
+
+The output file will be:
+
+```sh
+website/assets/img/svg
+```
+
 
 ## Custom Icon Font
 
@@ -209,7 +251,7 @@ More info on the settings is available on the [gulp-icon page](https://github.co
 
 Things to consider when preparing svg for icon fonts:
 
-- Minimum size 512px * 512px
+- Minimum size 500px * 500px
 - Each stroke must be converted to fills
 - Fills must be combined creating compound paths if necessary (no overlapping shapes)
 - Any color will be ignored: glyphs will always be interpreted as black. You also can’t use white for backgrounds: you can have only transparent ones
@@ -217,8 +259,11 @@ Things to consider when preparing svg for icon fonts:
 - The svg filename will be used as class name for the icon _(.icn--svg-file-name)_
 
 ###### Location:
-Drop your svg files _(minimum 512px * 512px)_ in the svg folder _(src/iconfont/svg)_
+Drop your svg files _(minimum 500px * 500px)_ in:
 
+```sh
+src/iconfont/svg/
+```
 
 ###### Run:
 
@@ -231,23 +276,26 @@ $ gulp iconfont
 The font will be placed in:
 
 ```sh
-website/assets/fonts
+website/assets/fonts/<your font name>
 ```
 
-The rendered icon files will be placed in:
+The scss/styl/less files will be placed in:
 
 ###### SCSS
 ```sh
+src/scss/base/fonts/_font-icn.scss
 src/scss/modules/_icons.scss
 ```
 
 ###### Stylus
 ```sh
+src/scss/base/fonts/font-styl
 src/stylus/modules/icons.styl
 ```
 
 ###### Less
 ```sh
+src/scss/base/fonts/font-icn.less
 src/less/modules/icons.less
 ```
 
