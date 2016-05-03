@@ -18,9 +18,9 @@ for (var i = 0; i < jsScriptsBower.length; i++) {
     case '':
     break;
 
-    // case 'react': %>
-    //   '<%= jsScriptsBower[i]["key"] %>': { main: [<%= jsScriptsBower[i]["main"].map(String) %>] },<%
-    // break;
+    case 'react': %>
+      '<%= jsScriptsBower[i]["key"] %>': { main: [<%= jsScriptsBower[i]["main"] %>] },<%
+    break;
 
     default: %>
       '<%= jsScriptsBower[i]["key"] %>': { main: '<%= jsScriptsBower[i]["main"] %>' },<%

@@ -20,6 +20,16 @@ function setJSAnswers(self, cb) {
           });
         break;
 
+        case 'react':
+          self.jsScripts.push({
+            key: 'react',
+            file: 'react.min.js',
+            //main: '*.min.js',
+            main: ["'react.min.js'", "'react-dom.min.js'", "'react-dom-server.min.js'"],
+            sort: 0
+          });
+        break;
+
         case 'zepto':
           self.jsScripts.push({
             key: 'zepto',
@@ -161,15 +171,6 @@ function setJSAnswers(self, cb) {
     //   });
     // }
 
-    if(hasFeature('react', self.scriptsOption)) {
-      self.jsScriptsBower.push({
-        key: 'react',
-        file: 'react.min.js',
-        //main: ['react.min.js', 'react-with-addons.min.js', 'react-dom.min.js', 'react-dom-server.min.js'],
-        main: '*.min.js',
-        sort: 0
-      });
-    }
 
 
     // // Overwrite self.jsScripts if Require option is true
