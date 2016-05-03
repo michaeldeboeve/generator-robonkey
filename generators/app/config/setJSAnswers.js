@@ -163,20 +163,23 @@ function setJSAnswers(self, cb) {
 
     if(hasFeature('react', self.scriptsOption)) {
       self.jsScriptsBower.push({
-        file: 'react-with-addons.min.js',
+        key: 'react',
+        file: 'react.min.js',
+        //main: ['react.min.js', 'react-with-addons.min.js', 'react-dom.min.js', 'react-dom-server.min.js'],
+        main: '*.min.js',
         sort: 0
       });
     }
 
 
-    // Overwrite self.jsScripts if Require option is true
-    if(hasFeature('require', self.scriptsOption)) {
-      self.jsScripts = [];
-      self.jsScripts.push({
-        file: 'require.js',
-        sort: 0
-      });
-    }
+    // // Overwrite self.jsScripts if Require option is true
+    // if(hasFeature('require', self.scriptsOption)) {
+    //   self.jsScripts = [];
+    //   self.jsScripts.push({
+    //     file: 'require.js',
+    //     sort: 0
+    //   });
+    // }
 
     self.jsScripts = self.jsScripts.sort(function(a,b){return a.sort-b.sort});
     self.jsScriptsBower = self.jsScriptsBower.sort(function(a,b){return a.sort-b.sort});
@@ -195,6 +198,7 @@ function setJSAnswers(self, cb) {
     self.backboneOption = hasFeature('backbone', self.scriptsOption);
     self.underscoreOption = hasFeature('underscore', self.scriptsOption);
     self.zeptoOption = hasFeature('zepto', self.scriptsOption);
+    self.reactOption = hasFeature('react', self.scriptsOption);
     self.scrollrevealOption = hasFeature('scrollreveal', self.scriptsOption);
 
     cb();

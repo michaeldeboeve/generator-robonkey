@@ -33,6 +33,10 @@ function javascriptsLibsPrompt(self, cb){
       value: 'require',
       checked: hasFeature('require', self.cfg.scriptsOption)
     }, {
+      name: 'React',
+      value: 'react',
+      checked: hasFeature('react', self.cfg.scriptsOption)
+    }, {
       name: 'Waypoints',
       value: 'waypoints',
       checked: hasFeature('waypoints', self.cfg.scriptsOption)
