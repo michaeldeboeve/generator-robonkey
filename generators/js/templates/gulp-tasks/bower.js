@@ -9,6 +9,7 @@ var uglify          = require('gulp-uglify');
 gulp.task('moveBower', function(){
   var files = mainBowerFiles({
     base: '../bower_components',
+    debugging: true,
     overrides: { <%
 for (var i = 0; i < jsScriptsBower.length; i++) {
   switch(jsScriptsBower[i]['key']) {
