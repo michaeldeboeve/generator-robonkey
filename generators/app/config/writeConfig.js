@@ -205,6 +205,24 @@ var writeConfig = function (configFile, self){
       configJson['iconFont']['templateInput'] = '';
       configJson['iconFont']['templateOutput'] = '';
       configJson['iconFont']['templateFontpath'] = '../fonts/';
+
+      switch(self.preproOption){
+        case 'scss':
+          configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/_icons.scss');
+          configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/scss/modules/_icons.scss');
+        break;
+
+        case 'stylus':
+          configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.styl');
+          configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/stylus/modules/icons.styl');
+        break;
+
+        case 'less':
+          configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.less');
+          configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/less/modules/icons.less');
+        break;
+      }
+      
     }
 
     if(self.svgiconsOption){
@@ -214,22 +232,6 @@ var writeConfig = function (configFile, self){
       configJson['svgicons']['build'] = path.join(self.rootFolder, self.templateDest, self.imgDirPath + '/svg/');
     }
 
-    switch(self.preproOption){
-      case 'scss':
-        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/_icons.scss');
-        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/scss/modules/_icons.scss');
-      break;
-
-      case 'stylus':
-        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.styl');
-        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/stylus/modules/icons.styl');
-      break;
-
-      case 'less':
-        configJson['iconFont']['templateInput'] = path.join(self.rootFolder, 'src/iconfont/template/icons.less');
-        configJson['iconFont']['templateOutput'] = path.join(self.fontStyleOutputBase, 'src/less/modules/icons.less');
-      break;
-    }
 
     cb(configJson);
   }
