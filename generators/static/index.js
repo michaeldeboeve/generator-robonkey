@@ -109,6 +109,7 @@ module.exports = yeoman.Base.extend({
     },
 
     styles: function(){
+      if(this.exit) return;
       this.composeWith('robonkey:styles',{
         options: {
           calledFrom: generatorName,
@@ -118,6 +119,7 @@ module.exports = yeoman.Base.extend({
     },
 
     js: function(){
+      if(this.exit) return;
       this.composeWith('robonkey:js',{
         options: {
           calledFrom: generatorName,
@@ -127,6 +129,7 @@ module.exports = yeoman.Base.extend({
     },
 
     font: function(){
+      if(this.exit) return;
       this.composeWith('robonkey:icons',{
         options: {
           calledFrom: generatorName,
@@ -191,11 +194,9 @@ module.exports = yeoman.Base.extend({
 
   install: function(){
     if(this.exit) return;
-    if(!this.calledFrom){
-      var done = this.async();
-      installDep(this);
-      done();
-    }
+    var done = this.async();
+    installDep(this);
+    done();
   }
 
 });

@@ -69,12 +69,4 @@ module.exports = yeoman.generators.Base.extend({
   },
 
 
-
-
-  install: function(){
-    var done = this.async();
-    installDep(this);
-    done();
-  }
-
 });
