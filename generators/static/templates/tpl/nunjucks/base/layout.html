@@ -12,7 +12,12 @@
     <link rel="icon" type="image/x-icon" href="<%= imgDirPath %>/favicons/favicon.ico">
     <link rel="apple-touch-icon" href="<%= imgDirPath %>/favicons/touch-icon-precomposed.png">
 
+    <!-- build:css -->
     <link rel="stylesheet" href="<%= cssDirPath %>/style.css">
+    <!-- endbuild -->
+
+    <!-- inject:head:js -->
+    <!-- endinject -->
 
   </head>
   <body>
@@ -21,7 +26,11 @@
     {% endblock %}
 
 
-
+    <!-- inject:js -->
+    <!-- endinject -->
+    
+    <!-- build:js -->
     <script src="<%= jsDirPath %>/script.js"></script>
+    <!-- endbuild -->
   </body>
 </html>

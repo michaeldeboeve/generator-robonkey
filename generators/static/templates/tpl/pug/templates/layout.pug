@@ -61,14 +61,26 @@ html(lang=lang class="no-js " + lang)
       link(rel="apple-touch-icon", href="<%= imgDirPath %>/favicons/touch-icon-precomposed.png")
 
 
-    block headerStyles
-      link(rel="stylesheet", href="<%= cssDirPath %>/style.css")
+    block headerStyles<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- build:css -->'<% } %>
+      link(rel="stylesheet", href="<%= cssDirPath %>/style.css")<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- endbuild -->'<% } %>
 
-    block headerScripts
+    block headerScripts<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
+      != '\n    <!-- endinject -->'<% } %>
 
   body
     block contentMain
 
 
-    block footerScripts
+
+    <% if(environmentOption !== 'express') { %>!= '\n'<% } %>
+
+    block footerScripts<% if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- endinject -->'<% } if(environmentOption !== 'express') { %>
+      != '\n\n    <!-- build:js -->'<% } %>
+      script(src="<%= jsDirPath %>/script.js")<% if(environmentOption !== 'express') { %>
+      != '\n    <!-- endbuild -->\n'<% } %>
       script(src="<%= jsDirPath %>/script.js")
