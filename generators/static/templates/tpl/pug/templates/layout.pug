@@ -29,30 +29,30 @@ block favicons
 
 doctype html
 
-html(lang="#{ lang }" class="no-js #{ lang }")
+html(lang=lang class="no-js " + lang)
 
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     title #{ pageTitle }
-    meta(name="description", content="#{ pageDescription }")
+    meta(name="description", content=pageDescription)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     //- meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui")
 
     if useTwitterMetaTags
-      meta(name="twitter:card", content="#{ twitterCard }")
-      meta(name="twitter:site", content="#{ twitterHandler }")
-      meta(name="twitter:url", content="#{ socialURL }")
-      meta(name="twitter:title", content="#{ twitterTitle }")
-      meta(name="twitter:description", content="#{ twitterDescription }")
-      meta(name="twitter:image", content="#{ twitterImage }")
+      meta(name="twitter:card", content=twitterCard)
+      meta(name="twitter:site", content=twitterHandler)
+      meta(name="twitter:url", content=socialURL)
+      meta(name="twitter:title", content=twitterTitle)
+      meta(name="twitter:description", content=twitterDescription)
+      meta(name="twitter:image", content=twitterImage)
 
     if useFacebookMetaTags
-      meta(property="og:type", content="#{ facebookType }")
-      meta(property="og:url", content="#{ socialURL }")
-      meta(property="og:title", content="#{ facebookTitle }")
-      meta(property="og:description", content="#{ facebookDescription }")
-      meta(property="og:image", content="#{ facebookImage }")
+      meta(property="og:type", content=facebookType)
+      meta(property="og:url", content=socialURL)
+      meta(property="og:title", content=facebookTitle)
+      meta(property="og:description", content=facebookDescription)
+      meta(property="og:image", content=facebookImage)
 
     link(rel="icon", type="image/x-icon", href="<%= imgDirPath %>/favicons/favicon.ico")
 
@@ -61,24 +61,14 @@ html(lang="#{ lang }" class="no-js #{ lang }")
       link(rel="apple-touch-icon", href="<%= imgDirPath %>/favicons/touch-icon-precomposed.png")
 
 
-    block headerStyles<% if(environmentOption !== 'express') { %>
-      != '\n    <!-- build:css -->'<% } %>
-      link(rel="stylesheet", href="<%= cssDirPath %>/style.css")<% if(environmentOption !== 'express') { %>
-      != '\n    <!-- endbuild -->'<% } %>
+    block headerStyles
+      link(rel="stylesheet", href="<%= cssDirPath %>/style.css")
 
-    block headerScripts<% if(environmentOption !== 'express') { %>
-      != '\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
-      != '\n    <!-- endinject -->'<% } %>
+    block headerScripts
 
   body
     block contentMain
 
 
-
-    <% if(environmentOption !== 'express') { %>!= '\n'<% } %>
-    block footerScripts<% if(environmentOption !== 'express') { %>
-      != '\n\n    <!-- inject:head:js -->'<% } if(environmentOption !== 'express') { %>
-      != '\n\n    <!-- endinject -->'<% } if(environmentOption !== 'express') { %>
-      != '\n\n    <!-- build:js -->'<% } %>
-      script(src="<%= jsDirPath %>/script.js")<% if(environmentOption !== 'express') { %>
-      != '\n    <!-- endbuild -->\n'<% } %>
+    block footerScripts
+      script(src="<%= jsDirPath %>/script.js")
