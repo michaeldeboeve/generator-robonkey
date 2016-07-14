@@ -29,7 +29,7 @@ for (var i = 0; i < jsScriptsBower.length; i++) {
     }
   });
 
-  <% if(modernizrOption){ %>files.push('<%= rootFolder %>src/modernizr/*.js');<% } %>
+  <% if(modernizrOption){ %>files.push('<%= rootFolder %>/src/modernizr/*.js');<% } %>
 
   return gulp.src(files)
     .pipe(flatten())

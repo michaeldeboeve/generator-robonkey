@@ -1,6 +1,6 @@
 {
   "name": "generator-robonkey",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "A Yeoman generator for Gulp, Templating, CSS Preprocessors, Coffeescript, PostCSS, Modernizr, svg icons/icon font generator, BrowserSync, and some libraries to choose from. Express, Wordpress, Drupal, CodeIgniter, Laravel subgenerators are available.",
   "repository": "https://github.com/michaeldeboeve/generator-robonkey.git",
   "keywords": [

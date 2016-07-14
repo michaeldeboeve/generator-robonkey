@@ -27,7 +27,7 @@ for (var i = 0; i < jsScriptsBower.length; i++) {
   }
 } %>)
 
-  <% if(modernizrOption){ %>files.push '<%= rootFolder %>src/modernizr/*.js'<% } %>
+  <% if(modernizrOption){ %>files.push '<%= rootFolder %>/src/modernizr/*.js'<% } %>
 
   gulp.src(files)
     .pipe(flatten())
