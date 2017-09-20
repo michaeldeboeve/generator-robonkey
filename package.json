@@ -35,13 +35,13 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "fs-extra": "^0.30.0",
-    "jsonfile": "^2.2.3",
-    "rimraf": ">=2.1.4",
-    "semver": ">=2.0.10",
-    "simple-git": "^1.28.0",
-    "through2": "^2.0.1",
+    "jsonfile": "^2.4.0",
+    "rimraf": "^2.6.2",
+    "semver": "^5.4.1",
+    "simple-git": "^1.77.0",
+    "through2": "^2.0.3",
     "yeoman-generator": "^0.19.2",
-    "yosay": "^1.0.3"
+    "yosay": "^1.2.1"
   },
   "main": "generators/index.js",
   "files": [
